@@ -50,5 +50,16 @@
   </div>
 
   <script src="/assets/js/EN/chatExpand_Siblings.js?v=20251026"></script>
+  <script>
+  // Defensive session fetch: if the main script didn't populate session info yet
+  (function(){
+    if(!window.NasabSession){
+      fetch('/api/session_info.php',{credentials:'include'})
+        .then(r=>r.ok?r.json():Promise.reject())
+        .then(j=>{ window.NasabSession=j; if(j && j.email){ const el=document.getElementById('sessionEmail'); if(el) el.textContent=j.email; } })
+        .catch(()=>{ console.warn('Session info unavailable (fallback)'); });
+    }
+  })();
+  </script>
 </body>
 </html>
