@@ -23,11 +23,11 @@ require_once __DIR__ . '/security.php';
 fa_set_security_headers(['enforce' => false, 'hsts' => false]);
 
 // Database (production)
-if (!defined('DB_HOST')) define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-if (!defined('DB_NAME')) define('DB_NAME', getenv('DB_NAME') ?: 'familyapp');
-if (!defined('DB_USER')) define('DB_USER', getenv('DB_USER') ?: 'root');
+if (!defined('DB_HOST')) define('DB_HOST', getenv('DB_HOST') ?: '218.208.91.162');
+if (!defined('DB_NAME')) define('DB_NAME', getenv('DB_NAME') ?: 'hdsiteco_familyapp');
+if (!defined('DB_USER')) define('DB_USER', getenv('DB_USER') ?: 'hdsiteco_mjamalnasir');
 // Prefer environment for DB_PASS, fall back to existing value if provided here.
-if (!defined('DB_PASS')) define('DB_PASS', getenv('DB_PASS') ?: '1111');
+if (!defined('DB_PASS')) define('DB_PASS', getenv('DB_PASS') ?: 'Aa@j4m4ln4s1r');
 if (!defined('DB_CHARSET')) define('DB_CHARSET', 'utf8mb4');
 
 // Optional: set DB_PORT if not default (e.g., 3307). Leave null for default driver port.
