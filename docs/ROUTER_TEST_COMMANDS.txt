@@ -1,0 +1,133 @@
+# Router Quick Test Commands
+
+## Test the Router Immediately
+
+### 1. Check Syntax (✅ PASSED)
+```powershell
+D:\wamp64\bin\php\php8.3.14\php.exe -l d:\wamp64\www\familyapp\router.php
+```
+**Expected**: "No syntax errors detected"
+
+---
+
+### 2. Test Dashboard URL
+Open browser and visit:
+```
+http://familyapp/dashboard
+```
+
+**What should happen**:
+1. Browser makes request to `/dashboard`
+2. Apache serves `index.php` (no physical /dashboard file)
+3. Router checks friendly URL map
+4. Router finds `'dashboard' => 'dashboard.html'`
+5. Router redirects to `/pages/EN/dashboard.html` (302 redirect)
+6. Browser follows redirect
+7. Page loads OR redirects to login if not authenticated
+
+**DevTools Network Tab**:
+```
+GET /dashboard → 302 Found → Location: /pages/EN/dashboard.html
+GET /pages/EN/dashboard.html → 200 OK (or 302 to login)
+```
+
+---
+
+### 3. Test Login URL
+```
+http://familyapp/login
+```
+**Expected**: Redirects to `/pages/EN/auth/login.php` and shows login form
+
+---
+
+### 4. Test Query String Preservation
+```
+http://familyapp/dashboard?tab=recent
+```
+**Expected**: Redirects to `/pages/EN/dashboard.html?tab=recent`
+
+---
+
+### 5. Test Language Switching
+```
+http://familyapp/dashboard?lang=MY
+```
+**Expected**: Redirects to `/pages/MY/dashboard.html?lang=MY`
+
+---
+
+### 6. Test curl (PowerShell)
+```powershell
+curl.exe -I http://familyapp/dashboard
+```
+**Expected output**:
+```
+HTTP/1.1 302 Found
+Location: /pages/EN/dashboard.html
+```
+
+---
+
+## All Supported Friendly URLs
+
+Copy-paste these into browser address bar to test:
+
+```
+http://familyapp/login
+http://familyapp/register
+http://familyapp/dashboard
+http://familyapp/wizard
+http://familyapp/profile
+http://familyapp/settings
+http://familyapp/families
+http://familyapp/tree
+http://familyapp/invites
+http://familyapp/people
+http://familyapp/admin_dashboard
+```
+
+---
+
+## Troubleshooting
+
+### If you get 404
+1. Check WAMP is running: Green icon in system tray
+2. Check `index.php` exists: `Test-Path d:\wamp64\www\familyapp\index.php`
+3. Check Apache config: VirtualHost should have `DirectoryIndex index.php`
+4. Check error log: `Get-Content D:\wamp64\logs\apache_error.log -Tail 20`
+
+### If no redirect happens
+1. Open DevTools Network tab BEFORE visiting URL
+2. Look for 302 response
+3. Check if `Location` header is present
+4. If no redirect, router may not be loading - check PHP errors
+
+### If redirect loops
+1. Clear browser cache
+2. Check target page doesn't redirect back
+3. Add debug: `error_log("Router: path = $path");` in handleFriendlyUrl()
+
+---
+
+## Success Criteria
+
+✅ Visiting `/dashboard` → Redirects to `/pages/EN/dashboard.html`
+✅ No 404 errors on friendly URLs
+✅ Query strings preserved
+✅ Language detection works
+✅ Authentication redirects work
+
+---
+
+## Next Actions
+
+1. **TEST NOW**: Visit `http://familyapp/dashboard` in browser
+2. **Verify**: Check DevTools Network tab shows 302 redirect
+3. **Update Links**: Replace long URLs in HTML with friendly URLs
+4. **Deploy**: Push to production when tested
+
+---
+
+**Status**: ✅ Router is robust and ready for testing
+**Documentation**: See `docs/ROUTER_ROBUSTNESS_REPORT.md` for full details

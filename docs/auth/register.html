@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Account · Family Tree PWA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+  <main class="auth-wrap">
+    <div class="glass auth-card card-enter">
+  <a class="link" href="/index.html">← Back to Home</a>
+      <h1 class="auth-title">Create your account</h1>
+      <p class="auth-sub">Get started with your first family tree</p>
+  <form action="/auth/register.php" method="post">
+        <div class="field">
+          <label for="full_name">Full Name</label>
+          <input class="input" type="text" id="full_name" name="full_name" placeholder="Jane Doe" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input class="input" type="email" id="email" name="email" placeholder="you@example.com" required />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input class="input" type="password" id="password" name="password" placeholder="••••••••" required />
+        </div>
+        <div class="field">
+          <label for="confirm_password">Confirm Password</label>
+          <input class="input" type="password" id="confirm_password" name="confirm_password" placeholder="••••••••" required />
+        </div>
+        <div class="field">
+            <p class="tagline">If you received a family token code, enter it to start the token wizard after registration.</p>
+             <label for="family_token" style="cursor: pointer; text-decoration: underline; color: #f63b48;" onclick="document.getElementById('family_token').style.display='block'; this.style.display='none';">Family token (optional)</label>
+            <input class="input" type="text" id="family_token" name="family_token" placeholder="Enter code if you have one" style="display: none;" />
+        </div>
+        
+        <div class="form-actions">
+          <span></span>
+          <button class="btn btn-primary" type="submit">Create Account</button>
+        </div>
+        
+      </form>
+      
+      <script>
+        // Prefill and show messages from query params
+        (function(){
+          const qs=new URLSearchParams(location.search);
+          const err=qs.get('error');
+          const map={
+            missing:'Please complete all fields.',
+            invalid_email:'Please enter a valid email address.',
+            mismatch:'Passwords do not match.',
+            weak:'Password must be at least 8 characters.',
+            exists:'An account with this email already exists.',
+            server:'Server error. Please try again.'
+          };
+          if(qs.get('full_name')) document.getElementById('full_name').value = qs.get('full_name');
+          if(qs.get('email')) document.getElementById('email').value = qs.get('email');
+          // Prefill family token from query (?family_token= or ?tok=)
+          const tk = qs.get('family_token') || qs.get('tok');
+          if (tk) document.getElementById('family_token').value = tk;
+          if(map[err]){
+            const p=document.createElement('p');
+            p.textContent=map[err]; p.style.color='#fca5a5'; p.style.marginTop='10px';
+            document.currentScript.parentElement.appendChild(p);
+          }
+        })();
+      </script>
+      <p style="margin-top:14px;color:#cbd5e1;">Already have an account? <a class="link" href="./login.html">Sign in</a></p>
+      <footer>
+    <p><small>By Signing in, you agree to our <a href="../pages/terms.html">Terms of Service</a> and <a href="../pages/terms.html">Privacy Policy</a>.</small></p>
+  </footer>
+    </div>
+    <footer>
+    <p><small>© 2025 Nasab Family Tree – Experimental Beta Release. Developed by a personal developer for educational purposes only.</small></p>
+  </footer>
+  </main>
+  <script src="../assets/js/main.js"></script>
+  <script>window.addEventListener('load',()=>document.querySelector('.card-enter')?.classList.add('in'));</script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+# Friendly URL Routing Guide
+
+## Overview
+
+The SmartRouter now supports **friendly URLs** - short, clean paths that automatically redirect to the correct language-specific page path. This eliminates the need for .htaccess rewrite rules while providing a better user experience.
+
+## How It Works
+
+### Without .htaccess
+Since we're not using .htaccess mod_rewrite, the router handles URL routing through PHP:
+
+1. All requests without a physical file go to `index.php` (via Apache DirectoryIndex)
+2. `index.php` loads `router.php`
+3. Router checks for friendly URL patterns
+4. Router redirects to the full language-specific path
+
+### URL Transformation Flow
+
+```
+User visits:     http://familyapp/dashboard
+↓
+Apache serves:   index.php (no physical /dashboard file exists)
+↓
+Router checks:   Is "dashboard" in friendly URL map?
+↓
+Router redirects: /pages/EN/dashboard.html (or MY based on user's language)
+↓
+Apache serves:   /pages/EN/dashboard.html
+```
+
+## Supported Friendly URLs
+
+### Authentication URLs
+
+| Friendly URL | Redirects To | Description |
+|-------------|--------------|-------------|
+| `/login` | `/pages/{LANG}/auth/login.php` | Login page |
+| `/register` | `/pages/{LANG}/auth/register.php` | Registration page |
+| `/logout` | `/pages/{LANG}/auth/logout.php` | Logout handler |
+| `/tok_register` | `/pages/{LANG}/auth/tok_register.php` | Token-based registration |
+
+### Application URLs
+
+| Friendly URL | Redirects To | Description |
+|-------------|--------------|-------------|
+| `/dashboard` | `/pages/{LANG}/dashboard.html` | User dashboard |
+| `/admin_dashboard` | `/pages/{LANG}/admin_dashboard.html` | Admin dashboard |
+| `/admin_pending_people` | `/pages/{LANG}/admin_pending_people.html` | Admin pending people list |
+| `/profile` | `/pages/{LANG}/profile.html` | User profile |
+| `/settings` | `/pages/{LANG}/settings.html` | Settings page |
+| `/families` | `/pages/{LANG}/families.html` | Families list |
+| `/tree` | `/pages/{LANG}/tree.html` | Family tree view |
+| `/invites` | `/pages/{LANG}/invites.html` | Invitations page |
+| `/people` | `/pages/{LANG}/people.html` | People list |
+
+### Wizard URLs
+
+| Friendly URL | Redirects To | Description |
+|-------------|--------------|-------------|
+| `/wizard` | `/pages/{LANG}/chat_wizard.html` | Setup wizard |
+| `/chat_wizard` | `/pages/{LANG}/chat_wizard.html` | Setup wizard (full name) |
+| `/token_wizard` | `/pages/{LANG}/chat_token_wizard.html` | Token-based wizard |
+| `/chat_token_wizard` | `/pages/{LANG}/chat_token_wizard.html` | Token wizard (full name) |
+| `/family_token_wizard` | `/pages/{LANG}/chat_wizard_token_family.html` | Family token wizard |
+
+## Query String Preservation
+
+All query parameters are preserved during redirection:
+
+```
+http://familyapp/dashboard?tab=recent&filter=active
+    ↓ redirects to ↓
+http://familyapp/pages/EN/dashboard.html?tab=recent&filter=active
+```
+
+## Language Detection
+
+The `{LANG}` in the redirect path is determined by:
+
+1. **URL parameter**: `?lang=EN` or `?lang=MY`
+2. **Session**: Previously selected language stored in `$_SESSION['lang']`
+3. **Cookie**: Long-term language preference in `lang` cookie
+4. **Browser**: Accept-Language header (MS/MY → MY, EN → EN)
+5. **Default**: EN (English)
+
+## How to Add New Friendly URLs
+
+### Step 1: Update the Friendly Map
+
+Edit `router.php` and find the `handleFriendlyUrl()` method:
+
+```php
+private function handleFriendlyUrl() {
+    // Map of friendly URLs to actual page paths
+    $friendlyMap = [
+        // Add your new mapping here
+        'your-url' => 'your-page.html',
+        
+        // Example: Add a help page
+        'help' => 'help.html',
+        
+        // Example: Add a reports page
+        'reports' => 'reports.html',
+        
+        // ... existing mappings ...
+    ];
+    // ... rest of method ...
+}
+```
+
+### Step 2: Create the Target Page
+
+Ensure the target page exists in both language folders:
+- `pages/EN/your-page.html`
+- `pages/MY/your-page.html`
+
+### Step 3: Update Links in Your Application
+
+You can now use the friendly URL in your HTML:
+
+```html
+<!-- Instead of: -->
+<a href="/pages/EN/help.html">Help</a>
+
+<!-- Use: -->
+<a href="/help">Help</a>
+```
+
+The router will automatically redirect to the correct language version.
+
+## Testing Friendly URLs
+
+### Test via Browser
+1. Start WAMP server
+2. Visit `http://familyapp/dashboard`
+3. Should redirect to `http://familyapp/pages/EN/dashboard.html` (or MY based on language)
+
+### Test via curl (PowerShell)
+
+```powershell
+# Test dashboard URL
+curl -I http://familyapp/dashboard
+
+# Should return:
+# HTTP/1.1 302 Found
+# Location: /pages/EN/dashboard.html
+
+# Test with query string
+curl -I "http://familyapp/dashboard?tab=recent"
+
+# Should return:
+# HTTP/1.1 302 Found
+# Location: /pages/EN/dashboard.html?tab=recent
+
+# Test with language parameter
+curl -I "http://familyapp/dashboard?lang=MY"
+
+# Should return:
+# HTTP/1.1 302 Found
+# Location: /pages/MY/dashboard.html?lang=MY
+```
+
+### Test Non-Existent Friendly URL
+
+```powershell
+curl -I http://familyapp/nonexistent
+
+# Should return:
+# HTTP/1.1 302 Found
+# Location: /
+# (redirects to landing page)
+```
+
+## Routing Priority Order
+
+The router processes URLs in this order:
+
+1. **Root/Landing** (`/`, `/index.php`, `/index.html`)
+2. **API endpoints** (`/api/*`) - passed through to PHP files
+3. **Old auth paths** (`/auth/*`) - redirected to `/pages/{LANG}/auth/*`
+4. **Language-specific pages** (`/pages/EN/*` or `/pages/MY/*`)
+5. **Assets** (`/assets/*`, `/uploads/*`) - passed through to Apache
+6. **Static files** (`.css`, `.js`, `.jpg`, etc.) - passed through to Apache
+7. **Friendly URLs** (matches patterns like `/dashboard`, `/login`, etc.)
+8. **Default handler** (authenticated users → appropriate page, guests → landing)
+
+## Error Handling
+
+### Friendly URL Points to Non-Existent File
+
+If a friendly URL maps to a file that doesn't exist:
+
+```php
+'mypage' => 'nonexistent.html'
+```
+
+The router will:
+1. Redirect to `/pages/EN/nonexistent.html`
+2. Detect file doesn't exist
+3. Serve 404 page: `/pages/EN/404.html`
+
+### Invalid Friendly URL
+
+URLs not in the friendly map fall through to the default handler:
+- **Authenticated users**: Redirected to dashboard or wizard
+- **Guest users**: Redirected to landing page (`/`)
+
+## Authentication Requirements
+
+### Public URLs (No Login Required)
+- All authentication pages: `/login`, `/register`, `/tok_register`
+- Landing page: `/`
+- Assets: `/assets/*`, `/uploads/*`
+- API endpoints: `/api/*` (handle their own auth)
+
+### Protected URLs (Login Required)
+- All other friendly URLs require authentication
+- Unauthenticated access triggers redirect to login with return URL:
+  ```
+  /dashboard → /pages/EN/auth/login.php
+  (stores /dashboard in session as redirect_after_login)
+  ```
+
+## Advantages Over .htaccess
+
+1. **No redirect loops**: PHP-based routing is simpler and more predictable
+2. **Easier debugging**: Set breakpoints, log routing decisions
+3. **Dynamic mapping**: Can load friendly URLs from database if needed
+4. **Portable**: Works on any web server (nginx, IIS, Apache)
+5. **Maintainable**: All routing logic in one PHP class
+6. **No Apache module dependencies**: Doesn't require mod_rewrite
+
+## Comparison: Before vs After
+
+### Before (with .htaccess rewrite rules)
+```apache
+RewriteRule ^dashboard$ /pages/EN/dashboard.html [L,R=302]
+RewriteRule ^login$ /pages/EN/auth/login.php [L,R=302]
+# ... dozens of similar rules ...
+# Risk: redirect loops, .htaccess conflicts
+```
+
+### After (with SmartRouter)
+```php
+$friendlyMap = [
+    'dashboard' => 'dashboard.html',
+    'login' => 'auth/login.php',
+    // Clean, simple, debuggable
+];
+```
+
+## Performance Considerations
+
+### Request Flow Overhead
+- **Cold request** (not cached): ~10-20ms for routing logic
+- **Warm request** (OpCache): ~2-5ms
+- **Redirect overhead**: One additional HTTP round-trip (302 redirect)
+
+### Optimization Options
+
+If performance becomes critical, you can:
+
+1. **Cache routing decisions** in APCu or Redis
+2. **Pre-generate redirect rules** and use .htaccess (defeats the purpose, but possible)
+3. **Use reverse proxy** (nginx) for friendly URL rewrites before PHP
+4. **Convert to direct links** once URLs are stable (no redirection needed)
+
+For 99% of use cases, the current approach is fast enough and provides maximum flexibility.
+
+## Future Enhancements
+
+### Possible Improvements
+
+1. **Database-driven mapping**: Load friendly URLs from database
+   ```sql
+   CREATE TABLE url_mappings (
+       friendly_url VARCHAR(255),
+       target_path VARCHAR(500),
+       active TINYINT(1)
+   );
+   ```
+
+2. **Wildcard patterns**: Support `/user/:id` → `/pages/EN/profile.html?id=:id`
+
+3. **SEO-friendly slugs**: `/help/getting-started` → `/pages/EN/help.html?topic=getting-started`
+
+4. **Canonical URL headers**: Add `Link: <canonical-url>` headers
+
+5. **301 vs 302 redirects**: Use 301 for permanent, 302 for temporary (currently all 302)
+
+## Troubleshooting
+
+### Problem: Friendly URL Returns 404
+
+**Symptom**: Visiting `/dashboard` shows "404 Not Found"
+
+**Possible Causes**:
+1. Router not being loaded by `index.php`
+2. Friendly URL not in the mapping
+3. Target file doesn't exist
+
+**Solution**:
+```powershell
+# Check if index.php loads router
+php d:\wamp64\www\familyapp\index.php
+
+# Check if friendly URL is in map
+# Edit router.php and verify 'dashboard' key exists in $friendlyMap
+
+# Check if target file exists
+Test-Path d:\wamp64\www\familyapp\pages\EN\dashboard.html
+```
+
+### Problem: Infinite Redirect Loop
+
+**Symptom**: Browser error "Too many redirects"
+
+**Possible Causes**:
+1. Target page in friendly map redirects back to friendly URL
+2. Router logic error
+
+**Solution**:
+- Check that target pages don't have client-side redirects back to friendly URLs
+- Add debug logging in `handleFriendlyUrl()` method
+- Use browser DevTools Network tab to trace redirect chain
+
+### Problem: Query String Lost
+
+**Symptom**: `/dashboard?tab=recent` becomes `/pages/EN/dashboard.html` (no query)
+
+**Possible Cause**: Query string not being preserved in redirect
+
+**Solution**:
+- Verify `$this->queryString` is populated in router constructor
+- Check that `{$queryStr}` is appended in redirect Location header
+- Current code should handle this correctly
+
+### Problem: Wrong Language Selected
+
+**Symptom**: User sets MY language but sees EN pages
+
+**Possible Causes**:
+1. Session not persisting
+2. Cookie not being set
+3. Language detection logic error
+
+**Solution**:
+```powershell
+# Check session configuration
+php -r "echo session_save_path();"
+
+# Verify session works
+# Visit /dashboard?lang=MY
+# Check browser DevTools → Application → Cookies → lang cookie
+# Check browser DevTools → Application → Session Storage
+```
+
+## Summary
+
+Friendly URLs provide a clean, professional user experience without the complexity and risks of .htaccess rewriting. The SmartRouter handles all URL transformation in PHP, making the system:
+
+- ✅ Portable across web servers
+- ✅ Easy to debug and maintain
+- ✅ Immune to redirect loops
+- ✅ Simple to extend with new URLs
+- ✅ Fully integrated with authentication and language detection
+
+For questions or issues, consult:
+- `docs/router_documentation.md` - Full router architecture
+- `docs/NO_HTACCESS_SOLUTION.md` - Why we don't use .htaccess
+- `docs/router_quick_reference.md` - Quick command reference

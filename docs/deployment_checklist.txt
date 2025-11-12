@@ -1,0 +1,278 @@
+# SmartRouter Deployment Checklist
+
+## Pre-Deployment Verification (Local)
+
+### Step 1: Database Configuration
+- [x] Config updated to local WAMP credentials
+- [x] Database connection tested
+- [x] Required tables exist (users, families, etc.)
+- [x] Test users created with different states
+
+### Step 2: File Structure
+- [x] router.php exists and has SmartRouter class
+- [x] .htaccess updated with routing rules
+- [x] test_router.php created for testing
+- [x] Documentation created (router_documentation.md)
+- [x] Quick reference created (router_quick_reference.md)
+
+### Step 3: Local Testing
+- [ ] Run test_router.php and verify all checks pass
+- [ ] Test landing page loads
+- [ ] Test language switching (?lang=EN, ?lang=MY)
+- [ ] Test authentication redirect (access dashboard without login)
+- [ ] Test login flow
+- [ ] Test wizard incomplete user redirect
+- [ ] Test wizard complete user redirect
+- [ ] Test admin user redirect
+- [ ] Test API endpoints still work
+- [ ] Test static assets load (CSS, JS, images)
+- [ ] Test 404 page displays correctly
+
+## Local Test Commands
+
+```powershell
+# 1. Test router script
+Start-Process "http://localhost/familyapp/test_router.php"
+
+# 2. Test landing page
+curl http://localhost/familyapp/
+
+# 3. Test language switching
+curl http://localhost/familyapp/?lang=EN
+curl http://localhost/familyapp/?lang=MY
+
+# 4. Test protected page (should redirect)
+curl -I http://localhost/familyapp/pages/EN/dashboard.html
+
+# 5. Test auth page (should show login)
+curl http://localhost/familyapp/pages/EN/auth/login.php
+
+# 6. Test API endpoint (should return JSON)
+curl http://localhost/familyapp/api/session_info.php
+
+# 7. Test static asset
+curl -I http://localhost/familyapp/assets/css/main.css
+```
+
+## Production Deployment Steps
+
+### Step 1: Backup Current Production
+```bash
+# SSH to production server
+ssh user@nasab.hdsite.com.my
+
+# Backup files
+cd public_html
+tar -czf backup_before_router_$(date +%Y%m%d_%H%M%S).tar.gz *
+
+# Backup database
+mysqldump -h 218.208.91.162 -u hdsiteco_mjamalnasir -p hdsiteco_familyapp > backup_$(date +%Y%m%d_%H%M%S).sql
+```
+
+### Step 2: Update Configuration
+```bash
+# Create config.local.php for production
+cat > config/config.local.php << 'EOF'
+<?php
+// Production overrides
+define('DB_HOST', '218.208.91.162');
+define('DB_NAME', 'hdsiteco_familyapp');
+define('DB_USER', 'hdsiteco_mjamalnasir');
+define('DB_PASS', getenv('DB_PASS') ?: '');
+
+// Enable security headers
+require_once __DIR__ . '/security.php';
+fa_set_security_headers();
+
+// Disable error display
+ini_set('display_errors', 0);
+error_reporting(E_ALL);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/../logs/php_errors.log');
+EOF
+```
+
+### Step 3: Upload Files
+```bash
+# Using FTP/SFTP or cPanel File Manager
+# Upload:
+- router.php (overwrite existing)
+- .htaccess (overwrite existing)
+- config/config.local.php (new file)
+- test_router.php (for verification)
+```
+
+### Step 4: Set Permissions
+```bash
+# Ensure proper permissions
+chmod 644 router.php
+chmod 644 .htaccess
+chmod 600 config/config.local.php
+chmod 755 logs
+```
+
+### Step 5: Verify Production
+```bash
+# Test router script (browser)
+https://nasab.hdsite.com.my/test_router.php
+
+# Test endpoints
+curl https://nasab.hdsite.com.my/
+curl https://nasab.hdsite.com.my/?lang=EN
+curl https://nasab.hdsite.com.my/?lang=MY
+curl https://nasab.hdsite.com.my/api/session_info.php
+curl -I https://nasab.hdsite.com.my/assets/css/main.css
+```
+
+### Step 6: Delete Test Script
+```bash
+# Remove test script from production
+rm test_router.php
+```
+
+## Post-Deployment Testing
+
+### Critical User Flows
+1. [ ] New visitor lands on homepage
+2. [ ] Language selection works
+3. [ ] Registration without token → wizard
+4. [ ] Registration with invite token → dashboard with token
+5. [ ] Registration with family token → family wizard
+6. [ ] Login with incomplete wizard → chat_wizard.html
+7. [ ] Login with complete wizard → dashboard.html
+8. [ ] Admin login → admin_dashboard.html
+9. [ ] Protected page access requires auth
+10. [ ] API endpoints return JSON
+11. [ ] Static assets load correctly
+12. [ ] 404 page displays for missing pages
+
+### Browser Testing
+Test in multiple browsers:
+- [ ] Chrome/Edge (latest)
+- [ ] Firefox (latest)
+- [ ] Safari (if available)
+- [ ] Mobile browsers
+
+### Performance Check
+- [ ] Page load time < 3s
+- [ ] No console errors
+- [ ] No broken links
+- [ ] Images load correctly
+
+## Rollback Plan
+
+### If Issues Occur:
+```bash
+# 1. Restore old router.php
+cp router.php.backup router.php
+
+# 2. Restore old .htaccess
+cp .htaccess.backup .htaccess
+
+# 3. Or restore full backup
+tar -xzf backup_before_router_YYYYMMDD_HHMMSS.tar.gz
+
+# 4. Clear application cache if needed
+rm -rf cache/*
+
+# 5. Verify old system working
+curl https://nasab.hdsite.com.my/
+```
+
+## Monitoring
+
+### First 24 Hours
+Check every 2-4 hours:
+- [ ] Error logs for router errors
+- [ ] PHP error logs
+- [ ] Apache error logs
+- [ ] User registration success rate
+- [ ] Login success rate
+
+### Error Log Locations
+```bash
+# PHP errors
+tail -f logs/php_errors.log
+
+# Apache errors (cPanel)
+# Home > Metrics > Errors
+
+# Application logs
+tail -f logs/action_logs/*.log
+```
+
+## Common Issues & Fixes
+
+### Issue: 500 Error on All Pages
+**Check**: PHP syntax error in router.php
+```bash
+php -l router.php
+```
+
+### Issue: Infinite Redirects
+**Check**: Authentication logic in handleAuthPage()
+**Fix**: Ensure logged-in users aren't redirected from protected pages
+
+### Issue: 404 on Static Assets
+**Check**: .htaccess rewrite rules
+**Fix**: Ensure static asset pass-through is before router rule
+
+### Issue: API Returns HTML
+**Check**: API pass-through in .htaccess
+**Fix**: Add API directory to pass-through rules
+
+### Issue: Language Not Switching
+**Check**: Session and cookies
+**Fix**: Verify session_start() in router
+
+## Success Criteria
+
+All must pass:
+- [x] test_router.php shows all green checks
+- [ ] Production homepage loads
+- [ ] Language switching works
+- [ ] Login redirects correctly
+- [ ] Wizard flow works
+- [ ] Admin access works
+- [ ] API endpoints function
+- [ ] Static assets load
+- [ ] No errors in logs
+- [ ] Mobile responsive
+- [ ] All browsers work
+
+## Contact Points
+
+### Support Resources
+- Documentation: `/docs/router_documentation.md`
+- Quick Reference: `/docs/router_quick_reference.md`
+- Test Script: `/test_router.php` (local only)
+- Error Logs: `/logs/php_errors.log`
+
+### Development Team
+- Lead Developer: [Name]
+- Database Admin: [Name]
+- Server Admin: [Name]
+
+## Final Sign-Off
+
+```
+Deployment Date: _______________
+Deployed By: _______________
+Verified By: _______________
+
+Checklist Completed: [ ]
+Production Tested: [ ]
+Backup Confirmed: [ ]
+Rollback Plan Ready: [ ]
+
+Signature: _______________
+```
+
+---
+
+## Notes
+- Keep test_router.php on local only
+- Monitor error logs for first 48 hours
+- Have rollback plan ready
+- Test all user journeys before declaring success
+- Update documentation if changes made during deployment

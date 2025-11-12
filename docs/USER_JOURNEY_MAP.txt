@@ -1,0 +1,950 @@
+# NASAB Family Tree - End-to-End User Journey Map
+
+**Application**: NASAB Family Tree PWA
+**Date**: November 10, 2025
+**Purpose**: Complete mapping of all user flows from landing to active usage
+
+---
+
+## 🎯 Journey Overview
+
+The application supports **3 primary user entry paths**:
+
+1. **Fresh Registration** → Full Wizard → Dashboard
+2. **Token-Based Registration** → Join Existing Family → Dashboard
+3. **Direct Login** → Resume/Dashboard
+
+---
+
+## 📍 Journey 1: NEW USER - Fresh Registration (Full Wizard)
+
+### **Entry Point**: Landing Page (`/` or `/index.html`)
+
+**Page**: `pages/EN/index.html`
+- **Content**: Hero page with brand, logo, tagline
+- **Actions**:
+  - Click "Get Started" → `/auth/register.html`
+  - Click "Sign In" → `/auth/login.html`
+  - Language switch (EN/MY)
+
+---
+
+### **Step 1: Registration** (`/register` or `/pages/EN/auth/register.html`)
+
+**Page**: `pages/EN/auth/register.html`
+
+**Form Fields**:
+- Full Name (required)
+- Email (required)
+- Password (required)
+- Confirm Password (required)
+- Family Token (optional, hidden by default - click to show)
+
+**Form Action**: `POST /auth/register.php`
+
+**Validation**:
+- All fields complete → `error=missing`
+- Valid email format → `error=invalid_email`
+- Passwords match → `error=mismatch`
+- Password ≥8 chars → `error=weak`
+- Email not already registered → `error=exists`
+
+**Success Flow**:
+1. User account created in `users` table
+2. Session created (`$_SESSION['user_id']`, `$_SESSION['user_email']`, `$_SESSION['user_name']`)
+3. **Redirect to**: `/pages/EN/chat_wizard.html` (onboarding wizard)
+
+**With Family Token**:
+- If family token provided during registration
+- Redirect to: `/pages/EN/chat_token_wizard.html?family_token=XXX`
+- (Alternative flow - see Journey 2)
+
+---
+
+### **Step 2: Chat Wizard - Family Setup** (`/wizard` or `/pages/EN/chat_wizard.html`)
+
+**Page**: `pages/EN/chat_wizard.html`
+**Script**: `assets/js/EN/chatWizard.js`
+
+**UI**: WhatsApp-style conversational interface
+- Bot messages (left, white bubbles)
+- User responses (right, green bubbles)
+- Button chips for quick choices
+- Typing indicators
+
+**Session Check**:
+- On load: `GET /api/session_info.php`
+- Display user email in header
+- State persisted in `localStorage` key: `wizard_state_v1`
+
+---
+
+#### **Wizard Step 1: Create Family**
+
+**Bot Asks**: "What is your family name?"
+
+**User Input**: Free text (e.g., "Smith Family")
+
+**API Calls**:
+1. `POST /api/family_check_name.php`
+   - Body: `{ name: "Smith Family" }`
+   - Response: `{ ok: true, unique: true/false }`
+   - If not unique: Bot asks for different name
+
+2. `POST /api/family_create.php`
+   - Body: `{ name: "Smith Family" }`
+   - Response: `{ ok: true, family_id: 123 }`
+   - Updates `users.families_id` = 123
+
+**State Update**: `state.step = 2`, `state.family = { name: "Smith Family" }`
+
+---
+
+#### **Wizard Step 2: Add Self**
+
+**Bot Shows**: "This is your registered full name: [NAME FROM SESSION]"
+
+**Bot Asks**:
+1. "Gender?" → Chips: [male] [female]
+2. "Are you living?" → Chips: [yes] [no]
+3. "Birth date?" → Free text or [Skip]
+
+**API Call**: `POST /api/step2_self_save.php`
+- Body: `{ name: "John Doe", gender: "male", status: "living", birth_date: "1990-05-15" }`
+- Response: `{ ok: true, person_id: 456 }`
+- Creates first person record in `persons` table
+
+**State Update**: `state.step = 3`, `state.self = { ... }`
+
+---
+
+#### **Wizard Step 3: Add Parents**
+
+**Bot Asks**: "Let's add your parents. Father's name?"
+
+**User Input**: Free text or "skip"
+
+**For Each Parent** (Father, Mother):
+- Name
+- Living status → [living] [deceased]
+- Birth date (if living) or Death date (if deceased)
+- Can [Skip] any parent
+
+**API Call**: `POST /api/step3_parents_save.php`
+- Body: `FormData` with parent fields
+- Response: `{ ok: true }`
+- Creates parent person records
+- Creates relationships in `persons_relationships` table
+
+**State Update**: `state.step = 4`, `state.parents = { father: {...}, mother: {...} }`
+
+---
+
+#### **Wizard Step 4: Add Siblings**
+
+**Bot Asks**: "Any siblings? (brothers or sisters)"
+
+**User Input**: "yes" or "skip"
+
+**If Yes** - For Each Sibling:
+- Name
+- Gender → [male] [female]
+- Older/younger than you? → [older] [younger]
+- Add another? → [yes] [no]
+
+**API Call**: `POST /api/step4_siblings_save.php`
+- Body: `{ siblings: [ { name: "Jane Doe", gender: "female", older: true }, ... ] }`
+- Response: `{ ok: true }`
+
+**State Update**: `state.step = 5`, `state.siblings = [ ... ]`
+
+---
+
+#### **Wizard Step 5: Add Partners (Spouse/Relationship)**
+
+**Bot Asks**: "Any partners (spouse, significant other)?"
+
+**User Input**: "yes" or "skip"
+
+**If Yes** - For Each Partner:
+- Name
+- Type → [married] [engaged] [relationship]
+- Still together? → [yes] [no]
+- Wedding date (if married)
+- Add another partner? → [yes] [no]
+
+**API Call**: `POST /api/step5_partners_save.php`
+- Body: `{ partners: [ { name: "Mary Smith", type: "married", current: true, date: "2015-06-20" }, ... ] }`
+- Response: `{ ok: true }`
+
+**State Update**: `state.step = 6`, `state.partners = [ ... ]`
+
+---
+
+#### **Wizard Step 6: Add Children**
+
+**Bot Asks**: "Do you have any children?"
+
+**User Input**: "yes" or "skip"
+
+**If Yes** - For Each Child:
+- Name
+- Gender → [male] [female]
+- Birth date (optional)
+- Which partner is parent? (if multiple partners)
+- Add another? → [yes] [no]
+
+**API Call**: `POST /api/step6_children_save.php`
+- Body: `{ children: [ { name: "Billy Smith", gender: "male", birth_date: "2018-03-10", partner_id: 789 }, ... ] }`
+- Response: `{ ok: true }`
+
+**Final Step - Completion**:
+
+**API Call**: `POST /api/wizard_complete_step6.php` (if has children)
+OR `POST /api/wizard_complete_no_partners.php` (if no partners/children)
+
+**Response**: `{ ok: true, redirect: "/pages/EN/dashboard.html" }`
+
+**Redirect**: Browser navigates to dashboard
+
+---
+
+### **Step 3: Dashboard** (`/dashboard` or `/pages/EN/dashboard.html`)
+
+**Page**: `pages/EN/dashboard.html`
+
+**On Load**:
+1. `GET /api/session_info.php` → Get user info
+2. `GET /api/family_summary.php` → Get family stats
+3. `GET /api/invites_received.php` → Check pending invites
+4. `GET /api/pd_list.php` → Get pending decisions (people duplicates)
+
+**Dashboard Sections**:
+
+#### **Header**
+- User email/name
+- Logout button
+- Language switch
+
+#### **Family Stats Cards**
+- Total People count
+- Total Invitations sent
+- Pending Decisions (duplicates to merge)
+
+#### **Received Invites Banner** (if any pending)
+- Shows: "You have [N] pending invitation(s)"
+- Button: "View Invitations" → `/invites.html`
+
+#### **Pending Decisions Banner** (if any)
+- Shows: "You have [N] duplicate(s) to review"
+- Button: "Review Now" → `/pd_tree.html` or `/pd_view.html`
+
+#### **Action Buttons**:
+- **View Tree** → `/tree.html` - Visual family tree
+- **Add Person** → `/chatEdit_persons.html` - Add new family member
+- **Expand Family** → `/chat_expand.html` - Expand existing person (add relatives)
+- **Invitations** → `/invites.html` - Manage sent/received invites
+- **Activity Log** → Shows recent changes
+
+---
+
+## 📍 Journey 2: NEW USER - Token-Based Registration (Join Existing Family)
+
+### **Entry Point**: Invitation Link
+
+**URL Format**: `/auth/tok_register.html?invite_token=XXXX`
+OR: `/auth/register.html?family_token=YYYY`
+
+---
+
+### **Step 1: Token Registration** (`/tok_register` or `/pages/EN/auth/tok_register.html`)
+
+**Page**: `pages/EN/auth/tok_register.html`
+
+**On Load**:
+1. Extract `invite_token` or `family_token` from URL
+2. Store in `localStorage` or session
+3. Pre-validate token (optional API call)
+
+**Form Fields**:
+- Full Name
+- Email
+- Password
+- Confirm Password
+- **Token** (pre-filled from URL, hidden field)
+
+**Form Action**: `POST /auth/tok_register.php`
+
+**Validation**: Same as regular registration
+
+**Success Flow**:
+1. User account created
+2. Session created
+3. Token stored in session: `$_SESSION['pending_invite_token']` or `$_SESSION['pending_family_token']`
+4. **Redirect to**: `/pages/EN/chat_token_wizard.html?family_token=YYYY`
+
+---
+
+### **Step 2: Token Wizard** (`/token_wizard` or `/pages/EN/chat_token_wizard.html`)
+
+**Page**: `pages/EN/chat_token_wizard.html`
+**Script**: `assets/js/chatTokenWizard.js` (if exists) or similar flow
+
+**Purpose**: Simplified wizard for joining existing family
+
+**Flow**:
+1. **Validate Token**
+   - `POST /api/family_token_validate.php`
+   - Body: `{ token: "YYYY" }`
+   - Response: `{ ok: true, family_id: 123, inviter_name: "John Doe", scope: "family" }`
+
+2. **Link Self to Family**
+   - Bot: "You've been invited to [Family Name] by [Inviter]"
+   - Bot: "Please enter your details"
+   - Same Step 2 from regular wizard (add self)
+   - `POST /api/step2_self_save.php` (creates person, links to family)
+
+3. **Add Children (if applicable)**
+   - Bot: "Do you have children to add?"
+   - For each child: Name, Gender, Birth date
+   - `POST /api/token_family_save_child.php`
+
+4. **Add Unions/Partners (if couple scope)**
+   - If token scope = "couple"
+   - Bot: "Add relationship details between you and partner"
+   - `POST /api/token_family_unions.php`
+
+**Completion**:
+- Redirect to: `/pages/EN/dashboard.html`
+- User now sees combined family tree
+
+---
+
+## 📍 Journey 3: RETURNING USER - Direct Login
+
+### **Entry Point**: Login Page (`/login` or `/pages/EN/auth/login.html`)
+
+**Page**: `pages/EN/auth/login.html`
+
+**Form Fields**:
+- Email (required)
+- Password (required)
+
+**Form Action**: `POST /auth/login.php`
+
+**Validation**:
+- Credentials match → Success
+- Invalid → `error=invalid`
+- Account inactive → `error=inactive`
+
+**Success Flow**:
+1. Session created (`$_SESSION['user_id']`)
+2. Check `users.families_id`:
+   - **If NULL** (wizard incomplete) → Redirect to `/pages/EN/chat_wizard.html`
+   - **If SET** (has family) → Redirect to `/pages/EN/dashboard.html`
+
+**Redirect After Login**:
+- If `$_SESSION['redirect_after_login']` exists → Redirect to stored URL
+- Else → Dashboard
+
+---
+
+## 🔄 Core User Flows (Post-Login)
+
+### **Flow A: View Family Tree** (`/tree` → `/pages/EN/tree.html`)
+
+**Page**: `pages/EN/tree.html`
+
+**On Load**:
+1. `GET /api/family_tree.php` → Get complete tree data
+   - Response: `{ ok: true, nodes: [...], edges: [...] }`
+
+2. Render tree using D3.js or similar library
+   - Nodes = persons (circles/boxes)
+   - Edges = relationships (lines)
+   - Colors = gender
+   - Interactions: Click person → View details
+
+**Tree Features**:
+- Pan/zoom controls
+- Collapse/expand branches
+- Filter by generation
+- Search person
+- Export as image/PDF
+
+---
+
+### **Flow B: Add New Person** (`/chatEdit_persons.html`)
+
+**Page**: `pages/EN/chatEdit_persons.html`
+
+**Chat Interface** - Bot guides:
+1. "Who are you adding?" → Free text
+2. "Gender?" → [male] [female] [other]
+3. "Relationship to you?" → [parent, sibling, child, spouse, cousin, etc.]
+4. "Birth date?" → Date picker or skip
+5. Living/deceased status
+6. Optional: Death date, occupation, bio
+
+**API Call**: `POST /api/person_update.php`
+- Body: `{ name, gender, birth_date, death_date, ... }`
+- Response: `{ ok: true, person_id: 999 }`
+
+**Redirect**: Back to dashboard or tree
+
+---
+
+### **Flow C: Expand Existing Person** (`/chat_expand.html`)
+
+**Page**: `pages/EN/chat_expand.html`
+
+**Purpose**: Add relatives to an existing person (e.g., add parents to someone)
+
+**Steps**:
+1. **Select Person**
+   - Shows list of family members
+   - User clicks person to expand
+
+2. **Choose Expansion Type**
+   - [Add Parents]
+   - [Add Siblings]
+   - [Add Partners]
+   - [Add Children]
+
+3. **Guided Entry** (similar to wizard steps)
+   - `POST /api/expand_start.php` → Initialize expansion
+   - `POST /api/expand_step1_save_parents.php`
+   - `POST /api/expand_step2_save_siblings.php`
+   - `POST /api/expand_step3_save_partners.php`
+   - `POST /api/expand_step4_save_children.php`
+
+**Child Relationships API**:
+- `GET /api/children_by_parents.php?p1=[id]&p2=[id]`
+- Returns children for a couple
+
+**Completion**: Updates tree, redirects to tree view
+
+---
+
+### **Flow D: Invitations Management** (`/invites` → `/pages/EN/invites.html`)
+
+**Page**: `pages/EN/invites.html`
+
+**On Load**:
+1. `GET /api/invites_list.php` → Get invites sent by user
+2. `GET /api/invites_received.php` → Get invites received by user
+
+**Two Tabs**:
+
+#### **Tab 1: Sent Invitations**
+
+**Table Columns**:
+- Email
+- Scope (Family/Couple/Person)
+- Role (Owner/Editor/Viewer)
+- Status (Pending/Accepted/Rejected)
+- Expires Date
+- Actions: [Resend] [Revoke]
+
+**Create New Invite**:
+- Button: "Send Invitation" → Opens dialog
+
+**Invite Dialog**:
+- Email (required)
+- Scope → [Family] [Couple] [Person]
+- Role → [Owner] [Editor] [Viewer]
+- Permissions checkboxes:
+  - Can Edit
+  - Can Add
+  - Can Delete
+  - Can Manage Files
+- Parent 1 (if couple scope)
+- Parent 2 (if couple scope)
+- Person (if person scope)
+- Message (optional)
+- Expires in → [7 days] [14 days] [30 days]
+
+**API Call**: `POST /api/invites_create.php`
+- Body: `{ email, scope_type, role, parent1_id, parent2_id, person_id, can_edit, can_add, can_delete, can_manage_files, message, expires_days }`
+- Response: `{ ok: true, invite_id: 555, token: "XXXX" }`
+
+**Email Sent**: Via Mailer class (PHPMailer)
+- Subject: "You're invited to join [Family Name] on NASAB"
+- Body: Contains registration link with token
+
+**Actions**:
+- **Resend**: `POST /api/invites_resend.php?id=[invite_id]` → Re-sends email
+- **Revoke**: `POST /api/invites_revoke.php?id=[invite_id]` → Cancels invitation
+
+---
+
+#### **Tab 2: Received Invitations**
+
+**Table Columns**:
+- From (inviter email)
+- Family Name
+- Scope
+- Role
+- Permissions
+- Received Date
+- Actions: [Accept] [Reject]
+
+**Actions**:
+- **Accept**: `POST /api/invites_accept.php?invite_id=[id]`
+  - Merges user into family
+  - Creates person record if needed
+  - Updates permissions
+  - Response: `{ ok: true, redirect: "/dashboard" }`
+
+- **Reject**: `POST /api/invites_reject.php?invite_id=[id]`
+  - Marks invite as rejected
+  - Response: `{ ok: true }`
+
+**Direct Accept** (from email link):
+- URL: `/accept_invite.html?token=XXXX`
+- Page: `pages/EN/accept_invite.html`
+- Auto-calls: `POST /api/invites_accept_direct.php`
+- Redirects to login if not authenticated
+
+---
+
+### **Flow E: Pending Decisions (Duplicate Merge)** (`/pd_view.html`)
+
+**Page**: `pages/EN/pd_view.html` or `pages/EN/pd_tree.html`
+
+**Purpose**: Resolve duplicate persons (same person added by different users)
+
+**On Load**:
+1. `GET /api/pd_list.php` → Get pending decision clusters
+   - Response: `{ ok: true, clusters: [ { id: 1, persons: [p1, p2], confidence: 0.85 }, ... ] }`
+
+**Display**:
+- Shows potential duplicate pairs
+- Side-by-side comparison:
+  - Name
+  - Birth date
+  - Gender
+  - Parents
+  - Relationships
+
+**Actions**:
+- **Merge**: `POST /api/pd_merge.php?cluster_id=[id]&keep=[person_id]&remove=[person_id]`
+  - Merges relationships
+  - Deletes duplicate
+  - Response: `{ ok: true }`
+
+- **Not Same**: `POST /api/pd_click.php?cluster_id=[id]&action=reject`
+  - Marks as not duplicate
+  - Response: `{ ok: true }`
+
+**Cluster Tree View**:
+- `GET /api/pd_family_tree.php?cluster_id=[id]`
+- Shows both persons in context of family tree
+- Visual comparison
+
+---
+
+### **Flow F: Profile & Settings** (`/profile.html`, `/settings.html`)
+
+**Profile Page**:
+- User info display
+- Change password
+- Update email
+- Upload profile photo
+
+**Settings Page**:
+- Language preference (EN/MY)
+- Notification preferences
+- Privacy settings
+- Export family data (GEDCOM)
+
+---
+
+### **Flow G: Activity Log** (Dashboard section)
+
+**API**: `GET /api/action_logs_list.php`
+
+**Response**: 
+```json
+{
+  "ok": true,
+  "logs": [
+    {
+      "id": 1,
+      "user_email": "john@example.com",
+      "action": "person_added",
+      "details": "Added person: Jane Doe",
+      "timestamp": "2025-11-10 14:30:00"
+    }
+  ]
+}
+```
+
+**Display**: Recent activity timeline
+- Who did what
+- When
+- To which person/family
+
+---
+
+## 🔐 Authentication & Authorization
+
+### **Session Management**
+
+**Session Variables**:
+- `$_SESSION['user_id']` - User ID (int)
+- `$_SESSION['user_email']` - User email
+- `$_SESSION['user_name']` - User full name
+- `$_SESSION['redirect_after_login']` - Return URL after login
+- `$_SESSION['pending_invite_token']` - Invite token (pending)
+- `$_SESSION['pending_family_token']` - Family token (pending)
+
+**Session Check**: Every protected page/API calls `session_info.php`
+
+---
+
+### **Permission Levels**
+
+**Roles** (in `invites` table):
+1. **Owner** - Full control
+2. **Editor** - Can edit existing
+3. **Viewer** - Read-only
+
+**Granular Permissions**:
+- `can_edit` - Edit persons
+- `can_add` - Add new persons
+- `can_delete` - Delete persons
+- `can_manage_files` - Upload/delete files
+
+**Admin Flag**: `users.pwa_admin` = 1
+- Access to admin dashboard
+- Approve/reject pending people
+- Manage all families
+
+---
+
+## 🎨 UI/UX Patterns
+
+### **Design System**
+
+**Framework**: Custom Glass UI (CSS)
+- Glassmorphism effects (backdrop-filter blur)
+- Gradient buttons (sky-blue to purple)
+- Inter font family
+- Responsive grid layout
+
+**Color Palette**:
+- Primary: `#0ea5e9` (sky blue)
+- Secondary: `#6366f1` (indigo)
+- Success: `#10b981` (emerald)
+- Danger: `#ef4444` (red)
+- Background: `#ece5dd` (warm gray - chat pages)
+- White glass: `rgba(255, 255, 255, 0.6)` with blur
+
+**Components**:
+- `.btn` - Button styles
+- `.glass` - Glass card effect
+- `.chip` - Choice buttons
+- `.msg` - Chat message bubbles
+- `.stat` - Dashboard stat cards
+
+---
+
+### **Chat Interface Pattern**
+
+**Used in**:
+- `chat_wizard.html`
+- `chat_token_wizard.html`
+- `chatEdit_persons.html`
+- `chat_expand.html`
+
+**Structure**:
+- Header (user info, logout)
+- Chat area (messages scroll)
+- Input area (text field + send button)
+
+**Bot Message**: White bubble, left-aligned
+**User Message**: Green bubble, right-aligned
+**Choices**: Horizontal button chips below bot message
+**Typing Indicator**: "typing..." animation
+
+---
+
+## 📊 Data Flow Architecture
+
+### **Database Tables** (Key ones for user journey)
+
+1. **users**
+   - `id`, `email`, `password_hash`, `full_name`
+   - `families_id` (NULL = wizard incomplete)
+   - `pwa_admin` (admin flag)
+
+2. **families**
+   - `id`, `name`, `created_by`, `created_at`
+
+3. **persons**
+   - `id`, `family_id`, `name`, `gender`, `birth_date`, `death_date`, `status`
+
+4. **persons_relationships**
+   - `id`, `family_id`, `person_id`, `parent_id`, `relationship_type`
+
+5. **partnerships**
+   - `id`, `family_id`, `person1_id`, `person2_id`, `type`, `current`, `date`
+
+6. **invites**
+   - `id`, `family_id`, `email`, `token`, `scope_type`, `role`, `status`, `expires_at`
+
+7. **pending_people_clusters**
+   - `id`, `family_id`, `person1_id`, `person2_id`, `confidence`, `status`
+
+8. **action_logs**
+   - `id`, `user_id`, `action`, `details`, `created_at`
+
+---
+
+## 🚀 API Endpoints Summary
+
+### **Authentication**
+- `POST /auth/register.php` - Create account
+- `POST /auth/tok_register.php` - Register with token
+- `POST /auth/login.php` - Login
+- `GET /auth/logout.php` - Logout
+- `GET /api/session_info.php` - Get current user
+
+### **Wizard Flow**
+- `POST /api/family_check_name.php` - Check family name availability
+- `POST /api/family_create.php` - Create family
+- `POST /api/step2_self_save.php` - Save self person
+- `POST /api/step3_parents_save.php` - Save parents
+- `POST /api/step4_siblings_save.php` - Save siblings
+- `POST /api/step5_partners_save.php` - Save partners
+- `POST /api/step6_children_save.php` - Save children
+- `POST /api/wizard_complete_step6.php` - Complete wizard
+- `POST /api/wizard_complete_no_partners.php` - Complete (no partners)
+
+### **Token Wizard**
+- `POST /api/family_token_validate.php` - Validate token
+- `POST /api/token_family_save_child.php` - Add child via token
+- `POST /api/token_family_unions.php` - Add union via token
+
+### **Dashboard**
+- `GET /api/family_summary.php` - Get family stats
+- `GET /api/invites_received.php` - Get received invites
+- `GET /api/pd_list.php` - Get pending decisions
+
+### **Family Tree**
+- `GET /api/family_tree.php` - Get tree data
+- `GET /api/test_family_tree.php` - Test tree endpoint
+- `POST /api/person_update.php` - Update/add person
+- `GET /api/person_get.php` - Get person details
+
+### **Expand Flow**
+- `POST /api/expand_start.php` - Start expansion
+- `POST /api/expand_step1_save_parents.php` - Add parents
+- `GET /api/expand_step1_prefill_parents.php` - Prefill parent data
+- `POST /api/expand_step2_save_siblings.php` - Add siblings
+- `GET /api/expand_step2_prefill_siblings.php` - Prefill siblings
+- `POST /api/expand_step3_save_partners.php` - Add partners
+- `GET /api/expand_step3_prefill_partners.php` - Prefill partners
+- `POST /api/expand_step4_save_children.php` - Add children
+- `GET /api/children_by_parents.php` - Get children for couple
+
+### **Invitations**
+- `POST /api/invites_create.php` - Create invite
+- `GET /api/invites_list.php` - Get sent invites
+- `GET /api/invites_received.php` - Get received invites
+- `POST /api/invites_accept.php` - Accept invite
+- `POST /api/invites_accept_direct.php` - Accept via token
+- `POST /api/invites_reject.php` - Reject invite
+- `POST /api/invites_resend.php` - Resend invite
+- `POST /api/invites_revoke.php` - Revoke invite
+- `GET /api/invites_check_email.php` - Check if email has invite
+- `GET /api/invite_url_helper.php` - Generate invite URL
+
+### **Pending Decisions**
+- `GET /api/pd_list.php` - Get duplicate clusters
+- `POST /api/pd_merge.php` - Merge duplicates
+- `POST /api/pd_click.php` - Mark as not duplicate
+- `GET /api/pd_family_tree.php` - Get cluster tree
+- `GET /api/pd_clusters.php` - Get cluster details
+
+### **Other**
+- `GET /api/action_logs_list.php` - Get activity logs
+- `POST /api/upload_person_photo.php` - Upload photo
+- `POST /api/nested_family_create.php` - Create nested family
+- `POST /api/family_quick_setup.php` - Quick family setup
+
+---
+
+## 📱 Progressive Web App (PWA)
+
+### **Manifest** (`/manifest.webmanifest`)
+- App name: "NASAB Family Tree"
+- Icons: Various sizes for home screen
+- Start URL: `/`
+- Display: `standalone`
+- Theme color: `#0ea5e9`
+
+### **Offline Support**
+- Page: `pages/EN/offline.html`
+- Shows when no internet connection
+- Service worker (if implemented)
+
+### **Mobile Responsive**
+- All pages use responsive design
+- Touch-friendly buttons
+- Mobile-optimized chat interface
+
+---
+
+## 🔍 Search & Discovery
+
+### **Person Search** (if implemented)
+- Search by name
+- Filter by gender, generation
+- Search within family tree
+
+### **URL Patterns**
+
+**Public Pages**:
+- `/` - Landing
+- `/login`, `/register` - Auth
+- `/about.html`, `/terms.html` - Info pages
+
+**Protected Pages**:
+- `/dashboard` - Main hub
+- `/wizard` - Onboarding
+- `/tree` - Tree view
+- `/invites` - Invitations
+- `/profile` - User profile
+
+**Admin Pages**:
+- `/admin_dashboard` - Admin hub
+- `/admin_pending_people` - Approve people
+
+---
+
+## 🎯 Key Success Metrics
+
+### **User Onboarding**
+- Registration to wizard completion rate
+- Average time to complete wizard
+- Wizard abandonment points
+
+### **Engagement**
+- Daily active users
+- Average family tree size
+- Invitations sent/accepted ratio
+- Expansions per user
+- Photos uploaded per family
+
+### **Data Quality**
+- Duplicate merge rate
+- Missing data fields percentage
+- Relationship completeness
+
+---
+
+## 🐛 Error Handling
+
+### **User-Facing Errors**
+
+**Registration Errors**:
+- `error=missing` - "Please complete all fields"
+- `error=invalid_email` - "Invalid email address"
+- `error=mismatch` - "Passwords don't match"
+- `error=weak` - "Password too weak"
+- `error=exists` - "Email already registered"
+
+**API Errors**:
+- `{ ok: false, error: "auth" }` - Not authenticated
+- `{ ok: false, error: "no_family" }` - No family assigned
+- `{ ok: false, error: "server_error" }` - Generic server error
+
+**Display Pattern**:
+- Error message shows in red text
+- Below form fields
+- Query string: `?error=invalid_email`
+- JavaScript: Parse URL, show message
+
+---
+
+## 🎓 Developer Notes
+
+### **Code Organization**
+
+**Frontend**:
+- `/pages/EN/` - English pages
+- `/pages/MY/` - Malaysian pages
+- `/assets/js/EN/` - English scripts
+- `/assets/js/MY/` - Malaysian scripts
+- `/assets/css/` - Shared styles
+
+**Backend**:
+- `/api/` - API endpoints
+- `/auth/` - Auth endpoints (as PHP files in pages/EN/auth/)
+- `/classes/` - PHP classes (Database, Mailer, ActionLogger)
+- `/config/` - Configuration files
+
+### **State Management**
+- **Session**: `$_SESSION` for server-side user state
+- **LocalStorage**: Wizard state, preferences
+- **Cookies**: Language preference
+
+### **Localization**
+- Duplicate pages for EN/MY
+- JavaScript files duplicated for each language
+- Router handles language detection
+
+### **Security**
+- Password hashing: `password_hash()`
+- SQL injection prevention: Prepared statements
+- CSRF tokens: (to be implemented)
+- XSS prevention: Input sanitization
+- Session hijacking: Secure session settings
+
+---
+
+## 📝 TODO / Future Enhancements
+
+1. **CSRF Protection**: Add tokens to all forms
+2. **Email Verification**: Verify email after registration
+3. **Password Reset**: Forgot password flow
+4. **2FA**: Two-factor authentication
+5. **Advanced Search**: Full-text search across tree
+6. **Export**: GEDCOM export
+7. **Import**: GEDCOM import
+8. **Notifications**: Email/push notifications
+9. **Comments**: Add notes to persons/relationships
+10. **Photos**: Photo albums per person
+11. **Documents**: Attach documents (birth certificates, etc.)
+12. **Reports**: Generate family reports
+13. **Print**: Print family tree as poster
+14. **Privacy**: Granular privacy settings
+15. **Versioning**: Track changes, undo/redo
+
+---
+
+## ✅ Journey Map Completion Checklist
+
+- ✅ Landing page flow documented
+- ✅ Registration flows (regular + token) documented
+- ✅ Full wizard steps mapped (1-6)
+- ✅ Token wizard documented
+- ✅ Login flow documented
+- ✅ Dashboard features listed
+- ✅ Tree view flow documented
+- ✅ Add/expand person flows documented
+- ✅ Invitations flow (send/receive/accept) documented
+- ✅ Pending decisions (duplicate merge) documented
+- ✅ All API endpoints catalogued
+- ✅ Database schema outlined
+- ✅ UI patterns documented
+- ✅ Error handling covered
+- ✅ Security notes included
+
+---
+
+**End of User Journey Map**
+
+This document provides a complete E2E view of all user flows in the NASAB Family Tree application, from first visit to advanced features. Use this as a reference for development, testing, QA, and onboarding new team members.

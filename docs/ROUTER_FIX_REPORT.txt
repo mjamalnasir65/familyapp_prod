@@ -1,0 +1,201 @@
+# SmartRouter Fix for WAMP Subdirectory Installation
+
+## Issue
+
+Internal Server Error 500 when accessing `http://familyapp/`
+
+## Root Causes Identified
+
+### 1. php_flag Directives in .htaccess
+
+**Problem**: `php_flag session.auto_start Off` and `php_flag session.use_cookies On` cause 500 errors when PHP is not running as Apache module or when AllowOverride doesn't permit php_flag.
+
+**Solution**: Removed php_flag directives from .htaccess. These should be configured in php.ini instead.
+
+### 2. Incorrect Base Path Handling
+
+**Problem**: Router was designed for root installation (/) but application is installed in subdirectory (/familyapp/)
+
+**Solution**:
+
+- Added `$basePath = '/familyapp'` property to SmartRouter
+- Updated constructor to strip base path from REQUEST_URI
+- Updated all header("Location:") redirects to include base path
+
+## Changes Made
+
+### File: `.htaccess`
+
+#### Removed (lines 8-9)
+
+```apache
+php_flag session.auto_start Off
+php_flag session.use_cookies On
+```
+
+#### Changed RewriteBase
+
+```apache
+RewriteBase /familyapp/
+```
+
+#### Updated Path Matching for Subdirectory
+
+```apache
+# Pass through static assets
+RewriteCond %{REQUEST_URI} ^/familyapp/(assets|uploads)/ [OR]
+RewriteCond %{REQUEST_URI} \.(css|js|jpg|jpeg|png|gif|svg|woff|woff2|ttf|eot|ico|webmanifest)$
+RewriteRule ^ - [L]
+
+# Pass through API endpoints
+RewriteCond %{REQUEST_URI} ^/familyapp/api/
+RewriteRule ^ - [L]
+
+# Pass through old /auth/ PHP files
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} ^/familyapp/auth/.*\.php$
+RewriteRule ^ - [L]
+```
+
+### File: `router.php`
+
+#### Added Base Path Property
+
+```php
+private $basePath = '/familyapp';
+```
+
+#### Updated Constructor to Strip Base Path
+
+```php
+public function __construct() {
+    $this->db = Database::getInstance()->getConnection();
+    $fullUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    // Remove base path if present
+    if (strpos($fullUri, $this->basePath) === 0) {
+        $this->requestUri = substr($fullUri, strlen($this->basePath));
+    } else {
+        $this->requestUri = $fullUri;
+    }
+    $this->queryString = $_SERVER['QUERY_STRING'] ?? '';
+    $this->initializeLanguage();
+    $this->initializeUser();
+}
+```
+
+#### Updated All Redirects (9 locations)
+
+```php
+// Example:
+header("Location: {$this->basePath}/pages/{$this->lang}/dashboard.html");
+```
+
+**Updated Methods:**
+
+- `redirectToLangAuth()`
+- `handleLangPage()` - auth redirect
+- `redirectAuthenticatedUser()` - 4 redirect locations
+- `redirectToWizard()`
+- `handleDefault()`
+
+## Testing
+
+### Syntax Check
+
+```powershell
+D:\wamp64\bin\php\php8.3.14\php.exe d:\wamp64\www\familyapp\test_syntax.php
+```
+
+**Result**: ✅ SUCCESS - No syntax errors
+
+### Test URLs
+
+Now test in browser:
+
+1. `http://familyapp/` - Landing page
+2. `http://familyapp/?lang=EN` - English
+3. `http://familyapp/?lang=MY` - Malay
+4. `http://familyapp/test_router.php` - Full test suite
+5. `http://familyapp/pages/EN/dashboard.html` - Should redirect to login
+6. `http://familyapp/api/session_info.php` - Should return JSON
+
+## Configuration for Production
+
+When deploying to production (where app is at root /):
+
+### Option 1: Update Both Files
+
+```php
+// router.php
+private $basePath = '';  // Empty for root installation
+```
+
+```apache
+# .htaccess
+RewriteBase /
+
+# Change path matching back to root:
+RewriteCond %{REQUEST_URI} ^/(assets|uploads)/ [OR]
+RewriteCond %{REQUEST_URI} ^/api/
+```
+
+### Option 2: Make Base Path Configurable
+
+Add to `config/config.php`:
+
+```php
+define('BASE_PATH', '/familyapp');  // or '' for production
+```
+
+Then in router.php:
+
+```php
+private $basePath;
+
+public function __construct() {
+    $this->basePath = defined('BASE_PATH') ? BASE_PATH : '';
+    // rest of constructor...
+}
+```
+
+## PHP Configuration Note
+
+Since we removed php_flag from .htaccess, ensure these are set in php.ini:
+
+```ini
+session.auto_start = 0
+session.use_cookies = 1
+session.cookie_httponly = 1
+```
+
+Or add to VirtualHost in httpd-vhosts.conf:
+
+```apache
+<VirtualHost *:80>
+    ServerName familyapp
+    DocumentRoot "d:/wamp64/www/familyapp"
+    <Directory "d:/wamp64/www/familyapp/">
+        Options +Indexes +Includes +FollowSymLinks +MultiViews
+        AllowOverride All
+        Require local
+        
+        php_admin_flag session.auto_start Off
+        php_admin_flag session.use_cookies On
+    </Directory>
+</VirtualHost>
+```
+
+## Verification Checklist
+
+- [x] Syntax check passes
+- [ ] Landing page loads without 500 error
+- [ ] Language switching works
+- [ ] Auth redirect includes base path
+- [ ] API endpoints accessible
+- [ ] Static assets load
+- [ ] Test suite runs completely
+
+---
+
+**Status**: Fixed and ready for browser testing
+**Next Step**: Open `http://familyapp/` in browser and verify landing page loads

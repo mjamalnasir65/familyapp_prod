@@ -1,0 +1,321 @@
+# SmartRouter Quick Reference
+
+## Common Tasks
+
+### Add New Language
+```php
+// In router.php
+private $langFolders = ['EN', 'MY', 'ES']; // Add new language code
+
+// Create new folders
+mkdir pages/ES
+mkdir pages/ES/auth
+mkdir assets/js/ES
+
+// Copy and translate pages from EN
+```
+
+### Add New Protected Page
+```php
+// Just create the file in language folder
+// Router automatically protects non-auth pages
+pages/EN/new_page.html
+pages/MY/new_page.html
+
+// Access at:
+http://localhost/familyapp/pages/EN/new_page.html
+```
+
+### Add New Public Page
+```php
+// Put in auth folder to bypass authentication
+pages/EN/auth/public_page.html
+
+// Or add exception in handleLangPage()
+private function handleLangPage($page) {
+    $publicPages = ['auth/', 'about.html', 'terms.html'];
+    // ...
+}
+```
+
+### Change Default Language
+```php
+// In router.php
+private $defaultLang = 'MY'; // Change from EN to MY
+```
+
+### Modify Wizard Completion Logic
+```php
+// In getWizardStatus()
+private function getWizardStatus() {
+    // Add custom logic
+    $hasFamily = !empty($result['families_id']);
+    $hasProfileComplete = !empty($result['profile_complete']);
+    
+    return [
+        'completed' => $hasFamily && $hasProfileComplete,
+        // ...
+    ];
+}
+```
+
+### Add Custom Redirect Logic
+```php
+// In redirectAuthenticatedUser()
+private function redirectAuthenticatedUser() {
+    // Add custom checks
+    if (isset($_SESSION['force_profile_update'])) {
+        header("Location: /pages/{$this->lang}/profile.html");
+        exit;
+    }
+    // ... existing logic
+}
+```
+
+## URL Patterns
+
+### Pattern Recognition
+```
+/                              → Landing page
+/index.html                    → Landing page
+/pages/EN/dashboard.html       → Protected EN page
+/pages/MY/dashboard.html       → Protected MY page
+/pages/EN/auth/login.php       → Public auth page
+/api/session_info.php          → API endpoint (pass-through)
+/assets/css/main.css           → Static asset (pass-through)
+/auth/login.php                → Redirects to /pages/<LANG>/auth/login.php
+```
+
+### Query Strings
+```
+?lang=EN                       → Force English
+?lang=MY                       → Force Malay
+?invite_token=xxx              → Registration with invite
+?family_token=xxx              → Registration with family
+?step=3                        → Resume wizard at step
+```
+
+## Session Management
+
+### Check User Login Status
+```php
+if (isset($_SESSION['user_id'])) {
+    // User is logged in
+    $userId = $_SESSION['user_id'];
+}
+```
+
+### Get Current Language
+```php
+$lang = $_SESSION['lang'] ?? 'EN';
+```
+
+### Store Pending Token
+```php
+// Before registration
+$_SESSION['pending_invite_token'] = $_GET['token'];
+
+// After registration, router auto-redirects with token
+```
+
+## Database Queries
+
+### Check Admin Status
+```sql
+SELECT pwa_admin FROM users WHERE id = ? LIMIT 1
+```
+
+### Check Wizard Status
+```sql
+SELECT families_id FROM users WHERE id = ? LIMIT 1
+-- NULL = incomplete, NOT NULL = complete
+```
+
+### Update Wizard Status
+```sql
+UPDATE users SET families_id = ? WHERE id = ?
+```
+
+## Error Pages
+
+### Serve Custom 404
+```php
+http_response_code(404);
+$this->servePage(__DIR__ . "/pages/{$this->lang}/404.html");
+```
+
+### Serve Custom 500
+```php
+http_response_code(500);
+$this->servePage(__DIR__ . "/pages/{$this->lang}/500.html");
+```
+
+## Debugging
+
+### Enable Debug Output
+```php
+// Top of router.php (temporary!)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Add debug logging
+error_log("Router Debug: URI={$this->requestUri}, User={$this->userId}, Lang={$this->lang}");
+```
+
+### Check Routing Decision
+```php
+// In route() method
+error_log("Route decision for: " . $this->requestUri);
+error_log("User ID: " . ($this->userId ?? 'none'));
+error_log("Language: " . $this->lang);
+```
+
+### View Session Data
+```php
+// Add to test_router.php
+echo "<pre>" . print_r($_SESSION, true) . "</pre>";
+```
+
+## Apache Configuration
+
+### Enable mod_rewrite (if disabled)
+```apache
+# In httpd.conf
+LoadModule rewrite_module modules/mod_rewrite.so
+```
+
+### Allow .htaccess Override
+```apache
+<Directory "D:/wamp64/www/familyapp">
+    AllowOverride All
+</Directory>
+```
+
+### Check Rewrite Status
+```php
+<?php phpinfo(); ?>
+// Look for "Loaded Modules" section
+```
+
+## Common Errors
+
+### "Too many redirects"
+**Cause**: Loop in authentication logic
+**Fix**: Check that auth pages don't redirect logged-in users
+
+### "404 on everything"
+**Cause**: mod_rewrite not working
+**Fix**: Check Apache config, verify .htaccess loaded
+
+### "CSS not loading"
+**Cause**: Wrong path or routing issue
+**Fix**: Check .htaccess static asset rules
+
+### "API returns HTML"
+**Cause**: API being routed through router
+**Fix**: Verify API pass-through in .htaccess
+
+## Performance Tips
+
+### Cache Language Detection
+```php
+// Language already cached in session
+// No need to detect on every request
+```
+
+### Use return false for Pass-Through
+```php
+// Let Apache handle it
+if (strpos($this->requestUri, '/api/') === 0) {
+    return false; // Fast exit
+}
+```
+
+### Minimize Database Queries
+```php
+// Cache admin status in session
+if (!isset($_SESSION['is_admin'])) {
+    $_SESSION['is_admin'] = $this->isAdmin();
+}
+return $_SESSION['is_admin'];
+```
+
+## Security Checklist
+
+- [ ] HTTPS enabled in production
+- [ ] Session cookies HttpOnly
+- [ ] CSRF tokens in forms
+- [ ] SQL prepared statements
+- [ ] Password hashing (bcrypt)
+- [ ] Input validation
+- [ ] XSS prevention in output
+- [ ] File upload restrictions
+- [ ] Rate limiting on auth
+- [ ] Session regeneration on login
+
+## Testing Shortcuts
+
+### Quick Language Test
+```bash
+# Windows PowerShell
+curl http://localhost/familyapp/?lang=EN
+curl http://localhost/familyapp/?lang=MY
+```
+
+### Test Authentication
+```bash
+# Should redirect to login
+curl -I http://localhost/familyapp/pages/EN/dashboard.html
+
+# Should show login page
+curl -I http://localhost/familyapp/pages/EN/auth/login.php
+```
+
+### Test API Pass-Through
+```bash
+curl http://localhost/familyapp/api/session_info.php
+# Should return JSON, not HTML
+```
+
+## File Checklist
+
+Essential files for router:
+- [ ] router.php
+- [ ] .htaccess
+- [ ] config/config.php
+- [ ] classes/Database.php
+- [ ] pages/EN/404.html
+- [ ] pages/MY/404.html
+- [ ] pages/EN/auth/login.php
+- [ ] pages/MY/auth/login.php
+- [ ] index.html (landing)
+
+## Maintenance
+
+### Update Router Logic
+```bash
+# Edit router.php
+# Test with test_router.php
+# Deploy to production
+# Monitor error logs
+```
+
+### Add Route Exception
+```php
+// In route() method
+if ($this->requestUri === '/special-page') {
+    return $this->handleSpecialPage();
+}
+```
+
+### Clear Sessions (troubleshooting)
+```php
+// Add to test page
+session_destroy();
+setcookie('lang', '', time()-3600, '/');
+echo "Session cleared";
+```
+
+---
+
+**Pro Tip**: Always test routing changes with test_router.php before deploying!

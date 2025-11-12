@@ -1,0 +1,391 @@
+# SmartRouter Documentation
+
+## Overview
+The SmartRouter is an intelligent routing system for the Family Echo application that handles:
+- Multi-language support (EN/MY)
+- Authentication flows
+- User journey management
+- Wizard completion tracking
+- Token-based registration
+
+## Architecture
+
+### File Structure
+```
+d:\wamp64\www\familyapp\
+├── router.php              # SmartRouter class and initialization
+├── .htaccess               # Apache rewrite rules
+├── test_router.php         # Router test suite
+└── config/
+    └── config.php          # Database and app configuration
+```
+
+### Routing Flow
+
+```
+HTTP Request
+    ↓
+.htaccess (Apache)
+    ↓
+Check if static asset? → YES → Serve directly
+    ↓ NO
+Check if API endpoint? → YES → Pass to PHP file
+    ↓ NO
+    ↓
+SmartRouter::route()
+    ↓
+Language Detection (URL → Session → Cookie → Browser → Default)
+    ↓
+User Authentication Check
+    ↓
+Route Decision Tree:
+    ├── Landing Page (/)
+    ├── Auth Pages (/pages/<LANG>/auth/*)
+    ├── Protected Pages (/pages/<LANG>/*)
+    └── Redirects based on user state
+```
+
+## Language Detection Priority
+
+1. **URL Parameter**: `?lang=EN` or `?lang=MY`
+2. **Session**: `$_SESSION['lang']`
+3. **Cookie**: `$_COOKIE['lang']`
+4. **Browser**: `HTTP_ACCEPT_LANGUAGE` header
+5. **Default**: `EN`
+
+Once detected, language is stored in both session and cookie (365-day expiry).
+
+## User Journey Scenarios
+
+### 1. New Visitor (Not Logged In)
+```
+Visit / → Landing page (index.html)
+    ↓
+Choose language (EN/MY)
+    ↓
+Click Register → /pages/<LANG>/auth/register.php
+    ↓
+Complete registration
+    ↓
+Router detects no families_id → Redirect to chat_wizard.html
+```
+
+### 2. Registration with Invite Token
+```
+Click invite link → /pages/<LANG>/accept_invite.html?invite_token=xxx
+    ↓
+Click Register → Token stored in $_SESSION['pending_invite_token']
+    ↓
+Complete registration
+    ↓
+Router detects pending token → Redirect to dashboard.html?invite_token=xxx
+    ↓
+Accept invite API processes token
+```
+
+### 3. Registration with Family Token
+```
+Receive family token → Register with ?family_token=xxx
+    ↓
+Token stored in $_SESSION['pending_family_token']
+    ↓
+Complete registration
+    ↓
+Router detects family token → Redirect to chat_token_wizard.html?family_token=xxx
+```
+
+### 4. Returning User (Wizard Incomplete)
+```
+Login → Router checks families_id field
+    ↓
+families_id is NULL → Wizard incomplete
+    ↓
+Redirect to chat_wizard.html
+    ↓
+Complete wizard → families_id populated
+    ↓
+Next login → Redirect to dashboard.html
+```
+
+### 5. Returning Complete User
+```
+Login → Router checks families_id field
+    ↓
+families_id has value → Wizard complete
+    ↓
+Redirect to dashboard.html
+```
+
+### 6. Admin User
+```
+Login → Router checks pwa_admin field
+    ↓
+pwa_admin = 1 → Admin user
+    ↓
+Redirect to admin_dashboard.html
+    ↓
+Admin can access any page (no wizard restrictions)
+```
+
+## Protected Routes
+
+All pages under `/pages/<LANG>/` except `/pages/<LANG>/auth/*` require authentication.
+
+### Authentication Enforcement
+- Unauthenticated access → Redirect to `/pages/<LANG>/auth/login.php`
+- Current URL stored in `$_SESSION['redirect_after_login']`
+- After login → Redirect to stored URL or default destination
+
+## Database Dependencies
+
+### Users Table
+```sql
+-- Required columns for router logic
+id              INT PRIMARY KEY
+email           VARCHAR
+families_id     INT           -- NULL = wizard incomplete
+pwa_admin       TINYINT(1)    -- 1 = admin, 0 = regular user
+```
+
+### Wizard Status Detection
+```php
+// Check if user has completed wizard
+SELECT families_id FROM users WHERE id = ?
+
+// families_id IS NULL → Wizard incomplete
+// families_id IS NOT NULL → Wizard complete
+```
+
+## Session Variables
+
+### Language
+- `$_SESSION['lang']` - Current language (EN/MY)
+
+### Authentication
+- `$_SESSION['user_id']` - Logged-in user ID
+
+### Redirects
+- `$_SESSION['redirect_after_login']` - URL to redirect after login
+
+### Tokens
+- `$_SESSION['pending_invite_token']` - Invite token for post-registration
+- `$_SESSION['pending_family_token']` - Family token for post-registration
+
+## API Endpoints (Pass-Through)
+
+All URLs starting with `/api/` are passed through to their PHP files without routing:
+- `/api/session_info.php`
+- `/api/family_create.php`
+- `/api/person_update.php`
+- etc.
+
+## Static Assets (Pass-Through)
+
+These are served directly by Apache:
+- `/assets/` - CSS, JS, images
+- `/uploads/` - User uploads
+- `*.css`, `*.js`, `*.jpg`, etc.
+
+## .htaccess Configuration
+
+```apache
+# Pass through static assets
+RewriteCond %{REQUEST_URI} ^/(assets|uploads)/ [OR]
+RewriteCond %{REQUEST_URI} \.(css|js|jpg|jpeg|png|gif|svg|woff|woff2|ttf|eot|ico|webmanifest)$
+RewriteRule ^ - [L]
+
+# Pass through API endpoints
+RewriteCond %{REQUEST_URI} ^/api/
+RewriteRule ^ - [L]
+
+# Route everything else through SmartRouter
+RewriteRule ^ router.php [QSA,L]
+```
+
+## Testing
+
+### Run Test Suite
+```
+http://localhost/familyapp/test_router.php
+```
+
+### Manual Tests
+1. **Landing page**: Visit `/`
+2. **Language switching**: Add `?lang=EN` or `?lang=MY`
+3. **Auth redirect**: Try `/pages/EN/dashboard.html` without login
+4. **Login flow**: Complete login and verify redirect
+5. **API access**: Verify `/api/session_info.php` still works
+6. **Static assets**: Check CSS/JS load correctly
+
+### Test User States
+
+#### Test 1: New User (No Family)
+```sql
+-- Create test user with no family
+INSERT INTO users (email, password_hash, families_id, pwa_admin)
+VALUES ('test1@test.com', '$2y$10$...', NULL, 0);
+```
+Expected: Redirect to chat_wizard.html
+
+#### Test 2: Complete User
+```sql
+-- Create test user with family
+INSERT INTO users (email, password_hash, families_id, pwa_admin)
+VALUES ('test2@test.com', '$2y$10$...', 1, 0);
+```
+Expected: Redirect to dashboard.html
+
+#### Test 3: Admin User
+```sql
+-- Create admin user
+INSERT INTO users (email, password_hash, families_id, pwa_admin)
+VALUES ('admin@test.com', '$2y$10$...', 1, 1);
+```
+Expected: Redirect to admin_dashboard.html
+
+## Error Handling
+
+### 404 Not Found
+- Serves language-specific 404.html
+- Falls back to generic error if 404.html missing
+
+### 500 Server Error
+- Catches exceptions in router
+- Logs error to PHP error log
+- Shows generic 500 error page
+
+### Database Errors
+- Caught and logged
+- User treated as not admin / wizard incomplete (fail-safe)
+
+## Content Injection
+
+Router automatically injects metadata into served pages:
+
+### HTML lang Attribute
+```html
+<!-- Before -->
+<html>
+
+<!-- After -->
+<html lang="en">
+```
+
+### Body data-lang Attribute
+```html
+<!-- Before -->
+<body>
+
+<!-- After -->
+<body data-lang="EN">
+```
+
+### Content-Language Header
+```
+Content-Language: en
+```
+
+## Security Considerations
+
+1. **CSRF Protection**: Session-based, not router-handled
+2. **XSS Prevention**: Content served as-is (pages must handle escaping)
+3. **SQL Injection**: Prepared statements used for all queries
+4. **Session Fixation**: Use session_regenerate_id() in auth endpoints
+5. **File Access**: .htaccess blocks direct access to sensitive files
+
+## Performance
+
+### Caching
+- Database connection singleton (one per request)
+- Session initialized once
+- Language detection cached in session/cookie
+
+### Optimization
+- Static assets bypass PHP entirely (served by Apache)
+- API endpoints bypass routing logic
+- Minimal regex matching for route detection
+
+## Migration from Old Router
+
+### Old Behavior
+```php
+// Old router used ?r=dashboard pattern
+http://localhost/familyapp/?r=dashboard
+```
+
+### New Behavior
+```php
+// New router uses full paths
+http://localhost/familyapp/pages/EN/dashboard.html
+```
+
+### Backward Compatibility
+- Old `/auth/` paths redirect to `/pages/<LANG>/auth/`
+- Legacy `/familyapp/public/` prefix stripped via .htaccess
+
+## Troubleshooting
+
+### Issue: Infinite Redirect Loop
+**Cause**: Auth page redirecting authenticated users who redirect back
+**Fix**: Check `handleAuthPage()` logic to avoid redirecting logged-in users
+
+### Issue: 404 on All Pages
+**Cause**: .htaccess not working or mod_rewrite disabled
+**Fix**: 
+- Check Apache `AllowOverride All` in httpd.conf
+- Verify mod_rewrite loaded: `apache_get_modules()`
+
+### Issue: API Endpoints Return HTML
+**Cause**: API requests being routed through router
+**Fix**: Ensure `.htaccess` has API pass-through rule before router rule
+
+### Issue: CSS/JS Not Loading
+**Cause**: Static assets being routed through PHP
+**Fix**: Check static asset regex in `.htaccess`
+
+### Issue: Language Not Persisting
+**Cause**: Cookies disabled or session not started
+**Fix**: Verify `session_start()` and cookie settings in php.ini
+
+## Deployment Checklist
+
+### Local Development (WAMP)
+- ✅ Config points to localhost database
+- ✅ Security headers disabled
+- ✅ Display errors enabled
+- ✅ Test router with test_router.php
+
+### Production (Linux/cPanel)
+- [ ] Update config.php or use config.local.php
+- [ ] Enable security headers
+- [ ] Disable display_errors
+- [ ] Set up error logging
+- [ ] Enable HTTPS redirect in .htaccess
+- [ ] Test all user journeys
+- [ ] Verify API endpoints work
+- [ ] Check file permissions (router.php, config.php)
+
+## Future Enhancements
+
+1. **Step Tracking**: Store wizard progress in database
+2. **Session Timeout**: Add inactive timeout handling
+3. **Rate Limiting**: Add brute-force protection for auth pages
+4. **Cache Headers**: Add conditional caching for static pages
+5. **Breadcrumbs**: Track navigation history in session
+6. **A/B Testing**: Route users to experimental pages
+7. **Analytics**: Log page views and user journeys
+
+## Support
+
+For issues or questions:
+1. Check test_router.php output
+2. Review Apache error logs
+3. Check PHP error logs
+4. Verify database schema matches requirements
+5. Test with different user states
+
+---
+
+**Version**: 1.0.0  
+**Last Updated**: 2024  
+**Author**: Family Echo Development Team

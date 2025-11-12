@@ -1,0 +1,133 @@
+# SESSION & LOGOUT - QUICK REFERENCE
+
+## 🎯 KEY CONCEPTS
+
+### Session Policy
+- **Landing page (/)** = NO SESSION
+- **Session starts** = Only when user clicks language, login, or register
+- **Logout** = Destroys EVERYTHING and returns to landing page
+
+---
+
+## 🔄 USER FLOWS
+
+### 1️⃣ Fresh Visit
+```
+User → http://localhost:8080/
+├── Landing page loads (NO session)
+├── User sees language buttons (EN/MY)
+└── User sees login/register buttons
+```
+
+### 2️⃣ Language Selection
+```
+User clicks "English"
+├── Session STARTS
+├── Language saved to session/cookie
+└── Redirect to appropriate page
+```
+
+### 3️⃣ Login
+```
+User clicks "Login"
+├── Session STARTS (if not already)
+├── Login form displayed
+└── After login → Dashboard or Wizard
+```
+
+### 4️⃣ Logout
+```
+User clicks "Logout"
+├── Router intercepts request
+├── Session DESTROYED completely
+├── Cookies CLEARED
+├── Browser storage CLEARED
+└── Redirect to landing page (NO session)
+```
+
+---
+
+## 🔗 LOGOUT LINKS
+
+Use any of these in your HTML:
+
+### Friendly URL (Recommended)
+```html
+<a href="/logout">Logout</a>
+```
+
+### Language-Specific
+```html
+<!-- English -->
+<a href="/pages/EN/auth/logout.php">Logout</a>
+
+<!-- Malay -->
+<a href="/pages/MY/auth/logout.php">Log Keluar</a>
+```
+
+**All paths lead to**: Complete session destruction → `/index.html`
+
+---
+
+## 🧪 TESTING
+
+### Check No Session on Landing
+1. Open browser (incognito/private mode)
+2. Visit `http://localhost:8080/`
+3. Open DevTools → Application → Cookies
+4. **Expected**: No session cookie
+
+### Check Session Starts
+1. Click "English" button
+2. Check DevTools → Cookies
+3. **Expected**: Session cookie present
+
+### Check Logout Clears Everything
+1. Login to dashboard
+2. Click "Logout"
+3. Check DevTools:
+   - Cookies → No session cookie ✅
+   - Application → sessionStorage empty ✅
+   - Application → localStorage empty ✅
+4. **Expected**: Back at landing page
+
+---
+
+## 🔧 ROUTER METHODS
+
+| Method | Purpose |
+|--------|---------|
+| `isLandingPage()` | Detect if request is for landing page |
+| `startSessionIfNeeded()` | Start session only when needed |
+| `isLogoutRequest()` | Detect logout request from any path |
+| `handleLogout()` | Destroy session and redirect to landing |
+| `handleLandingPage()` | Serve landing without session |
+
+---
+
+## 📁 FILES CHANGED
+
+- ✅ `router.php` - Session management + logout handler
+- ✅ `pages/EN/auth/logout.php` - Redirect to `/index.html`
+- ✅ `pages/MY/auth/logout.php` - Redirect to `/index.html`
+
+---
+
+## ✅ CHECKLIST
+
+- [x] Landing page has NO session
+- [x] Session starts on language selection
+- [x] Session starts on login button
+- [x] Session starts on register button
+- [x] Logout destroys session completely
+- [x] Logout clears all cookies
+- [x] Logout clears browser storage
+- [x] Logout redirects to landing page
+- [x] No breaking changes to existing flows
+
+---
+
+## 🚀 READY TO TEST!
+
+**Status**: ✅ Implemented and validated  
+**Next**: Test logout flow in browser

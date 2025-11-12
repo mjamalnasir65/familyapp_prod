@@ -1,0 +1,722 @@
+# NASAB Family Tree - Complete Paths List
+
+**Generated from**: USER_JOURNEY_MAP.md
+**Date**: November 10, 2025
+**Purpose**: Comprehensive list of all application paths organized by function
+
+---
+
+## 📂 Path Organization
+
+- **Frontend Pages**: HTML pages served to users
+- **API Endpoints**: Backend JSON endpoints
+- **Auth Endpoints**: Authentication PHP files
+- **Static Assets**: CSS, JS, images
+- **Special Routes**: Friendly URLs handled by router
+
+---
+
+## 🏠 PUBLIC PAGES (No Authentication Required)
+
+### Landing & Info Pages
+```
+/                                    → pages/EN/index.html (landing page)
+/index.html                          → pages/EN/index.html
+/pages/EN/index.html                 → Landing page (EN)
+/pages/MY/index.html                 → Landing page (MY)
+/pages/EN/public.html                → Public info page
+/pages/EN/about.html                 → About NASAB
+/pages/EN/terms.html                 → Terms of Service
+/pages/EN/offline.html               → Offline page (PWA)
+/pages/EN/404.html                   → 404 error page
+```
+
+### Authentication Pages
+```
+/login                               → /pages/EN/auth/login.html (friendly)
+/register                            → /pages/EN/auth/register.html (friendly)
+/tok_register                        → /pages/EN/auth/tok_register.html (friendly)
+/logout                              → /pages/EN/auth/logout.php (friendly)
+
+/pages/EN/auth/login.html            → Login form page
+/pages/EN/auth/login.php             → Login form handler
+/pages/EN/auth/register.html         → Registration form page
+/pages/EN/auth/register.php          → Registration form handler (POST)
+/pages/EN/auth/tok_register.html     → Token registration page
+/pages/EN/auth/tok_register.php      → Token registration handler (POST)
+/pages/EN/auth/logout.php            → Logout handler (destroys session)
+
+/pages/MY/auth/login.html            → Login page (MY)
+/pages/MY/auth/login.php             → Login handler (MY)
+/pages/MY/auth/register.html         → Registration page (MY)
+/pages/MY/auth/register.php          → Registration handler (MY)
+/pages/MY/auth/tok_register.html     → Token registration (MY)
+/pages/MY/auth/tok_register.php      → Token registration handler (MY)
+/pages/MY/auth/logout.php            → Logout (MY)
+```
+
+---
+
+## 🔐 PROTECTED PAGES (Authentication Required)
+
+### Dashboard & Main Hub
+```
+/dashboard                           → /pages/EN/dashboard.html (friendly)
+/pages/EN/dashboard.html             → Main dashboard
+/pages/EN/dashboard.php              → Dashboard PHP version (if exists)
+/pages/MY/dashboard.html             → Dashboard (MY)
+```
+
+### Wizard Pages (Onboarding)
+```
+/wizard                              → /pages/EN/chat_wizard.html (friendly)
+/chat_wizard                         → /pages/EN/chat_wizard.html (friendly)
+/token_wizard                        → /pages/EN/chat_token_wizard.html (friendly)
+/chat_token_wizard                   → /pages/EN/chat_token_wizard.html (friendly)
+/family_token_wizard                 → /pages/EN/chat_wizard_token_family.html (friendly)
+
+/pages/EN/chat_wizard.html           → Full 6-step wizard (conversational)
+/pages/EN/chat_token_wizard.html     → Token-based wizard
+/pages/EN/chat_wizard_token_family.html → Family token wizard
+
+/pages/MY/chat_wizard.html           → Wizard (MY)
+/pages/MY/chat_token_wizard.html     → Token wizard (MY)
+/pages/MY/chat_wizard_token_family.html → Family token wizard (MY)
+```
+
+### Family Tree Views
+```
+/tree                                → /pages/EN/tree.html (friendly)
+/pages/EN/tree.html                  → Visual family tree (D3.js)
+/pages/EN/view_tree.html             → Alternative tree view
+/pages/EN/edit_tree.html             → Edit tree view
+/pages/EN/test_tree.html             → Test tree view
+/pages/EN/pd_tree.html               → Pending decisions tree view
+
+/pages/MY/tree.html                  → Tree view (MY)
+/pages/MY/view_tree.html             → Tree view (MY)
+/pages/MY/edit_tree.html             → Edit tree (MY)
+```
+
+### Person Management
+```
+/pages/EN/chatEdit_persons.html      → Add/edit person (chat interface)
+/pages/EN/profile_persons.html       → Person profile view
+/pages/EN/chat_expand.html           → Expand person (add relatives)
+/pages/EN/chatExpand_children.html   → Expand: add children
+/pages/EN/chatExpand_partners.html   → Expand: add partners
+/pages/EN/chatExpand_Siblings.html   → Expand: add siblings
+
+/pages/MY/chatEdit_persons.html      → Edit persons (MY)
+/pages/MY/chat_expand.html           → Expand person (MY)
+```
+
+### Invitations
+```
+/invites                             → /pages/EN/invites.html (friendly)
+/pages/EN/invites.html               → Invitations management (send/receive)
+/pages/EN/chat_invites.html          → Invitations chat interface
+/pages/EN/accept_invite.html         → Accept invitation page
+
+/pages/MY/invites.html               → Invitations (MY)
+/pages/MY/accept_invite.html         → Accept invite (MY)
+```
+
+### Pending Decisions (Duplicates)
+```
+/pages/EN/pd_view.html               → Pending decisions view
+/pages/EN/pd_tree.html               → Pending decisions tree view
+
+/pages/MY/pd_view.html               → Pending decisions (MY)
+```
+
+### Profile & Settings
+```
+/profile                             → /pages/EN/profile.html (friendly)
+/settings                            → /pages/EN/settings.html (friendly)
+
+/pages/EN/profile.html               → User profile (if exists)
+/pages/EN/settings.html              → Settings page (if exists)
+```
+
+---
+
+## 👑 ADMIN PAGES (Admin Flag Required)
+
+```
+/admin_dashboard                     → /pages/EN/admin_dashboard.html (friendly)
+/admin_pending_people                → /pages/EN/admin_pending_people.html (friendly)
+
+/pages/EN/admin_dashboard.html       → Admin dashboard
+/pages/EN/admin_pending_people.html  → Admin: manage pending people
+
+/pages/MY/admin_dashboard.html       → Admin dashboard (MY)
+/pages/MY/admin_pending_people.html  → Admin pending people (MY)
+```
+
+---
+
+## 🔌 API ENDPOINTS (Backend JSON)
+
+### Authentication & Session
+```
+GET  /api/session_info.php           → Get current user session info
+```
+
+### Wizard Flow (6 Steps)
+```
+POST /api/family_check_name.php      → Check if family name is unique
+POST /api/family_create.php          → Create new family
+POST /api/step2_self_save.php        → Save self person (step 2)
+POST /api/step3_parents_save.php     → Save parents (step 3)
+POST /api/step4_siblings_save.php    → Save siblings (step 4)
+POST /api/step5_partners_save.php    → Save partners (step 5)
+POST /api/step6_children_save.php    → Save children (step 6)
+POST /api/wizard_complete_step6.php  → Complete wizard (with children)
+POST /api/wizard_complete_no_partners.php → Complete wizard (no partners)
+```
+
+### Token Wizard Flow
+```
+POST /api/family_token_validate.php  → Validate family/invite token
+POST /api/family_token_issue.php     → Issue new family token
+POST /api/token_family_save_child.php → Save child via token wizard
+POST /api/token_family_unions.php    → Save unions via token wizard
+```
+
+### Dashboard Data
+```
+GET  /api/family_summary.php         → Get family statistics
+GET  /api/invites_received.php       → Get received invitations count/list
+GET  /api/pd_list.php                → Get pending decisions (duplicates)
+```
+
+### Family Tree
+```
+GET  /api/family_tree.php            → Get complete family tree data (nodes/edges)
+GET  /api/test_family_tree.php       → Test tree endpoint
+GET  /api/pd_family_tree.php         → Get tree for pending decision cluster
+```
+
+### Person CRUD
+```
+GET  /api/person_get.php             → Get person details by ID
+POST /api/person_update.php          → Create or update person
+```
+
+### Expand Person (Add Relatives)
+```
+POST /api/expand_start.php           → Initialize expansion for person
+GET  /api/expand_step1_prefill_parents.php → Prefill parent data
+POST /api/expand_step1_save_parents.php → Save parents for person
+GET  /api/expand_step2_prefill_siblings.php → Prefill siblings data
+POST /api/expand_step2_save_siblings.php → Save siblings for person
+GET  /api/expand_step3_prefill_partners.php → Prefill partners data
+POST /api/expand_step3_save_partners.php → Save partners for person
+POST /api/expand_step4_save_children.php → Save children for person
+GET  /api/children_by_parents.php    → Get children for a couple (p1, p2)
+GET  /api/step6_parents_context.php  → Get parents context for step 6
+GET  /api/step3_parents_load.php     → Load parents for step 3
+```
+
+### Invitations Management
+```
+POST /api/invites_create.php         → Create new invitation
+GET  /api/invites_list.php           → Get invitations sent by user
+GET  /api/invites_received.php       → Get invitations received by user
+GET  /api/invites_received_history.php → Get received invites history
+POST /api/invites_accept.php         → Accept invitation (by invite_id)
+POST /api/invites_accept_direct.php  → Accept invitation (by token, direct link)
+POST /api/invites_reject.php         → Reject invitation
+POST /api/invites_resend.php         → Resend invitation email
+POST /api/invites_revoke.php         → Revoke/cancel invitation
+GET  /api/invites_check_email.php    → Check if email has pending invite
+GET  /api/invite_url_helper.php      → Generate invitation URL with token
+```
+
+### Pending Decisions (Duplicate Merge)
+```
+GET  /api/pd_list.php                → Get pending decision clusters
+GET  /api/pd_clusters.php            → Get cluster details
+POST /api/pd_merge.php               → Merge duplicate persons
+POST /api/pd_click.php               → Mark cluster decision (merge/reject)
+GET  /api/pd_family_tree.php         → Get tree view for cluster
+```
+
+### Activity Logs
+```
+GET  /api/action_logs_list.php       → Get activity log entries
+```
+
+### File Uploads
+```
+POST /api/upload_person_photo.php    → Upload photo for person
+```
+
+### Other
+```
+POST /api/family_quick_setup.php     → Quick family setup (shortcut)
+POST /api/nested_family_create.php   → Create nested/sub-family
+```
+
+---
+
+## 🎨 STATIC ASSETS
+
+### Stylesheets
+```
+/assets/css/main.css                 → Main application styles
+```
+
+### JavaScript Core
+```
+/assets/js/main.js                   → Core JavaScript utilities
+/assets/js/i18n.js                   → Internationalization
+/assets/js/lang-switch.js            → Language switcher
+/assets/js/date-utils.js             → Date utilities
+```
+
+### JavaScript - English (EN)
+```
+/assets/js/EN/chatWizard.js          → Chat wizard logic (EN)
+/assets/js/EN/chatTokenWizard.js     → Token wizard logic (EN)
+```
+
+### JavaScript - Malaysian (MY)
+```
+/assets/js/MY/chatWizard.js          → Chat wizard logic (MY)
+/assets/js/MY/chatTokenWizard.js     → Token wizard logic (MY)
+```
+
+### Images & Icons
+```
+/assets/img/logo.png                 → Application logo
+/assets/img/*                        → Other images
+```
+
+### Fonts
+```
+/assets/fonts/*                      → Custom fonts (if any)
+```
+
+### PWA
+```
+/manifest.webmanifest                → PWA manifest file
+```
+
+### Uploads
+```
+/uploads/person_photos/*             → Uploaded person photos
+```
+
+---
+
+## 🔀 ROUTER FRIENDLY URLS
+
+**Note**: These are short URLs that redirect to full language-specific paths
+
+### Authentication
+```
+/login            → /pages/{LANG}/auth/login.php
+/register         → /pages/{LANG}/auth/register.php
+/logout           → /pages/{LANG}/auth/logout.php
+/tok_register     → /pages/{LANG}/auth/tok_register.php
+```
+
+### Application
+```
+/dashboard        → /pages/{LANG}/dashboard.html
+/wizard           → /pages/{LANG}/chat_wizard.html
+/chat_wizard      → /pages/{LANG}/chat_wizard.html
+/token_wizard     → /pages/{LANG}/chat_token_wizard.html
+/chat_token_wizard → /pages/{LANG}/chat_token_wizard.html
+/family_token_wizard → /pages/{LANG}/chat_wizard_token_family.html
+/tree             → /pages/{LANG}/tree.html
+/invites          → /pages/{LANG}/invites.html
+/profile          → /pages/{LANG}/profile.html
+/settings         → /pages/{LANG}/settings.html
+/families         → /pages/{LANG}/families.html
+/people           → /pages/{LANG}/people.html
+```
+
+### Admin
+```
+/admin_dashboard      → /pages/{LANG}/admin_dashboard.html
+/admin_pending_people → /pages/{LANG}/admin_pending_people.html
+```
+
+**{LANG}** = User's language preference (EN or MY)
+
+---
+
+## 📋 PATH SUMMARY BY HTTP METHOD
+
+### GET Requests (Read)
+```
+GET  /                               → Landing page
+GET  /login                          → Login form
+GET  /register                       → Registration form
+GET  /dashboard                      → Dashboard
+GET  /wizard                         → Onboarding wizard
+GET  /tree                           → Family tree view
+GET  /invites                        → Invitations page
+GET  /profile                        → User profile
+GET  /settings                       → Settings page
+
+GET  /api/session_info.php
+GET  /api/family_summary.php
+GET  /api/family_tree.php
+GET  /api/invites_list.php
+GET  /api/invites_received.php
+GET  /api/pd_list.php
+GET  /api/person_get.php
+GET  /api/children_by_parents.php
+GET  /api/action_logs_list.php
+GET  /api/expand_step1_prefill_parents.php
+GET  /api/expand_step2_prefill_siblings.php
+GET  /api/expand_step3_prefill_partners.php
+GET  /api/step3_parents_load.php
+GET  /api/step6_parents_context.php
+GET  /api/pd_clusters.php
+GET  /api/pd_family_tree.php
+GET  /api/invites_check_email.php
+GET  /api/invite_url_helper.php
+GET  /api/invites_received_history.php
+GET  /api/test_family_tree.php
+```
+
+### POST Requests (Write)
+```
+POST /auth/login.php                 → Process login
+POST /auth/register.php              → Process registration
+POST /auth/tok_register.php          → Process token registration
+
+POST /api/family_check_name.php
+POST /api/family_create.php
+POST /api/step2_self_save.php
+POST /api/step3_parents_save.php
+POST /api/step4_siblings_save.php
+POST /api/step5_partners_save.php
+POST /api/step6_children_save.php
+POST /api/wizard_complete_step6.php
+POST /api/wizard_complete_no_partners.php
+POST /api/family_token_validate.php
+POST /api/family_token_issue.php
+POST /api/token_family_save_child.php
+POST /api/token_family_unions.php
+POST /api/person_update.php
+POST /api/expand_start.php
+POST /api/expand_step1_save_parents.php
+POST /api/expand_step2_save_siblings.php
+POST /api/expand_step3_save_partners.php
+POST /api/expand_step4_save_children.php
+POST /api/invites_create.php
+POST /api/invites_accept.php
+POST /api/invites_accept_direct.php
+POST /api/invites_reject.php
+POST /api/invites_resend.php
+POST /api/invites_revoke.php
+POST /api/pd_merge.php
+POST /api/pd_click.php
+POST /api/upload_person_photo.php
+POST /api/family_quick_setup.php
+POST /api/nested_family_create.php
+```
+
+---
+
+## 🔗 URL PATTERNS WITH PARAMETERS
+
+### Query String Parameters
+```
+/pages/EN/auth/register.html?error={error_code}
+  - error=missing, invalid_email, mismatch, weak, exists, server
+
+/pages/EN/auth/register.html?family_token={token}
+  - Prefill family token for registration
+
+/pages/EN/auth/tok_register.html?invite_token={token}
+  - Token-based registration
+
+/pages/EN/chat_wizard.html?step={step_number}
+  - Resume wizard at specific step (1-6)
+
+/pages/EN/chat_token_wizard.html?family_token={token}
+  - Token wizard with prefilled token
+
+/pages/EN/accept_invite.html?token={invite_token}
+  - Direct invitation accept link
+
+/pages/EN/dashboard.html?tab={tab_name}
+  - Dashboard tab selection
+
+/api/children_by_parents.php?p1={person_id}&p2={person_id}
+  - Get children for couple
+
+/api/pd_merge.php?cluster_id={id}&keep={person_id}&remove={person_id}
+  - Merge duplicate persons
+
+/api/pd_click.php?cluster_id={id}&action={merge|reject}
+  - Decision on duplicate cluster
+
+/api/invites_resend.php?id={invite_id}
+  - Resend invitation
+
+/api/invites_revoke.php?id={invite_id}
+  - Revoke invitation
+
+/api/pd_family_tree.php?cluster_id={id}
+  - Get tree for cluster
+```
+
+### Language Parameter (Global)
+```
+?lang=EN                             → Switch to English
+?lang=MY                             → Switch to Malaysian
+```
+
+---
+
+## 📊 PATHS BY USER JOURNEY STAGE
+
+### Stage 1: First Visit (Anonymous)
+```
+/                                    → Landing
+/register                            → Sign up
+/login                               → Sign in
+/about.html                          → Learn more
+/terms.html                          → Legal info
+```
+
+### Stage 2: Registration & Onboarding (New User)
+```
+POST /auth/register.php              → Create account
+/wizard                              → Start wizard
+POST /api/family_create.php          → Create family
+POST /api/step2_self_save.php        → Add self
+POST /api/step3_parents_save.php     → Add parents
+POST /api/step4_siblings_save.php    → Add siblings
+POST /api/step5_partners_save.php    → Add partners
+POST /api/step6_children_save.php    → Add children
+POST /api/wizard_complete_step6.php  → Finish
+```
+
+### Stage 3: Active Use (Authenticated)
+```
+/dashboard                           → Main hub
+GET /api/family_summary.php          → Get stats
+/tree                                → View tree
+GET /api/family_tree.php             → Get tree data
+/pages/EN/chatEdit_persons.html      → Add person
+POST /api/person_update.php          → Save person
+/chat_expand.html                    → Expand person
+/invites                             → Manage invites
+POST /api/invites_create.php         → Send invite
+```
+
+### Stage 4: Collaboration (Multi-User)
+```
+/tok_register?invite_token=XXX       → Join via invite
+POST /api/invites_accept.php         → Accept invite
+/pd_view.html                        → Review duplicates
+POST /api/pd_merge.php               → Merge duplicates
+GET /api/action_logs_list.php        → View activity
+```
+
+### Stage 5: Administration (Admin Users)
+```
+/admin_dashboard                     → Admin panel
+/admin_pending_people                → Approve people
+```
+
+---
+
+## 🧪 TEST & DEBUG PATHS
+
+```
+/pages/EN/test_tree.html             → Test tree visualization
+GET /api/test_family_tree.php        → Test tree data endpoint
+```
+
+---
+
+## 🚫 REDIRECTS & SPECIAL CASES
+
+### Authentication Redirects
+```
+Protected Page (not logged in)       → /pages/{LANG}/auth/login.php
+Login Success (no redirect stored)   → /pages/{LANG}/dashboard.html
+Login Success (redirect stored)      → {stored_url}
+Registration Success                 → /pages/{LANG}/chat_wizard.html
+Wizard Complete                      → /pages/{LANG}/dashboard.html
+Logout                               → /pages/{LANG}/index.html or /
+```
+
+### Wizard State Redirects
+```
+Login (no family)                    → /pages/{LANG}/chat_wizard.html
+Login (has family)                   → /pages/{LANG}/dashboard.html
+Dashboard (wizard incomplete)        → /pages/{LANG}/chat_wizard.html
+```
+
+### Token Redirects
+```
+Register with family_token           → /pages/{LANG}/chat_token_wizard.html?family_token=XXX
+Dashboard (pending_invite_token)     → /pages/{LANG}/dashboard.html?invite_token=XXX
+Dashboard (pending_family_token)     → /pages/{LANG}/chat_token_wizard.html?family_token=XXX
+```
+
+### Admin Redirects
+```
+Login (is_admin=true)                → /pages/{LANG}/admin_dashboard.html
+```
+
+---
+
+## 📝 PATH VALIDATION RULES
+
+### Public Access (No Auth Required)
+- `/`, `/index.html`
+- `/login`, `/register`, `/tok_register`
+- `/about.html`, `/terms.html`, `/offline.html`, `/404.html`
+- `/assets/*`, `/uploads/*` (static assets)
+- All `/auth/*` pages
+
+### Protected Access (Auth Required)
+- `/dashboard`
+- `/wizard`, `/chat_wizard`, `/token_wizard`
+- `/tree`, `/invites`, `/profile`, `/settings`
+- All `/pages/{LANG}/*` except `/pages/{LANG}/auth/*` and `/pages/{LANG}/public.html`
+- All `/api/*` endpoints (check session)
+
+### Admin Access (Admin Flag Required)
+- `/admin_dashboard`
+- `/admin_pending_people`
+
+### Token Required
+- `/tok_register` (needs invite_token or family_token)
+- `/accept_invite.html` (needs token parameter)
+- `/chat_token_wizard.html` (needs family_token)
+
+---
+
+## 🗺️ SITEMAP STRUCTURE
+
+```
+familyapp/
+├── / (index.html)
+├── /login
+├── /register
+├── /tok_register
+├── /about.html
+├── /terms.html
+│
+├── /dashboard (protected)
+│   ├── View stats
+│   ├── Check invites
+│   ├── Check pending decisions
+│   └── Activity log
+│
+├── /wizard (protected)
+│   ├── Step 1: Family name
+│   ├── Step 2: Self
+│   ├── Step 3: Parents
+│   ├── Step 4: Siblings
+│   ├── Step 5: Partners
+│   └── Step 6: Children
+│
+├── /tree (protected)
+│   ├── View tree
+│   ├── Click person
+│   └── Export tree
+│
+├── /invites (protected)
+│   ├── Sent invitations tab
+│   ├── Received invitations tab
+│   ├── Create new invite
+│   ├── Accept/reject invite
+│   └── Resend/revoke invite
+│
+├── /chat_expand.html (protected)
+│   ├── Select person
+│   ├── Choose expansion type
+│   └── Add relatives
+│
+├── /pd_view.html (protected)
+│   ├── View duplicate clusters
+│   ├── Compare persons
+│   └── Merge or reject
+│
+└── /admin_dashboard (admin only)
+    ├── Manage users
+    ├── Approve people
+    └── System stats
+```
+
+---
+
+## 📈 TOTAL PATH COUNT
+
+**Frontend Pages**: ~50 HTML files (EN + MY duplicates)
+**API Endpoints**: ~50 PHP files
+**Auth Endpoints**: ~6 PHP handlers
+**Static Assets**: ~15+ files (CSS, JS, images)
+**Friendly URLs**: ~20 mapped routes
+
+**Grand Total**: ~140+ distinct paths
+
+---
+
+## ✅ CHECKLIST FOR PATH TESTING
+
+### Public Paths
+- [ ] Landing page loads
+- [ ] Login page accessible
+- [ ] Register page accessible
+- [ ] About/Terms pages load
+- [ ] Static assets serve correctly
+
+### Authentication Flow
+- [ ] Registration creates account
+- [ ] Login authenticates user
+- [ ] Logout destroys session
+- [ ] Token registration works
+- [ ] Redirects after login work
+
+### Wizard Flow
+- [ ] All 6 wizard steps function
+- [ ] API calls succeed
+- [ ] State persists in localStorage
+- [ ] Completion redirects to dashboard
+
+### Dashboard & Tree
+- [ ] Dashboard loads with stats
+- [ ] Tree visualization renders
+- [ ] Person details display
+- [ ] Navigation works
+
+### Invitations
+- [ ] Send invite creates token
+- [ ] Email sent successfully
+- [ ] Accept invite merges families
+- [ ] Revoke/resend work
+
+### Admin
+- [ ] Admin dashboard accessible (admin only)
+- [ ] Non-admin blocked from admin paths
+
+### Friendly URLs
+- [ ] All friendly URLs redirect correctly
+- [ ] Language detection works
+- [ ] Query strings preserved
+
+---
+
+**End of Complete Paths List**
+
+Use this document for:
+- Route planning and testing
+- API documentation
+- QA test case creation
+- Frontend route configuration
+- Backend endpoint validation
