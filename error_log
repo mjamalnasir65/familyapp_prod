@@ -1,0 +1,4 @@
+[11-Nov-2025 19:34:15 UTC] Router error: DB connection failed: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+[11-Nov-2025 19:34:36 UTC] Router error: DB connection failed: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+[11-Nov-2025 19:35:52 UTC] Router error: DB connection failed: SQLSTATE[HY000] [1045] Access denied for user 'hdsiteco_mjamalnasir'@'v1559.securen.net' (using password: NO)
+[11-Nov-2025 19:35:59 UTC] Router error: DB connection failed: SQLSTATE[HY000] [1045] Access denied for user 'hdsiteco_mjamalnasir'@'v1559.securen.net' (using password: NO)

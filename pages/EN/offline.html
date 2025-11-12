@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Offline · Family App</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <style>
+    body{background:#e7dfd8;color:#0f172a;}
+    .wrap{max-width:640px;margin:10vh auto;padding:24px;border-radius:12px;background:#fff;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(2,6,23,0.08);}
+    h1{margin-top:0}
+    .muted{color:#475569}
+    .btn{display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;border:0}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <h1 id="offTitle">You're offline</h1>
+      <p class="muted" id="offHint">Some features may be unavailable. We'll automatically retry when your connection returns.</p>
+      <p><a class="btn" id="offTry" href="./">Try again</a></p>
+    </div>
+  </main>
+  <script src="/assets/js/i18n.js"></script>
+  <script>
+    // Keep EN consistent via runtime keys too
+    (function(){
+      try{
+        document.getElementById('offTitle').textContent = T('youre_offline', "You're offline");
+        document.getElementById('offHint').textContent = T('offline_hint', "Some features may be unavailable. We'll automatically retry when your connection returns.");
+        document.getElementById('offTry').textContent = T('try_again','Try again');
+      }catch(_){/* noop */}
+    })();
+  </script>
+</body>
+</html>

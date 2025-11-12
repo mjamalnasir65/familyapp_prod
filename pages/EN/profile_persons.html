@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Person profile</title>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    .card { background:#fff; color:#1a1a1a; border-radius:12px; padding:16px; box-shadow: 0 8px 28px rgba(0,0,0,0.06); }
+    .muted { color:#475569; }
+    .row { display:flex; gap:10px; align-items:center; }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .grid .full { grid-column: 1 / -1; }
+    .label { font-weight:600; color:#0f172a; margin-bottom:4px; display:block; }
+    .value { background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px; color:#0f172a; }
+    .value.pre { white-space:pre-line; }
+    .label { font-weight:600; color:#0f172a; }
+    .dead-fields[hidden] { display:none !important; }
+    .btn { color:#fff; }
+  </style>
+</head>
+<body>
+  <main class="hero">
+    <div class="glass card-enter" style="max-width:1000px;">
+      <header class="wizard-head">
+        <div class="row" style="justify-content:space-between;">
+          <div class="tagline">Signed in as: <strong id="sessionEmail">...</strong></div>
+          <nav style="display:flex; gap:10px;">
+            <a class="link" href="/pages/EN/view_tree.html">Back to tree</a>
+            <a class="link" href="/pages/EN/auth/logout.php">❌</a>
+          </nav>
+        </div>
+        <h1>Person profile</h1>
+        <p class="tagline">Read-only profile. Death fields only appear if status is Deceased.</p>
+      </header>
+
+      <section class="card">
+        <div id="status" class="muted" style="margin-bottom:10px;">Loading…</div>
+        <div class="grid">
+          <div class="full">
+            <label class="label" for="full_name">Full name</label>
+            <div id="full_name" class="value"></div>
+          </div>
+          <div>
+            <label class="label" for="gender">Gender</label>
+            <div id="gender" class="value"></div>
+          </div>
+          <div>
+            <label class="label" for="life_status_val">Status</label>
+            <div id="life_status_val" class="value"></div>
+          </div>
+          <div>
+            <label class="label" for="birth_date"> Birth Year (YYYY)</label>
+            <div id="birth_date" class="value"></div>
+          </div>
+          
+          <div class="dead-fields" id="deadFields" hidden>
+            <label class="label" for="death_date">Death Year</label>
+            <div id="death_date" class="value"></div>
+          </div>
+                   
+          
+          <div class="hide-when-dead">
+            <label class="label" for="fb_link">Website / Facebook link</label>
+            <div id="fb_link" class="value"></div>
+          </div>
+         <div class="full">
+            <div class="grid full" style="align-items:center; gap:12px;">
+              <div class="full">
+                <label class="label">Photo</label>
+              </div>
+              <div>
+                <img id="photo_preview" src="" alt="No photo" style="max-width:160px; border-radius:8px; border:1px solid #e2e8f0; display:none;" />
+              </div>
+              <input type="hidden" id="photo_data" />
+            </div>
+          </div>
+        </div>
+
+        <div class="actions" style="display:flex; gap:10px; margin-top:14px;">
+          <a class="btn" href="/pages/EN/view_tree.html">Close</a>
+        </div>
+        <div id="error" class="tagline" style="margin-top:10px; color:#b33; display:none;"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+  fetch('/api/session_info.php').then(r => r.ok ? r.json() : { ok:false }).then(u=>{
+      const el=document.getElementById('sessionEmail'); if (el) el.textContent = (u&&u.ok&&u.user&&u.user.email)||'—';
+    }).catch(()=>{});
+
+    function qs(name){ const u=new URL(location.href); return u.searchParams.get(name); }
+    function setStatus(m){ const el=document.getElementById('status'); el.textContent=m; }
+
+    function toggleDeath(val){
+      const deadWraps = document.querySelectorAll('.dead-fields');
+      const hideWhenDead = document.querySelectorAll('.hide-when-dead');
+      const showDeath = val === 'deceased';
+      deadWraps.forEach(w => w.hidden = !showDeath);
+      hideWhenDead.forEach(w => w.hidden = showDeath);
+    }
+
+  function setText(id, val){ const el=document.getElementById(id); if (el) el.textContent = val || ''; }
+
+  async function load(){
+      const idParam = qs('targetperson') || qs('pid') || qs('person_id');
+      const pid = Number(idParam);
+      if (!pid){ setStatus('Missing person id'); return; }
+      setStatus('Loading…');
+      try {
+  const r = await fetch(`/api/person_get.php?id=${encodeURIComponent(pid)}`);
+        const j = await r.json(); if (!j||!j.ok){ setStatus('Unable to load'); return; }
+        const p = j.person||{};
+        setText('full_name', p.full_name);
+        setText('gender', p.gender);
+        const life = (p.is_alive===false)?'deceased':'living';
+        setText('life_status_val', life === 'deceased' ? 'Deceased' : 'Living');
+        setText('birth_date', p.birth_date);
+        setText('birth_place', p.birth_place);
+        setText('death_date', p.death_date);
+        setText('burial_place', p.burial_place);
+        setText('profession', p.profession);
+        setText('email', p.email);
+        setText('mobile', p.mobile);
+        setText('fb_link', p.fb_link);
+        setText('address', p.address);
+        setText('photo_data', p.photo_data);
+        const prev = document.getElementById('photo_preview');
+        const src = (p.photo_site && typeof p.photo_site === 'string')
+          ? p.photo_site
+          : (p.photo_data && /^https?:\/\//i.test(p.photo_data) ? p.photo_data : '');
+        if (src) { prev.src = src; prev.style.display = ''; } else { prev.src=''; prev.style.display='none'; }
+        toggleDeath(life); setStatus('Ready');
+      } catch(_){ setStatus('Error'); }
+    }
+
+    window.addEventListener('load', ()=>{ document.querySelector('.card-enter')?.classList.add('in'); load(); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Possible Duplicates · Info</title>
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <style>
+        .info {
+            background: #ffffff;
+            color: #0f172a;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            line-height: 1.45;
+        }
+
+        .info h2 {
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .info p {
+            margin: 6px 0;
+        }
+
+        .info ul {
+            margin: 8px 0 0 18px;
+        }
+
+        .muted {
+            color: #475569;
+        }
+
+        /* PD panel styles (consistent with dashboard) */
+        #pdPanel .stat {
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+        }
+
+        #pdPanel,
+        #pdPanel * {
+            color: #0f172a;
+        }
+
+        #pdPanel h3 {
+            color: #1e40af;
+            font-weight: 700;
+        }
+
+        #pdPanel .tagline {
+            color: #1f2937;
+            opacity: 1;
+        }
+
+        #pdPanel strong {
+            color: #0c4a6e;
+        }
+
+        #pdPanel .btn {
+            background: #1d4ed8;
+            color: #fff;
+            border: none;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+        }
+
+        #pdPanel .btn:hover {
+            filter: brightness(0.95);
+        }
+    </style>
+</head>
+
+<body>
+    <main class="hero">
+        <div class="glass card-enter" style="max-width:960px;">
+            <header class="wizard-head"
+            style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <h1 style="margin:0;">Possible Duplicates (PD) & Merge</h1>
+            <nav style="display:flex; gap:10px;">
+                <a class="link" href="/pages/MY/dashboard.html">Back to dashboard</a>
+                <a class="link" href="/pages/MY/auth/logout.php">❌</a>
+            </nav>
+        </header>            <section class="info" style="margin:12px 0;">
+                <h2>How “Possible Duplicate” (PD) and Merging Work</h2>
+                <ul>
+                    <li><strong>If you reject an invite</strong>, it simply ends there — the connection is cancelled,
+                        and the person who invited you will be told that you’ve declined. The possible duplicate (PD)
+                        tag will also be removed.</li>
+
+                    <li><strong>If you accept an invite</strong>, it means you agree that both profiles might belong to
+                        the same person — but nothing is merged yet. It’s just a first confirmation that you recognise
+                        the match.</li>
+
+                    <li><strong>To actually merge two profiles</strong>, both sides must agree:
+                        <ul>
+                            <li>Each person clicks the <strong>“Merge”</strong> button.</li>
+                            <li>We record both confirmations safely in the system.</li>
+                            <li>Only after both have agreed will the merge happen automatically.</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>After both people agree</strong>, the system links the profiles together so that one
+                        shared record is used across the family tree. From then on, that person appears only once in all
+                        connected families.</li>
+                    <li><strong>Viewing the merged Tree</strong>: Once the merge is complete, you can view the updated family tree with the merged profiles.<a class="btn btn-primary" href="/pages/MY/pd_tree.html">PD Tree</a> </li>
+                </ul>
+
+                <p class="muted">Note: The merge is based on a person’s unique identity (Person ID), not just the user’s
+                    account or email. This ensures the same person can appear correctly in different families without
+                    confusion.</p>
+            </section>
+
+
+            <!-- PD panel (same markup as dashboard) -->
+            <section id="pdPanel" style="display:none; margin-top:16px;">
+                <div class="stat" style="background:#eef2ff; border:1px solid #c7d2fe;">
+                    <h3 style="margin:0 0 6px; color:#1e40af;">Potential duplicate people</h3>
+                    <div id="pdList" style="display:flex; flex-direction:column; gap:8px;"></div>
+                </div>
+            </section>
+        </div>
+        <footer style="margin-top:24px; text-align:center; font-size:0.9rem; color:#555;">
+            <p><small>© 2025 Nasab Family Tree – Experimental Beta Release. Developed by a personal developer for educational purposes only.</small></p>
+        </footer>
+    </main>
+
+    <script src="/assets/js/i18n.js"></script>
+    <script>
+        async function loadPDs() {
+            try {
+                const r = await fetch('/api/pd_list.php', {
+                    credentials: 'include'
+                });
+                const j = await r.json();
+                const panel = document.getElementById('pdPanel');
+                const list = document.getElementById('pdList');
+                if (!j || !j.ok || !(j.items || []).length) {
+                    panel.style.display = 'none';
+                    return;
+                }
+                panel.style.display = 'block';
+                list.innerHTML = '';
+                for (const it of j.items) {
+                    const row = document.createElement('div');
+                    row.style.display = 'flex';
+                    row.style.alignItems = 'center';
+                    row.style.justifyContent = 'space-between';
+                    row.style.gap = '10px';
+                    const flags = [];
+                    if (it.flags?.email) flags.push('same email');
+                    if (it.flags?.parents) flags.push('shared parents');
+                    if (!flags.length && it.flags) {
+                        if (it.flags.name) flags.push('similar name');
+                        if (it.flags.father) flags.push('similar father');
+                        if (it.flags.mother) flags.push('similar mother');
+                    }
+                    const badge = flags.length ? ` · <span class="tagline">${flags.join(', ')}</span>` : '';
+                    let actions = '';
+                    // Status-aware UI
+                    switch ((it.status || '').toLowerCase()) {
+                        case 'merged':
+                            actions = '<span class="tagline">Merged</span>';
+                            break;
+                        case 'reviewed':
+                            if (it.u1 && it.u2) {
+                                actions = `<button class="btn" data-act="merge" data-id="${it.id}">Finalize merge</button>`;
+                            } else if (it.your_consented) {
+                                actions = `<button class="btn" disabled title=\"You\'ve already consented\">Consented</button>`;
+                            } else {
+                                actions = `<button class="btn" data-act="consent" data-id="${it.id}">Consent to merge</button>`;
+                            }
+                            break;
+                        case 'accepted':
+                            // Invite accepted; collect consents
+                            if (it.u1 && it.u2) {
+                                // Some backends may still require a review step; show ready state
+                                actions = '<span class="tagline">Both consented · awaiting review</span>';
+                            } else if (it.your_consented) {
+                                actions = '<span class="tagline">Awaiting other person\'s consent</span>';
+                            } else {
+                                actions = `<button class="btn" data-act="consent" data-id="${it.id}">Consent to merge</button>`;
+                            }
+                            break;
+                        case 'dismissed':
+                            actions = '<span class="tagline">Dismissed</span>';
+                            break;
+                        default:
+                            // proposed / pending or unknown
+                            actions = '<span class="tagline">Awaiting invite acceptance</span>';
+                            break;
+                    }
+                    row.innerHTML = `
+            <div><strong>${it.a?.name||('ID '+it.a?.id)}</strong> ↔ <strong>${it.b?.name||('ID '+it.b?.id)}</strong>${badge}</div>
+            <div style="display:flex; gap:8px; align-items:center;">${actions}</div>`;
+                    list.appendChild(row);
+                }
+
+                list.addEventListener('click', async (e) => {
+                    const btn = e.target.closest('button');
+                    if (!btn) return;
+                    const id = parseInt(btn.dataset.id, 10);
+                    if (btn.dataset.act === 'consent') {
+                        btn.disabled = true;
+                        btn.textContent = T('loading','Loading…');
+                        try {
+                            const res = await fetch('/api/pd_click.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    id
+                                })
+                            });
+                            const jj = await res.json();
+                            if (!jj || !jj.ok) {
+                                btn.disabled = false;
+                                btn.textContent = T('consent_to_merge','Consent to merge');
+                                alert(jj?.error || T('error','Error'));
+                                return;
+                            }
+                            await loadPDs();
+                        } catch (_) {
+                            btn.disabled = false;
+                            btn.textContent = T('consent_to_merge','Consent to merge');
+                            alert(T('server_error','Server error'));
+                        }
+                    }
+                    if (btn.dataset.act === 'merge') {
+                        btn.disabled = true;
+                        btn.textContent = T('merging','Merging…');
+                        try {
+                            const res = await fetch('/api/pd_merge.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    id
+                                })
+                            });
+                            const jj = await res.json();
+                            if (!jj || !jj.ok) {
+                                btn.disabled = false;
+                                btn.textContent = T('finalized_merge','Finalize merge');
+                                if (jj && jj.error === 'consent_required') alert(
+                                    T('awaiting_acceptance','Awaiting invite acceptance'));
+                                else alert(jj?.error || T('error','Error'));
+                                return;
+                            }
+                            await loadPDs();
+                        } catch (_) {
+                            btn.disabled = false;
+                            btn.textContent = T('finalized_merge','Finalize merge');
+                            alert(T('server_error','Server error'));
+                        }
+                    }
+                }, {
+                    once: true
+                });
+            } catch (_) {
+                /* ignore */ }
+        }
+
+        window.addEventListener('load', () => {
+            document.querySelector('.card-enter')?.classList.add('in');
+            loadPDs();
+        });
+    </script>
+</body>
+
+</html>

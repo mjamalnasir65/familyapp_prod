@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Test Tree Engine · Family Tree PWA</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+	<!-- Reuse the same CSS as tree.html -->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<style>
+		#treeCanvas { width: 100%; min-height: 40vh; border-radius: 12px; background:#fff; box-shadow: 0 8px 28px rgba(0,0,0,0.06); padding: 14px; color:#222; }
+		ul { color:#222; }
+		.node { display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:8px; color:#1a1a1a; font-size:14px; line-height:1.35; }
+		.node:hover { background:#eef3ff; }
+		.exp { width: 20px; text-align:center; cursor:pointer; user-select:none; color:#2c3e50; font-weight:700; font-size:14px; }
+		.exp.hidden { visibility:hidden; }
+		.children { margin-left: 24px; border-left: 1px dashed #cfd7e6; padding-left: 12px; }
+		.label { cursor:pointer; color:#0f172a; font-weight:600; }
+		.muted { color:#64748b; font-weight:500; }
+	</style>
+	<script src="/assets/js/i18n.js"></script>
+	<script>
+		function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, ch=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;' }[ch])); }
+	</script>
+</head>
+<body>
+	<main class="hero">
+		<div class="glass card-enter" style="max-width:1100px;">
+			<header class="wizard-head">
+			<div style="display:flex; align-items:center; gap:12px; justify-content:space-between;">
+				<div class="tagline"><span id="signedInAs">Signed in as:</span> <strong id="sessionEmail">...</strong></div>
+				<nav style="display:flex; gap:10px;">
+					<a class="link" href="/pages/EN/dashboard.html">↩️</a>
+					<a class="link" href="/pages/EN/auth/logout.php">❌</a>
+				</nav>
+			</div>
+				<h1 id="pageTitle">Test Tree Engine</h1>
+				<p class="tagline" id="pageTagline">This page renders a read-only tree from a fresh API, without touching the existing engine.</p>
+			</header>
+
+			<section>
+				<div style="margin-bottom:10px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+					<label class="tagline" for="coupleSelect" id="lblStartCouple">Start from couple:</label>
+					<select id="coupleSelect" class="input" style="min-width:280px;"></select>
+					<span class="tagline" id="meta"></span>
+				</div>
+				<div id="treeCanvas"></div>
+				<div class="actions" style="margin-top:16px; display:flex; gap:10px;">
+					<a class="btn btn-ghost" href="/pages/EN/dashboard.html" id="backDashboard">Back to dashboard</a>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<script>
+		// Header session name
+		fetch('/api/session_info.php').then(r => r.ok ? r.json() : { ok:false }).then(u=>{
+			const el=document.getElementById('sessionEmail'); if (el) el.textContent = (u&&u.ok&&u.user&&u.user.email)||'—';
+		}).catch(()=>{});
+
+		window.addEventListener('load',()=>{
+			document.querySelector('.card-enter')?.classList.add('in');
+			// Static text localization
+			const map = {
+				'signedInAs':['signed_in_as','Signed in as:'],
+				'pageTitle':['test_tree_engine','Test Tree Engine'],
+				'pageTagline':['test_tree_tagline','This page renders a read-only tree from a fresh API, without touching the existing engine.'],
+				'lblStartCouple':['start_from_couple','Start from couple:'],
+				'backDashboard':['back_to_dashboard','Back to dashboard']
+			};
+			for (const [id,[k,f]] of Object.entries(map)){ const el=document.getElementById(id); if (el) el.textContent=T(k,f); }
+			loadTestTree();
+		});
+
+		async function loadTestTree(){
+			try {
+				const res = await fetch('/api/test_family_tree.php', { credentials:'same-origin' });
+				const j = await res.json();
+				if (!j || !j.ok) { renderError(T('unable_load_tree','Unable to load family tree')); return; }
+				populateCouples(j);
+				renderFromCouple(j);
+			} catch(_){ renderError(T('unable_load_tree','Unable to load family tree')); }
+		}
+
+		function renderError(msg){
+			const root = document.getElementById('treeCanvas');
+			root.innerHTML = `<div class="tagline" style="color:#b33;">${msg}</div>`;
+		}
+
+		function populateCouples(data){
+			const sel = document.getElementById('coupleSelect');
+			const { couples, people } = data;
+			sel.innerHTML='';
+			if (!couples || couples.length===0){
+				const opt = document.createElement('option'); opt.value=''; opt.textContent=T('no_couples_found','No couples found'); sel.appendChild(opt);
+				return;
+			}
+			const mk = (pid)=> people[pid] ? people[pid].name : ('#'+pid);
+			couples.forEach(c=>{
+				const opt = document.createElement('option');
+				opt.value = c.key;
+				opt.textContent = `${mk(c.a)} + ${mk(c.b)}`;
+				sel.appendChild(opt);
+			});
+			sel.addEventListener('change', ()=> renderFromCouple(data, sel.value));
+			if (couples.length) sel.value = couples[0].key;
+		}
+
+		function renderFromCouple(data, key){
+			const { parent_pairs } = data;
+			const k = key || (data.couples && data.couples[0] && data.couples[0].key) || '';
+			const meta = document.getElementById('meta');
+			meta.textContent = k ? `${T('couple_key','Couple key:')} ${k}` : '';
+			const pair = k && parent_pairs[k];
+			const rootEl = document.getElementById('treeCanvas');
+			rootEl.innerHTML='';
+			if (!pair){ rootEl.innerHTML = `<div class="tagline">${T('no_data_selected_couple','No data for selected couple.')}</div>`; return; }
+			const ul = document.createElement('ul'); ul.style.listStyle='none'; ul.style.padding='0'; ul.style.margin='0';
+			ul.appendChild(renderCouple(pair.a, pair.b, data));
+			rootEl.appendChild(ul);
+		}
+
+		// Render couple row and descendant blocks Tree-Engine style
+		function renderCouple(aId, bId, data){
+			const { people, parent_pairs } = data;
+			const li = document.createElement('li');
+			const row = document.createElement('div'); row.className='node';
+			const exp = document.createElement('span'); exp.className='exp'; exp.textContent='▾';
+			row.appendChild(exp);
+			const a = people[aId]; const b = people[bId];
+			const aLbl = document.createElement('span'); aLbl.className='label'; aLbl.textContent = a ? a.name : ('#'+aId);
+			const plus = document.createElement('span'); plus.textContent=' + ';
+			const bLbl = document.createElement('span'); bLbl.className='label'; bLbl.textContent = b ? b.name : ('#'+bId);
+			row.appendChild(aLbl); row.appendChild(plus); row.appendChild(bLbl);
+			li.appendChild(row);
+
+			let open = true;
+			const kidsWrap = document.createElement('div'); kidsWrap.className='children'; kidsWrap.style.display = '';
+			const ul = document.createElement('ul'); ul.style.listStyle='none'; ul.style.padding='0'; ul.style.margin='0';
+
+			const key = `${Math.min(aId,bId)}-${Math.max(aId,bId)}`;
+			const children = sortChildren((parent_pairs[key]?.children)||[], data.people);
+			children.forEach(cid => { ul.appendChild(renderChildGroups(cid, data)); });
+			kidsWrap.appendChild(ul); li.appendChild(kidsWrap);
+
+			exp.addEventListener('click', ()=>{ open=!open; exp.textContent=open?'▾':'▸'; kidsWrap.style.display = open?'':'none'; });
+			return li;
+		}
+
+		// For a child, group by each co-parent, and render each sub-couple recursively
+		function renderChildGroups(childId, data){
+			const { people, co_parents } = data;
+			const child = people[childId];
+			const li = document.createElement('li');
+
+			const partners = (co_parents[childId]||[]);
+			if (!partners.length){
+				const row = document.createElement('div'); row.className='node';
+				const exp = document.createElement('span'); exp.className='exp hidden'; row.appendChild(exp);
+				const cLbl = document.createElement('span'); cLbl.className='label'; cLbl.innerHTML = labelWithMeta(child);
+				row.appendChild(cLbl); li.appendChild(row); return li;
+			}
+
+			const wrap = document.createElement('div'); wrap.className='children'; wrap.style.borderLeft='none';
+			const ul = document.createElement('ul'); ul.style.listStyle='none'; ul.style.padding='0'; ul.style.margin='0';
+			partners.forEach(pid => { ul.appendChild(renderCouple(childId, pid, data)); });
+			wrap.appendChild(ul); li.appendChild(wrap);
+			return li;
+		}
+
+		// Sorting helpers
+		function parseDateKey(s){
+			if (!s) return null;
+			const m = String(s).match(/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/);
+			if (m){ const y=m[1], mo=m[2]||'12', d=m[3]||'31'; return `${y}-${mo}-${d}`; }
+			const yr = String(s).match(/^(\d{4})$/); if (yr) return `${yr[1]}-12-31`;
+			return null;
+		}
+		function compareIdsByBirthThenName(aId, bId, people){
+			const a = people[aId]||{}; const b = people[bId]||{};
+			const ak = parseDateKey(a.birth_date); const bk = parseDateKey(b.birth_date);
+			if (ak && bk){ if (ak < bk) return -1; if (ak > bk) return 1; }
+			else if (ak && !bk) return -1; else if (!ak && bk) return 1;
+			const an = (a.name||'').toLowerCase(); const bn = (b.name||'').toLowerCase();
+			if (an < bn) return -1; if (an > bn) return 1; return 0;
+		}
+		function sortChildren(arr, people){ const copy=(arr||[]).slice(); copy.sort((x,y)=> compareIdsByBirthThenName(x,y,people)); return copy; }
+
+		function labelWithMeta(p){
+			if (!p) return '';
+			const bits=[]; if (p.birth_date) bits.push(`${T('birth_abbrev','b.')} ${p.birth_date}`); if (!p.is_alive) bits.push(p.death_date?`${T('death_abbrev','d.')} ${p.death_date}`:T('deceased','deceased'));
+			const meta = bits.length?` <span class="muted">(${bits.join(' · ')})</span>`:'';
+			return `${escapeHtml(p.name)}${meta}`;
+		}
+	</script>
+</body>
+</html>

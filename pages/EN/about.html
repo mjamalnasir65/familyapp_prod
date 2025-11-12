@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About · Nasab Family Tree</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Removed external js-confetti to satisfy CSP (report-only would block). Re-enable with updated CSP or self-host if effects needed. -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    /* Mobile-first responsive typography & spacing */
+    :root {
+      --page-max: 900px;
+      --pad-x: 1rem;
+      --pad-y: 1.25rem;
+    }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.55;
+      margin: 0;
+      padding: var(--pad-y) var(--pad-x) 3rem;
+      max-width: var(--page-max);
+      color: #eaf1f6;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2 { color:#fff; font-weight:600; line-height:1.15; }
+    h1 { font-size: clamp(1.9rem, 5.5vw, 2.75rem); border-bottom:2px solid rgba(255,255,255,.35); padding-bottom:.4rem; margin:.25rem 0 1.1rem; }
+    h2 { font-size: clamp(1.25rem, 4.2vw, 1.75rem); margin:2.0rem 0 .75rem; }
+    section { margin-bottom:1.75rem; }
+    ul { margin: .5rem 0 0 1.05rem; padding:0; list-style:disc; }
+    li { margin:.45rem 0; }
+    p, li { color:#eaf1f6; font-size: clamp(.95rem, 2.9vw, 1.05rem); }
+    strong { color:#fff; }
+    .tagline { font-style:italic; color:#dfe9f2; margin-top:-.35rem; font-size: clamp(.85rem,2.6vw,.95rem); }
+    img { max-width:160px; width:100%; height:auto; display:block; margin:0 auto 1.25rem; }
+    /* Constrain width & center on larger screens */
+    .page-wrap { width:100%; margin:0 auto; }
+    @media (min-width: 640px) {
+      body { padding: 2.0rem 2.4rem 4rem; }
+      img { max-width:190px; margin-bottom:1.75rem; }
+    }
+    @media (min-width: 960px) {
+      body { padding: 2.6rem 2.8rem 5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+  <img src="../../assets/img/logo.png" alt="Nasab Family Tree Logo">
+  <h1>About Nasab Family Tree</h1>
+  <p class="tagline">Preserving generations, connecting families, and empowering stories.</p>
+
+  <section id="objective">
+    <h2>Our Objective</h2>
+    <p><strong>Nasab Family Tree</strong> is a Progressive Web App (PWA) created to help families record, visualise and manage their lineage in a simple, secure and collaborative way.  
+    The project began as a personal educational initiative to demonstrate how modern web technologies can preserve cultural heritage, family data and generational knowledge across time and geography.</p>
+  </section>
+
+  <section id="function">
+    <h2>Core Functions</h2>
+    <ul>
+      <li><strong>Family Tree Builder</strong> – create, expand and visualise complete family relationships with drag-and-drop simplicity.</li>
+      <li><strong>Profile Management</strong> – store detailed personal data such as birth, marriage, and location for each member.</li>
+      <li><strong>Multi-Admin Control</strong> – assign tree administrators or editors to manage different branches of the family.</li>
+      <li><strong>Audit & History Log</strong> – track edits, additions and deletions for transparency and accountability.</li>
+      <li><strong>Secure Authentication</strong> – user login system with session protection and role-based access.</li>
+      <li><strong>Multilingual Interface</strong> – available in English and Malay with instant switching.</li>
+      <li><strong>Offline Access (PWA)</strong> – works even without Internet; syncs changes when reconnected.</li>
+    </ul>
+  </section>
+
+  <section id="features">
+    <h2>Key Features</h2>
+    <ul>
+      <li><strong>Modern PWA Framework</strong> – installable on mobile or desktop directly from the browser.</li>
+      <li><strong>Data Privacy</strong> – complies with the Personal Data Protection Act (PDPA Malaysia); user data remains private within each family group.</li>
+      <li><strong>Language Folders</strong> – organised content under <code>/pages/EN</code> and <code>/pages/MY</code> for bilingual use.</li>
+      <li><strong>Custom Router & Pretty URLs</strong> – uses <code>.htaccess</code> and <code>router.php</code> for clean links such as <code>/profile.html</code> or <code>/tree.html</code>.</li>
+      <li><strong>Scalable Design</strong> – ready to expand for cooperative, community, or national genealogy projects.</li>
+    </ul>
+  </section>
+
+  <section id="note">
+    <h2>Development Note</h2>
+    <p>This PWA is developed by an independent personal developer as an <strong>experimental and educational project</strong>.  
+    The app may still contain minor errors or incomplete features. Users are encouraged to provide feedback and suggestions to improve its stability and usability.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact & Feedback</h2>
+    <p>For enquiries, feedback, or collaboration proposals, please contact:</p>
+    <p><strong>Email:</strong> nasabpwa@hdsite.com.my<br>
+       <strong>Support:</strong> nasabpwa@hdsite.com.my</p>
+  </section>
+
+  <footer style="text-align:center;color:#bcd2dc;font-size:0.75rem;margin-top:3.5rem;letter-spacing:.3px;">
+    <p style="margin:0;">© 2025 Nasab Family Tree – Experimental Beta. Developed for educational purposes.</p>
+  </footer>
+</div>
+
+</body>
+</html>

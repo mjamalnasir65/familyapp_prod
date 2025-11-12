@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Possible Duplicates Viewer</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; background: #0b0f1a; color: #e6e9ef; }
+    header { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background: rgba(255,255,255,0.04); backdrop-filter: blur(8px); position: sticky; top:0; }
+    header a { color:#9dc1ff; text-decoration:none; }
+    .wrap { padding: 16px; max-width: 1100px; margin: 0 auto; }
+    .cluster { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; margin-bottom: 14px; }
+    .cluster h3 { margin: 0 0 8px; font-size: 16px; color:#fff; }
+    .row { display:flex; gap: 10px; flex-wrap: wrap; }
+    .chip { padding: 8px 10px; border-radius: 28px; border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); }
+    .person { background:#0f1626; border:1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 10px; min-width: 200px; flex: 1 1 240px; }
+    .person h4 { margin: 0 0 6px; font-size: 15px; }
+    .person a { color:#b7ffb5; text-decoration:none; }
+    .meta { font-size: 12px; opacity: 0.8; }
+    .empty { opacity:.8; padding:16px; border:1px dashed rgba(255,255,255,0.15); border-radius:12px; }
+    .footer { margin-top: 18px; font-size: 12px; opacity: .7; }
+    .pill { display:inline-block; padding:4px 8px; border-radius:999px; background:#16273e; border:1px solid #27486f; color:#9dc1ff; font-size:12px; }
+    .loading { padding: 16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>PD Viewer</div>
+    <nav>
+      <a href="/pages/EN/dashboard.html">↩️</a>
+    </nav>
+  </header>
+  <div class="wrap">
+    <h2>Read-only Possible Duplicates</h2>
+    <p class="meta">Clusters are grouped by identical email and shared parent couple. This is a read-only view; merging is planned separately.</p>
+
+    <div id="status" class="loading">Loading…</div>
+    <div id="list"></div>
+
+    <h2 style="margin-top:22px;">Merged Tree Preview</h2>
+    <p class="meta">After a merge, aliases are collapsed for this preview only. Your main tree remains unchanged until you adopt this view.</p>
+    <div id="mergeStatus" class="loading">Loading merged view…</div>
+    <div id="mergeSummary" class="meta"></div>
+    <div id="mergeGroups"></div>
+    <h3 style="margin-top:16px;">Couples and children (merged view)</h3>
+    <div id="coupleList"></div>
+
+    <div class="footer">Tip: Click a person to open their profile in a new tab.</div>
+  </div>
+
+  <script src="/assets/js/i18n.js"></script>
+  <script>
+  async function loadClusters() {
+    const st = document.getElementById('status');
+    try {
+  const res = await fetch('/api/pd_clusters.php', { credentials:'include' });
+      const j = await res.json();
+      if (!j.ok) { st.textContent = T('error_loading_pd','Error loading PD clusters.'); return; }
+      const clusters = j.clusters || [];
+      st.remove();
+      render(clusters);
+    } catch (e) {
+      st.textContent = T('network_error_loading','Network error while loading.');
+    }
+  }
+
+  async function loadMergedTree() {
+    const st = document.getElementById('mergeStatus');
+    const summary = document.getElementById('mergeSummary');
+    const groupsEl = document.getElementById('mergeGroups');
+     const coupleEl = document.getElementById('coupleList');
+    try {
+  const res = await fetch('/api/pd_family_tree.php', { credentials:'include' });
+      const j = await res.json();
+  if (!j.ok) { st.textContent = T('error_loading_merged','Error loading merged tree.'); return; }
+      st.remove();
+      const people = j.people || {};
+      const couples = j.couples || [];
+      const aliasGroups = j.alias_groups || [];
+      const nodeCount = Object.keys(people).length;
+      summary.textContent = T('nodes_couples_alias','Nodes: {n} · Couples: {m} · Alias groups merged: {a}').replace('{n}', nodeCount).replace('{m}', couples.length).replace('{a}', aliasGroups.length);
+      groupsEl.innerHTML = '';
+      if (!aliasGroups.length) {
+        groupsEl.append(el('div', { class:'empty' }, [document.createTextNode(T('no_alias_groups','No alias groups to merge in this family.'))]));
+      } else {
+        aliasGroups.forEach(g => {
+          const row = el('div', { class:'row' });
+          (g.ids||[]).forEach(id => {
+            const p = people[id] || people[g.canonical_id];
+            const card = el('div', { class:'person' });
+            card.append(el('h4', {}, [document.createTextNode(p?.name || ('#'+id))]));
+            card.append(el('div', { class:'meta' }, [document.createTextNode('ID: '+id + (id===g.canonical_id?' (canonical)':''))]));
+            row.append(card);
+          });
+          const wrap = el('div', { class:'cluster' }, [el('h3', {}, [document.createTextNode(T('alias_group','Alias group'))]), row]);
+          groupsEl.append(wrap);
+        });
+      }
+
+      // Render compact couples list
+      coupleEl.innerHTML = '';
+      if (!couples.length) {
+        coupleEl.append(el('div', { class:'empty' }, [document.createTextNode(T('no_couples_merged','No couples recorded in merged view.'))]));
+      } else {
+        // sort by partner names
+        couples.sort((c1,c2) => {
+          const n1 = (people[c1.a]?.name||'') + ' ' + (people[c1.b]?.name||'');
+          const n2 = (people[c2.a]?.name||'') + ' ' + (people[c2.b]?.name||'');
+          return n1.localeCompare(n2);
+        });
+        couples.forEach(c => {
+          const a = people[c.a]; const b = people[c.b];
+          const head = el('h4', {}, [document.createTextNode((a?.name||('#'+c.a)) + ' + ' + (b?.name||('#'+c.b)))]);
+          const body = el('div', { class:'meta' });
+          const children = (c.children||[]).map(id => people[id]?.name || ('#'+id));
+          body.textContent = children.length ? (T('children_label','Children:') + ' ' + children.join(', ')) : T('no_children_recorded','No children recorded');
+          const row = el('div', { class:'cluster' }, [head, body]);
+          coupleEl.append(row);
+        });
+      }
+    } catch (e) {
+      st.textContent = T('network_error_loading','Network error while loading merged tree.');
+    }
+  }
+  function el(tag, attrs={}, children=[]) {
+    const n = document.createElement(tag);
+    for (const [k,v] of Object.entries(attrs)) {
+      if (k === 'class') n.className = v; else if (k === 'href') n.setAttribute('href', v); else n[k] = v;
+    }
+    for (const c of children) n.append(c);
+    return n;
+  }
+
+  function render(clusters) {
+    const list = document.getElementById('list');
+    list.innerHTML = '';
+    if (!clusters.length) {
+      list.append(el('div', { class:'empty' }, [document.createTextNode(T('no_duplicate_clusters','No duplicate clusters detected for your family (by email and shared parents).'))]));
+      return;
+    }
+    clusters.forEach(c => {
+      const head = el('h3', {}, [document.createTextNode(`${c.parent_a} + ${c.parent_b}`), document.createTextNode(' '), el('span',{class:'pill'},[document.createTextNode(c.email)])]);
+      const row = el('div', { class:'row' });
+      (c.persons||[]).forEach(p => {
+        const card = el('div', { class:'person' });
+        const link = el('a', { href:`./profile_person.html?id=${encodeURIComponent(p.id)}`, target:'_blank' }, [document.createTextNode(p.full_name || ('#'+p.id))]);
+        card.append(el('h4', {}, [link]));
+        card.append(el('div', { class:'meta' }, [document.createTextNode(`ID: ${p.id}`)]));
+        row.append(card);
+      });
+      const wrap = el('div', { class:'cluster' }, [head, row]);
+      list.append(wrap);
+    });
+  }
+  
+  loadClusters();
+  loadMergedTree();
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Log Tindakan</title>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    table { width:100%; border-collapse: collapse; }
+    th, td { border:1px solid #e2e8f0; padding:8px; text-align:left; }
+    th { background:#f1f5f9; }
+    .wrap { max-width:1100px; margin: 6vh auto; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="wizard-head">
+      <div class="row" style="justify-content:space-between;">
+        <div class="tagline">Log tindakan terkini</div>
+        <nav style="display:flex; gap:10px;">
+          <a class="link" href="/pages/MY/dashboard.html">Dashboard</a>
+          <a class="link" href="/pages/MY/auth/logout.php">❌</a>
+        </nav>
+      </div>
+      <h1>Logs</h1>
+    </header>
+
+    <section class="card">
+      <div style="display:flex; gap:8px; margin-bottom:8px;">
+        <input id="flt_action" class="input" placeholder="action (optional)" />
+        <input id="flt_user" class="input" placeholder="user_id (optional)" />
+        <button class="btn" onclick="loadLogs()">Muat semula</button>
+      </div>
+      <div id="status" class="tagline">Memuatkan…</div>
+      <div style="overflow:auto;">
+        <table id="tbl">
+          <thead><tr><th>ID</th><th>Masa</th><th>User</th><th>Aksi</th><th>Butiran</th><th>IP</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    async function ensureAdmin() {
+  const r = await fetch('/api/session_info.php');
+      const j = await r.json();
+      if (!j || !j.ok || !j.user || !j.user.is_admin) {
+  window.location.href = '/pages/MY/dashboard.html';
+      }
+    }
+    function esc(s){ try{return JSON.stringify(s);}catch(_){return String(s);} }
+    async function loadLogs(){
+      document.getElementById('status').textContent = 'Memuatkan…';
+      const action = document.getElementById('flt_action').value.trim();
+      const user = document.getElementById('flt_user').value.trim();
+      const qs = new URLSearchParams();
+      if (action) qs.set('action', action);
+      if (user) qs.set('user_id', user);
+  const r = await fetch('/api/action_logs_list.php?' + qs.toString());
+      const j = await r.json();
+      const tb = document.querySelector('#tbl tbody');
+      tb.innerHTML = '';
+      if (!j || !j.ok) { document.getElementById('status').textContent = 'Gagal memuatkan'; return; }
+      document.getElementById('status').textContent = 'OK';
+      for (const it of j.items) {
+        const tr = document.createElement('tr');
+        const det = it.details ? esc(it.details) : '';
+        tr.innerHTML = `<td>${it.id}</td><td>${it.created_at||''}</td><td>${it.user_id||''}</td><td>${it.action||''}</td><td><pre style="white-space:pre-wrap;margin:0">${det}</pre></td><td>${it.ip_address||''}</td>`;
+        tb.appendChild(tr);
+      }
+    }
+    ensureAdmin().then(loadLogs);
+  </script>
+</body>
+</html>

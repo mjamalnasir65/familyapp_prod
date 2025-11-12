@@ -1,0 +1,44 @@
+# ====================================================
+# Family Echo PWA - Smart Router Configuration
+# ====================================================
+
+RewriteEngine On
+RewriteBase /familyapp/
+
+# Note: php_flag directives removed (cause 500 error in .htaccess)
+# Configure these in php.ini or httpd.conf instead
+
+# Legacy prefix shim: strip /familyapp/public/ from old hardcoded links
+RewriteCond %{REQUEST_URI} ^/familyapp/public/(.*)$
+RewriteRule ^familyapp/public/(.*)$ /$1 [L,R=302]
+
+# Pass through static assets directly (bypass router)
+RewriteCond %{REQUEST_URI} ^/familyapp/(assets|uploads)/ [OR]
+RewriteCond %{REQUEST_URI} \.(css|js|jpg|jpeg|png|gif|svg|woff|woff2|ttf|eot|ico|webmanifest)$
+RewriteRule ^ - [L]
+
+# Pass through API endpoints directly (bypass router)
+RewriteCond %{REQUEST_URI} ^/familyapp/api/
+RewriteRule ^ - [L]
+
+# Pass through existing PHP files in old /auth/ directory (bypass router)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} ^/familyapp/auth/.*\.php$
+RewriteRule ^ - [L]
+
+# Serve existing physical files and directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Route everything else through SmartRouter
+RewriteRule ^ router.php [QSA,L]
+
+# Optional: force HTTPS in production
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Security: prevent direct access to sensitive files
+<FilesMatch "(\.env|config\.local\.php|composer\.(json|lock))$">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,659 @@
+[11-Nov-2025 21:14:31 UTC] PHP Warning:  require(/home/hdsiteco/public_html/nasab.hdsite.com.my/classes/vendor/autoload.php): Failed to open stream: No such file or directory in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php on line 5
+[11-Nov-2025 21:14:31 UTC] PHP Warning:  require(/home/hdsiteco/public_html/nasab.hdsite.com.my/classes/vendor/autoload.php): Failed to open stream: No such file or directory in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php on line 5
+[11-Nov-2025 21:14:31 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hdsiteco/public_html/nasab.hdsite.com.my/classes/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php:5
+Stack trace:
+#0 /home/hdsiteco/public_html/nasab.hdsite.com.my/api/invites_resend.php(4): require_once()
+#1 {main}
+  thrown in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php on line 5
+[11-Nov-2025 21:15:52 UTC] PHP Warning:  require(/home/hdsiteco/public_html/nasab.hdsite.com.my/classes/vendor/autoload.php): Failed to open stream: No such file or directory in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php on line 5
+[11-Nov-2025 21:15:52 UTC] PHP Warning:  require(/home/hdsiteco/public_html/nasab.hdsite.com.my/classes/vendor/autoload.php): Failed to open stream: No such file or directory in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php on line 5
+[11-Nov-2025 21:15:52 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hdsiteco/public_html/nasab.hdsite.com.my/classes/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php:5
+Stack trace:
+#0 /home/hdsiteco/public_html/nasab.hdsite.com.my/api/invites_resend.php(4): require_once()
+#1 {main}
+  thrown in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php on line 5
+[11-Nov-2025 21:17:26 UTC] PHP Warning:  require(/home/hdsiteco/public_html/nasab.hdsite.com.my/classes/vendor/autoload.php): Failed to open stream: No such file or directory in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php on line 5
+[11-Nov-2025 21:17:26 UTC] PHP Warning:  require(/home/hdsiteco/public_html/nasab.hdsite.com.my/classes/vendor/autoload.php): Failed to open stream: No such file or directory in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php on line 5
+[11-Nov-2025 21:17:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hdsiteco/public_html/nasab.hdsite.com.my/classes/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php:5
+Stack trace:
+#0 /home/hdsiteco/public_html/nasab.hdsite.com.my/api/invites_resend.php(4): require_once()
+#1 {main}
+  thrown in /home/hdsiteco/public_html/nasab.hdsite.com.my/classes/Mailer.php on line 5
+[11-Nov-2025 21:25:03 UTC] SERVER -> CLIENT: 220-v1559.securen.net ESMTP Exim 4.98.2 #2 Wed, 12 Nov 2025 05:25:03 +0800 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[11-Nov-2025 21:25:03 UTC] CLIENT -> SERVER: EHLO nasab.hdsite.com.my
+
+[11-Nov-2025 21:25:03 UTC] SERVER -> CLIENT: 250-v1559.securen.net Hello nasab.hdsite.com.my [218.208.91.162]
+250-SIZE 52428800
+250-LIMITS MAILMAX=1000 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[11-Nov-2025 21:25:03 UTC] CLIENT -> SERVER: AUTH LOGIN
+
+[11-Nov-2025 21:25:03 UTC] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[11-Nov-2025 21:25:03 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 21:25:03 UTC] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[11-Nov-2025 21:25:03 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 21:25:03 UTC] SERVER -> CLIENT: 235 Authentication succeeded
+
+[11-Nov-2025 21:25:03 UTC] CLIENT -> SERVER: MAIL FROM:<nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 21:25:03 UTC] SERVER -> CLIENT: 250 OK
+
+[11-Nov-2025 21:25:03 UTC] CLIENT -> SERVER: RCPT TO:<mjamalnasir65@gmail.com>
+
+[11-Nov-2025 21:25:04 UTC] SERVER -> CLIENT: 250 Accepted
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: DATA
+
+[11-Nov-2025 21:25:04 UTC] SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Date: Tue, 11 Nov 2025 21:25:03 +0000
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: To: mjamalnasir65@gmail.com
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: From: Family App <nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Subject: Family App invitation
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Message-ID: <iuKAm5fwN4H26wiHR6WU19YOa5DCm6DEpVLxmxdwpuQ@nasab.hdsite.com.my>
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: X-Mailer: PHPMailer 7.0.0 (https://github.com/PHPMailer/PHPMailer)
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: MIME-Version: 1.0
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER:  boundary="b1=_iuKAm5fwN4H26wiHR6WU19YOa5DCm6DEpVLxmxdwpuQ"
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: --b1=_iuKAm5fwN4H26wiHR6WU19YOa5DCm6DEpVLxmxdwpuQ
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Content-Type: text/plain; charset=UTF-8
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: You have been invited to join family jamal on Family App.
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Role: editor · Scope: family
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/EN/accept_invite.html?token=9AlGEOY6CAQ8wqhrCp9osw
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Message:
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Test email
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: --b1=_iuKAm5fwN4H26wiHR6WU19YOa5DCm6DEpVLxmxdwpuQ
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p style="margin-top:10px">Message from inviter:</p><blockquote style="margin:6px 0 14px;padding-left:10px;border-left:3px solid #ddd">Test email</blockquote><p><a href="https://nasab.hdsite.com.my/pages/EN/accept_invite.html?token=9AlGEOY6CAQ8wqhrCp9osw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p></div>
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: --b1=_iuKAm5fwN4H26wiHR6WU19YOa5DCm6DEpVLxmxdwpuQ--
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: .
+
+[11-Nov-2025 21:25:04 UTC] SERVER -> CLIENT: 250 OK id=1vIvrF-0000000GNf9-1ugs
+
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: QUIT
+
+[11-Nov-2025 21:25:04 UTC] SERVER -> CLIENT: 221 v1559.securen.net closing connection
+
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 220-v1559.securen.net ESMTP Exim 4.98.2 #2 Wed, 12 Nov 2025 05:29:03 +0800 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: EHLO nasab.hdsite.com.my
+
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 250-v1559.securen.net Hello nasab.hdsite.com.my [218.208.91.162]
+250-SIZE 52428800
+250-LIMITS MAILMAX=1000 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: AUTH LOGIN
+
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 235 Authentication succeeded
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: MAIL FROM:<nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 250 OK
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: RCPT TO:<mjamalnasir65@gmail.com>
+
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 250 Accepted
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: DATA
+
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Date: Tue, 11 Nov 2025 21:29:03 +0000
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: To: mjamalnasir65@gmail.com
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: From: Family App <nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Subject: Family App invitation
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Message-ID: <D7f08Y1R0SFrA5d3pScJMp2tqFARt1HHL8WlJVOvMVQ@nasab.hdsite.com.my>
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: X-Mailer: PHPMailer 7.0.0 (https://github.com/PHPMailer/PHPMailer)
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: MIME-Version: 1.0
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER:  boundary="b1=_D7f08Y1R0SFrA5d3pScJMp2tqFARt1HHL8WlJVOvMVQ"
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: --b1=_D7f08Y1R0SFrA5d3pScJMp2tqFARt1HHL8WlJVOvMVQ
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Content-Type: text/plain; charset=UTF-8
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: You have been invited to join family jamal on Family App.
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Role: editor · Scope: family
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/EN/accept_invite.html?token=-25cbVS8EVqDM0ghtlpYoQ
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Message:
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Test email
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: --b1=_D7f08Y1R0SFrA5d3pScJMp2tqFARt1HHL8WlJVOvMVQ
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p style="margin-top:10px">Message from inviter:</p><blockquote style="margin:6px 0 14px;padding-left:10px;border-left:3px solid #ddd">Test email</blockquote><p><a href="https://nasab.hdsite.com.my/pages/EN/accept_invite.html?token=-25cbVS8EVqDM0ghtlpYoQ" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p></div>
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: --b1=_D7f08Y1R0SFrA5d3pScJMp2tqFARt1HHL8WlJVOvMVQ--
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: .
+
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 250 OK id=1vIvv7-0000000GP2h-1AGF
+
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: QUIT
+
+[11-Nov-2025 21:29:03 UTC] SERVER -> CLIENT: 221 v1559.securen.net closing connection
+
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 220-v1559.securen.net ESMTP Exim 4.98.2 #2 Wed, 12 Nov 2025 05:58:38 +0800 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: EHLO nasab.hdsite.com.my
+
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 250-v1559.securen.net Hello nasab.hdsite.com.my [218.208.91.162]
+250-SIZE 52428800
+250-LIMITS MAILMAX=1000 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: AUTH LOGIN
+
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 235 Authentication succeeded
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: MAIL FROM:<nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 250 OK
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: RCPT TO:<mjamalnasir65@gmail.com>
+
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 250 Accepted
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: DATA
+
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Date: Tue, 11 Nov 2025 21:58:38 +0000
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: To: mjamalnasir65@gmail.com
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: From: Family App <nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Subject: Family App invitation
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Message-ID: <1f3mzwnlWv4AxGaorVLWWUF2aPUt1hzgjvQME8Q@nasab.hdsite.com.my>
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: X-Mailer: PHPMailer 7.0.0 (https://github.com/PHPMailer/PHPMailer)
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: MIME-Version: 1.0
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER:  boundary="b1=_1f3mzwnlWv4AxGaorVLWWUF2aPUt1hzgjvQME8Q"
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: --b1=_1f3mzwnlWv4AxGaorVLWWUF2aPUt1hzgjvQME8Q
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Content-Type: text/plain; charset=UTF-8
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: You have been invited to join family jamal on Family App.
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Role: viewer · Scope: person
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/EN/accept_invite.html?token=I9sCJ5qE7hF1eHsUh5fptw
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: --b1=_1f3mzwnlWv4AxGaorVLWWUF2aPUt1hzgjvQME8Q
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>viewer</strong> · Scope: <strong>person</strong></p><p><a href="https://nasab.hdsite.com.my/pages/EN/accept_invite.html?token=I9sCJ5qE7hF1eHsUh5fptw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/EN/auth/login.html?invite_token=I9sCJ5qE7hF1eHsUh5fptw" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: --b1=_1f3mzwnlWv4AxGaorVLWWUF2aPUt1hzgjvQME8Q--
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: .
+
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 250 OK id=1vIwNk-0000000GXpz-1jjE
+
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: QUIT
+
+[11-Nov-2025 21:58:38 UTC] SERVER -> CLIENT: 221 v1559.securen.net closing connection
+
+[11-Nov-2025 22:00:50 UTC] SERVER -> CLIENT: 220-v1559.securen.net ESMTP Exim 4.98.2 #2 Wed, 12 Nov 2025 06:00:50 +0800 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[11-Nov-2025 22:00:50 UTC] CLIENT -> SERVER: EHLO nasab.hdsite.com.my
+
+[11-Nov-2025 22:00:50 UTC] SERVER -> CLIENT: 250-v1559.securen.net Hello nasab.hdsite.com.my [218.208.91.162]
+250-SIZE 52428800
+250-LIMITS MAILMAX=1000 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[11-Nov-2025 22:00:50 UTC] CLIENT -> SERVER: AUTH LOGIN
+
+[11-Nov-2025 22:00:50 UTC] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[11-Nov-2025 22:00:50 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 22:00:50 UTC] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[11-Nov-2025 22:00:50 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 22:00:50 UTC] SERVER -> CLIENT: 235 Authentication succeeded
+
+[11-Nov-2025 22:00:50 UTC] CLIENT -> SERVER: MAIL FROM:<nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 22:00:51 UTC] SERVER -> CLIENT: 250 OK
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: RCPT TO:<mjamalnasir65@gmail.com>
+
+[11-Nov-2025 22:00:51 UTC] SERVER -> CLIENT: 250 Accepted
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: DATA
+
+[11-Nov-2025 22:00:51 UTC] SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Date: Tue, 11 Nov 2025 22:00:50 +0000
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: To: mjamalnasir65@gmail.com
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: From: Family App <nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Subject: Family App invitation
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Message-ID: <3tV9cm1lUt26ZObTlgb4tcVNyWkrA6TaCHNxCUR0@nasab.hdsite.com.my>
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: X-Mailer: PHPMailer 7.0.0 (https://github.com/PHPMailer/PHPMailer)
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: MIME-Version: 1.0
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER:  boundary="b1=_3tV9cm1lUt26ZObTlgb4tcVNyWkrA6TaCHNxCUR0"
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: --b1=_3tV9cm1lUt26ZObTlgb4tcVNyWkrA6TaCHNxCUR0
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Content-Type: text/plain; charset=UTF-8
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: You have been invited to join family jamal on Family App.
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Role: editor · Scope: family
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/EN/accept_invite.html?token=c-iG22RwEeZW0bF-SvgNdw
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: --b1=_3tV9cm1lUt26ZObTlgb4tcVNyWkrA6TaCHNxCUR0
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p><a href="https://nasab.hdsite.com.my/pages/EN/accept_invite.html?token=c-iG22RwEeZW0bF-SvgNdw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/EN/auth/login.html?invite_token=c-iG22RwEeZW0bF-SvgNdw" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: --b1=_3tV9cm1lUt26ZObTlgb4tcVNyWkrA6TaCHNxCUR0--
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: .
+
+[11-Nov-2025 22:00:51 UTC] SERVER -> CLIENT: 250 OK id=1vIwPs-0000000GYOJ-3SLP
+
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: QUIT
+
+[11-Nov-2025 22:00:51 UTC] SERVER -> CLIENT: 221 v1559.securen.net closing connection
+
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 220-v1559.securen.net ESMTP Exim 4.98.2 #2 Wed, 12 Nov 2025 06:10:49 +0800 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: EHLO nasab.hdsite.com.my
+
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 250-v1559.securen.net Hello nasab.hdsite.com.my [218.208.91.162]
+250-SIZE 52428800
+250-LIMITS MAILMAX=1000 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: AUTH LOGIN
+
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 235 Authentication succeeded
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: MAIL FROM:<nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 250 OK
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: RCPT TO:<mjamalnasir65@gmail.com>
+
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 250 Accepted
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: DATA
+
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Date: Tue, 11 Nov 2025 22:10:48 +0000
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: To: mjamalnasir65@gmail.com
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: From: Family App <nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Subject: Family App invitation
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Message-ID: <s21axHCNd3El897lGo7AvuIUzNCH8qGBQLNfrD6E@nasab.hdsite.com.my>
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: X-Mailer: PHPMailer 7.0.0 (https://github.com/PHPMailer/PHPMailer)
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: MIME-Version: 1.0
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER:  boundary="b1=_s21axHCNd3El897lGo7AvuIUzNCH8qGBQLNfrD6E"
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: --b1=_s21axHCNd3El897lGo7AvuIUzNCH8qGBQLNfrD6E
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Content-Type: text/plain; charset=UTF-8
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: You have been invited to join family jamal on Family App.
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Role: editor · Scope: family
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/MY/accept_invite.html?token=JzomGVasRQIUGBEzxSiZjw
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: --b1=_s21axHCNd3El897lGo7AvuIUzNCH8qGBQLNfrD6E
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p><a href="https://nasab.hdsite.com.my/pages/MY/accept_invite.html?token=JzomGVasRQIUGBEzxSiZjw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/MY/auth/login.html?invite_token=JzomGVasRQIUGBEzxSiZjw" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: --b1=_s21axHCNd3El897lGo7AvuIUzNCH8qGBQLNfrD6E--
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: .
+
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 250 OK id=1vIwZX-0000000Galw-0uuT
+
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: QUIT
+
+[11-Nov-2025 22:10:49 UTC] SERVER -> CLIENT: 221 v1559.securen.net closing connection
+
+[11-Nov-2025 22:16:22 UTC] SERVER -> CLIENT: 220-v1559.securen.net ESMTP Exim 4.98.2 #2 Wed, 12 Nov 2025 06:16:22 +0800 
+220-We do not authorize the use of this system to transport unsolicited, 
+220 and/or bulk e-mail.
+
+[11-Nov-2025 22:16:22 UTC] CLIENT -> SERVER: EHLO nasab.hdsite.com.my
+
+[11-Nov-2025 22:16:22 UTC] SERVER -> CLIENT: 250-v1559.securen.net Hello nasab.hdsite.com.my [218.208.91.162]
+250-SIZE 52428800
+250-LIMITS MAILMAX=1000 RCPTMAX=50000
+250-8BITMIME
+250-PIPELINING
+250-PIPECONNECT
+250-AUTH PLAIN LOGIN
+250 HELP
+
+[11-Nov-2025 22:16:22 UTC] CLIENT -> SERVER: AUTH LOGIN
+
+[11-Nov-2025 22:16:22 UTC] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[11-Nov-2025 22:16:22 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 22:16:22 UTC] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[11-Nov-2025 22:16:22 UTC] CLIENT -> SERVER: [credentials hidden]
+[11-Nov-2025 22:16:22 UTC] SERVER -> CLIENT: 235 Authentication succeeded
+
+[11-Nov-2025 22:16:22 UTC] CLIENT -> SERVER: MAIL FROM:<nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 22:16:23 UTC] SERVER -> CLIENT: 250 OK
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: RCPT TO:<mjamalnasir65@gmail.com>
+
+[11-Nov-2025 22:16:23 UTC] SERVER -> CLIENT: 250 Accepted
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: DATA
+
+[11-Nov-2025 22:16:23 UTC] SERVER -> CLIENT: 354 Enter message, ending with "." on a line by itself
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Date: Tue, 11 Nov 2025 22:16:22 +0000
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: To: mjamalnasir65@gmail.com
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: From: Family App <nasabpwa@hdsite.com.my>
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Subject: Family App invitation
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Message-ID: <SToNbbMMBzkbZkyEOy8fBiy3fe8jnw7U57qGAFXOyY@nasab.hdsite.com.my>
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: X-Mailer: PHPMailer 7.0.0 (https://github.com/PHPMailer/PHPMailer)
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: MIME-Version: 1.0
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Content-Type: multipart/alternative;
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER:  boundary="b1=_SToNbbMMBzkbZkyEOy8fBiy3fe8jnw7U57qGAFXOyY"
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: --b1=_SToNbbMMBzkbZkyEOy8fBiy3fe8jnw7U57qGAFXOyY
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Content-Type: text/plain; charset=UTF-8
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: You have been invited to join family jamal on Family App.
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Role: editor · Scope: family
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/MY/accept_invite.html?token=XiWfDlxFqEuaPw-bJmWDpQ
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: --b1=_SToNbbMMBzkbZkyEOy8fBiy3fe8jnw7U57qGAFXOyY
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Content-Type: text/html; charset=UTF-8
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p><a href="https://nasab.hdsite.com.my/pages/MY/accept_invite.html?token=XiWfDlxFqEuaPw-bJmWDpQ" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/MY/auth/login.html?invite_token=XiWfDlxFqEuaPw-bJmWDpQ" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: --b1=_SToNbbMMBzkbZkyEOy8fBiy3fe8jnw7U57qGAFXOyY--
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: .
+
+[11-Nov-2025 22:16:23 UTC] SERVER -> CLIENT: 250 OK id=1vIwev-0000000GcCB-08qm
+
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: QUIT
+
+[11-Nov-2025 22:16:23 UTC] SERVER -> CLIENT: 221 v1559.securen.net closing connection
+

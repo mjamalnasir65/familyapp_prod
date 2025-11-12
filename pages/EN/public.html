@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NASAB Family Tree</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body>
+  <main class="hero">
+    <div class="glass card-enter">
+      <header class="hero-header">
+        <div class="brand">
+          <div class="image-holder">
+            <img src="/assets/img/logo.png" alt="NASAB Family Tree Logo" class="logo">
+          </div>
+          <h1>NASAB Family Tree</h1>
+        </div>
+        <p class="tagline">Build and manage your family tree with ease</p>
+        <div id="langSwitch"></div>
+      </header>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="./auth/register.html">Get Started</a>
+        <a class="btn btn-ghost" href="./auth/login.html">Sign In</a>
+      </div>
+
+      <footer class="hero-foot">
+        <span class="pill">Responsive</span>
+        <span class="pill">Glass UI</span>
+        <a class="pill" href="./about.html">About NASAB</a>
+      </footer>
+    </div>
+    <footer>
+    <p><small>© 2025 Nasab Family Tree – Experimental Beta Release. Developed by a personal developer for educational purposes only.</small></p>
+  </footer>
+  </main>
+  <script src="/assets/js/i18n.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/lang-switch.js"></script>
+  <script>
+    // Optional: simple fade-in after fonts
+    window.addEventListener('load', () => {
+      document.querySelector('.card-enter')?.classList.add('in');
+    });
+  </script>
+</body>
+</html>

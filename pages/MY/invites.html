@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invites</title>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    .card {
+      background: #fff;
+      color: #1a1a1a;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .filters a {
+      padding: 6px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .filters a.active {
+      background: #eef2ff;
+      border-color: #c7d2fe;
+      color: #1d4ed8;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 8px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    .muted {
+      color: #64748b;
+    }
+
+    .btn {
+      color: #fff;
+    }
+
+    /* Improve contrast for received invites area */
+    #receivedBox {
+      color: #0f172a;
+    }
+
+    #receivedBox h3 {
+      color: #0c4a6e;
+    }
+
+    #receivedBox .muted {
+      color: #0f172a;
+      opacity: 1;
+    }
+
+    #receivedBox table th,
+    #receivedBox table td {
+      color: #0f172a;
+    }
+
+    #receivedBox button {
+      background: #0ea5e9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    #receivedBox button:hover {
+      filter: brightness(0.95);
+    }
+
+    .dialog {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, .35);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .dialog[aria-modal="true"] {
+      backdrop-filter: blur(2px);
+    }
+
+    .dialog .panel {
+      position: relative;
+      background: #ffffff;
+      color: #0f172a;
+      padding: 16px;
+      border-radius: 12px;
+      width: 520px;
+      max-width: calc(100% - 32px);
+      box-shadow: 0 24px 64px rgba(2, 6, 23, 0.20);
+      border: 1px solid #e2e8f0;
+      line-height: 1.35;
+    }
+
+    .dialog .panel h3 {
+      color: #0f172a;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .dialog .panel label {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .dialog .panel .dialog-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: transparent;
+      border: 0;
+      font-size: 20px;
+      line-height: 1;
+      color: #334155;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+    }
+
+    .dialog .panel .dialog-close:hover,
+    .dialog .panel .dialog-close:focus {
+      background: #f1f5f9;
+      outline: 2px solid transparent;
+      box-shadow: 0 0 0 2px #93c5fd inset;
+    }
+
+    .input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #94a3b8;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    .dialog ::placeholder {
+      color: #475569;
+      opacity: 1;
+    }
+
+    .grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .grid .full {
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="hero">
+    <div class="glass card-enter" style="max-width:1100px;">
+      <header class="wizard-head">
+        <div class="row" style="justify-content:space-between;">
+          <div class="tagline">Signed in as: <strong id="sessionEmail">...</strong></div>
+          <nav style="display:flex; gap:10px;">
+             <a class="link" href="/pages/MY/dashboard.html">↩️</a>
+            <a class="link" href="/pages/MY/edit_tree.html">Tree</a>
+            <a class="link" href="/pages/MY/auth/logout.php">❌</a>
+          </nav>
+        </div>
+        <h1>Invite members</h1>
+        <p class="tagline">Manage invitations to your family and branches.</p>
+      </header>
+
+      <section class="card">
+        <div id="receivedBox" class="card"
+          style="margin-bottom:12px; display:none; background:#f0f9ff; border:1px solid #bae6fd;">
+          <h3 style="margin-top:0; color:#0c4a6e;">Invitations for you</h3>
+          <div id="receivedList" class="muted"></div>
+        </div>
+        <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+          <div class="filters">
+            <a href="#" data-filter="" class="active">All</a>
+            <a href="#" data-filter="pending">Pending</a>
+            <a href="#" data-filter="accepted">Accepted</a>
+            <a href="#" data-filter="revoked">Revoked</a>
+          </div>
+          <button id="newInviteBtn" class="btn">Invite new member</button>
+        </div>
+        <div class="muted" id="status">Loading…</div>
+        <div style="overflow:auto;">
+          <table id="invitesTable" style="min-width:760px;">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Scope</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Expires</th>
+                <th class="right">Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="card">
+        <div id="receivedHistory" class="card" style="margin-top:16px; display:none; background:#ffffff; border:1px solid #e2e8f0;">
+          <h3 style="margin-top:0; color:#0f172a;">Your invitation history</h3>
+          <div id="receivedHistoryList" class="muted"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="dialog" id="inviteDialog" role="dialog" aria-modal="true">
+    <div class="panel">
+      <button id="dialogCloseBtn" type="button" class="dialog-close" aria-label="Close" title="Close">×</button>
+      <h3 style="margin-top:0">Invite new member</h3>
+      <div class="grid">
+        <div class="full">
+          <label>Email</label>
+          <input id="inv_email" class="input" placeholder="email@example.com" />
+          <div id="invInfo" class="muted" style="margin-top:6px;"></div>
+        </div>
+        <div>
+          <label>Role</label>
+          <select id="inv_role" class="input">
+            <option value="viewer">viewer</option>
+            <option value="editor">editor</option>
+            <option value="owner">owner</option>
+          </select>
+        </div>
+        <div>
+          <label>Scope</label>
+          <select id="inv_scope" class="input">
+            <option value="family">Family-wide</option>
+            <option value="couple">Branch (couple)</option>
+            <option value="person">Person collaborator</option>
+          </select>
+        </div>
+        <div>
+          <label>Parent 1 ID (for couple)</label>
+          <input id="inv_p1" class="input" placeholder="parent1_id" />
+        </div>
+        <div>
+          <label>Parent 2 ID (for couple)</label>
+          <input id="inv_p2" class="input" placeholder="parent2_id" />
+        </div>
+        <div>
+          <label>Person ID (for person scope)</label>
+          <input id="inv_person" class="input" placeholder="person_id" />
+        </div>
+        <div>
+          <label>Expires (days)</label>
+          <input id="inv_days" class="input" type="number" value="7" min="1" max="30" />
+        </div>
+        <div class="full">
+          <label>Message (optional)</label>
+          <textarea id="inv_msg" class="input" rows="3"
+            placeholder="Write a note for your invitee (optional)"></textarea>
+        </div>
+        <div class="full" style="display:flex; gap:8px; justify-content:flex-end; margin-top:8px;">
+          <button id="invCancel" class="btn btn-ghost" type="button">Cancel</button>
+          <button id="invCreate" class="btn" type="button">Create</button>
+        </div>
+        <div id="invErr" class="muted" style="color:#b33"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/js/i18n.js"></script>
+  <script>
+    const statusEl = document.getElementById('status');
+    const tbody = document.querySelector('#invitesTable tbody');
+    const dialog = document.getElementById('inviteDialog');
+
+  fetch('/api/session_info.php').then(r => r.ok ? r.json() : { ok:false }).then(u => {
+      const el = document.getElementById('sessionEmail');
+      if (el) el.textContent = (u && u.ok && u.user && u.user.email) || '—';
+    }).catch(() => {});
+
+    function qs(name) {
+      const u = new URL(location.href);
+      return u.searchParams.get(name);
+    }
+
+    function openDialog() {
+      dialog.style.display = 'flex';
+    }
+
+    function closeDialog() {
+      dialog.style.display = 'none';
+    }
+
+    function syncScopeFields() {
+      const scope = (document.getElementById('inv_scope')?.value) || 'family';
+      const p1 = document.getElementById('inv_p1')?.parentElement;
+      const p2 = document.getElementById('inv_p2')?.parentElement;
+      const person = document.getElementById('inv_person')?.parentElement;
+      if (p1 && p2) {
+        const show = scope === 'couple';
+        p1.style.display = show ? '' : 'none';
+        p2.style.display = show ? '' : 'none';
+      }
+      if (person) {
+        const showP = scope === 'person';
+        person.style.display = showP ? '' : 'none';
+      }
+    }
+
+    function initInvitePrefill() {
+      const u = new URL(location.href);
+      const sp = u.searchParams;
+      const wants = sp.get('invite') === '1' || sp.has('email') || sp.has('scope') || sp.has('scope_type') || sp.has(
+        'person_id') || sp.has('parent1_id') || sp.has('parent2_id');
+      if (!wants) {
+        syncScopeFields();
+        return;
+      }
+      const email = sp.get('email') || '';
+      const scope = (sp.get('scope') || sp.get('scope_type') || 'family');
+      const role = sp.get('role') || 'viewer';
+      const person_id = sp.get('person_id') || '';
+      const p1 = sp.get('parent1_id') || '';
+      const p2 = sp.get('parent2_id') || '';
+      const days = sp.get('days') || sp.get('expires_days') || '';
+      const message = sp.get('message') || '';
+      const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el != null && val !== null) el.value = val;
+      };
+      setVal('inv_email', email);
+      setVal('inv_scope', ['family', 'couple', 'person'].includes(scope) ? scope : 'family');
+      setVal('inv_role', ['viewer', 'editor', 'owner'].includes(role) ? role : 'viewer');
+      setVal('inv_person', person_id);
+      setVal('inv_p1', p1);
+      setVal('inv_p2', p2);
+      if (days) setVal('inv_days', days);
+      setVal('inv_msg', message);
+      syncScopeFields();
+      openDialog();
+      // run initial check after prefill
+      setTimeout(() => {
+        try {
+          checkEmail();
+        } catch (_) {}
+      }, 0);
+    }
+
+    async function loadReceivedInvites() {
+      try {
+  const r = await fetch('/api/invites_received.php', {
+          credentials: 'include'
+        });
+        const j = await r.json();
+        const box = document.getElementById('receivedBox');
+        const list = document.getElementById('receivedList');
+        if (!j || !j.ok || !(j.items || []).length) {
+          box.style.display = 'none';
+          return;
+        }
+        box.style.display = 'block';
+        list.innerHTML = '';
+        const tbl = document.createElement('table');
+        tbl.style.width = '100%';
+        tbl.style.borderCollapse = 'collapse';
+        tbl.innerHTML =
+          `<thead><tr><th>${T('family','Family')}</th><th>${T('role','Role')}</th><th>${T('scope','Scope')}</th><th>${T('expires','Expires')}</th><th class="right">${T('action','Action')}</th></tr></thead><tbody></tbody>`;
+        const tb = tbl.querySelector('tbody');
+        for (const it of j.items) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${it.family_name||''}</td>
+            <td>${it.role||''}</td>
+            <td>${it.scope_type||''}</td>
+            <td>${it.token_expires_at||''}</td>
+            <td class="right"><button data-act="accept" data-id="${it.id}">${T('accept','Accept')}</button></td>`;
+          tb.appendChild(tr);
+        }
+        list.appendChild(tbl);
+        list.addEventListener('click', async (e) => {
+          const btn = e.target.closest('button');
+          if (!btn) return;
+          if (btn.dataset.act === 'accept') {
+            const id = parseInt(btn.dataset.id, 10);
+            if (!id) return;
+            btn.disabled = true;
+            btn.textContent = T('accepting','Accepting…');
+            try {
+              const res = await fetch('/api/invites_accept_direct.php', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  id
+                })
+              });
+              const jj = await res.json();
+              if (!jj || !jj.ok) {
+                btn.disabled = false;
+                btn.textContent = T('accept','Accept');
+                alert(jj.error || T('accept_failed','Accept failed'));
+                return;
+              }
+              loadReceivedInvites();
+            } catch (_) {
+              btn.disabled = false;
+              btn.textContent = T('accept','Accept');
+              alert(T('server_error','Server error'));
+            }
+          }
+        }, {
+          once: true
+        });
+      } catch (_) {
+        /* ignore */ }
+    }
+
+    async function loadReceivedHistory(){
+      try {
+  const r = await fetch('/api/invites_received_history.php', { credentials:'include' });
+        const j = await r.json();
+        const box = document.getElementById('receivedHistory');
+        const list = document.getElementById('receivedHistoryList');
+        if (!j || !j.ok){ box.style.display='none'; return; }
+        const items = j.items || [];
+        box.style.display = 'block';
+        list.innerHTML = '';
+        const tbl = document.createElement('table');
+        tbl.style.width = '100%';
+        tbl.style.borderCollapse = 'collapse';
+        tbl.innerHTML = `<thead><tr>
+            <th>Family</th>
+            <th>Role</th>
+            <th>Scope</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Responded</th>
+            <th>Expires</th>
+          </tr></thead><tbody></tbody>`;
+        const tb = tbl.querySelector('tbody');
+        for (const it of items){
+          const responded = it.responded_at || it.accepted_at || it.updated_at || '';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${it.family_name||''}</td>
+            <td>${it.role||''}</td>
+            <td>${it.scope_type||''}</td>
+            <td>${it.status||''}</td>
+            <td>${it.created_at||''}</td>
+            <td>${responded}</td>
+            <td>${it.token_expires_at||''}</td>`;
+          tb.appendChild(tr);
+        }
+        list.appendChild(tbl);
+      } catch (_) { /* ignore */ }
+    }
+
+    async function loadInvites(filter) {
+  statusEl.textContent = T('loading','Loading…');
+      tbody.innerHTML = '';
+      const url = filter ? `/api/invites_list.php?status=${encodeURIComponent(filter)}` :
+        '/api/invites_list.php';
+      const r = await fetch(url, {
+        credentials: 'include'
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!j.ok) {
+        statusEl.textContent = j.error || T('unable_load_tree','Unable to load');
+        return;
+      }
+      statusEl.textContent = T('invites_count','{n} invite(s)').replace('{n}', j.items.length);
+      for (const it of j.items) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${it.email||''}</td>
+          <td>${it.scope_type||''}</td>
+          <td>${it.role||''}</td>
+          <td>${it.status||''}</td>
+          <td>${it.token_expires_at||''}</td>
+          <td class="right">
+            ${it.status==='pending' ? `<button data-act="resend" data-id="${it.id}">${T('resend','Resend')}</button>
+            <button data-act="revoke" data-id="${it.id}">${T('revoke','Revoke')}</button>` : ''}
+          </td>`;
+        tbody.appendChild(tr);
+      }
+    }
+
+    document.querySelectorAll('.filters a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.filters a').forEach(x => x.classList.remove('active'));
+        a.classList.add('active');
+        loadInvites(a.dataset.filter || '');
+      });
+    });
+
+    tbody.addEventListener('click', async (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const id = parseInt(btn.dataset.id, 10);
+      if (!id) return;
+      if (btn.dataset.act === 'revoke') {
+  const r = await fetch('/api/invites_revoke.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id
+          })
+        });
+        const j = await r.json();
+        if (!j.ok) {
+          alert(j.error || T('revoke_failed','Revoke failed'));
+          return;
+        }
+        loadInvites(document.querySelector('.filters a.active')?.dataset.filter || '');
+      } else if (btn.dataset.act === 'resend') {
+  const r = await fetch('/api/invites_resend.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id
+          })
+        });
+        const j = await r.json();
+        if (!j.ok) {
+          alert(j.error || T('resend_failed','Resend failed'));
+          return;
+        }
+        await navigator.clipboard?.writeText(j.invite_url).catch(() => {});
+        alert(T('invite_link_copied','Invite link copied to clipboard'));
+      }
+    });
+
+    document.getElementById('newInviteBtn').addEventListener('click', () => {
+      openDialog();
+      setTimeout(() => {
+        try {
+          checkEmail();
+        } catch (_) {}
+      }, 0);
+    });
+    document.getElementById('invCancel').addEventListener('click', closeDialog);
+    document.getElementById('dialogCloseBtn').addEventListener('click', closeDialog);
+    document.getElementById('inv_scope').addEventListener('change', syncScopeFields);
+    document.getElementById('inv_email').addEventListener('blur', () => {
+      try {
+        checkEmail();
+      } catch (_) {}
+    });
+    document.getElementById('inv_email').addEventListener('input', () => {
+      const b = document.getElementById('invCreate');
+      b.disabled = false;
+      document.getElementById('invInfo').textContent = '';
+    });
+    // Close when clicking the overlay outside the panel
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) closeDialog();
+    });
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dialog.style.display === 'flex') closeDialog();
+    });
+    document.getElementById('invCreate').addEventListener('click', async () => {
+      const email = document.getElementById('inv_email').value.trim();
+      const role = document.getElementById('inv_role').value;
+      const scope = document.getElementById('inv_scope').value;
+      const parent1_id = parseInt(document.getElementById('inv_p1').value || '0', 10) || undefined;
+      const parent2_id = parseInt(document.getElementById('inv_p2').value || '0', 10) || undefined;
+      const person_id = parseInt(document.getElementById('inv_person').value || '0', 10) || undefined;
+      const expires_days = parseInt(document.getElementById('inv_days').value || '7', 10) || 7;
+      const message = document.getElementById('inv_msg').value.trim();
+      const payload = {
+        email,
+        role,
+        scope_type: scope,
+        parent1_id,
+        parent2_id,
+        person_id,
+        expires_days,
+  message,
+  lang: 'MY'
+      };
+      const err = document.getElementById('invErr');
+      err.textContent = '';
+      try {
+        // Final pre-check
+  const chk = await fetch('/api/invites_check_email.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email
+          })
+        });
+        const cj = await chk.json().catch(() => ({}));
+        if (!cj.ok) {
+          err.textContent = cj.error || T('validation_failed','Validation failed');
+          return;
+        }
+        if (cj.reason === 'self_invite') {
+          err.textContent = T('self_invite_block','You cannot invite yourself');
+          return;
+        }
+        if (cj.reason === 'already_member') {
+          err.textContent = T('already_member','This user is already a member of this family.');
+          return;
+        }
+        if (cj.reason === 'pending_invite_exists') {
+          err.textContent = T('pending_invite_exists','A pending invite already exists. Use Resend in the list below.');
+          return;
+        }
+        if ((cj.warnings || []).includes('cross_family_exists')) {
+          const proceed = confirm(T('cross_family_exists','This email already exists in our system. Possible duplicate person.'));
+          if (!proceed) return;
+        }
+
+  const r = await fetch('/api/invites_create.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        const j = await r.json();
+        if (!j.ok) {
+          err.textContent = j.error || T('create_failed','Create failed');
+          return;
+        }
+        await navigator.clipboard?.writeText(j.invite_url).catch(() => {});
+        alert(T('invite_created','Invite created. Link copied to clipboard.'));
+        closeDialog();
+        loadInvites(document.querySelector('.filters a.active')?.dataset.filter || '');
+      } catch (_) {
+  err.textContent = T('server_error','Server error');
+      }
+    });
+
+    async function checkEmail() {
+      const email = (document.getElementById('inv_email')?.value || '').trim();
+      const info = document.getElementById('invInfo');
+      const createBtn = document.getElementById('invCreate');
+      if (!email) {
+        info.textContent = '';
+        createBtn.disabled = false;
+        return;
+      }
+  info.textContent = T('checking','Checking…');
+      try {
+  const r = await fetch('/api/invites_check_email.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email
+          })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!j.ok) {
+          info.textContent = j.error || T('check_failed','Check failed');
+          createBtn.disabled = false;
+          return;
+        }
+        if (j.reason === 'self_invite') {
+          info.textContent = T('self_invite_block','You cannot invite yourself');
+          createBtn.disabled = true;
+        } else if (j.reason === 'already_member') {
+          info.textContent = T('already_member','This user is already a member.');
+          createBtn.disabled = true;
+        } else if (j.reason === 'pending_invite_exists') {
+          info.textContent = T('pending_invite_exists','You had invited this email (pending). Use Resend below.');
+          createBtn.disabled = true;
+        } else {
+          // Cross-family duplicate warning
+          if ((j.warnings || []).includes('cross_family_exists')) {
+            info.textContent = T('cross_family_exists','This email already exists in our system. Possible duplicate person.');
+            createBtn.disabled = false;
+            return;
+          }
+          // Past invites (non-pending)
+          if ((j.invites?.recent || []).length) {
+            info.textContent = T('resend','Resend');
+            createBtn.disabled = false;
+            return;
+          }
+          const parts = [];
+          if (j.user?.exists) parts.push(T('existing_account','Existing account'));
+          info.textContent = parts.length ? parts.join(' · ') : T('looks_good','Looks good.');
+          createBtn.disabled = false;
+        }
+      } catch (_) {
+        info.textContent = T('check_failed','Check failed');
+        createBtn.disabled = false;
+      }
+    }
+
+    window.addEventListener('load', () => {
+      document.querySelector('.card-enter')?.classList.add('in');
+      loadInvites('');
+      initInvitePrefill();
+      loadReceivedInvites();
+      loadReceivedHistory();
+    });
+  </script>
+</body>
+
+</html>

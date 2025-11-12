@@ -1,0 +1,9 @@
+# Logs folder security
+Options -Indexes
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+# Allow only .log and .txt direct access (no PHP execution here anyway)
+<FilesMatch "\.(log|txt)$">
+  Require all granted
+</FilesMatch>
