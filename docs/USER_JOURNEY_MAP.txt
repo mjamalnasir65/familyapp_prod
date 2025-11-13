@@ -20,7 +20,7 @@ The application supports **3 primary user entry paths**:
 
 ### **Entry Point**: Landing Page (`/` or `/index.html`)
 
-**Page**: `pages/EN/index.html`
+**Page**: `pages/en/index.html`
 - **Content**: Hero page with brand, logo, tagline
 - **Actions**:
   - Click "Get Started" → `/auth/register.html`
@@ -29,9 +29,9 @@ The application supports **3 primary user entry paths**:
 
 ---
 
-### **Step 1: Registration** (`/register` or `/pages/EN/auth/register.html`)
+### **Step 1: Registration** (`/register` or `/pages/en/auth/register.html`)
 
-**Page**: `pages/EN/auth/register.html`
+**Page**: `pages/en/auth/register.html`
 
 **Form Fields**:
 - Full Name (required)
@@ -52,19 +52,19 @@ The application supports **3 primary user entry paths**:
 **Success Flow**:
 1. User account created in `users` table
 2. Session created (`$_SESSION['user_id']`, `$_SESSION['user_email']`, `$_SESSION['user_name']`)
-3. **Redirect to**: `/pages/EN/chat_wizard.html` (onboarding wizard)
+3. **Redirect to**: `/pages/en/chat_wizard.html` (onboarding wizard)
 
 **With Family Token**:
 - If family token provided during registration
-- Redirect to: `/pages/EN/chat_token_wizard.html?family_token=XXX`
+- Redirect to: `/pages/en/chat_token_wizard.html?family_token=XXX`
 - (Alternative flow - see Journey 2)
 
 ---
 
-### **Step 2: Chat Wizard - Family Setup** (`/wizard` or `/pages/EN/chat_wizard.html`)
+### **Step 2: Chat Wizard - Family Setup** (`/wizard` or `/pages/en/chat_wizard.html`)
 
-**Page**: `pages/EN/chat_wizard.html`
-**Script**: `assets/js/EN/chatWizard.js`
+**Page**: `pages/en/chat_wizard.html`
+**Script**: `assets/js/en/chatWizard.js`
 
 **UI**: WhatsApp-style conversational interface
 - Bot messages (left, white bubbles)
@@ -203,15 +203,15 @@ The application supports **3 primary user entry paths**:
 **API Call**: `POST /api/wizard_complete_step6.php` (if has children)
 OR `POST /api/wizard_complete_no_partners.php` (if no partners/children)
 
-**Response**: `{ ok: true, redirect: "/pages/EN/dashboard.html" }`
+**Response**: `{ ok: true, redirect: "/pages/en/dashboard.html" }`
 
 **Redirect**: Browser navigates to dashboard
 
 ---
 
-### **Step 3: Dashboard** (`/dashboard` or `/pages/EN/dashboard.html`)
+### **Step 3: Dashboard** (`/dashboard` or `/pages/en/dashboard.html`)
 
-**Page**: `pages/EN/dashboard.html`
+**Page**: `pages/en/dashboard.html`
 
 **On Load**:
 1. `GET /api/session_info.php` → Get user info
@@ -257,9 +257,9 @@ OR: `/auth/register.html?family_token=YYYY`
 
 ---
 
-### **Step 1: Token Registration** (`/tok_register` or `/pages/EN/auth/tok_register.html`)
+### **Step 1: Token Registration** (`/tok_register` or `/pages/en/auth/tok_register.html`)
 
-**Page**: `pages/EN/auth/tok_register.html`
+**Page**: `pages/en/auth/tok_register.html`
 
 **On Load**:
 1. Extract `invite_token` or `family_token` from URL
@@ -281,13 +281,13 @@ OR: `/auth/register.html?family_token=YYYY`
 1. User account created
 2. Session created
 3. Token stored in session: `$_SESSION['pending_invite_token']` or `$_SESSION['pending_family_token']`
-4. **Redirect to**: `/pages/EN/chat_token_wizard.html?family_token=YYYY`
+4. **Redirect to**: `/pages/en/chat_token_wizard.html?family_token=YYYY`
 
 ---
 
-### **Step 2: Token Wizard** (`/token_wizard` or `/pages/EN/chat_token_wizard.html`)
+### **Step 2: Token Wizard** (`/token_wizard` or `/pages/en/chat_token_wizard.html`)
 
-**Page**: `pages/EN/chat_token_wizard.html`
+**Page**: `pages/en/chat_token_wizard.html`
 **Script**: `assets/js/chatTokenWizard.js` (if exists) or similar flow
 
 **Purpose**: Simplified wizard for joining existing family
@@ -315,16 +315,16 @@ OR: `/auth/register.html?family_token=YYYY`
    - `POST /api/token_family_unions.php`
 
 **Completion**:
-- Redirect to: `/pages/EN/dashboard.html`
+- Redirect to: `/pages/en/dashboard.html`
 - User now sees combined family tree
 
 ---
 
 ## 📍 Journey 3: RETURNING USER - Direct Login
 
-### **Entry Point**: Login Page (`/login` or `/pages/EN/auth/login.html`)
+### **Entry Point**: Login Page (`/login` or `/pages/en/auth/login.html`)
 
-**Page**: `pages/EN/auth/login.html`
+**Page**: `pages/en/auth/login.html`
 
 **Form Fields**:
 - Email (required)
@@ -340,8 +340,8 @@ OR: `/auth/register.html?family_token=YYYY`
 **Success Flow**:
 1. Session created (`$_SESSION['user_id']`)
 2. Check `users.families_id`:
-   - **If NULL** (wizard incomplete) → Redirect to `/pages/EN/chat_wizard.html`
-   - **If SET** (has family) → Redirect to `/pages/EN/dashboard.html`
+   - **If NULL** (wizard incomplete) → Redirect to `/pages/en/chat_wizard.html`
+   - **If SET** (has family) → Redirect to `/pages/en/dashboard.html`
 
 **Redirect After Login**:
 - If `$_SESSION['redirect_after_login']` exists → Redirect to stored URL
@@ -351,9 +351,9 @@ OR: `/auth/register.html?family_token=YYYY`
 
 ## 🔄 Core User Flows (Post-Login)
 
-### **Flow A: View Family Tree** (`/tree` → `/pages/EN/tree.html`)
+### **Flow A: View Family Tree** (`/tree` → `/pages/en/tree.html`)
 
-**Page**: `pages/EN/tree.html`
+**Page**: `pages/en/tree.html`
 
 **On Load**:
 1. `GET /api/family_tree.php` → Get complete tree data
@@ -376,7 +376,7 @@ OR: `/auth/register.html?family_token=YYYY`
 
 ### **Flow B: Add New Person** (`/chatEdit_persons.html`)
 
-**Page**: `pages/EN/chatEdit_persons.html`
+**Page**: `pages/en/chatEdit_persons.html`
 
 **Chat Interface** - Bot guides:
 1. "Who are you adding?" → Free text
@@ -396,7 +396,7 @@ OR: `/auth/register.html?family_token=YYYY`
 
 ### **Flow C: Expand Existing Person** (`/chat_expand.html`)
 
-**Page**: `pages/EN/chat_expand.html`
+**Page**: `pages/en/chat_expand.html`
 
 **Purpose**: Add relatives to an existing person (e.g., add parents to someone)
 
@@ -426,9 +426,9 @@ OR: `/auth/register.html?family_token=YYYY`
 
 ---
 
-### **Flow D: Invitations Management** (`/invites` → `/pages/EN/invites.html`)
+### **Flow D: Invitations Management** (`/invites` → `/pages/en/invites.html`)
 
-**Page**: `pages/EN/invites.html`
+**Page**: `pages/en/invites.html`
 
 **On Load**:
 1. `GET /api/invites_list.php` → Get invites sent by user
@@ -502,7 +502,7 @@ OR: `/auth/register.html?family_token=YYYY`
 
 **Direct Accept** (from email link):
 - URL: `/accept_invite.html?token=XXXX`
-- Page: `pages/EN/accept_invite.html`
+- Page: `pages/en/accept_invite.html`
 - Auto-calls: `POST /api/invites_accept_direct.php`
 - Redirects to login if not authenticated
 
@@ -510,7 +510,7 @@ OR: `/auth/register.html?family_token=YYYY`
 
 ### **Flow E: Pending Decisions (Duplicate Merge)** (`/pd_view.html`)
 
-**Page**: `pages/EN/pd_view.html` or `pages/EN/pd_tree.html`
+**Page**: `pages/en/pd_view.html` or `pages/en/pd_tree.html`
 
 **Purpose**: Resolve duplicate persons (same person added by different users)
 
@@ -786,7 +786,7 @@ OR: `/auth/register.html?family_token=YYYY`
 - Theme color: `#0ea5e9`
 
 ### **Offline Support**
-- Page: `pages/EN/offline.html`
+- Page: `pages/en/offline.html`
 - Shows when no internet connection
 - Service worker (if implemented)
 
@@ -874,15 +874,15 @@ OR: `/auth/register.html?family_token=YYYY`
 ### **Code Organization**
 
 **Frontend**:
-- `/pages/EN/` - English pages
-- `/pages/MY/` - Malaysian pages
-- `/assets/js/EN/` - English scripts
-- `/assets/js/MY/` - Malaysian scripts
+- `/pages/en/` - English pages
+- `/pages/my/` - Malaysian pages
+- `/assets/js/en/` - English scripts
+- `/assets/js/my/` - Malaysian scripts
 - `/assets/css/` - Shared styles
 
 **Backend**:
 - `/api/` - API endpoints
-- `/auth/` - Auth endpoints (as PHP files in pages/EN/auth/)
+- `/auth/` - Auth endpoints (as PHP files in pages/en/auth/)
 - `/classes/` - PHP classes (Database, Mailer, ActionLogger)
 - `/config/` - Configuration files
 

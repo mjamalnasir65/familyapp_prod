@@ -25,11 +25,11 @@ The existing `index.php` already loads `router.php`, so all requests go through 
    - DirectoryIndex automatically serves `index.php`
    - Router handles the request
 
-2. **Direct File Access**: `http://familyapp/pages/EN/auth/login.php`
+2. **Direct File Access**: `http://familyapp/pages/en/auth/login.php`
    - Apache serves the PHP file directly
    - No router involvement for `.php` files
 
-3. **HTML Pages**: `http://familyapp/pages/EN/dashboard.html`
+3. **HTML Pages**: `http://familyapp/pages/en/dashboard.html`
    - Need to be accessed as PHP or create a custom 404 handler
    - **Recommended**: Rename `.html` files to `.php` for direct access
 
@@ -107,8 +107,8 @@ Should set language and show landing page
 
 ### 3. Test PHP Files Directly
 ```
-http://familyapp/pages/EN/auth/login.php
-http://familyapp/pages/MY/auth/login.php
+http://familyapp/pages/en/auth/login.php
+http://familyapp/pages/my/auth/login.php
 ```
 Should show login page directly
 
@@ -141,12 +141,12 @@ Should return CSS file
 4. Router detects user state and shows appropriate page
 
 ### For .php files
-1. Browser requests `http://familyapp/pages/EN/auth/login.php`
+1. Browser requests `http://familyapp/pages/en/auth/login.php`
 2. Apache serves the PHP file directly
 3. No router involvement
 
 ### For .html files (Current Limitation)
-1. Browser requests `http://familyapp/pages/EN/dashboard.html`
+1. Browser requests `http://familyapp/pages/en/dashboard.html`
 2. Apache serves the HTML file directly (if it exists)
 3. No authentication check!
 
@@ -156,7 +156,7 @@ Should return CSS file
 
 Instead of:
 ```html
-<a href="/pages/EN/dashboard.html">Dashboard</a>
+<a href="/pages/en/dashboard.html">Dashboard</a>
 ```
 
 Use:
@@ -167,7 +167,7 @@ Use:
 And let the router handle it, OR rename files:
 ```bash
 # Rename .html to .php if they need authentication
-mv pages/EN/dashboard.html pages/EN/dashboard.php
+mv pages/en/dashboard.html pages/en/dashboard.php
 ```
 
 ## If You Need Clean URLs (Optional)
@@ -180,7 +180,7 @@ FallbackResource /index.php
 Then router will handle ALL 404s, including:
 - `http://familyapp/dashboard` → Router
 - `http://familyapp/login` → Router  
-- `http://familyapp/pages/EN/dashboard.html` → Router
+- `http://familyapp/pages/en/dashboard.html` → Router
 
 But this requires updating router logic to handle these patterns.
 
@@ -200,7 +200,7 @@ But this requires updating router logic to handle these patterns.
 
 1. Test `http://familyapp/` - should show landing page
 2. Test language switching
-3. Test login at `http://familyapp/pages/EN/auth/login.php`
+3. Test login at `http://familyapp/pages/en/auth/login.php`
 4. Decide if you want to:
    - Keep .html files and update router
    - Rename .html to .php

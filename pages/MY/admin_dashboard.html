@@ -100,7 +100,7 @@
       <header class="wizard-head">
         <div style="display:flex; align-items:center; gap:12px; justify-content:space-between;">
           <div class="tagline"><span id="signedInAs">Log masuk sebagai:</span> <strong id="sessionEmail">...</strong></div>
-          <a class="link" href="/pages/MY/auth/logout.php">❌</a>
+          <a class="link" href="/pages/my/auth/logout.php">❌</a>
         </div>
   <h1 id="readyTitle">Semua selesai 🎉</h1>
   <p class="tagline" id="summaryTag">Ringkasan pantas keluarga anda setakat ini.</p>
@@ -146,12 +146,12 @@
         </div>
 
         <div class="actions">
-          <a class="btn btn-primary" href="/pages/MY/tree.html">🌳 <span class="label" id="actExpand">Kembangkan pokok</span></a>
-          <a class="btn btn-primary" href="/pages/MY/edit_tree.html">✏️ <span class="label" id="actEdit">Edit Butiran</span></a>
-          <a class="btn btn-primary" href="/pages/MY/view_tree.html">👁️ <span class="label" id="actView">Lihat Pokok</span></a>
-          <a class="btn btn-primary" href="/pages/MY/chat_invites.html">👥 <span class="label" id="actInvite">Jemput</span></a>
-          <a class="btn btn-primary" href="/pages/MY/profile_persons.html">📁 <span class="label" id="actProfile">Profil</span></a>
-          <a class="btn btn-primary" href="/pages/MY/chat_wizard_token_family.html">🔑 <span class="label" id="actToken">Token Keluarga</span></a>
+          <a class="btn btn-primary" href="/pages/my/tree.html">🌳 <span class="label" id="actExpand">Kembangkan pokok</span></a>
+          <a class="btn btn-primary" href="/pages/my/edit_tree.html">✏️ <span class="label" id="actEdit">Edit Butiran</span></a>
+          <a class="btn btn-primary" href="/pages/my/view_tree.html">👁️ <span class="label" id="actView">Lihat Pokok</span></a>
+          <a class="btn btn-primary" href="/pages/my/chat_invites.html">👥 <span class="label" id="actInvite">Jemput</span></a>
+          <a class="btn btn-primary" href="/pages/my/profile_persons.html">📁 <span class="label" id="actProfile">Profil</span></a>
+          <a class="btn btn-primary" href="/pages/my/chat_wizard_token_family.html">🔑 <span class="label" id="actToken">Token Keluarga</span></a>
           
         </div>
       </section>
@@ -164,13 +164,13 @@
   fetch('/api/session_info.php').then(r => r.json()).then(u => {
       // Gate access: redirect non-admins to regular dashboard
       if (!u || !u.ok || !u.user || !u.user.is_admin) {
-  window.location.href = '/pages/MY/dashboard.html';
+  window.location.href = '/pages/my/dashboard.html';
         return;
       }
       const el = document.getElementById('sessionEmail');
       if (el) el.textContent = (u && u.ok && u.user && u.user.email) || '—';
     }).catch(() => {
-  window.location.href = '/pages/MY/auth/login.html';
+  window.location.href = '/pages/my/auth/login.html';
     });
 
     async function loadReceivedInvites() {

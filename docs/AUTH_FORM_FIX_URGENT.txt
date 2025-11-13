@@ -32,10 +32,10 @@ Updated all auth forms to use correct language-specific paths:
 
 ```html
 <!-- CORRECT - works -->
-<form action="/pages/EN/auth/login.php" method="post">
-<form action="/pages/MY/auth/login.php" method="post">
-<form action="/pages/EN/auth/register.php" method="post">
-<form action="/pages/MY/auth/register.php" method="post">
+<form action="/pages/en/auth/login.php" method="post">
+<form action="/pages/my/auth/login.php" method="post">
+<form action="/pages/en/auth/register.php" method="post">
+<form action="/pages/my/auth/register.php" method="post">
 ```
 
 ---
@@ -43,14 +43,14 @@ Updated all auth forms to use correct language-specific paths:
 ## 📁 FILES FIXED
 
 ### English Auth Forms (4 files)
-- ✅ `pages/EN/auth/login.html` - Line 18: `/auth/login.php` → `/pages/EN/auth/login.php`
-- ✅ `pages/EN/auth/register.html` - Line 18: `/auth/register.php` → `/pages/EN/auth/register.php`
-- ✅ `pages/EN/auth/tok_register.html` - Line 18: `/auth/register.php` → `/pages/EN/auth/register.php`
+- ✅ `pages/en/auth/login.html` - Line 18: `/auth/login.php` → `/pages/en/auth/login.php`
+- ✅ `pages/en/auth/register.html` - Line 18: `/auth/register.php` → `/pages/en/auth/register.php`
+- ✅ `pages/en/auth/tok_register.html` - Line 18: `/auth/register.php` → `/pages/en/auth/register.php`
 
 ### Malay Auth Forms (4 files)
-- ✅ `pages/MY/auth/login.html` - Line 18: `/auth/login.php` → `/pages/MY/auth/login.php`
-- ✅ `pages/MY/auth/register.html` - Line 18: `/auth/register.php` → `/pages/MY/auth/register.php`
-- ✅ `pages/MY/auth/tok_register.html` - Line 18: `/auth/register.php` → `/pages/MY/auth/register.php`
+- ✅ `pages/my/auth/login.html` - Line 18: `/auth/login.php` → `/pages/my/auth/login.php`
+- ✅ `pages/my/auth/register.html` - Line 18: `/auth/register.php` → `/pages/my/auth/register.php`
+- ✅ `pages/my/auth/tok_register.html` - Line 18: `/auth/register.php` → `/pages/my/auth/register.php`
 
 **Total**: 6 files updated
 
@@ -75,15 +75,15 @@ grep -r 'action="/auth/' pages/
 ## 🧪 TEST NOW
 
 1. **Clear browser cache** (important!)
-2. Visit `http://familyapp/login` or `http://familyapp/pages/EN/auth/login.html`
+2. Visit `http://familyapp/login` or `http://familyapp/pages/en/auth/login.html`
 3. Enter credentials and submit
-4. **Expected**: Form submits successfully to `/pages/EN/auth/login.php`
+4. **Expected**: Form submits successfully to `/pages/en/auth/login.php`
 5. **Expected**: No 404 error
 
 ### DevTools Check
 ```
 Before: POST /auth/login.php → 404 Not Found ❌
-After:  POST /pages/EN/auth/login.php → 200 OK or redirect ✅
+After:  POST /pages/en/auth/login.php → 200 OK or redirect ✅
 ```
 
 ---
@@ -108,7 +108,7 @@ if (strpos($this->requestUri, '/auth/') === 0) {
 
 ### The Fix
 Forms must POST directly to the correct path:
-- ✅ `/pages/EN/auth/login.php` - Physical file exists
+- ✅ `/pages/en/auth/login.php` - Physical file exists
 - ❌ `/auth/login.php` - No physical file, redirect doesn't work
 
 ---
@@ -119,7 +119,7 @@ Forms must POST directly to the correct path:
 
 ```html
 <!-- Good - explicit path -->
-<form action="/pages/EN/auth/login.php" method="post">
+<form action="/pages/en/auth/login.php" method="post">
 
 <!-- Bad - relies on redirect (breaks for POST) -->
 <form action="/auth/login.php" method="post">

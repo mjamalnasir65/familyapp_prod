@@ -13,7 +13,7 @@
     <h2>Accept invitation</h2>
     <p id="msg">Processing…</p>
     <div id="actions" style="margin-top:16px; display:none; gap:12px; flex-wrap:wrap;">
-      <a id="goLogin" class="btn btn-primary" href="/pages/EN/auth/login.html">Sign in to accept</a>
+      <a id="goLogin" class="btn btn-primary" href="/pages/en/auth/login.html">Sign in to accept</a>
       
     </div>
   </div>
@@ -37,7 +37,7 @@
           const acts = document.getElementById('actions');
           acts.style.display = 'flex';
           const loginLink = document.getElementById('goLogin');
-          loginLink.href = '/pages/EN/auth/login.html?invite_token=' + encodeURIComponent(token);
+          loginLink.href = '/pages/en/auth/login.html?invite_token=' + encodeURIComponent(token);
           return;
         }
         if (!j.ok) {
@@ -49,7 +49,7 @@
         acts.style.display = 'flex';
         document.getElementById('goTree').classList.add('btn-primary');
         setTimeout(() => {
-          location.href = '/pages/EN/tree.html';
+          location.href = '/pages/en/tree.html';
         }, 1200);
       } catch (_) {
         msg.textContent = T('server_error_dot', 'Server error.');

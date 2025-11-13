@@ -56,8 +56,8 @@
         <div style="display:flex; align-items:center; gap:12px; justify-content:space-between;">
           <div class="tagline">Log masuk sebagai: <strong id="sessionEmail">...</strong></div>
           <nav style="display:flex; gap:10px;">
-            <a class="link" href="/pages/MY/dashboard.html">↩️</a>
-            <a class="link" href="/pages/MY/auth/logout.php">❌</a>
+            <a class="link" href="/pages/my/dashboard.html">↩️</a>
+            <a class="link" href="/pages/my/auth/logout.php">❌</a>
           </nav>
         </div>
   <h1>Pokok Keluarga Anda 🌲</h1>
@@ -71,7 +71,7 @@
         </div>
         <div id="treeCanvas"></div>
         <div class="actions" style="margin-top:16px; display:flex; gap:10px;">
-          <a class="btn btn-ghost" href="/pages/MY/dashboard.html">Kembali ke papan pemuka</a>
+          <a class="btn btn-ghost" href="/pages/my/dashboard.html">Kembali ke papan pemuka</a>
           
         </div>
       </section>
@@ -282,7 +282,7 @@
 
     function onNodeClick(person){
       if (!person || !person.id) return;
-  window.location.href = `/pages/MY/chat_expand.html?pid=${encodeURIComponent(person.id)}`;
+  window.location.href = `/pages/my/chat_expand.html?pid=${encodeURIComponent(person.id)}`;
     }
   </script>
 </body>

@@ -67,7 +67,7 @@ try {
                 $_SESSION['user_email'] = $emailLower;
                 $_SESSION['user_name'] = $fullName;
                 $_SESSION['families_id'] = $familiesId;
-                header('Location: /pages/MY/dashboard.html');
+                header('Location: /pages/my/dashboard.html');
                 exit;
             } catch (Throwable $ce) {
                 if ($pdo->inTransaction()) { $pdo->rollBack(); }
@@ -94,7 +94,7 @@ try {
 
     // Admin short-circuit: send admins to Admin Dashboard
     if (!empty($user['pwa_admin'])) {
-    header('Location: /pages/MY/admin_dashboard.html');
+    header('Location: /pages/my/admin_dashboard.html');
         exit;
     }
 
@@ -128,7 +128,7 @@ try {
                     $pdo->commit();
                     // Cache family in session and go to dashboard
                     $_SESSION['families_id'] = $familiesId;
-                    header('Location: /pages/MY/dashboard.html');
+                    header('Location: /pages/my/dashboard.html');
                     exit;
                 } catch (Throwable $ie) {
                     if ($pdo->inTransaction()) { $pdo->rollBack(); }
@@ -147,13 +147,13 @@ try {
     }
 
     if (($status['redirect_to'] ?? 'wizard') === 'dashboard') {
-    header('Location: /pages/MY/dashboard.html');
+    header('Location: /pages/my/dashboard.html');
         exit;
     }
 
     $next = (int)($status['next_step'] ?? 1);
     // Route to chat-based wizard (replacing classic UI). Preserve server-calculated next step.
-    header('Location: /pages/MY/chat_wizard.html?step=' . max(1, min(6, $next)));
+    header('Location: /pages/my/chat_wizard.html?step=' . max(1, min(6, $next)));
     exit;
 } catch (Throwable $e) {
     header('Location: /auth/login.html?error=server');

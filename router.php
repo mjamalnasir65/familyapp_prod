@@ -307,7 +307,7 @@ class SmartRouter {
     
     /**
      * Handle logout - destroy all sessions and redirect to landing page
-     * Can be called from /logout, /pages/EN/auth/logout.php, or /pages/MY/auth/logout.php
+     * Can be called from /logout, /pages/en/auth/logout.php, or /pages/my/auth/logout.php
      */
     private function handleLogout() {
         // Start session if not started (to destroy it)

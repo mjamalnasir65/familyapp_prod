@@ -116,7 +116,7 @@
 
     if (collected.length === 0){
   const nav = await ask('Tiada anak ditambah. Kembali ke pokok?', { choices:[ {label:'Pergi ke pokok', value:'tree'}, {label:'Kekal di sini', value:'stay'} ] });
-  if (nav==='tree') location.href = '/pages/EN/tree.html';
+  if (nav==='tree') location.href = '/pages/en/tree.html';
       return;
     }
 
@@ -126,7 +126,7 @@
       const j = await res.json();
   if (!j || !j.ok){ pushBot('<span class="muted" style="color:#b33;">Simpan gagal.</span>'); return; }
   pushBot('Disimpan. Kembali ke pokok…');
-  setTimeout(()=>{ location.href = '/pages/EN/tree.html'; }, 900);
+  setTimeout(()=>{ location.href = '/pages/en/tree.html'; }, 900);
   } catch(_){ pushBot('<span class="muted" style="color:#b33;">Ralat simpan.</span>'); }
   }
 

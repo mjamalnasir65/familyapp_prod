@@ -87,8 +87,8 @@
         let coId = 0;
         if (existing.length === 1 && existing[0] && existing[0].partner_id) coId = Number(existing[0].partner_id)||0;
         const url = coId
-          ? `/pages/EN/chatExpand_children.html?pid=${encodeURIComponent(pid)}&co=${encodeURIComponent(coId)}`
-          : `/pages/EN/chatExpand_children.html?pid=${encodeURIComponent(pid)}`;
+          ? `/pages/en/chatExpand_children.html?pid=${encodeURIComponent(pid)}&co=${encodeURIComponent(coId)}`
+          : `/pages/en/chatExpand_children.html?pid=${encodeURIComponent(pid)}`;
         location.href = url;
       }
       return;
@@ -122,8 +122,8 @@
         sessionStorage.setItem('prefill_children', JSON.stringify(obj));
       } catch(_){}
       const url = coId
-  ? `/pages/EN/chatExpand_children.html?pid=${encodeURIComponent(pid)}&co=${encodeURIComponent(coId)}`
-  : `/pages/EN/chatExpand_children.html?pid=${encodeURIComponent(pid)}`;
+  ? `/pages/en/chatExpand_children.html?pid=${encodeURIComponent(pid)}&co=${encodeURIComponent(coId)}`
+  : `/pages/en/chatExpand_children.html?pid=${encodeURIComponent(pid)}`;
       setTimeout(()=>{ location.href = url; }, 900);
     } catch(_){ pushBot(`<span class="muted" style="color:#b33;">Save error.</span>`); }
   }

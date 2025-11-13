@@ -24,7 +24,7 @@ Added `handleFriendlyUrl()` method to SmartRouter that:
 
 1. **Extracts clean path** from request URI (e.g., "dashboard" from "/dashboard")
 2. **Checks friendly URL map** for matching pattern
-3. **Redirects to full language-specific path** (e.g., "/pages/EN/dashboard.html")
+3. **Redirects to full language-specific path** (e.g., "/pages/en/dashboard.html")
 4. **Preserves query strings** during redirection
 5. **Respects user language preference** (EN/MY)
 
@@ -103,7 +103,7 @@ The router now processes URLs in this priority order:
 1. ✅ Root/Landing (`/`, `/index.php`, `/index.html`)
 2. ✅ API endpoints (`/api/*`) - pass through
 3. ✅ Old auth paths (`/auth/*`) - redirect to language-specific
-4. ✅ Language-specific pages (`/pages/EN/*`, `/pages/MY/*`)
+4. ✅ Language-specific pages (`/pages/en/*`, `/pages/my/*`)
 5. ✅ Assets (`/assets/*`, `/uploads/*`) - pass through
 6. ✅ Static files (`.css`, `.js`, `.jpg`, etc.) - pass through
 7. ✅ **NEW: Friendly URLs** (`/dashboard`, `/login`, etc.)
@@ -135,22 +135,22 @@ SUCCESS: router.php appears syntactically correct!
 ### Test 1: Dashboard URL
 1. Start WAMP server
 2. Visit: `http://familyapp/dashboard`
-3. **Expected**: Redirect to `http://familyapp/pages/EN/dashboard.html` (or MY based on language)
+3. **Expected**: Redirect to `http://familyapp/pages/en/dashboard.html` (or MY based on language)
 4. **Expected**: Page loads (if logged in) OR redirects to login (if not logged in)
 
 ### Test 2: Login URL
 1. Visit: `http://familyapp/login`
-2. **Expected**: Redirect to `http://familyapp/pages/EN/auth/login.php`
+2. **Expected**: Redirect to `http://familyapp/pages/en/auth/login.php`
 3. **Expected**: Login form displays
 
 ### Test 3: Query String Preservation
 1. Visit: `http://familyapp/dashboard?tab=recent&filter=active`
-2. **Expected**: Redirect to `http://familyapp/pages/EN/dashboard.html?tab=recent&filter=active`
+2. **Expected**: Redirect to `http://familyapp/pages/en/dashboard.html?tab=recent&filter=active`
 3. **Expected**: Query parameters preserved
 
 ### Test 4: Language Switching
 1. Visit: `http://familyapp/dashboard?lang=MY`
-2. **Expected**: Redirect to `http://familyapp/pages/MY/dashboard.html?lang=MY`
+2. **Expected**: Redirect to `http://familyapp/pages/my/dashboard.html?lang=MY`
 3. **Expected**: Malaysian language version loads
 
 ### Test 5: Non-Existent Friendly URL
@@ -166,9 +166,9 @@ SUCCESS: router.php appears syntactically correct!
 ```
 Request:  GET http://familyapp/dashboard
 Response: HTTP/1.1 302 Found
-Header:   Location: /pages/EN/dashboard.html
+Header:   Location: /pages/en/dashboard.html
 
-Request:  GET http://familyapp/pages/EN/dashboard.html
+Request:  GET http://familyapp/pages/en/dashboard.html
 Response: HTTP/1.1 200 OK (or 302 if not logged in)
 ```
 
@@ -213,8 +213,8 @@ private function handleFriendlyUrl() {
 ```
 
 ### Step 2: Create Target Pages
-- Create `pages/EN/help.html`
-- Create `pages/MY/help.html`
+- Create `pages/en/help.html`
+- Create `pages/my/help.html`
 
 ### Step 3: Use in Your HTML
 ```html

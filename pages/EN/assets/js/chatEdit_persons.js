@@ -169,7 +169,7 @@
     const keys = Object.keys(updates).filter(k=>k!=='id');
     if (keys.length === 0){
       const nav = await ask('No changes made. Go back to edit tree?', { choices:[{label:'Yes', value:'yes'},{label:'Stay', value:'stay'}] });
-  if (nav==='yes'){ location.href = '/pages/EN/edit_tree.html'; }
+  if (nav==='yes'){ location.href = '/pages/en/edit_tree.html'; }
       return;
     }
 
@@ -179,7 +179,7 @@
       const j = await res.json();
       if (!j || !j.ok){ bot('<span class="muted" style="color:#b33;">Save failed.</span>'); return; }
       bot('Saved. Returning to edit tree…');
-  setTimeout(()=>{ location.href = '/pages/EN/edit_tree.html'; }, 900);
+  setTimeout(()=>{ location.href = '/pages/en/edit_tree.html'; }, 900);
     } catch(_){ bot('<span class="muted" style="color:#b33;">Save error.</span>'); }
   }
 

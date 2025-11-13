@@ -20,39 +20,39 @@
 
 ### Landing & Info Pages
 ```
-/                                    → pages/EN/index.html (landing page)
-/index.html                          → pages/EN/index.html
-/pages/EN/index.html                 → Landing page (EN)
-/pages/MY/index.html                 → Landing page (MY)
-/pages/EN/public.html                → Public info page
-/pages/EN/about.html                 → About NASAB
-/pages/EN/terms.html                 → Terms of Service
-/pages/EN/offline.html               → Offline page (PWA)
-/pages/EN/404.html                   → 404 error page
+/                                    → pages/en/index.html (landing page)
+/index.html                          → pages/en/index.html
+/pages/en/index.html                 → Landing page (EN)
+/pages/my/index.html                 → Landing page (MY)
+/pages/en/public.html                → Public info page
+/pages/en/about.html                 → About NASAB
+/pages/en/terms.html                 → Terms of Service
+/pages/en/offline.html               → Offline page (PWA)
+/pages/en/404.html                   → 404 error page
 ```
 
 ### Authentication Pages
 ```
-/login                               → /pages/EN/auth/login.html (friendly)
-/register                            → /pages/EN/auth/register.html (friendly)
-/tok_register                        → /pages/EN/auth/tok_register.html (friendly)
-/logout                              → /pages/EN/auth/logout.php (friendly)
+/login                               → /pages/en/auth/login.html (friendly)
+/register                            → /pages/en/auth/register.html (friendly)
+/tok_register                        → /pages/en/auth/tok_register.html (friendly)
+/logout                              → /pages/en/auth/logout.php (friendly)
 
-/pages/EN/auth/login.html            → Login form page
-/pages/EN/auth/login.php             → Login form handler
-/pages/EN/auth/register.html         → Registration form page
-/pages/EN/auth/register.php          → Registration form handler (POST)
-/pages/EN/auth/tok_register.html     → Token registration page
-/pages/EN/auth/tok_register.php      → Token registration handler (POST)
-/pages/EN/auth/logout.php            → Logout handler (destroys session)
+/pages/en/auth/login.html            → Login form page
+/pages/en/auth/login.php             → Login form handler
+/pages/en/auth/register.html         → Registration form page
+/pages/en/auth/register.php          → Registration form handler (POST)
+/pages/en/auth/tok_register.html     → Token registration page
+/pages/en/auth/tok_register.php      → Token registration handler (POST)
+/pages/en/auth/logout.php            → Logout handler (destroys session)
 
-/pages/MY/auth/login.html            → Login page (MY)
-/pages/MY/auth/login.php             → Login handler (MY)
-/pages/MY/auth/register.html         → Registration page (MY)
-/pages/MY/auth/register.php          → Registration handler (MY)
-/pages/MY/auth/tok_register.html     → Token registration (MY)
-/pages/MY/auth/tok_register.php      → Token registration handler (MY)
-/pages/MY/auth/logout.php            → Logout (MY)
+/pages/my/auth/login.html            → Login page (MY)
+/pages/my/auth/login.php             → Login handler (MY)
+/pages/my/auth/register.html         → Registration page (MY)
+/pages/my/auth/register.php          → Registration handler (MY)
+/pages/my/auth/tok_register.html     → Token registration (MY)
+/pages/my/auth/tok_register.php      → Token registration handler (MY)
+/pages/my/auth/logout.php            → Logout (MY)
 ```
 
 ---
@@ -61,82 +61,82 @@
 
 ### Dashboard & Main Hub
 ```
-/dashboard                           → /pages/EN/dashboard.html (friendly)
-/pages/EN/dashboard.html             → Main dashboard
-/pages/EN/dashboard.php              → Dashboard PHP version (if exists)
-/pages/MY/dashboard.html             → Dashboard (MY)
+/dashboard                           → /pages/en/dashboard.html (friendly)
+/pages/en/dashboard.html             → Main dashboard
+/pages/en/dashboard.php              → Dashboard PHP version (if exists)
+/pages/my/dashboard.html             → Dashboard (MY)
 ```
 
 ### Wizard Pages (Onboarding)
 ```
-/wizard                              → /pages/EN/chat_wizard.html (friendly)
-/chat_wizard                         → /pages/EN/chat_wizard.html (friendly)
-/token_wizard                        → /pages/EN/chat_token_wizard.html (friendly)
-/chat_token_wizard                   → /pages/EN/chat_token_wizard.html (friendly)
-/family_token_wizard                 → /pages/EN/chat_wizard_token_family.html (friendly)
+/wizard                              → /pages/en/chat_wizard.html (friendly)
+/chat_wizard                         → /pages/en/chat_wizard.html (friendly)
+/token_wizard                        → /pages/en/chat_token_wizard.html (friendly)
+/chat_token_wizard                   → /pages/en/chat_token_wizard.html (friendly)
+/family_token_wizard                 → /pages/en/chat_wizard_token_family.html (friendly)
 
-/pages/EN/chat_wizard.html           → Full 6-step wizard (conversational)
-/pages/EN/chat_token_wizard.html     → Token-based wizard
-/pages/EN/chat_wizard_token_family.html → Family token wizard
+/pages/en/chat_wizard.html           → Full 6-step wizard (conversational)
+/pages/en/chat_token_wizard.html     → Token-based wizard
+/pages/en/chat_wizard_token_family.html → Family token wizard
 
-/pages/MY/chat_wizard.html           → Wizard (MY)
-/pages/MY/chat_token_wizard.html     → Token wizard (MY)
-/pages/MY/chat_wizard_token_family.html → Family token wizard (MY)
+/pages/my/chat_wizard.html           → Wizard (MY)
+/pages/my/chat_token_wizard.html     → Token wizard (MY)
+/pages/my/chat_wizard_token_family.html → Family token wizard (MY)
 ```
 
 ### Family Tree Views
 ```
-/tree                                → /pages/EN/tree.html (friendly)
-/pages/EN/tree.html                  → Visual family tree (D3.js)
-/pages/EN/view_tree.html             → Alternative tree view
-/pages/EN/edit_tree.html             → Edit tree view
-/pages/EN/test_tree.html             → Test tree view
-/pages/EN/pd_tree.html               → Pending decisions tree view
+/tree                                → /pages/en/tree.html (friendly)
+/pages/en/tree.html                  → Visual family tree (D3.js)
+/pages/en/view_tree.html             → Alternative tree view
+/pages/en/edit_tree.html             → Edit tree view
+/pages/en/test_tree.html             → Test tree view
+/pages/en/pd_tree.html               → Pending decisions tree view
 
-/pages/MY/tree.html                  → Tree view (MY)
-/pages/MY/view_tree.html             → Tree view (MY)
-/pages/MY/edit_tree.html             → Edit tree (MY)
+/pages/my/tree.html                  → Tree view (MY)
+/pages/my/view_tree.html             → Tree view (MY)
+/pages/my/edit_tree.html             → Edit tree (MY)
 ```
 
 ### Person Management
 ```
-/pages/EN/chatEdit_persons.html      → Add/edit person (chat interface)
-/pages/EN/profile_persons.html       → Person profile view
-/pages/EN/chat_expand.html           → Expand person (add relatives)
-/pages/EN/chatExpand_children.html   → Expand: add children
-/pages/EN/chatExpand_partners.html   → Expand: add partners
-/pages/EN/chatExpand_siblings.html   → Expand: add siblings
+/pages/en/chatEdit_persons.html      → Add/edit person (chat interface)
+/pages/en/profile_persons.html       → Person profile view
+/pages/en/chat_expand.html           → Expand person (add relatives)
+/pages/en/chatExpand_children.html   → Expand: add children
+/pages/en/chatExpand_partners.html   → Expand: add partners
+/pages/en/chatExpand_siblings.html   → Expand: add siblings
 
-/pages/MY/chatEdit_persons.html      → Edit persons (MY)
-/pages/MY/chat_expand.html           → Expand person (MY)
+/pages/my/chatEdit_persons.html      → Edit persons (MY)
+/pages/my/chat_expand.html           → Expand person (MY)
 ```
 
 ### Invitations
 ```
-/invites                             → /pages/EN/invites.html (friendly)
-/pages/EN/invites.html               → Invitations management (send/receive)
-/pages/EN/chat_invites.html          → Invitations chat interface
-/pages/EN/accept_invite.html         → Accept invitation page
+/invites                             → /pages/en/invites.html (friendly)
+/pages/en/invites.html               → Invitations management (send/receive)
+/pages/en/chat_invites.html          → Invitations chat interface
+/pages/en/accept_invite.html         → Accept invitation page
 
-/pages/MY/invites.html               → Invitations (MY)
-/pages/MY/accept_invite.html         → Accept invite (MY)
+/pages/my/invites.html               → Invitations (MY)
+/pages/my/accept_invite.html         → Accept invite (MY)
 ```
 
 ### Pending Decisions (Duplicates)
 ```
-/pages/EN/pd_view.html               → Pending decisions view
-/pages/EN/pd_tree.html               → Pending decisions tree view
+/pages/en/pd_view.html               → Pending decisions view
+/pages/en/pd_tree.html               → Pending decisions tree view
 
-/pages/MY/pd_view.html               → Pending decisions (MY)
+/pages/my/pd_view.html               → Pending decisions (MY)
 ```
 
 ### Profile & Settings
 ```
-/profile                             → /pages/EN/profile.html (friendly)
-/settings                            → /pages/EN/settings.html (friendly)
+/profile                             → /pages/en/profile.html (friendly)
+/settings                            → /pages/en/settings.html (friendly)
 
-/pages/EN/profile.html               → User profile (if exists)
-/pages/EN/settings.html              → Settings page (if exists)
+/pages/en/profile.html               → User profile (if exists)
+/pages/en/settings.html              → Settings page (if exists)
 ```
 
 ---
@@ -144,14 +144,14 @@
 ## 👑 ADMIN PAGES (Admin Flag Required)
 
 ```
-/admin_dashboard                     → /pages/EN/admin_dashboard.html (friendly)
-/admin_pending_people                → /pages/EN/admin_pending_people.html (friendly)
+/admin_dashboard                     → /pages/en/admin_dashboard.html (friendly)
+/admin_pending_people                → /pages/en/admin_pending_people.html (friendly)
 
-/pages/EN/admin_dashboard.html       → Admin dashboard
-/pages/EN/admin_pending_people.html  → Admin: manage pending people
+/pages/en/admin_dashboard.html       → Admin dashboard
+/pages/en/admin_pending_people.html  → Admin: manage pending people
 
-/pages/MY/admin_dashboard.html       → Admin dashboard (MY)
-/pages/MY/admin_pending_people.html  → Admin pending people (MY)
+/pages/my/admin_dashboard.html       → Admin dashboard (MY)
+/pages/my/admin_pending_people.html  → Admin pending people (MY)
 ```
 
 ---
@@ -278,14 +278,14 @@ POST /api/nested_family_create.php   → Create nested/sub-family
 
 ### JavaScript - English (EN)
 ```
-/assets/js/EN/chatWizard.js          → Chat wizard logic (EN)
-/assets/js/EN/chatTokenWizard.js     → Token wizard logic (EN)
+/assets/js/en/chatWizard.js          → Chat wizard logic (EN)
+/assets/js/en/chatTokenWizard.js     → Token wizard logic (EN)
 ```
 
 ### JavaScript - Malaysian (MY)
 ```
-/assets/js/MY/chatWizard.js          → Chat wizard logic (MY)
-/assets/js/MY/chatTokenWizard.js     → Token wizard logic (MY)
+/assets/js/my/chatWizard.js          → Chat wizard logic (MY)
+/assets/js/my/chatTokenWizard.js     → Token wizard logic (MY)
 ```
 
 ### Images & Icons
@@ -429,25 +429,25 @@ POST /api/nested_family_create.php
 
 ### Query String Parameters
 ```
-/pages/EN/auth/register.html?error={error_code}
+/pages/en/auth/register.html?error={error_code}
   - error=missing, invalid_email, mismatch, weak, exists, server
 
-/pages/EN/auth/register.html?family_token={token}
+/pages/en/auth/register.html?family_token={token}
   - Prefill family token for registration
 
-/pages/EN/auth/tok_register.html?invite_token={token}
+/pages/en/auth/tok_register.html?invite_token={token}
   - Token-based registration
 
-/pages/EN/chat_wizard.html?step={step_number}
+/pages/en/chat_wizard.html?step={step_number}
   - Resume wizard at specific step (1-6)
 
-/pages/EN/chat_token_wizard.html?family_token={token}
+/pages/en/chat_token_wizard.html?family_token={token}
   - Token wizard with prefilled token
 
-/pages/EN/accept_invite.html?token={invite_token}
+/pages/en/accept_invite.html?token={invite_token}
   - Direct invitation accept link
 
-/pages/EN/dashboard.html?tab={tab_name}
+/pages/en/dashboard.html?tab={tab_name}
   - Dashboard tab selection
 
 /api/children_by_parents.php?p1={person_id}&p2={person_id}
@@ -507,7 +507,7 @@ POST /api/wizard_complete_step6.php  → Finish
 GET /api/family_summary.php          → Get stats
 /tree                                → View tree
 GET /api/family_tree.php             → Get tree data
-/pages/EN/chatEdit_persons.html      → Add person
+/pages/en/chatEdit_persons.html      → Add person
 POST /api/person_update.php          → Save person
 /chat_expand.html                    → Expand person
 /invites                             → Manage invites
@@ -534,7 +534,7 @@ GET /api/action_logs_list.php        → View activity
 ## 🧪 TEST & DEBUG PATHS
 
 ```
-/pages/EN/test_tree.html             → Test tree visualization
+/pages/en/test_tree.html             → Test tree visualization
 GET /api/test_family_tree.php        → Test tree data endpoint
 ```
 

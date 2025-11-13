@@ -242,7 +242,7 @@
     const has = await ask('Do you have children?', ['yes','no']);
     if (!(has||'').toLowerCase().startsWith('y')){
   await fetch('/api/wizard_complete_step6.php', { method:'POST' });
-  addMsg('🎉 Wizard complete! Redirecting to dashboard…'); await sleep(800); window.location.href='/pages/EN/dashboard.html'; return;
+  addMsg('🎉 Wizard complete! Redirecting to dashboard…'); await sleep(800); window.location.href='/pages/en/dashboard.html'; return;
     }
 
     let countStr = await ask('How many children? (number)');
@@ -266,7 +266,7 @@
     const j = await r.json().catch(()=>({ok:false}));
     if (!j.ok){ addMsg('Unable to save children right now. Try again.'); return; }
     state.children = children; saveState();
-  addMsg('🎉 Wizard complete! Redirecting to dashboard…'); await sleep(800); window.location.href='/pages/EN/dashboard.html';
+  addMsg('🎉 Wizard complete! Redirecting to dashboard…'); await sleep(800); window.location.href='/pages/en/dashboard.html';
   }
 
   // Start the conversation

@@ -156,7 +156,7 @@
 
     addMsg('✅ Parents saved. Moving to siblings…', 'bot');
     // Fix: case-sensitive path on production (S in Siblings)
-    setTimeout(()=>{ window.location.href=`/pages/EN/chatExpand_siblings.html?pid=${encodeURIComponent(pid)}`; }, 700);
+    setTimeout(()=>{ window.location.href=`/pages/en/chatExpand_siblings.html?pid=${encodeURIComponent(pid)}`; }, 700);
   }
 
   window.addEventListener('load', main);

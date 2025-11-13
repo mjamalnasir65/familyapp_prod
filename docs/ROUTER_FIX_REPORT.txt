@@ -116,7 +116,7 @@ Now test in browser:
 2. `http://familyapp/?lang=EN` - English
 3. `http://familyapp/?lang=MY` - Malay
 4. `http://familyapp/test_router.php` - Full test suite
-5. `http://familyapp/pages/EN/dashboard.html` - Should redirect to login
+5. `http://familyapp/pages/en/dashboard.html` - Should redirect to login
 6. `http://familyapp/api/session_info.php` - Should return JSON
 
 ## Configuration for Production

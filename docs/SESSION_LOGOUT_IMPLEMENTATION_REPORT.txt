@@ -18,7 +18,7 @@
 - ✅ Language selection (clicking EN or MY button)
 - ✅ Clicking Login button
 - ✅ Clicking Register button
-- ✅ Any navigation to `/pages/EN/` or `/pages/MY/`
+- ✅ Any navigation to `/pages/en/` or `/pages/my/`
 
 ### 2. ✅ Logout Destroys Everything
 **Complete Session Cleanup**:
@@ -32,8 +32,8 @@
 
 ### 3. ✅ Logout Redirects to Landing
 **Always Returns to Root**:
-- From `/pages/EN/auth/logout.php` → `/index.html`
-- From `/pages/MY/auth/logout.php` → `/index.html`
+- From `/pages/en/auth/logout.php` → `/index.html`
+- From `/pages/my/auth/logout.php` → `/index.html`
 - From friendly URL `/logout` → `/index.html`
 - User falls back to fresh landing page (no session)
 
@@ -220,16 +220,16 @@ if ($targetPage === 'LOGOUT_ACTION') {
 - Modified `handleLandingPage()` to never start session
 - Updated friendly URL map with logout handling
 
-### 2. pages/EN/auth/logout.php
+### 2. pages/en/auth/logout.php
 **Changes**:
-- Changed redirect from `/pages/EN/public.html` to `/index.html`
+- Changed redirect from `/pages/en/public.html` to `/index.html`
 - Clears browser storage (sessionStorage, localStorage)
 - Unregisters service workers
 - Fallback noscript redirect to `/index.html`
 
-### 3. pages/MY/auth/logout.php
+### 3. pages/my/auth/logout.php
 **Changes**:
-- Changed redirect from `/pages/MY/public.html` to `/index.html`
+- Changed redirect from `/pages/my/public.html` to `/index.html`
 - Clears browser storage (sessionStorage, localStorage)
 - Unregisters service workers
 - Fallback noscript redirect to `/index.html`
@@ -260,7 +260,7 @@ if ($targetPage === 'LOGOUT_ACTION') {
 
 ### Login Flow (Session Active)
 ```
-1. User clicks "Login" → /login or /pages/EN/auth/login.php
+1. User clicks "Login" → /login or /pages/en/auth/login.php
 2. Router ensures session started
 3. Login form displayed
 4. After successful login:
@@ -278,7 +278,7 @@ if ($targetPage === 'LOGOUT_ACTION') {
 
 ### Logout Flow (Session Destroyed)
 ```
-1. User clicks "Logout" link → /logout OR /pages/EN/auth/logout.php
+1. User clicks "Logout" link → /logout OR /pages/en/auth/logout.php
 2. Router intercepts request
 3. handleLogout() called:
    a. Session destroyed
@@ -302,19 +302,19 @@ if ($targetPage === 'LOGOUT_ACTION') {
 
 ### 2. Language-Specific (EN)
 ```html
-<a href="/pages/EN/auth/logout.php">Logout</a>
+<a href="/pages/en/auth/logout.php">Logout</a>
 ```
 **Result**: Router handles, destroys session, redirects to `/index.html`
 
 ### 3. Language-Specific (MY)
 ```html
-<a href="/pages/MY/auth/logout.php">Log Keluar</a>
+<a href="/pages/my/auth/logout.php">Log Keluar</a>
 ```
 **Result**: Router handles, destroys session, redirects to `/index.html`
 
 ### 4. Direct Logout Page Access
-**EN**: `http://localhost:8080/pages/EN/auth/logout.php`  
-**MY**: `http://localhost:8080/pages/MY/auth/logout.php`  
+**EN**: `http://localhost:8080/pages/en/auth/logout.php`  
+**MY**: `http://localhost:8080/pages/my/auth/logout.php`  
 **Friendly**: `http://localhost:8080/logout`
 
 **All paths lead to same result**: Complete session destruction + redirect to landing page
@@ -510,8 +510,8 @@ curl -I http://localhost:8080/logout
 ## 📚 REFERENCES
 
 - **router.php** - Main implementation
-- **pages/EN/auth/logout.php** - English logout page
-- **pages/MY/auth/logout.php** - Malay logout page
+- **pages/en/auth/logout.php** - English logout page
+- **pages/my/auth/logout.php** - Malay logout page
 - **COMPLETE_PATHS_LIST.md** - All application paths
 - **ROUTER_VALIDATION_REPORT.md** - Router validation
 

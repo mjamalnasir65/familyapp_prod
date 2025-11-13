@@ -154,8 +154,8 @@ Login
 |---------|---------|---------------|
 | `/` | Landing page | No |
 | `/index.html` | Landing page | No |
-| `/pages/EN/auth/*` | Auth pages | No |
-| `/pages/EN/*` | Protected pages | Yes |
+| `/pages/en/auth/*` | Auth pages | No |
+| `/pages/en/*` | Protected pages | Yes |
 | `/api/*` | Pass-through | Varies |
 | `/assets/*` | Pass-through | No |
 | `/uploads/*` | Pass-through | No |
@@ -318,7 +318,7 @@ cp .htaccess.backup .htaccess
 - Manual redirect logic scattered across files
 
 ### After SmartRouter
-- ✅ Clean URL structure (`/pages/EN/dashboard.html`)
+- ✅ Clean URL structure (`/pages/en/dashboard.html`)
 - ✅ Intelligent user journey routing
 - ✅ Automatic wizard completion tracking
 - ✅ Multi-language with browser detection
@@ -427,7 +427,7 @@ http://localhost/familyapp/test_router.php
 http://localhost/familyapp/
 http://localhost/familyapp/?lang=EN
 http://localhost/familyapp/?lang=MY
-http://localhost/familyapp/pages/EN/dashboard.html
+http://localhost/familyapp/pages/en/dashboard.html
 ```
 
 ### Verify Syntax

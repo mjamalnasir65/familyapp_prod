@@ -156,7 +156,7 @@
 
     addMsg('✅ Ibu bapa disimpan. Teruskan ke adik-beradik…', 'bot');
     // Pembaikan: nama fail huruf besar "S" (chatExpand_siblings.html)
-    setTimeout(()=>{ window.location.href=`/pages/MY/chatExpand_siblings.html?pid=${encodeURIComponent(pid)}`; }, 700);
+    setTimeout(()=>{ window.location.href=`/pages/my/chatExpand_siblings.html?pid=${encodeURIComponent(pid)}`; }, 700);
   }
 
   window.addEventListener('load', main);

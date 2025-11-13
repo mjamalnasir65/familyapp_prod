@@ -51,7 +51,7 @@ try {
     $_SESSION['user_name'] = $full_name;
 
     // Redirect to chat wizard start (replacing classic UI)
-    header('Location: /pages/EN/chat_wizard.html?step=1');
+    header('Location: /pages/en/chat_wizard.html?step=1');
     exit;
 } catch (Throwable $e) {
     header('Location: /auth/register.html?error=server');

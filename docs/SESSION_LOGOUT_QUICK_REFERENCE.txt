@@ -59,10 +59,10 @@ Use any of these in your HTML:
 ### Language-Specific
 ```html
 <!-- English -->
-<a href="/pages/EN/auth/logout.php">Logout</a>
+<a href="/pages/en/auth/logout.php">Logout</a>
 
 <!-- Malay -->
-<a href="/pages/MY/auth/logout.php">Log Keluar</a>
+<a href="/pages/my/auth/logout.php">Log Keluar</a>
 ```
 
 **All paths lead to**: Complete session destruction → `/index.html`
@@ -108,8 +108,8 @@ Use any of these in your HTML:
 ## 📁 FILES CHANGED
 
 - ✅ `router.php` - Session management + logout handler
-- ✅ `pages/EN/auth/logout.php` - Redirect to `/index.html`
-- ✅ `pages/MY/auth/logout.php` - Redirect to `/index.html`
+- ✅ `pages/en/auth/logout.php` - Redirect to `/index.html`
+- ✅ `pages/my/auth/logout.php` - Redirect to `/index.html`
 
 ---
 

@@ -23,9 +23,9 @@ Apache serves:   index.php (no physical /dashboard file exists)
 ↓
 Router checks:   Is "dashboard" in friendly URL map?
 ↓
-Router redirects: /pages/EN/dashboard.html (or MY based on user's language)
+Router redirects: /pages/en/dashboard.html (or MY based on user's language)
 ↓
-Apache serves:   /pages/EN/dashboard.html
+Apache serves:   /pages/en/dashboard.html
 ```
 
 ## Supported Friendly URLs
@@ -70,7 +70,7 @@ All query parameters are preserved during redirection:
 ```
 http://familyapp/dashboard?tab=recent&filter=active
     ↓ redirects to ↓
-http://familyapp/pages/EN/dashboard.html?tab=recent&filter=active
+http://familyapp/pages/en/dashboard.html?tab=recent&filter=active
 ```
 
 ## Language Detection
@@ -111,8 +111,8 @@ private function handleFriendlyUrl() {
 ### Step 2: Create the Target Page
 
 Ensure the target page exists in both language folders:
-- `pages/EN/your-page.html`
-- `pages/MY/your-page.html`
+- `pages/en/your-page.html`
+- `pages/my/your-page.html`
 
 ### Step 3: Update Links in Your Application
 
@@ -120,7 +120,7 @@ You can now use the friendly URL in your HTML:
 
 ```html
 <!-- Instead of: -->
-<a href="/pages/EN/help.html">Help</a>
+<a href="/pages/en/help.html">Help</a>
 
 <!-- Use: -->
 <a href="/help">Help</a>
@@ -133,7 +133,7 @@ The router will automatically redirect to the correct language version.
 ### Test via Browser
 1. Start WAMP server
 2. Visit `http://familyapp/dashboard`
-3. Should redirect to `http://familyapp/pages/EN/dashboard.html` (or MY based on language)
+3. Should redirect to `http://familyapp/pages/en/dashboard.html` (or MY based on language)
 
 ### Test via curl (PowerShell)
 
@@ -143,21 +143,21 @@ curl -I http://familyapp/dashboard
 
 # Should return:
 # HTTP/1.1 302 Found
-# Location: /pages/EN/dashboard.html
+# Location: /pages/en/dashboard.html
 
 # Test with query string
 curl -I "http://familyapp/dashboard?tab=recent"
 
 # Should return:
 # HTTP/1.1 302 Found
-# Location: /pages/EN/dashboard.html?tab=recent
+# Location: /pages/en/dashboard.html?tab=recent
 
 # Test with language parameter
 curl -I "http://familyapp/dashboard?lang=MY"
 
 # Should return:
 # HTTP/1.1 302 Found
-# Location: /pages/MY/dashboard.html?lang=MY
+# Location: /pages/my/dashboard.html?lang=MY
 ```
 
 ### Test Non-Existent Friendly URL
@@ -178,7 +178,7 @@ The router processes URLs in this order:
 1. **Root/Landing** (`/`, `/index.php`, `/index.html`)
 2. **API endpoints** (`/api/*`) - passed through to PHP files
 3. **Old auth paths** (`/auth/*`) - redirected to `/pages/{LANG}/auth/*`
-4. **Language-specific pages** (`/pages/EN/*` or `/pages/MY/*`)
+4. **Language-specific pages** (`/pages/en/*` or `/pages/my/*`)
 5. **Assets** (`/assets/*`, `/uploads/*`) - passed through to Apache
 6. **Static files** (`.css`, `.js`, `.jpg`, etc.) - passed through to Apache
 7. **Friendly URLs** (matches patterns like `/dashboard`, `/login`, etc.)
@@ -195,9 +195,9 @@ If a friendly URL maps to a file that doesn't exist:
 ```
 
 The router will:
-1. Redirect to `/pages/EN/nonexistent.html`
+1. Redirect to `/pages/en/nonexistent.html`
 2. Detect file doesn't exist
-3. Serve 404 page: `/pages/EN/404.html`
+3. Serve 404 page: `/pages/en/404.html`
 
 ### Invalid Friendly URL
 
@@ -217,7 +217,7 @@ URLs not in the friendly map fall through to the default handler:
 - All other friendly URLs require authentication
 - Unauthenticated access triggers redirect to login with return URL:
   ```
-  /dashboard → /pages/EN/auth/login.php
+  /dashboard → /pages/en/auth/login.php
   (stores /dashboard in session as redirect_after_login)
   ```
 
@@ -234,8 +234,8 @@ URLs not in the friendly map fall through to the default handler:
 
 ### Before (with .htaccess rewrite rules)
 ```apache
-RewriteRule ^dashboard$ /pages/EN/dashboard.html [L,R=302]
-RewriteRule ^login$ /pages/EN/auth/login.php [L,R=302]
+RewriteRule ^dashboard$ /pages/en/dashboard.html [L,R=302]
+RewriteRule ^login$ /pages/en/auth/login.php [L,R=302]
 # ... dozens of similar rules ...
 # Risk: redirect loops, .htaccess conflicts
 ```
@@ -280,9 +280,9 @@ For 99% of use cases, the current approach is fast enough and provides maximum f
    );
    ```
 
-2. **Wildcard patterns**: Support `/user/:id` → `/pages/EN/profile.html?id=:id`
+2. **Wildcard patterns**: Support `/user/:id` → `/pages/en/profile.html?id=:id`
 
-3. **SEO-friendly slugs**: `/help/getting-started` → `/pages/EN/help.html?topic=getting-started`
+3. **SEO-friendly slugs**: `/help/getting-started` → `/pages/en/help.html?topic=getting-started`
 
 4. **Canonical URL headers**: Add `Link: <canonical-url>` headers
 
@@ -326,7 +326,7 @@ Test-Path d:\wamp64\www\familyapp\pages\EN\dashboard.html
 
 ### Problem: Query String Lost
 
-**Symptom**: `/dashboard?tab=recent` becomes `/pages/EN/dashboard.html` (no query)
+**Symptom**: `/dashboard?tab=recent` becomes `/pages/en/dashboard.html` (no query)
 
 **Possible Cause**: Query string not being preserved in redirect
 

@@ -170,7 +170,7 @@
     const keys = Object.keys(updates).filter(k=>k!=='id');
     if (keys.length === 0){
   const nav = await ask('Tiada perubahan dibuat. Kembali ke sunting pokok?', { choices:[{label:'Ya', value:'yes'},{label:'Kekal', value:'stay'}] });
-  if (nav==='yes'){ location.href = '/pages/MY/edit_tree.html'; }
+  if (nav==='yes'){ location.href = '/pages/my/edit_tree.html'; }
       return;
     }
 
@@ -180,7 +180,7 @@
       const j = await res.json();
   if (!j || !j.ok){ bot('<span class="muted" style="color:#b33;">Simpan gagal.</span>'); return; }
   bot('Disimpan. Kembali ke halaman sunting pokok…');
-  setTimeout(()=>{ location.href = '/pages/MY/edit_tree.html'; }, 900);
+  setTimeout(()=>{ location.href = '/pages/my/edit_tree.html'; }, 900);
   } catch(_){ bot('<span class="muted" style="color:#b33;">Ralat simpan.</span>'); }
   }
 

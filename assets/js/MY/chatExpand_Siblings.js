@@ -98,7 +98,7 @@
 
     if (collected.length === 0){
   const nav = await ask('Tiada adik-beradik baharu ditambah. Teruskan ke langkah pasangan?', { choices:[ {label:'Teruskan', value:'go'}, {label:'Kekal di sini', value:'stay'} ] });
-  if (nav === 'go') location.href = `/pages/MY/chatExpand_partners.html?pid=${encodeURIComponent(pid)}`;
+  if (nav === 'go') location.href = `/pages/my/chatExpand_partners.html?pid=${encodeURIComponent(pid)}`;
       return;
     }
 
@@ -112,7 +112,7 @@
       const j = await res.json();
   if (!j || !j.ok){ pushBot(`<span class="muted" style="color:#b33;">Simpan gagal.</span>`); return; }
   pushBot('Disimpan. Mengalih ke pasangan…');
-  setTimeout(()=>{ location.href = `/pages/MY/chatExpand_partners.html?pid=${encodeURIComponent(pid)}`; }, 900);
+  setTimeout(()=>{ location.href = `/pages/my/chatExpand_partners.html?pid=${encodeURIComponent(pid)}`; }, 900);
   } catch(_){ pushBot(`<span class="muted" style="color:#b33;">Ralat simpan.</span>`); }
   }
 

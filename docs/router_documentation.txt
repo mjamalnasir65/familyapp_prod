@@ -212,7 +212,7 @@ http://localhost/familyapp/test_router.php
 ### Manual Tests
 1. **Landing page**: Visit `/`
 2. **Language switching**: Add `?lang=EN` or `?lang=MY`
-3. **Auth redirect**: Try `/pages/EN/dashboard.html` without login
+3. **Auth redirect**: Try `/pages/en/dashboard.html` without login
 4. **Login flow**: Complete login and verify redirect
 5. **API access**: Verify `/api/session_info.php` still works
 6. **Static assets**: Check CSS/JS load correctly
@@ -316,7 +316,7 @@ http://localhost/familyapp/?r=dashboard
 ### New Behavior
 ```php
 // New router uses full paths
-http://localhost/familyapp/pages/EN/dashboard.html
+http://localhost/familyapp/pages/en/dashboard.html
 ```
 
 ### Backward Compatibility

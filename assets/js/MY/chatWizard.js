@@ -242,7 +242,7 @@
     const has = await ask('Do you have children?', ['yes','no']);
   if (!(has||'').toLowerCase().startsWith('y')){
   await fetch('/api/wizard_complete_step6.php', { method:'POST' });
-  addMsg('🎉 Wizard siap! Mengalih ke papan pemuka…'); await sleep(800); window.location.href='/pages/MY/dashboard.html'; return;
+  addMsg('🎉 Wizard siap! Mengalih ke papan pemuka…'); await sleep(800); window.location.href='/pages/my/dashboard.html'; return;
     }
 
   let countStr = await ask('Berapa orang anak? (nombor)');
@@ -266,7 +266,7 @@
     const j = await r.json().catch(()=>({ok:false}));
   if (!j.ok){ addMsg('Tidak dapat menyimpan anak buat masa ini. Cuba lagi.'); return; }
     state.children = children; saveState();
-  addMsg('🎉 Wizard siap! Mengalih ke papan pemuka…'); await sleep(800); window.location.href='/pages/MY/dashboard.html';
+  addMsg('🎉 Wizard siap! Mengalih ke papan pemuka…'); await sleep(800); window.location.href='/pages/my/dashboard.html';
   }
 
   // Start the conversation

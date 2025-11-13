@@ -35,13 +35,13 @@ header('Expires: 0');
                 try { navigator.serviceWorker.getRegistrations().then(function(regs){ regs.forEach(function(reg){ reg.unregister().catch(function(){}); }); }); } catch(_){}
             }
             // Redirect to landing
-            setTimeout(function(){ location.replace('<?php echo isset($_SESSION['lang']) && strtoupper($_SESSION['lang'])==='EN' ? "/pages/EN/public.html" : "/pages/MY/public.html"; ?>'); }, 10);
+            setTimeout(function(){ location.replace('<?php echo isset($_SESSION['lang']) && strtoupper($_SESSION['lang'])==='EN' ? "/pages/en/public.html" : "/pages/my/public.html"; ?>'); }, 10);
         })();
     </script>
 </head>
 <body>
     <noscript>
-    <meta http-equiv="refresh" content="0;url=<?php echo (isset($_SESSION['lang']) && strtoupper($_SESSION['lang'])==='EN') ? '/pages/EN/public.html' : '/pages/MY/public.html'; ?>" />
+    <meta http-equiv="refresh" content="0;url=<?php echo (isset($_SESSION['lang']) && strtoupper($_SESSION['lang'])==='EN') ? '/pages/en/public.html' : '/pages/my/public.html'; ?>" />
     </noscript>
     Signing out…
 </body>

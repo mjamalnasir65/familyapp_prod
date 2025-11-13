@@ -26,7 +26,7 @@ Your router.php now **fully complements** the COMPLETE_PATHS_LIST.md. Here's wha
 The router complements the paths list by:
 
 1. **✅ Providing friendly URLs** for all documented user-facing pages
-2. **✅ Preserving direct access** to `/pages/EN/...` paths (no breaking changes)
+2. **✅ Preserving direct access** to `/pages/en/...` paths (no breaking changes)
 3. **✅ Passing through API endpoints** unchanged (as documented)
 4. **✅ Passing through static assets** unchanged (as documented)
 5. **✅ Following documented conventions** (language detection, query string preservation)
@@ -167,16 +167,16 @@ The router now uses **clear category headers**:
 
 | Feature | Old URL | New URL | Improvement |
 |---------|---------|---------|-------------|
-| Tree View | `/pages/EN/tree.html` | `/tree` | 73% shorter |
-| Expand Person | `/pages/EN/chat_expand.html?p=123` | `/expand?p=123` | 65% shorter |
-| Pending Decisions | `/pages/EN/pd_view.html` | `/pending_decisions` | More semantic |
-| Admin Dashboard | `/pages/EN/admin_dashboard.html` | `/admin` | 84% shorter |
+| Tree View | `/pages/en/tree.html` | `/tree` | 73% shorter |
+| Expand Person | `/pages/en/chat_expand.html?p=123` | `/expand?p=123` | 65% shorter |
+| Pending Decisions | `/pages/en/pd_view.html` | `/pending_decisions` | More semantic |
+| Admin Dashboard | `/pages/en/admin_dashboard.html` | `/admin` | 84% shorter |
 
 ### Sharing Benefits
 Users can now share **clean, memorable URLs**:
-- ✅ `yoursite.com/tree?family=smith` instead of `yoursite.com/pages/EN/tree.html?family=smith`
-- ✅ `yoursite.com/expand?p=123` instead of `yoursite.com/pages/EN/chat_expand.html?p=123`
-- ✅ `yoursite.com/invites` instead of `yoursite.com/pages/EN/invites.html`
+- ✅ `yoursite.com/tree?family=smith` instead of `yoursite.com/pages/en/tree.html?family=smith`
+- ✅ `yoursite.com/expand?p=123` instead of `yoursite.com/pages/en/chat_expand.html?p=123`
+- ✅ `yoursite.com/invites` instead of `yoursite.com/pages/en/invites.html`
 
 ---
 
@@ -184,8 +184,8 @@ Users can now share **clean, memorable URLs**:
 
 ### What Still Works
 - ✅ All existing 20 friendly URLs unchanged
-- ✅ Direct `/pages/EN/...` URLs still accessible
-- ✅ Direct `/pages/MY/...` URLs still accessible
+- ✅ Direct `/pages/en/...` URLs still accessible
+- ✅ Direct `/pages/my/...` URLs still accessible
 - ✅ All API endpoints at `/api/*.php`
 - ✅ All static assets at `/assets/*`
 - ✅ Query string parameters preserved

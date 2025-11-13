@@ -33,8 +33,8 @@
     <header>
       <div>Signed in as: <strong id="sessionEmail">…</strong></div>
       <nav class="nav">
-  <a href="/pages/MY/edit_tree.html">Back to edit tree</a>
-  <a href="/pages/MY/auth/logout.php">❌</a>
+  <a href="/pages/my/edit_tree.html">Back to edit tree</a>
+  <a href="/pages/my/auth/logout.php">❌</a>
       </nav>
     </header>
     <div id="messages" aria-live="polite"></div>
@@ -45,7 +45,7 @@
   </div>
 
   <script src="/assets/js/date-utils.js?v=20251026"></script>
-  <script src="/assets/js/MY/chatEdit_persons.js?v=20251026"></script>
+  <script src="/assets/js/my/chatEdit_persons.js?v=20251026"></script>
   <script>
     // Show session email in header
   fetch('/api/session_info.php').then(r => r.ok ? r.json() : { ok:false }).then(u=>{

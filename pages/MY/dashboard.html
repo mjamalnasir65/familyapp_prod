@@ -102,7 +102,7 @@
       <header class="wizard-head">
         <div style="display:flex; align-items:center; gap:12px; justify-content:space-between;">
           <div class="tagline">Log masuk sebagai: <strong id="sessionEmail">...</strong></div>
-          <a class="link" href="/pages/MY/auth/logout.php">❌</a>
+          <a class="link" href="/pages/my/auth/logout.php">❌</a>
         </div>
   <h1>Semuanya sudah siap 🎉</h1>
   <p class="tagline">Ini ringkasan pantas keluarga anda setakat ini.</p>
@@ -148,11 +148,11 @@
         </div>
 
         <div class="actions">
-          <a class="btn btn-primary" href="/pages/MY/tree.html">🌳 <span class="label">Kembangkan pokok</span></a>
-          <a class="btn btn-primary" href="/pages/MY/edit_tree.html">✏️ <span class="label">Sunting Butiran</span></a>
-          <a class="btn btn-primary" href="/pages/MY/view_tree.html">👁️ <span class="label">Lihat Pokok</span></a>
-          <a class="btn btn-primary" href="/pages/MY/chat_invites.html">👥 <span class="label">Jemput</span></a>
-          <a class="btn btn-primary" href="/pages/MY/profile.html">📁 <span class="label">Profil</span></a>
+          <a class="btn btn-primary" href="/pages/my/tree.html">🌳 <span class="label">Kembangkan pokok</span></a>
+          <a class="btn btn-primary" href="/pages/my/edit_tree.html">✏️ <span class="label">Sunting Butiran</span></a>
+          <a class="btn btn-primary" href="/pages/my/view_tree.html">👁️ <span class="label">Lihat Pokok</span></a>
+          <a class="btn btn-primary" href="/pages/my/chat_invites.html">👥 <span class="label">Jemput</span></a>
+          <a class="btn btn-primary" href="/pages/my/profile.html">📁 <span class="label">Profil</span></a>
          
           
         </div>
@@ -176,7 +176,7 @@
           if (actions && !actions.querySelector('[data-admin-link]')) {
             const a = document.createElement('a');
             a.className = 'btn btn-primary';
-            a.href = '/pages/MY/admin_dashboard.html';
+            a.href = '/pages/my/admin_dashboard.html';
             a.setAttribute('data-admin-link', '1');
             a.innerHTML = '🛠️ <span class="label">Admin</span>';
             actions.appendChild(a);

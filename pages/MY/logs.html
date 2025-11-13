@@ -18,8 +18,8 @@
       <div class="row" style="justify-content:space-between;">
         <div class="tagline">Log tindakan terkini</div>
         <nav style="display:flex; gap:10px;">
-          <a class="link" href="/pages/MY/dashboard.html">Dashboard</a>
-          <a class="link" href="/pages/MY/auth/logout.php">❌</a>
+          <a class="link" href="/pages/my/dashboard.html">Dashboard</a>
+          <a class="link" href="/pages/my/auth/logout.php">❌</a>
         </nav>
       </div>
       <h1>Logs</h1>
@@ -46,7 +46,7 @@
   const r = await fetch('/api/session_info.php');
       const j = await r.json();
       if (!j || !j.ok || !j.user || !j.user.is_admin) {
-  window.location.href = '/pages/MY/dashboard.html';
+  window.location.href = '/pages/my/dashboard.html';
       }
     }
     function esc(s){ try{return JSON.stringify(s);}catch(_){return String(s);} }

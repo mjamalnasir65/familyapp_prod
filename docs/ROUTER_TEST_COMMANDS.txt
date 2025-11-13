@@ -21,14 +21,14 @@ http://familyapp/dashboard
 2. Apache serves `index.php` (no physical /dashboard file)
 3. Router checks friendly URL map
 4. Router finds `'dashboard' => 'dashboard.html'`
-5. Router redirects to `/pages/EN/dashboard.html` (302 redirect)
+5. Router redirects to `/pages/en/dashboard.html` (302 redirect)
 6. Browser follows redirect
 7. Page loads OR redirects to login if not authenticated
 
 **DevTools Network Tab**:
 ```
-GET /dashboard → 302 Found → Location: /pages/EN/dashboard.html
-GET /pages/EN/dashboard.html → 200 OK (or 302 to login)
+GET /dashboard → 302 Found → Location: /pages/en/dashboard.html
+GET /pages/en/dashboard.html → 200 OK (or 302 to login)
 ```
 
 ---
@@ -37,7 +37,7 @@ GET /pages/EN/dashboard.html → 200 OK (or 302 to login)
 ```
 http://familyapp/login
 ```
-**Expected**: Redirects to `/pages/EN/auth/login.php` and shows login form
+**Expected**: Redirects to `/pages/en/auth/login.php` and shows login form
 
 ---
 
@@ -45,7 +45,7 @@ http://familyapp/login
 ```
 http://familyapp/dashboard?tab=recent
 ```
-**Expected**: Redirects to `/pages/EN/dashboard.html?tab=recent`
+**Expected**: Redirects to `/pages/en/dashboard.html?tab=recent`
 
 ---
 
@@ -53,7 +53,7 @@ http://familyapp/dashboard?tab=recent
 ```
 http://familyapp/dashboard?lang=MY
 ```
-**Expected**: Redirects to `/pages/MY/dashboard.html?lang=MY`
+**Expected**: Redirects to `/pages/my/dashboard.html?lang=MY`
 
 ---
 
@@ -64,7 +64,7 @@ curl.exe -I http://familyapp/dashboard
 **Expected output**:
 ```
 HTTP/1.1 302 Found
-Location: /pages/EN/dashboard.html
+Location: /pages/en/dashboard.html
 ```
 
 ---
@@ -112,7 +112,7 @@ http://familyapp/admin_dashboard
 
 ## Success Criteria
 
-✅ Visiting `/dashboard` → Redirects to `/pages/EN/dashboard.html`
+✅ Visiting `/dashboard` → Redirects to `/pages/en/dashboard.html`
 ✅ No 404 errors on friendly URLs
 ✅ Query strings preserved
 ✅ Language detection works

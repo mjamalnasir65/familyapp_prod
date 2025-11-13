@@ -148,8 +148,8 @@
         <div style="display:flex; align-items:center; gap:12px; justify-content:space-between;">
           <div class="tagline">Signed in as: <strong id="sessionEmail">...</strong></div>
           <nav style="display:flex; gap:10px;">
-            <a class="link" href="/pages/EN/dashboard.html">↩️</a>
-            <a class="link" href="/pages/EN/auth/logout.php">❌</a>
+            <a class="link" href="/pages/en/dashboard.html">↩️</a>
+            <a class="link" href="/pages/en/auth/logout.php">❌</a>
           </nav>
         </div>
         <h1>Your Family Tree🌲</h1>
@@ -163,7 +163,7 @@
         </div>
         <div id="treeCanvas"></div>
         <div class="actions" style="margin-top:16px; display:flex; gap:10px;">
-          <a class="btn btn-ghost" href="/pages/EN/dashboard.html">Back to dashboard</a>
+          <a class="btn btn-ghost" href="/pages/en/dashboard.html">Back to dashboard</a>
 
         </div>
       </section>
@@ -484,7 +484,7 @@
 
     function onNodeClick(person) {
       if (!person || !person.id) return;
-  window.location.href = `/pages/EN/chatEdit_persons.html?pid=${encodeURIComponent(person.id)}`;
+  window.location.href = `/pages/en/chatEdit_persons.html?pid=${encodeURIComponent(person.id)}`;
     }
 
     // Invite button: navigate to invites.html and prefill modal via query params
@@ -504,7 +504,7 @@
         // optional defaults
         qs.set('role', 'viewer');
         qs.set('days', '7');
-  window.location.href = `/pages/EN/chat_invites.html?${qs.toString()}`;
+  window.location.href = `/pages/en/chat_invites.html?${qs.toString()}`;
       });
       return btn;
     }

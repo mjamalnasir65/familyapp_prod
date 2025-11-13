@@ -12,16 +12,16 @@ const PRECACHE = `precache-${VERSION}`;
 const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/pages/EN/index.html',
-  '/pages/MY/index.html',
+  '/pages/en/index.html',
+  '/pages/my/index.html',
   '/manifest.webmanifest',
   '/assets/css/main.css',
   '/assets/js/main.js',
   '/assets/js/lang-switch.js',
   '/assets/js/i18n.js',
   '/assets/img/logo.png',
-  '/pages/EN/offline.html',
-  '/pages/MY/offline.html'
+  '/pages/en/offline.html',
+  '/pages/my/offline.html'
 ];
 
 self.addEventListener('install', (event) => {
@@ -62,7 +62,7 @@ self.addEventListener('fetch', (event) => {
       fetch(req).catch(async () => {
         // Choose EN or MY offline page based on path
         const isMY = /\/pages\/MY\//.test(url.pathname);
-        const fallback = isMY ? '/pages/MY/offline.html' : '/pages/EN/offline.html';
+        const fallback = isMY ? '/pages/my/offline.html' : '/pages/en/offline.html';
         const cached = await caches.match(fallback);
         return cached || Response.error();
       })

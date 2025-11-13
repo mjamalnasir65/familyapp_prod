@@ -16,7 +16,7 @@
   - User selects language (EN or MY)
   - User clicks Login button
   - User clicks Register button
-  - User navigates to any `/pages/EN/` or `/pages/MY/` path
+  - User navigates to any `/pages/en/` or `/pages/my/` path
 
 ### ✅ Requirement 2: Logout Destroys Everything
 **Complete session cleanup implemented**
@@ -35,8 +35,8 @@ Router's `handleLogout()` destroys:
 
 Works from:
 - ✅ Friendly URL: `/logout`
-- ✅ English page: `/pages/EN/auth/logout.php`
-- ✅ Malay page: `/pages/MY/auth/logout.php`
+- ✅ English page: `/pages/en/auth/logout.php`
+- ✅ Malay page: `/pages/my/auth/logout.php`
 
 ---
 
@@ -61,11 +61,11 @@ Works from:
 - `initializeLanguage()` - Start session when language selected
 - `handleFriendlyUrl()` - Special handling for `/logout`
 
-#### 2. **pages/EN/auth/logout.php** (Updated)
-**Changed**: Redirect from `/pages/EN/public.html` → `/index.html`
+#### 2. **pages/en/auth/logout.php** (Updated)
+**Changed**: Redirect from `/pages/en/public.html` → `/index.html`
 
-#### 3. **pages/MY/auth/logout.php** (Updated)
-**Changed**: Redirect from `/pages/MY/public.html` → `/index.html`
+#### 3. **pages/my/auth/logout.php** (Updated)
+**Changed**: Redirect from `/pages/my/public.html` → `/index.html`
 
 ---
 
@@ -130,10 +130,10 @@ Back to landing page (NO session)
 ### Language-Specific Logout
 ```html
 <!-- English pages -->
-<a href="/pages/EN/auth/logout.php">Logout</a>
+<a href="/pages/en/auth/logout.php">Logout</a>
 
 <!-- Malay pages -->
-<a href="/pages/MY/auth/logout.php">Log Keluar</a>
+<a href="/pages/my/auth/logout.php">Log Keluar</a>
 ```
 
 **All paths work the same**: Complete cleanup → Landing page

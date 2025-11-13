@@ -192,8 +192,8 @@ The following paths are **intentionally excluded** from friendly URL mappings:
 - Reason: These have standardized locations
 
 #### ✅ Direct Language Pages
-- `/pages/EN/*` - English pages (direct access)
-- `/pages/MY/*` - Malay pages (direct access)
+- `/pages/en/*` - English pages (direct access)
+- `/pages/my/*` - Malay pages (direct access)
 - Reason: Friendly URLs redirect to these
 
 ---
@@ -268,7 +268,7 @@ Some pages have **multiple aliases** for UX:
 ### Before Deployment
 - 20 friendly URLs
 - Missing tree views, expand flow, pending decisions, public pages
-- Users had to use long `/pages/EN/...` URLs
+- Users had to use long `/pages/en/...` URLs
 
 ### After Deployment
 - 45 friendly URLs (+125% increase)
@@ -279,14 +279,14 @@ Some pages have **multiple aliases** for UX:
 ### User Experience Improvements
 | Feature | Before | After | Benefit |
 |---------|--------|-------|---------|
-| Tree View | `/pages/EN/tree.html` | `/tree` | Shorter, memorable |
-| Expand Person | `/pages/EN/chat_expand.html?p=123` | `/expand?p=123` | Clean sharing |
-| Pending Duplicates | `/pages/EN/pd_view.html` | `/pending_decisions` | Semantic |
-| Admin Access | `/pages/EN/admin_dashboard.html` | `/admin` | Convenience |
+| Tree View | `/pages/en/tree.html` | `/tree` | Shorter, memorable |
+| Expand Person | `/pages/en/chat_expand.html?p=123` | `/expand?p=123` | Clean sharing |
+| Pending Duplicates | `/pages/en/pd_view.html` | `/pending_decisions` | Semantic |
+| Admin Access | `/pages/en/admin_dashboard.html` | `/admin` | Convenience |
 
 ### No Breaking Changes
 - ✅ All existing 20 URLs still work
-- ✅ Direct `/pages/EN/...` URLs still work
+- ✅ Direct `/pages/en/...` URLs still work
 - ✅ Query strings preserved
 - ✅ Language detection unchanged
 

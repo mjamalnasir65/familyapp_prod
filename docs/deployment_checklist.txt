@@ -42,10 +42,10 @@ curl http://localhost/familyapp/?lang=EN
 curl http://localhost/familyapp/?lang=MY
 
 # 4. Test protected page (should redirect)
-curl -I http://localhost/familyapp/pages/EN/dashboard.html
+curl -I http://localhost/familyapp/pages/en/dashboard.html
 
 # 5. Test auth page (should show login)
-curl http://localhost/familyapp/pages/EN/auth/login.php
+curl http://localhost/familyapp/pages/en/auth/login.php
 
 # 6. Test API endpoint (should return JSON)
 curl http://localhost/familyapp/api/session_info.php

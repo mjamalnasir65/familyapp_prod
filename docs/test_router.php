@@ -40,7 +40,7 @@ echo "<p class='info'>Session language set to: EN</p>\n";
 echo "<h2>Test 4: Router Class Instantiation</h2>\n";
 try {
     // Simulate request URI
-    $_SERVER['REQUEST_URI'] = '/pages/EN/dashboard.html';
+    $_SERVER['REQUEST_URI'] = '/pages/en/dashboard.html';
     $_SERVER['QUERY_STRING'] = '';
     
     // Include router to get class definition
@@ -57,12 +57,12 @@ $requiredFiles = [
     'router.php' => 'SmartRouter main file',
     'config/config.php' => 'Configuration file',
     'classes/Database.php' => 'Database class',
-    'pages/EN/404.html' => 'EN 404 page',
-    'pages/MY/404.html' => 'MY 404 page',
-    'pages/EN/auth/login.php' => 'EN login page',
-    'pages/MY/auth/login.php' => 'MY login page',
-    'pages/EN/dashboard.html' => 'EN dashboard',
-    'pages/MY/dashboard.html' => 'MY dashboard',
+    'pages/en/404.html' => 'EN 404 page',
+    'pages/my/404.html' => 'MY 404 page',
+    'pages/en/auth/login.php' => 'EN login page',
+    'pages/my/auth/login.php' => 'MY login page',
+    'pages/en/dashboard.html' => 'EN dashboard',
+    'pages/my/dashboard.html' => 'MY dashboard',
     'index.html' => 'Landing page'
 ];
 
@@ -100,9 +100,9 @@ echo "<h2>Test 7: Routing Logic Tests</h2>\n";
 $testCases = [
     '/' => 'Landing page',
     '/index.html' => 'Index page',
-    '/pages/EN/dashboard.html' => 'EN dashboard',
-    '/pages/MY/dashboard.html' => 'MY dashboard',
-    '/pages/EN/auth/login.php' => 'EN login',
+    '/pages/en/dashboard.html' => 'EN dashboard',
+    '/pages/my/dashboard.html' => 'MY dashboard',
+    '/pages/en/auth/login.php' => 'EN login',
     '/api/session_info.php' => 'API endpoint (should pass through)',
     '/assets/css/main.css' => 'Static asset (should pass through)',
     '/auth/login.php' => 'Old auth path (should redirect)'
@@ -146,7 +146,7 @@ echo "<p class='info'><strong>Next Steps:</strong></p>\n";
 echo "<ol>\n";
 echo "<li>Test by visiting <a href='/'>http://localhost/familyapp/</a></li>\n";
 echo "<li>Try language switching with ?lang=EN and ?lang=MY</li>\n";
-echo "<li>Test login flow at /pages/EN/auth/login.php</li>\n";
+echo "<li>Test login flow at /pages/en/auth/login.php</li>\n";
 echo "<li>Verify dashboard access after login</li>\n";
 echo "<li>Check that API endpoints still work</li>\n";
 echo "</ol>\n";

@@ -96,7 +96,7 @@
 
     if (collected.length === 0){
       const nav = await ask('No new siblings added. Continue to partners step?', { choices:[ {label:'Continue', value:'go'}, {label:'Stay here', value:'stay'} ] });
-  if (nav === 'go') location.href = `/pages/EN/chatExpand_partners.html?pid=${encodeURIComponent(pid)}`;
+  if (nav === 'go') location.href = `/pages/en/chatExpand_partners.html?pid=${encodeURIComponent(pid)}`;
       return;
     }
 
@@ -110,7 +110,7 @@
       const j = await res.json();
       if (!j || !j.ok){ pushBot(`<span class="muted" style="color:#b33;">Save failed.</span>`); return; }
       pushBot('Saved. Redirecting to partners…');
-  setTimeout(()=>{ location.href = `/pages/EN/chatExpand_partners.html?pid=${encodeURIComponent(pid)}`; }, 900);
+  setTimeout(()=>{ location.href = `/pages/en/chatExpand_partners.html?pid=${encodeURIComponent(pid)}`; }, 900);
     } catch(_){ pushBot(`<span class="muted" style="color:#b33;">Save error.</span>`); }
   }
 
