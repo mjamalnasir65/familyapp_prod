@@ -1,0 +1,84 @@
+# ==========================================================
+# 🔒 Basic Security & Rewrite Config for Nasab Family Tree PWA
+# ==========================================================
+
+# Ensure correct default index
+DirectoryIndex index.php index.html
+
+# ----------------------------------------------------------
+# 🔁 ROUTING: Allow router.php to handle unknown routes
+# ----------------------------------------------------------
+RewriteEngine On
+
+# Don’t rewrite existing files or directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Send all unmatched requests to router.php
+RewriteRule ^ router.php [L,QSA]
+
+# ----------------------------------------------------------
+# 🚀 LITESPEED CACHE SETTINGS
+# ----------------------------------------------------------
+<IfModule LiteSpeed>
+    # Disable cache for dynamic or frequently changing routes
+    CacheDisable public /pages/
+    CacheDisable public /api/
+    CacheDisable public /auth/
+    CacheDisable public /assets/js/
+    CacheDisable public /assets/json/
+    
+    # Keep cache enabled for static files (images, CSS)
+    CacheEnable public /
+    
+    # Purge cache automatically when files change
+    CacheSmartPurge On
+</IfModule>
+
+# ----------------------------------------------------------
+# 🌐 MIME TYPES & CHARACTER SET
+# ----------------------------------------------------------
+AddDefaultCharset utf-8
+AddType text/html .html
+AddType text/javascript .js
+AddType text/css .css
+AddType application/json .json
+AddType image/svg+xml .svg
+
+# ----------------------------------------------------------
+# 🔒 Security Headers
+# ----------------------------------------------------------
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ----------------------------------------------------------
+# 🧭 CORS for PWA (if needed for API or assets)
+# ----------------------------------------------------------
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js|json|css|png|jpg|svg|webp|ico|manifest|html)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+# ----------------------------------------------------------
+# 🕓 Cache-Control for static files (client browser cache)
+# ----------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 7 days"
+    ExpiresByType text/javascript "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/svg+xml "access plus 30 days"
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# ----------------------------------------------------------
+# ✅ END OF CONFIG
+# ----------------------------------------------------------

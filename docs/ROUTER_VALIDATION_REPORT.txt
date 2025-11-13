@@ -82,7 +82,7 @@
 | `/chat_expand` | `chat_expand.html` | ✅ **ADDED** | Explicit alias |
 | `/expand_children` | `chatExpand_children.html` | ✅ **ADDED** | Step 4 children |
 | `/expand_partners` | `chatExpand_partners.html` | ✅ **ADDED** | Step 3 partners |
-| `/expand_siblings` | `chatExpand_Siblings.html` | ✅ **ADDED** | Step 2 siblings |
+| `/expand_siblings` | `chatExpand_siblings.html` | ✅ **ADDED** | Step 2 siblings |
 
 **Coverage**: 100% (8/8)  
 **Impact**: Complete expand flow now has friendly URLs for better UX

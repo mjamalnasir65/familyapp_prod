@@ -1,4 +1,13 @@
 <?php
+// Early lowercase normalization: redirect any request URI containing uppercase letters
+// Helps prevent Linux case mismatch 404s and enforces canonical lowercase path usage
+if (isset($_SERVER['REQUEST_URI']) && preg_match('/[A-Z]/', $_SERVER['REQUEST_URI'])) {
+    $lower = strtolower($_SERVER['REQUEST_URI']);
+    if ($lower !== $_SERVER['REQUEST_URI']) {
+        header('Location: ' . $lower, true, 301);
+        exit;
+    }
+}
 /**
  * Smart Router for Family Echo Application
  * Handles language selection, authentication, and intelligent user journey routing
@@ -220,7 +229,7 @@ class SmartRouter {
             'chat_expand' => 'chat_expand.html',
             'expand_children' => 'chatExpand_children.html',
             'expand_partners' => 'chatExpand_partners.html',
-            'expand_siblings' => 'chatExpand_Siblings.html',
+            'expand_siblings' => 'chatExpand_siblings.html',
             
             // ============================================
             // INVITATIONS

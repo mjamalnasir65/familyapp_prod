@@ -105,7 +105,7 @@
 /pages/EN/chat_expand.html           → Expand person (add relatives)
 /pages/EN/chatExpand_children.html   → Expand: add children
 /pages/EN/chatExpand_partners.html   → Expand: add partners
-/pages/EN/chatExpand_Siblings.html   → Expand: add siblings
+/pages/EN/chatExpand_siblings.html   → Expand: add siblings
 
 /pages/MY/chatEdit_persons.html      → Edit persons (MY)
 /pages/MY/chat_expand.html           → Expand person (MY)

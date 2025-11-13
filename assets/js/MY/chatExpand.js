@@ -155,8 +155,8 @@
   if (!save || !save.ok){ addMsg('Simpan gagal. Cuba lagi.', 'bot'); return; }
 
     addMsg('✅ Ibu bapa disimpan. Teruskan ke adik-beradik…', 'bot');
-    // Pembaikan: nama fail huruf besar "S" (chatExpand_Siblings.html)
-    setTimeout(()=>{ window.location.href=`/pages/MY/chatExpand_Siblings.html?pid=${encodeURIComponent(pid)}`; }, 700);
+    // Pembaikan: nama fail huruf besar "S" (chatExpand_siblings.html)
+    setTimeout(()=>{ window.location.href=`/pages/MY/chatExpand_siblings.html?pid=${encodeURIComponent(pid)}`; }, 700);
   }
 
   window.addEventListener('load', main);

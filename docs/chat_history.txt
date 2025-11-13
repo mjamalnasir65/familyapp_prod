@@ -64,7 +64,7 @@ assets\js\EN
 assets\js\EN\chatEdit_persons.js
 assets\js\EN\chatExpand_children.js
 assets\js\EN\chatExpand_partners.js
-assets\js\EN\chatExpand_Siblings.js
+assets\js\EN\chatExpand_siblings.js
 assets\js\EN\chatExpand.js
 assets\js\EN\chatTokenWizard.js
 assets\js\EN\chatWizard.js
@@ -73,7 +73,7 @@ assets\js\MY
 assets\js\MY\chatEdit_persons.js
 assets\js\MY\chatExpand_children.js
 assets\js\MY\chatExpand_partners.js
-assets\js\MY\chatExpand_Siblings.js
+assets\js\MY\chatExpand_siblings.js
 assets\js\MY\chatExpand.js
 assets\js\MY\chatTokenWizard.js
 assets\js\MY\chatWizard.js
@@ -124,7 +124,7 @@ pages\EN\chat_wizard.html
 pages\EN\chatEdit_persons.html
 pages\EN\chatExpand_children.html
 pages\EN\chatExpand_partners.html
-pages\EN\chatExpand_Siblings.html
+pages\EN\chatExpand_siblings.html
 pages\EN\dashboard.html
 pages\EN\dashboard.php
 pages\EN\edit_tree.html
@@ -160,7 +160,7 @@ pages\MY\chat_wizard.html
 pages\MY\chatEdit_persons.html
 pages\MY\chatExpand_children.html
 pages\MY\chatExpand_partners.html
-pages\MY\chatExpand_Siblings.html
+pages\MY\chatExpand_siblings.html
 pages\MY\dashboard.html
 pages\MY\dashboard.php
 pages\MY\edit_tree.html
@@ -1734,10 +1734,10 @@ I’ll implement the backend lang override with a shared helper and clean up lin
     - Returns server_error if token generation fails
 
 - Cleaned up legacy comments referencing `/familyapp/public` paths in scripts:
-  - chatExpand_Siblings.js
+  - chatExpand_siblings.js
   - chatExpand_partners.js
   - chatExpand_children.js
-  - chatExpand_Siblings.js
+  - chatExpand_siblings.js
   - chatExpand_partners.js
   - chatExpand_children.js
   - lang-switch.js (comment adjusted to reflect current routing)
@@ -2270,7 +2270,7 @@ Searched text for `.then(r=>r.json())` (`**/assets/js/EN/*.js`), 3 results
 
 Good - the session_info calls are still using the old pattern but we already fixed those in HTML pages. Let me fix them in these JS files: 
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/EN/chatExpand_Siblings.js#1-1), lines 1 to 30
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/EN/chatExpand_siblings.js#1-1), lines 1 to 30
 
 Using "Replace String in File"
 
@@ -2352,7 +2352,7 @@ Created 3 todos
    - Returns fallback error object instead of throwing
 
 2. **Fixed session_info fetches in expand scripts**:
-   - Updated 6 files: chatExpand_Siblings.js, chatExpand_partners.js, chatExpand.js (both EN and MY)
+   - Updated 6 files: chatExpand_siblings.js, chatExpand_partners.js, chatExpand.js (both EN and MY)
    - Changed from `.then(r=>r.json())` → `.then(r=> r.ok ? r.json() : {ok:false})`
    - Prevents JSON parse errors when session endpoint returns 404 or 500
 
@@ -4716,9 +4716,9 @@ Using "Replace String in File"
 ```
 
 ```
-## Fix 12: chatExpand_Siblings.html - logout link 
+## Fix 12: chatExpand_siblings.html - logout link 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/EN/chatExpand_Siblings.html#37-37), lines 37 to 45
+Read [](file:///d%3A/wamp64/www/familyapp/pages/EN/chatExpand_siblings.html#37-37), lines 37 to 45
 
 Using "Replace String in File"
 
@@ -4835,7 +4835,7 @@ Perfect! All links are now correctly using absolute paths with EN prefix. Let me
 9. ✅ chat_wizard.html
 10. ✅ chat_token_wizard.html
 11. ✅ chat_expand.html
-12. ✅ chatExpand_Siblings.html
+12. ✅ chatExpand_siblings.html
 13. ✅ chatExpand_partners.html
 14. ✅ chatExpand_children.html
 15. ✅ chatEdit_persons.html
@@ -5044,9 +5044,9 @@ Using "Replace String in File"
 ```
 
 ```
-### Fix 14: chatExpand_Siblings.html (MY) 
+### Fix 14: chatExpand_siblings.html (MY) 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/MY/chatExpand_Siblings.html#37-37), lines 37 to 45
+Read [](file:///d%3A/wamp64/www/familyapp/pages/MY/chatExpand_siblings.html#37-37), lines 37 to 45
 
 Using "Replace String in File"
 
@@ -5152,7 +5152,7 @@ Excellent! All fixes are complete. Let me create a final summary:
 11. ✅ chat_token_wizard.html
 12. ✅ chat_invites.html
 13. ✅ chat_expand.html
-14. ✅ chatExpand_Siblings.html
+14. ✅ chatExpand_siblings.html
 15. ✅ chatExpand_partners.html
 16. ✅ chatExpand_children.html
 17. ✅ chatEdit_persons.html
@@ -5251,7 +5251,7 @@ pages\MY\chat_wizard.html
 pages\MY\chatEdit_persons.html
 pages\MY\chatExpand_children.html
 pages\MY\chatExpand_partners.html
-pages\MY\chatExpand_Siblings.html
+pages\MY\chatExpand_siblings.html
 pages\MY\dashboard.html
 pages\MY\dashboard.php
 pages\MY\edit_tree.html
@@ -6223,7 +6223,7 @@ Mobile tree CSS enhancements added to both EN and MY pages (responsive media que
 
 Made changes.
 
-mjamalnasir65: we hah a broken path from both pages/EN/tree.html and pages/MY/tree.html to pages\EN\chat_expand.html and pages\MY\chat_expand.html to pages\EN\chatExpand_Siblings.html and pages\MY\chatExpand_Siblings.html
+mjamalnasir65: we hah a broken path from both pages/EN/tree.html and pages/MY/tree.html to pages\EN\chat_expand.html and pages\MY\chat_expand.html to pages\EN\chatExpand_siblings.html and pages\MY\chatExpand_siblings.html
 
 GET
 https://nasab.hdsite.com.my/pages/EN/chatExpand_siblings.html?pid=2
@@ -6247,13 +6247,13 @@ GitHub Copilot: Read [](file:///d%3A/wamp64/www/familyapp/pages/EN)
 
 Read [](file:///d%3A/wamp64/www/familyapp/pages/EN/chat_expand.html)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/EN/chatExpand_Siblings.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/EN/chatExpand_siblings.html)
 
 Read [](file:///d%3A/wamp64/www/familyapp/pages/MY)
 
 Searched text for `chatExpand_siblings` (`**/d:\wamp64\www\familyapp\**`), no results
 
-Searched text for `chatExpand_Siblings` (`**/d:\wamp64\www\familyapp\**`), no results
+Searched text for `chatExpand_siblings` (`**/d:\wamp64\www\familyapp\**`), no results
 
 Read [](file:///d%3A/wamp64/www/familyapp/assets/js/EN/chatExpand.js)
 
@@ -6277,7 +6277,7 @@ Using "Apply Patch"
 
 Checked [](file:///d%3A/wamp64/www/familyapp/assets/js/EN/chatExpand.js), [](file:///d%3A/wamp64/www/familyapp/assets/js/MY/chatExpand.js), no problems found
 
-Fixed: Redirect paths now use the correct case (chatExpand_Siblings.html) in both chatExpand.js and chatExpand.js, resolving the 404 from `/pages/*/chatExpand_siblings.html`. No syntax errors after patch. Test by completing the parents step; it should load the siblings chat without 404. Let me know if you’d like a quick curl test script or need similar checks for partners/children flows.
+Fixed: Redirect paths now use the correct case (chatExpand_siblings.html) in both chatExpand.js and chatExpand.js, resolving the 404 from `/pages/*/chatExpand_siblings.html`. No syntax errors after patch. Test by completing the parents step; it should load the siblings chat without 404. Let me know if you’d like a quick curl test script or need similar checks for partners/children flows.
 
 =====================================================================================
   NEW CHAT SESSION COMBINING DEV AND PROD GIT Controlled
@@ -6298,7 +6298,7 @@ What’s solid
 Gaps and risks
 - API consistency: Only some endpoints have fatal handlers and guaranteed JSON. Others can still 500 with empty bodies (causes frontend JSON.parse errors).
 - Router vs direct access: You disabled .htaccess and rely on index.php + router, but many pages are reached directly. Keep router logic simple and avoid redirect loops; ensure POSTs never rely on router redirects.
-- Case sensitivity: Fixed chatExpand_siblings vs chatExpand_Siblings in JS. Verify all HTML links and redirects use exact casing (Linux prod is strict).
+- Case sensitivity: Fixed chatExpand_siblings vs chatExpand_siblings in JS. Verify all HTML links and redirects use exact casing (Linux prod is strict).
 - Duplicate/backup files: “login - Copy.php” exists; ensure not reachable or remove to avoid drift.
 - SMTP: Auth now configured (465/ssl with 587/tls fallback). If “Could not authenticate” reappears on prod, explicitly set AUTH type (LOGIN) and confirm mailbox policy on host.
 - Security: Production config currently relaxes CSP/HSTS and SMTP_DEBUG=2 in places. Remember to re-enable strict headers and set SMTP_DEBUG=0 before/after prod deploy.
@@ -6387,7 +6387,7 @@ Memory of resolved path issues (condensed):
 3. Ensured _init.php (or equivalent) resides inside /api and matches require paths.
 4. ActionLogger path adjusted to /logs (no phantom /public/logs).
 5. BASE_URL now environment-specific via config (dev localhost vs prod domain).
-6. Case sensitivity audited (EN/MY, chatExpand_Siblings consistent).
+6. Case sensitivity audited (EN/MY, chatExpand_siblings consistent).
 7. Manifest and favicon now referenced at root.
 8. Log & uploads directories writable and referenced with forward slashes.
 

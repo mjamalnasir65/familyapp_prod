@@ -1,11 +1,28 @@
 // Family Tree PWA - minimal landing/auth JS
 (function(){
-  // PWA Service Worker disabled for now: proactively unregister any existing registrations
+  function isMobileBrowser(){
+    try{
+      if (navigator.userAgentData && typeof navigator.userAgentData.mobile === 'boolean') {
+        return navigator.userAgentData.mobile;
+      }
+    }catch(_){ }
+    var ua = (navigator.userAgent||'');
+    var ipadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1; // iPadOS pretends to be Mac
+    return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile|Windows Phone|BlackBerry/i.test(ua) || ipadOS;
+  }
+
+  // Register SW only on mobile; actively unregister on desktop
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function(){
-      navigator.serviceWorker.getRegistrations().then(function(regs){
-        regs.forEach(function(reg){ reg.unregister().catch(function(){}); });
-      }).catch(function(){});
+      if (isMobileBrowser()) {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .catch(function(){ /* no-op */ });
+      } else {
+        // Ensure desktop has no active SW
+        navigator.serviceWorker.getRegistrations().then(function(regs){
+          regs.forEach(function(reg){ reg.unregister().catch(function(){}); });
+        }).catch(function(){});
+      }
     });
   }
   const supportsBackdrop = CSS && CSS.supports && CSS.supports('backdrop-filter','blur(1px)');

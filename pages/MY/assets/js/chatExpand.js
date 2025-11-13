@@ -156,7 +156,7 @@
 
   addMsg('✅ Ibu bapa disimpan. Teruskan ke adik-beradik…', 'bot');
   // Guna nama fail huruf besar "S" untuk serasi pelayan Linux
-  setTimeout(()=>{ window.location.href=`/pages/MY/chatExpand_Siblings.html?pid=${encodeURIComponent(pid)}`; }, 700);
+  setTimeout(()=>{ window.location.href=`/pages/MY/chatExpand_siblings.html?pid=${encodeURIComponent(pid)}`; }, 700);
   }
 
   window.addEventListener('load', main);

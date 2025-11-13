@@ -70,7 +70,7 @@ The router complements the paths list by:
 - `/chat_expand` → chat_expand.html
 - `/expand_children` → chatExpand_children.html
 - `/expand_partners` → chatExpand_partners.html
-- `/expand_siblings` → chatExpand_Siblings.html
+- `/expand_siblings` → chatExpand_siblings.html
 
 **Invitations** (2 new):
 - `/chat_invites` → chat_invites.html
