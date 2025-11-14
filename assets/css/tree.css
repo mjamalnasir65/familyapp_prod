@@ -1,0 +1,107 @@
+   /* Mobile-first Family Tree view styles */
+/* Focus: readable hierarchy, touch targets, horizontal overflow handling */
+
+#treeCanvas {
+  width:100%;
+  min-height:50vh;
+  padding:12px;
+  border-radius:12px;
+  background:#ffffff;
+  color:#1a1a1a;
+  box-shadow:0 8px 28px rgba(0,0,0,.06);
+  overflow-x:auto; /* allow wide generations */
+  overflow-y:visible;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-gutter:stable both-edges;
+}
+
+#treeCanvas::-webkit-scrollbar { height:10px; }
+#treeCanvas::-webkit-scrollbar-track { background:rgba(0,0,0,.05); }
+#treeCanvas::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:8px; }
+
+.tree-root-list, #treeCanvas ul {
+  list-style:none;
+  padding:0; margin:0;
+  color:#1a1a1a;
+}
+
+.node {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 10px;
+  border-radius:8px;
+  font-size:15px;
+  line-height:1.4;
+  position:relative;
+  transition:background .15s ease;
+}
+.node:hover { background:#eef3ff; }
+
+.expander {
+  width:28px;
+  text-align:center;
+  cursor:pointer;
+  user-select:none;
+  color:#2c3e50;
+  font-weight:700;
+  font-size:16px;
+  line-height:1;
+  touch-action:manipulation;
+}
+.expander.hidden { visibility:hidden; }
+
+.children {
+  margin-left:16px;
+  padding-left:10px;
+  border-left:1px dashed #e2e8f0;
+}
+.label { cursor:pointer; font-weight:600; color:#0f172a; overflow-wrap:break-word; word-break:normal; }
+.muted { color:#64748b; font-weight:500; }
+
+/* Accessibility */
+.expander:focus-visible, .label:focus-visible { outline:2px solid #3b82f6; outline-offset:2px; border-radius:6px; }
+
+/* Couple blocks inside partner groups */
+.children .children { border-left:none; margin-left:0; padding-left:0; }
+
+/* Toolbar above the tree (label + select) */
+.tree-toolbar{ display:grid; grid-template-columns: 1fr 2fr; gap:8px; align-items:center; margin-bottom:10px; }
+@media (max-width:520px){ .tree-toolbar{ grid-template-columns: 1fr; } .tree-toolbar .input{ width:100%; } }
+
+/* Visual for plus sign between couple names */
+.plus{ color:#64748b; font-weight:700; margin:0 4px; }
+
+/* Larger screens adjustments */
+@media (min-width:701px) {
+  #treeCanvas { min-height:40vh; padding:14px; }
+  .node { gap:8px; padding:6px 8px; font-size:14px; line-height:1.35; }
+  .expander { width:20px; font-size:14px; }
+  .children { margin-left:24px; padding-left:12px; border-left-color:#cfd7e6; }
+}
+
+@media (min-width:1100px) {
+  #treeCanvas { padding:18px; }
+}
+
+/* Ultra-small devices (<=420px) */
+@media (max-width:420px) {
+  .node { font-size:15px; padding:9px 10px; }
+  .expander { width:32px; font-size:18px; }
+  .children { margin-left:12px; padding-left:8px; }
+}
+
+/* Utility for loading/error states */
+.tree-status { font-size:14px; color:#b33; }
+
+/* Animation hint for expanding */
+.children { transition:opacity .18s ease; }
+.collapsing { opacity:0; }
+.expanding { opacity:1; }
+
+/* Dark mode support placeholder (if body.dark applied later) */
+body.dark #treeCanvas { background:#0f172a; color:#f1f5f9; }
+body.dark .node:hover { background:#1e293b; }
+body.dark .children { border-left-color:#334155; }
+body.dark .label { color:#f8fafc; }
+body.dark .muted { color:#94a3b8; }

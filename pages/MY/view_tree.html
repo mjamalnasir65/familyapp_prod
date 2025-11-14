@@ -8,46 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/main.css" />
-<style>
-  #treeCanvas { width: 100%; min-height: 40vh; border-radius: 12px; background:#fff; box-shadow: 0 8px 28px rgba(0,0,0,0.06); padding: 14px; color:#222; }
-  ul { color:#222; }
-  .node { display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:8px; color:#1a1a1a; font-size:14px; line-height:1.35; }
-  .node:hover { background:#eef3ff; }
-  .expander { width: 20px; text-align:center; cursor:pointer; user-select:none; color:#2c3e50; font-weight:700; font-size:14px; }
-  .expander.hidden { visibility:hidden; }
-  .children { margin-left: 24px; border-left: 1px dashed #cfd7e6; padding-left: 12px; }
-  .label { cursor:pointer; color:#0f172a; font-weight:600; }
-  .muted { color:#64748b; font-weight:500; }
-
-  /* Penambahbaikan mesra mudah alih untuk paparan pokok */
-  @media (max-width: 700px) {
-    #treeCanvas {
-      padding: 12px;
-      min-height: 50vh;
-      overflow-x: auto;
-      overflow-y: visible;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-gutter: stable both-edges;
-    }
-    .node {
-      gap: 10px;
-      padding: 8px 10px;
-      font-size: 10px;
-      line-height: 1.4;
-    }
-    .expander { width: 28px; font-size: 16px; touch-action: manipulation; }
-    .children { margin-left: 16px; padding-left: 10px; border-left-color:#e2e8f0; }
-    .label { overflow-wrap: anywhere; }
-  }
-
-  @media (max-width: 420px) {
-    .node { font-size: 15px; padding: 9px 10px; }
-    .expander { width: 32px; font-size: 18px; }
-    .children { margin-left: 12px; padding-left: 8px; }
-  }
-
-  .expander:focus-visible, .label:focus-visible { outline:2px solid #3b82f6; outline-offset:2px; border-radius:6px; }
-  </style>
+  <link rel="stylesheet" href="/assets/css/tree.css" />
 </head>
 <body>
   <main class="hero">
@@ -65,7 +26,7 @@
       </header>
 
       <section>
-        <div style="margin-bottom:10px; display:flex; gap:8px; align-items:center;">
+        <div class="tree-toolbar">
           <label class="tagline" for="parentSelect">Mula dari ibu bapa:</label>
           <select id="parentSelect" class="input" style="min-width:260px;"></select>
         </div>
@@ -157,7 +118,7 @@
       const b = people[bId];
       const aLbl = document.createElement('span'); aLbl.className='label'; aLbl.textContent = a ? a.name : ('#'+aId);
       if (a) aLbl.addEventListener('click', ()=> onNodeClick(a));
-      const plus = document.createElement('span'); plus.textContent = ' + ';
+      const plus = document.createElement('span'); plus.className='plus'; plus.textContent = '+';
       const bLbl = document.createElement('span'); bLbl.className='label'; bLbl.textContent = b ? b.name : ('#'+bId);
       if (b) bLbl.addEventListener('click', ()=> onNodeClick(b));
       row.appendChild(aLbl); row.appendChild(plus); row.appendChild(bLbl);
