@@ -17,7 +17,7 @@ if (!$to) {
 // Use language-aware path (default EN). For manual testing you can append &lang=MY.
 $lang = strtoupper(trim((string)($_GET['lang'] ?? 'EN')));
 if (!in_array($lang, ['EN','MY'], true)) { $lang = 'EN'; }
-$acceptUrl = rtrim(BASE_URL,'/') . '/pages/' . $lang . '/accept_invite.html?token=TEST_TOKEN';
+$acceptUrl = rtrim(BASE_URL,'/') . '/pages/' . $lang . '/accept-invite.html?token=TEST_TOKEN';
 $result = Mailer::sendInvite($to, $acceptUrl, 'Test email from Family App mail test.', [
     'family_name' => 'Mail Test',
     'role' => 'viewer',

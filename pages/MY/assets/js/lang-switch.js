@@ -30,14 +30,15 @@
   function resolveTarget(lang){
     var path = window.location.pathname;
     var parts = path.split('/').filter(Boolean);
-    // Prefer clean root-based pages path
-    var base = '/pages/' + lang + '/';
+    // Prefer clean root-based pages path (always lowercase in URL)
+    var urlLang = (lang || '').toString().toLowerCase();
+    var base = '/pages/' + urlLang + '/';
   // If already under /pages/<LANG>/ (legacy /familyapp/public/pages/ removed), replace LANG in-place
     var pagesIdx = parts.indexOf('pages');
     if (pagesIdx >= 0 && parts.length > pagesIdx+1) {
       var langSeg = parts[pagesIdx+1];
-      if (/^[A-Z]{2}$/.test(langSeg)){
-        parts[pagesIdx+1] = lang;
+      if (/^[A-Za-z]{2}$/.test(langSeg)){
+        parts[pagesIdx+1] = urlLang;
         return '/' + parts.join('/');
       }
     }
@@ -46,7 +47,7 @@
       var pubIdx = parts.indexOf('public');
       var pIdx = parts.indexOf('pages');
       if (pubIdx >= 0 && pIdx >= 0 && parts.length > pIdx+1) {
-        parts[pIdx+1] = lang;
+        parts[pIdx+1] = urlLang;
         return '/' + parts.join('/');
       }
     }

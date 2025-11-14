@@ -47,11 +47,11 @@
 
 | Friendly URL | Target | Status | Notes |
 |-------------|--------|--------|-------|
-| `/wizard` | `chat_wizard.html` | ✅ Present | Primary alias |
-| `/chat_wizard` | `chat_wizard.html` | ✅ Present | Explicit name |
-| `/token_wizard` | `chat_token_wizard.html` | ✅ Present | Token-based wizard |
-| `/chat_token_wizard` | `chat_token_wizard.html` | ✅ Present | Explicit token wizard |
-| `/family_token_wizard` | `chat_wizard_token_family.html` | ✅ Present | Family invitation wizard |
+| `/wizard` | `chat-wizard.html` | ✅ Present | Primary alias |
+| `/chat_wizard` | `chat-wizard.html` | ✅ Present | Explicit name |
+| `/token_wizard` | `chat-token-wizard.html` | ✅ Present | Token-based wizard |
+| `/chat-token-wizard` | `chat-token-wizard.html` | ✅ Present | Explicit token wizard |
+| `/family_token_wizard` | `chat-wizard-token-family.html` | ✅ Present | Family invitation wizard |
 
 **Coverage**: 100% (5/5)
 
@@ -75,14 +75,14 @@
 
 | Friendly URL | Target | Status | Notes |
 |-------------|--------|--------|-------|
-| `/edit_persons` | `chatEdit_persons.html` | ✅ **ADDED** | Primary edit interface |
-| `/chat_edit_persons` | `chatEdit_persons.html` | ✅ **ADDED** | Explicit alias |
+| `/edit_persons` | `chat-edit-persons.html` | ✅ **ADDED** | Primary edit interface |
+| `/chat_edit_persons` | `chat-edit-persons.html` | ✅ **ADDED** | Explicit alias |
 | `/profile_persons` | `profile_persons.html` | ✅ **ADDED** | Person profile view |
-| `/expand` | `chat_expand.html` | ✅ **ADDED** | Main expand interface |
-| `/chat_expand` | `chat_expand.html` | ✅ **ADDED** | Explicit alias |
-| `/expand_children` | `chatExpand_children.html` | ✅ **ADDED** | Step 4 children |
-| `/expand_partners` | `chatExpand_partners.html` | ✅ **ADDED** | Step 3 partners |
-| `/expand_siblings` | `chatExpand_siblings.html` | ✅ **ADDED** | Step 2 siblings |
+| `/expand` | `chat-expand.html` | ✅ **ADDED** | Main expand interface |
+| `/chat-expand` | `chat-expand.html` | ✅ **ADDED** | Explicit alias |
+| `/expand_children` | `chat-expand-children.html` | ✅ **ADDED** | Step 4 children |
+| `/expand_partners` | `chat-expand-partners.html` | ✅ **ADDED** | Step 3 partners |
+| `/expand_siblings` | `chat-expand-siblings.html` | ✅ **ADDED** | Step 2 siblings |
 
 **Coverage**: 100% (8/8)  
 **Impact**: Complete expand flow now has friendly URLs for better UX
@@ -94,8 +94,8 @@
 | Friendly URL | Target | Status | Notes |
 |-------------|--------|--------|-------|
 | `/invites` | `invites.html` | ✅ Present | Manage invitations |
-| `/chat_invites` | `chat_invites.html` | ✅ **ADDED** | Chat-style invite interface |
-| `/accept_invite` | `accept_invite.html` | ✅ **ADDED** | Invitation acceptance page |
+| `/chat-invites` | `chat-invites.html` | ✅ **ADDED** | Chat-style invite interface |
+| `/accept-invite` | `accept-invite.html` | ✅ **ADDED** | Invitation acceptance page |
 
 **Coverage**: 100% (3/3)  
 **Impact**: Complete invitation flow covered
@@ -251,7 +251,7 @@ The updated friendlyMap uses **clear category headers** with comments:
 Some pages have **multiple aliases** for UX:
 - `/wizard` and `/chat_wizard` → same target
 - `/admin` and `/admin_dashboard` → same target
-- `/expand` and `/chat_expand` → same target
+- `/expand` and `/chat-expand` → same target
 
 **Rationale**: Users may bookmark or share different variations
 
@@ -280,7 +280,7 @@ Some pages have **multiple aliases** for UX:
 | Feature | Before | After | Benefit |
 |---------|--------|-------|---------|
 | Tree View | `/pages/en/tree.html` | `/tree` | Shorter, memorable |
-| Expand Person | `/pages/en/chat_expand.html?p=123` | `/expand?p=123` | Clean sharing |
+| Expand Person | `/pages/en/chat-expand.html?p=123` | `/expand?p=123` | Clean sharing |
 | Pending Duplicates | `/pages/en/pd_view.html` | `/pending_decisions` | Semantic |
 | Admin Access | `/pages/en/admin_dashboard.html` | `/admin` | Convenience |
 

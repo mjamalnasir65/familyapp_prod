@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Token Family · Organizer</title>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    .panel{max-width:720px;margin:20px auto;padding:16px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .panel h2{margin:0 0 8px;color:#111;font-weight:700;letter-spacing:.2px}
+    label{display:block;margin:8px 0 4px;color:#222}
+    select,input[type=number],input[type=text]{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px}
+    button{padding:10px 16px;border:none;border-radius:6px;background:#2d6cdf;color:#fff;cursor:pointer}
+    .row{display:flex;gap:12px;align-items:center}
+    .row > *{flex:1}
+    .muted{color:#666;font-size:.9em}
+    .copy{background:#444}
+    .danger{background:#c62828}
+    .secondary{background:#6b7280}
+    .section{margin-top:16px;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#fafafa}
+    .mini{font-size:.9em}
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h2>Create a Token for Children Contribution</h2>
+    <p class="muted">Choose the parents/couple, set the expected number of children, and generate a shareable code. Tokens expire in 72 hours.</p>
+
+    <label for="union">Couple</label>
+    <select id="union"></select>
+
+    <div class="row">
+      <div>
+        <label for="expected">Expected children</label>
+        <input id="expected" type="number" min="0" value="0" />
+      </div>
+      <div>
+        <label>Token expiry</label>
+        <input type="text" value="72 hours (default)" readonly />
+      </div>
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <button id="issueBtn">Generate Token</button>
+      <a href="/pages/en/dashboard.html"><button type="button" class="secondary">Cancel</button></a>
+    </div>
+
+    <div id="result" style="display:none;margin-top:16px">
+      <label for="url">Shareable code</label>
+      <div class="row">
+        <input id="url" type="text" readonly />
+        <button id="copy" class="copy">Copy</button>
+      </div>
+      <p class="muted" style="margin-top:6px">Ask recipients to enter this code on the registration page to start the token wizard.</p>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <a href="/pages/en/dashboard.html"><button type="button" class="secondary">Back to Dashboard</button></a>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/js/chatw-wizard-token-family.js"></script>
+</body>
+</html>

@@ -57,11 +57,11 @@ Apache serves:   /pages/en/dashboard.html
 
 | Friendly URL | Redirects To | Description |
 |-------------|--------------|-------------|
-| `/wizard` | `/pages/{LANG}/chat_wizard.html` | Setup wizard |
-| `/chat_wizard` | `/pages/{LANG}/chat_wizard.html` | Setup wizard (full name) |
-| `/token_wizard` | `/pages/{LANG}/chat_token_wizard.html` | Token-based wizard |
-| `/chat_token_wizard` | `/pages/{LANG}/chat_token_wizard.html` | Token wizard (full name) |
-| `/family_token_wizard` | `/pages/{LANG}/chat_wizard_token_family.html` | Family token wizard |
+| `/wizard` | `/pages/{LANG}/chat-wizard.html` | Setup wizard |
+| `/chat_wizard` | `/pages/{LANG}/chat-wizard.html` | Setup wizard (full name) |
+| `/token_wizard` | `/pages/{LANG}/chat-token-wizard.html` | Token-based wizard |
+| `/chat-token-wizard` | `/pages/{LANG}/chat-token-wizard.html` | Token wizard (full name) |
+| `/family_token_wizard` | `/pages/{LANG}/chat-wizard-token-family.html` | Family token wizard |
 
 ## Query String Preservation
 
@@ -308,7 +308,7 @@ php d:\wamp64\www\familyapp\index.php
 # Edit router.php and verify 'dashboard' key exists in $friendlyMap
 
 # Check if target file exists
-Test-Path d:\wamp64\www\familyapp\pages\EN\dashboard.html
+Test-Path d:\wamp64\www\familyapp\pages\en\dashboard.html
 ```
 
 ### Problem: Infinite Redirect Loop

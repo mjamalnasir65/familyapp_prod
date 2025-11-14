@@ -51,7 +51,7 @@ try {
 
     $next = (int)($status['next_step'] ?? 1);
     // Route to chat-based wizard (replacing classic UI). Preserve server-calculated next step.
-    header('Location: /pages/my/chat_wizard.html?step=' . max(1, min(6, $next)));
+    header('Location: /pages/my/chat-wizard.html?step=' . max(1, min(6, $next)));
     exit;
 } catch (Throwable $e) {
     header('Location: /auth/login.html?error=server');

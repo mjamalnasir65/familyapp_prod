@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accept invite</title>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+
+<body class="hero">
+  <div class="glass card-enter" style="max-width:560px; margin:40px auto; padding:24px;">
+    <h2>Accept invitation</h2>
+    <p id="msg">Processing…</p>
+    <div id="actions" style="margin-top:16px; display:none; gap:12px; flex-wrap:wrap;">
+      <a id="goLogin" class="btn btn-primary" href="/pages/en/auth/login.html">Sign in to accept</a>
+      
+    </div>
+  </div>
+  <script src="/assets/js/i18n.js"></script>
+  <script>
+    async function run() {
+      const token = new URLSearchParams(location.search).get('token');
+      const msg = document.getElementById('msg');
+      if (!token) {
+        msg.textContent = T('missing_token', 'Missing token.');
+        return;
+      }
+      try {
+        const r = await fetch(`/api/invites_accept.php?token=${encodeURIComponent(token)}`, {
+          credentials: 'include'
+        });
+        const j = await r.json();
+        if (j.require_login) {
+          msg.textContent = T('please_sign_in_to_accept', 'Please sign in to accept this invite.');
+          // Show actions: prefill login form when clicked
+          const acts = document.getElementById('actions');
+          acts.style.display = 'flex';
+          const loginLink = document.getElementById('goLogin');
+          loginLink.href = '/pages/en/auth/login.html?invite_token=' + encodeURIComponent(token);
+          return;
+        }
+        if (!j.ok) {
+          msg.textContent = j.error || T('cannot_accept-invite', 'Cannot accept invite.');
+          return;
+        }
+        msg.textContent = T('invite_accepted_redirecting', 'Invite accepted. Redirecting to your tree…');
+        const acts = document.getElementById('actions');
+        acts.style.display = 'flex';
+        document.getElementById('goTree').classList.add('btn-primary');
+        setTimeout(() => {
+          location.href = '/pages/en/tree.html';
+        }, 1200);
+      } catch (_) {
+        msg.textContent = T('server_error_dot', 'Server error.');
+      }
+    }
+    window.addEventListener('load', () => {
+      const card = document.querySelector('.card-enter');
+      if (card) card.classList.add('in');
+      run();
+    });
+  </script>
+</body>
+
+</html>

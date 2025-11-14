@@ -27,7 +27,7 @@ function generateInviteToken(): array {
 function buildInviteUrl(string $token, string $lang): string {
     $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-    return $scheme.'://'.$host.'/pages/'.$lang.'/accept_invite.html?token='.$token;
+    return $scheme.'://'.$host.'/pages/'.$lang.'/accept-invite.html?token='.$token;
 }
 
 ?>

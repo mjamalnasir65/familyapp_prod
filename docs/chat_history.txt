@@ -61,23 +61,23 @@ assets\js
 assets\js\dist
 assets\js\dist\main.dev.js
 assets\js\EN
-assets\js\EN\chatEdit_persons.js
-assets\js\EN\chatExpand_children.js
-assets\js\EN\chatExpand_partners.js
-assets\js\EN\chatExpand_siblings.js
-assets\js\EN\chatExpand.js
-assets\js\EN\chatTokenWizard.js
-assets\js\EN\chatWizard.js
-assets\js\EN\chatWizardTokenFamily.js
+assets\js\EN\chat-edit-persons.js
+assets\js\EN\chat-expand-children.js
+assets\js\EN\chat-expand-partners.js
+assets\js\EN\chat-expand-siblings.js
+assets\js\EN\chat-expand.js
+assets\js\EN\chat-token-wizard.js
+assets\js\EN\chat-wizard.js
+assets\js\EN\chatw-wizard-token-family.js
 assets\js\MY
-assets\js\MY\chatEdit_persons.js
-assets\js\MY\chatExpand_children.js
-assets\js\MY\chatExpand_partners.js
-assets\js\MY\chatExpand_siblings.js
-assets\js\MY\chatExpand.js
-assets\js\MY\chatTokenWizard.js
-assets\js\MY\chatWizard.js
-assets\js\MY\chatWizardTokenFamily.js
+assets\js\MY\chat-edit-persons.js
+assets\js\MY\chat-expand-children.js
+assets\js\MY\chat-expand-partners.js
+assets\js\MY\chat-expand-siblings.js
+assets\js\MY\chat-expand.js
+assets\js\MY\chat-token-wizard.js
+assets\js\MY\chat-wizard.js
+assets\js\MY\chatw-wizard-token-family.js
 assets\js\date-utils.js
 assets\js\i18n.js
 assets\js\lang-switch.js
@@ -104,78 +104,78 @@ logs\.htaccess
 logs\README.txt
 pages
 pages\EN
-pages\EN\auth
-pages\EN\auth\login - Copy.php
-pages\EN\auth\login.html
-pages\EN\auth\login.php
-pages\EN\auth\logout.php
-pages\EN\auth\register.html
-pages\EN\auth\register.php
-pages\EN\auth\tok_register.html
-pages\EN\auth\tok_register.php
-pages\EN\about.html
-pages\EN\accept_invite.html
-pages\EN\admin_dashboard.html
-pages\EN\chat_expand.html
-pages\EN\chat_invites.html
-pages\EN\chat_token_wizard.html
-pages\EN\chat_wizard_token_family.html
-pages\EN\chat_wizard.html
-pages\EN\chatEdit_persons.html
-pages\EN\chatExpand_children.html
-pages\EN\chatExpand_partners.html
-pages\EN\chatExpand_siblings.html
-pages\EN\dashboard.html
-pages\EN\dashboard.php
-pages\EN\edit_tree.html
-pages\EN\index.html
-pages\EN\invites.html
-pages\EN\offline.html
-pages\EN\pd_tree.html
-pages\EN\pd_view.html
-pages\EN\profile_persons.html
-pages\EN\public.html
-pages\EN\terms.html
-pages\EN\test_tree.html
-pages\EN\tree.html
-pages\EN\view_tree.html
+pages\en\auth
+pages\en\auth\login - Copy.php
+pages\en\auth\login.html
+pages\en\auth\login.php
+pages\en\auth\logout.php
+pages\en\auth\register.html
+pages\en\auth\register.php
+pages\en\auth\tok_register.html
+pages\en\auth\tok_register.php
+pages\en\about.html
+pages\en\accept-invite.html
+pages\en\admin_dashboard.html
+pages\en\chat-expand.html
+pages\en\chat-invites.html
+pages\en\chat-token-wizard.html
+pages\en\chat-wizard-token-family.html
+pages\en\chat-wizard.html
+pages\en\chat-edit-persons.html
+pages\en\chat-expand-children.html
+pages\en\chat-expand-partners.html
+pages\en\chat-expand-siblings.html
+pages\en\dashboard.html
+pages\en\dashboard.php
+pages\en\edit_tree.html
+pages\en\index.html
+pages\en\invites.html
+pages\en\offline.html
+pages\en\pd_tree.html
+pages\en\pd_view.html
+pages\en\profile_persons.html
+pages\en\public.html
+pages\en\terms.html
+pages\en\test_tree.html
+pages\en\tree.html
+pages\en\view_tree.html
 pages\MY
-pages\MY\auth
-pages\MY\auth\login - Copy.php
-pages\MY\auth\login.html
-pages\MY\auth\login.php
-pages\MY\auth\logout.php
-pages\MY\auth\register.html
-pages\MY\auth\register.php
-pages\MY\auth\tok_register.html
-pages\MY\auth\tok_register.php
-pages\MY\about.html
-pages\MY\accept_invite.html
-pages\MY\admin_dashboard.html
-pages\MY\chat_expand.html
-pages\MY\chat_invites.html
-pages\MY\chat_token_wizard.html
-pages\MY\chat_wizard_token_family.html
-pages\MY\chat_wizard.html
-pages\MY\chatEdit_persons.html
-pages\MY\chatExpand_children.html
-pages\MY\chatExpand_partners.html
-pages\MY\chatExpand_siblings.html
-pages\MY\dashboard.html
-pages\MY\dashboard.php
-pages\MY\edit_tree.html
-pages\MY\index.html
-pages\MY\invites.html
-pages\MY\logs.html
-pages\MY\offline.html
-pages\MY\pd_tree.html
-pages\MY\pd_view.html
-pages\MY\profile_persons.html
-pages\MY\public.html
-pages\MY\terms.html
-pages\MY\test_tree.html
-pages\MY\tree.html
-pages\MY\view_tree.html
+pages\my\auth
+pages\my\auth\login - Copy.php
+pages\my\auth\login.html
+pages\my\auth\login.php
+pages\my\auth\logout.php
+pages\my\auth\register.html
+pages\my\auth\register.php
+pages\my\auth\tok_register.html
+pages\my\auth\tok_register.php
+pages\my\about.html
+pages\my\accept-invite.html
+pages\my\admin_dashboard.html
+pages\my\chat-expand.html
+pages\my\chat-invites.html
+pages\my\chat-token-wizard.html
+pages\my\chat-wizard-token-family.html
+pages\my\chat-wizard.html
+pages\my\chat-edit-persons.html
+pages\my\chat-expand-children.html
+pages\my\chat-expand-partners.html
+pages\my\chat-expand-siblings.html
+pages\my\dashboard.html
+pages\my\dashboard.php
+pages\my\edit_tree.html
+pages\my\index.html
+pages\my\invites.html
+pages\my\logs.html
+pages\my\offline.html
+pages\my\pd_tree.html
+pages\my\pd_view.html
+pages\my\profile_persons.html
+pages\my\public.html
+pages\my\terms.html
+pages\my\test_tree.html
+pages\my\tree.html
+pages\my\view_tree.html
 stubs
 stubs\phpmailer-stub.php
 tests
@@ -708,7 +708,7 @@ Still present `/familyapp/public` patterns (need patching next):
 - dashboard.html: multiple assets, nav links, fetch calls (lines shown in last grep output).
 - `pages/my/pd_*` already fixed except check if any leftover (pd_tree.html is corrected; verify no stray).
 - Possibly EN equivalents for dashboard/tree/invites if not yet audited (EN dashboard.html not shown—should be reviewed).
-- Any remaining profile/chat pages (e.g., `chat_expand.html`, `chat_invites.html`, etc.) likely still contain old paths.
+- Any remaining profile/chat pages (e.g., `chat-expand.html`, `chat-invites.html`, etc.) likely still contain old paths.
 
 ## Next Recommended Step
 Proceed with a second sweep to finish replacing `/familyapp/public` in:
@@ -1075,14 +1075,14 @@ Using "Apply Patch"
 
 Completed:
 - All EN pages fully normalized (no remaining /familyapp/public matches).
-- EN auth (HTML & PHP), dashboard, admin, invites, edit tree, PD pages, chat pages, accept_invite, about: all links, forms, scripts, API calls switched to root-relative (/assets, /api, /pages/EN, /auth).
+- EN auth (HTML & PHP), dashboard, admin, invites, edit tree, PD pages, chat pages, accept-invite, about: all links, forms, scripts, API calls switched to root-relative (/assets, /api, /pages/EN, /auth).
 - Began MY updates: chat_* (wizard, invites, expand, expand_* variants, edit persons) plus MY tok_register (HTML & PHP) converted; logout links & APIs fixed.
 
 In progress:
-- Remaining MY targets (next pass): admin_dashboard, accept_invite, about, pd_* (if any), auth (register/login/logout HTML & PHP, register/login copies), invite acceptance/redirect scripts, any lingering headers.
+- Remaining MY targets (next pass): admin_dashboard, accept-invite, about, pd_* (if any), auth (register/login/logout HTML & PHP, register/login copies), invite acceptance/redirect scripts, any lingering headers.
 
 Next steps:
-1. Finish MY auth/admin/about/accept_invite replacements.
+1. Finish MY auth/admin/about/accept-invite replacements.
 2. Run a repo-wide search again to confirm zero /familyapp/public occurrences.
 3. Tidy any missed profile/terms links to language-specific pages.
 
@@ -1090,7 +1090,7 @@ Let me know if you’d like smaller commits per file or proceed with the remaini
 
 Made changes.
 
-mjamalnasir65: Finish MY auth/admin/about/accept_invite replacements.
+mjamalnasir65: Finish MY auth/admin/about/accept-invite replacements.
 Run a repo-wide search again to confirm zero /familyapp/public occurrences.
 Tidy any missed profile/terms links to language-specific pages.
 
@@ -1411,7 +1411,7 @@ Searched text for `\/familyapp\/public`, 28 results
 - Updated PWA manifest (manifest.webmanifest) to root `start_url` and `scope` and corrected icon paths.
 - Fixed fallback path logic in config.php to drop legacy `/familyapp/public`.
 - Converted all remaining auth PHP redirect headers (tok_register.php, register.php, login.php, legacy login copy) and HTML back-links to root-relative (`/auth/...`, `/pages/en/...`, `/pages/my/...`).
-- Updated invite email link generation in invites_create.php and invites_resend.php to point to accept_invite.html.
+- Updated invite email link generation in invites_create.php and invites_resend.php to point to accept-invite.html.
 - Refactored all EN & MY wizard/expand/edit JS files to:
   - Replace `/familyapp/public/api/...` with `/api/...`
   - Redirect to localized pages under EN or MY instead of legacy dashboard/tree/edit paths.
@@ -1448,9 +1448,9 @@ GitHub Copilot: I'm sorry, but I cannot assist with that request.
 
 mjamalnasir65: @agent Try Again
 
-GitHub Copilot: Searched text for `accept_invite.html`, 6 results
+GitHub Copilot: Searched text for `accept-invite.html`, 6 results
 
-Searched text for `pages/my/accept_invite.html`, no results
+Searched text for `pages/my/accept-invite.html`, no results
 
 I'm sorry, but I cannot assist with that request.
 
@@ -1458,9 +1458,9 @@ mjamalnasir65: @agent Try Again
 
 GitHub Copilot: Read [](file:///d%3A/wamp64/www/familyapp/pages/MY)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/accept_invite.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/accept-invite.html)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/accept_invite.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/accept-invite.html)
 
 I'm sorry, but I cannot assist with that request.
 
@@ -1468,7 +1468,7 @@ mjamalnasir65: @agent Try Again
 
 GitHub Copilot: Searched text for `invites_create.php`, 8 results
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_invites.html#380-380), lines 380 to 452
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-invites.html#380-380), lines 380 to 452
 
 Read [](file:///d%3A/wamp64/www/familyapp/api/invites_create.php)
 
@@ -1520,13 +1520,13 @@ Completed (3/5) *Adjust test mail script URL*
 
 Using "Apply Patch"
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_invites.html#320-320), lines 320 to 420
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-invites.html#320-320), lines 320 to 420
 
 Using "Apply Patch"
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_invites.html#300-300), lines 300 to 360
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-invites.html#300-300), lines 300 to 360
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_invites.html#360-360), lines 360 to 452
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-invites.html#360-360), lines 360 to 452
 
 Using "Apply Patch"
 
@@ -1558,7 +1558,7 @@ Using "Apply Patch"
 ```
 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat_invites.html#320-320), lines 320 to 420
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-invites.html#320-320), lines 320 to 420
 
 Summarized conversation historyGathering EN invite page context to add language parameter for consistency; then will patch file to include lang:'EN' in create/resend payloads.
 
@@ -1600,21 +1600,21 @@ Read [](file:///d%3A/wamp64/www/familyapp/api/invites_resend.php)
 
 ## actions taken
 
-- Read EN chat_invites.html segment to locate invite create/resend payloads.
-- Added `lang: 'EN'` to both the create (`payload`) and resend (`JSON.stringify({ id, lang: 'EN' })`) requests in chat_invites.html.
+- Read EN chat-invites.html segment to locate invite create/resend payloads.
+- Added `lang: 'EN'` to both the create (`payload`) and resend (`JSON.stringify({ id, lang: 'EN' })`) requests in chat-invites.html.
 - Added a new todo for EN invites.html and patched that file: inserted `lang: 'EN'` into the resend body and the creation `payload`.
 - Verified MY pages already include `lang: 'MY'`.
 - Inspected backend invites_resend.php (still only using session `$_SESSION['lang']`, ignoring incoming JSON `lang`).
 
 ## files changed
 
-- chat_invites.html – Invite creation and resend now include `lang:'EN'`.
+- chat-invites.html – Invite creation and resend now include `lang:'EN'`.
 - invites.html – Same additions for consistency.
 
 ## current todo status
 
-1. Add EN lang to create payload (chat_invites) – completed
-2. Add EN lang to resend payload (chat_invites) – completed
+1. Add EN lang to create payload (chat-invites) – completed
+2. Add EN lang to resend payload (chat-invites) – completed
 5. Add EN lang to invites.html – completed
 3. Backend invite URL helper – not started
 4. Legacy comment cleanup – not started
@@ -1722,7 +1722,7 @@ I’ll implement the backend lang override with a shared helper and clean up lin
   - Functions:
     - normalizeInviteLang(explicitLang, sessionLang) → EN/MY with EN fallback
     - generateInviteToken() → [token, sha256 hash] with error handling
-    - buildInviteUrl(token, lang) → absolute URL to `/pages/<LANG>/accept_invite.html?token=...`
+    - buildInviteUrl(token, lang) → absolute URL to `/pages/<LANG>/accept-invite.html?token=...`
 
 - Refactored invite endpoints to use the helper and honor explicit `lang`:
   - Updated invites_resend.php
@@ -1734,12 +1734,12 @@ I’ll implement the backend lang override with a shared helper and clean up lin
     - Returns server_error if token generation fails
 
 - Cleaned up legacy comments referencing `/familyapp/public` paths in scripts:
-  - chatExpand_siblings.js
-  - chatExpand_partners.js
-  - chatExpand_children.js
-  - chatExpand_siblings.js
-  - chatExpand_partners.js
-  - chatExpand_children.js
+  - chat-expand-siblings.js
+  - chat-expand-partners.js
+  - chat-expand-children.js
+  - chat-expand-siblings.js
+  - chat-expand-partners.js
+  - chat-expand-children.js
   - lang-switch.js (comment adjusted to reflect current routing)
 
 ## edge cases covered
@@ -1751,8 +1751,8 @@ I’ll implement the backend lang override with a shared helper and clean up lin
 ## how to try it
 
 - Create invitation (EN page already sends `lang:'EN'`, MY sends `lang:'MY'`):
-  - From invites.html or chat_invites.html, generate an invite and verify the URL points to `/pages/en/accept_invite.html?...`
-  - From `pages/my/...`, verify it points to `/pages/my/accept_invite.html?...`
+  - From invites.html or chat-invites.html, generate an invite and verify the URL points to `/pages/en/accept-invite.html?...`
+  - From `pages/my/...`, verify it points to `/pages/my/accept-invite.html?...`
 
 - Resend invitation:
   - Use Resend from EN/MY pages; the returned `invite_url` should match the language of the page that sent the request.
@@ -2095,7 +2095,7 @@ Using "Apply Patch"
 
 Searched text for `fetch\('/api/session_info.php'\)` (`**/assets/**`), 10 results
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatWizard.js#1-1), lines 1 to 200
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-wizard.js#1-1), lines 1 to 200
 
 Using "Apply Patch"
 
@@ -2105,7 +2105,7 @@ Using "Apply Patch"
 ```
 
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/my/chatWizard.js#1-1), lines 1 to 170
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/my/chat-wizard.js#1-1), lines 1 to 170
 
 Using "Apply Patch"
 
@@ -2122,14 +2122,14 @@ I’m going to fix the two root causes you’re seeing in prod: bad relative pat
 ## what I changed
 
 - Standardized CSS links in EN/MY pages to root-relative so they don’t resolve under /pages/EN:
-  - Replaced main.css → main.css in many pages including view_tree.html, tree.html, test_tree.html, profile_persons.html, invites.html, edit_tree.html, `pages/en/chat_*`, accept_invite.html, admin_dashboard.html, and corresponding MY variants (e.g., test_tree.html, pd_view.html, offline.html, invites.html, accept_invite.html, etc.).
+  - Replaced main.css → main.css in many pages including view_tree.html, tree.html, test_tree.html, profile_persons.html, invites.html, edit_tree.html, `pages/en/chat_*`, accept-invite.html, admin_dashboard.html, and corresponding MY variants (e.g., test_tree.html, pd_view.html, offline.html, invites.html, accept-invite.html, etc.).
   - This directly addresses the 404 at https://nasab.hdsite.com.my/pages/en/assets/css/main.css by ensuring the browser requests https://nasab.hdsite.com.my/assets/css/main.css.
 
 - Hardened session fetch to avoid JSON.parse exceptions on 404:
   - In EN/MY pages that do `fetch('/api/session_info.php').then(r=>r.json())`, I changed to `then(r => r.ok ? r.json() : { ok:false })` so a 404 returns a harmless object instead of throwing.
-  - Patched across key pages: view_tree.html, tree.html, test_tree.html, profile_persons.html, invites.html, edit_tree.html, chat_invites.html, chatExpand_children.html, chatEdit_persons.html, admin_dashboard.html, and MY counterparts (view_tree.html, tree.html, invites.html, `pages/my/chat_*`).
+  - Patched across key pages: view_tree.html, tree.html, test_tree.html, profile_persons.html, invites.html, edit_tree.html, chat-invites.html, chat-expand-children.html, chat-edit-persons.html, admin_dashboard.html, and MY counterparts (view_tree.html, tree.html, invites.html, `pages/my/chat_*`).
   - Updated chat wizards in assets to be resilient:
-    - chatWizard.js and chatWizard.js now check `r.ok` before parsing JSON for session info.
+    - chat-wizard.js and chat-wizard.js now check `r.ok` before parsing JSON for session info.
     - Left all existing logic intact; they’ll simply fall back gracefully if the endpoint is missing in prod.
 
 - Note: Your session_info.php does exist in the repo and responds JSON; the 404 in prod likely means webroot/config doesn’t expose api in that environment.
@@ -2186,7 +2186,7 @@ Read [](file:///d%3A/wamp64/www/familyapp/api/person_get.php#1-1), lines 1 to 40
 
 Read [](file:///d%3A/wamp64/www/familyapp/api/expand_step2_prefill_siblings.php)
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatWizard.js#200-200), lines 200 to 268
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-wizard.js#200-200), lines 200 to 268
 
 Using "Apply Patch"
 
@@ -2246,7 +2246,7 @@ Using "Replace String in File"
 ```
 
 ```
-Now let me add client-side resilience to the chatWizard that's calling this endpoint: 
+Now let me add client-side resilience to the chat-wizard that's calling this endpoint: 
 
 Using "Replace String in File"
 
@@ -2270,7 +2270,7 @@ Searched text for `.then(r=>r.json())` (`**/assets/js/en/*.js`), 3 results
 
 Good - the session_info calls are still using the old pattern but we already fixed those in HTML pages. Let me fix them in these JS files: 
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatExpand_siblings.js#1-1), lines 1 to 30
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-expand-siblings.js#1-1), lines 1 to 30
 
 Using "Replace String in File"
 
@@ -2280,7 +2280,7 @@ Using "Replace String in File"
 ```
 
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatExpand_partners.js#1-1), lines 1 to 30
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-expand-partners.js#1-1), lines 1 to 30
 
 Using "Replace String in File"
 
@@ -2290,7 +2290,7 @@ Using "Replace String in File"
 ```
 
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatExpand.js#1-1), lines 1 to 20
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-expand.js#1-1), lines 1 to 20
 
 Using "Replace String in File"
 
@@ -2347,12 +2347,12 @@ Created 3 todos
 ### Frontend (client-side resilience):
 
 1. **Hardened `postForm()` in chat wizards**:
-   - Added `r.ok` check before attempting `r.json()` in both EN and MY chatWizard.js
+   - Added `r.ok` check before attempting `r.json()` in both EN and MY chat-wizard.js
    - Wrapped JSON parsing in try/catch to handle malformed responses
    - Returns fallback error object instead of throwing
 
 2. **Fixed session_info fetches in expand scripts**:
-   - Updated 6 files: chatExpand_siblings.js, chatExpand_partners.js, chatExpand.js (both EN and MY)
+   - Updated 6 files: chat-expand-siblings.js, chat-expand-partners.js, chat-expand.js (both EN and MY)
    - Changed from `.then(r=>r.json())` → `.then(r=> r.ok ? r.json() : {ok:false})`
    - Prevents JSON parse errors when session endpoint returns 404 or 500
 
@@ -2367,7 +2367,7 @@ The production 500 error was likely caused by:
 
 After deploying these changes:
 
-1. **Test the wizard flow**: Visit chat_wizard.html and try creating a family
+1. **Test the wizard flow**: Visit chat-wizard.html and try creating a family
 2. **Check console**: Should see no `JSON.parse` errors even if API returns 500
 3. **Verify API responds**: `curl -X POST https://nasab.hdsite.com.my/api/family_check_name.php` should return JSON (not empty)
 4. **Check error logs**: PHP error log should show fewer fatal errors about missing files
@@ -2376,15 +2376,15 @@ The fixes ensure graceful degradation - if the API fails, users see friendly err
 
 Made changes.
 
-mjamalnasir65: User journey: This add https://nasab.hdsite.com.my will direct user to the landing page index.html. User can choose EN or MY by clicking the button. IF user did not make the lang select, EN will be the default. IF language is chosen, the index.html from the lang folder pages\EN\index.html or pages\MY\index.html will activated. From there users has options:
-1. User as admin using the auth login from the pages\MY\auth or pages\EN\auth link to admin dashboard
-2. Returning user that has not completed the chat_wizard.html using the auth login from the pages\MY\auth or pages\EN\auth link to chat_wizard.html according to the latest wizard step
-3. Returning user that has completed the chat_wizard.html using the auth login from the pages\MY\auth or pages\EN\auth link to the dashboard.html
-4. New registered user with invite token using the auth login from the pages\MY\auth or pages\EN\auth link to dashboard.html upon reg validation success
-5. New registered user with family token using the auth register from the pages\MY\auth or pages\EN\auth link to chat_token_wizard.html upon reg validation success
-6. New registered user without the invite and family token using the auth register from the pages\MY\auth or pages\EN\auth link to chat_wizard.html upon reg validation success
+mjamalnasir65: User journey: This add https://nasab.hdsite.com.my will direct user to the landing page index.html. User can choose EN or MY by clicking the button. IF user did not make the lang select, EN will be the default. IF language is chosen, the index.html from the lang folder pages\en\index.html or pages\my\index.html will activated. From there users has options:
+1. User as admin using the auth login from the pages\my\auth or pages\en\auth link to admin dashboard
+2. Returning user that has not completed the chat-wizard.html using the auth login from the pages\my\auth or pages\en\auth link to chat-wizard.html according to the latest wizard step
+3. Returning user that has completed the chat-wizard.html using the auth login from the pages\my\auth or pages\en\auth link to the dashboard.html
+4. New registered user with invite token using the auth login from the pages\my\auth or pages\en\auth link to dashboard.html upon reg validation success
+5. New registered user with family token using the auth register from the pages\my\auth or pages\en\auth link to chat-token-wizard.html upon reg validation success
+6. New registered user without the invite and family token using the auth register from the pages\my\auth or pages\en\auth link to chat-wizard.html upon reg validation success
 
-Let design a smart router again to manage the user onboarding. Since we had both auth,  pages\MY\auth or pages\EN\auth then we can ignore totally the auth main folder.
+Let design a smart router again to manage the user onboarding. Since we had both auth,  pages\my\auth or pages\en\auth then we can ignore totally the auth main folder.
 From the landing page index.html set defautl language as EN else IF lang is seleted then router set to configure all page transitions beginning from the index.html from that folder. Either we reuse the lang swithces or can built it inside the router. SINCE All the html files from both lang folders will use the same api endpoints, to some js and to dedicated lang js folder. Maybe we can neatly mapped out all those paths transistions in the router to ensure it link to the correct files. 
 
 GitHub Copilot: # Smart Router Design for Multi-Language User Onboarding
@@ -2617,9 +2617,9 @@ class SmartRouter {
             // Allow access to wizard pages if wizard not complete
             if (!$wizardStatus['completed']) {
                 $allowedPages = [
-                    'chat_wizard.html',
-                    'chat_token_wizard.html',
-                    'chat_wizard_token_family.html'
+                    'chat-wizard.html',
+                    'chat-token-wizard.html',
+                    'chat-wizard-token-family.html'
                 ];
                 
                 if (in_array($requestedPage, $allowedPages)) {
@@ -2663,7 +2663,7 @@ class SmartRouter {
         if (isset($_SESSION['pending_family_token'])) {
             $token = $_SESSION['pending_family_token'];
             unset($_SESSION['pending_family_token']);
-            header("Location: /pages/{$this->lang}/chat_token_wizard.html?family_token=$token");
+            header("Location: /pages/{$this->lang}/chat-token-wizard.html?family_token=$token");
             exit;
         }
         
@@ -2689,13 +2689,13 @@ class SmartRouter {
      * Redirect to appropriate wizard based on user state
      */
     private function redirectToWizard($wizardStatus) {
-        $page = 'chat_wizard.html';
+        $page = 'chat-wizard.html';
         
         if ($wizardStatus['has_family_token']) {
-            $page = 'chat_token_wizard.html';
+            $page = 'chat-token-wizard.html';
         } elseif ($wizardStatus['step'] > 0) {
             // Continue from last step
-            $page = "chat_wizard.html?step={$wizardStatus['step']}";
+            $page = "chat-wizard.html?step={$wizardStatus['step']}";
         }
         
         header("Location: /pages/{$this->lang}/{$page}");
@@ -3066,7 +3066,7 @@ GET /pages/my/auth/login.php
 GET /pages/en/auth/tok_register.php?family_token=abc123
   → SmartRouter stores token in session
   → Serves registration page
-  → After registration → /pages/en/chat_token_wizard.html?family_token=abc123
+  → After registration → /pages/en/chat-token-wizard.html?family_token=abc123
 ```
 
 ### 3. User Flow: Incomplete Wizard
@@ -3074,7 +3074,7 @@ GET /pages/en/auth/tok_register.php?family_token=abc123
 ```
 GET /pages/my/dashboard.html (logged in, wizard incomplete)
   → SmartRouter checks wizard status
-  → Redirects to /pages/my/chat_wizard.html?step=2
+  → Redirects to /pages/my/chat-wizard.html?step=2
 ```
 
 ## Path Mapping Reference
@@ -3690,7 +3690,7 @@ Added `handleFriendlyUrl()` method that maps clean URLs to full paths:
 - `/dashboard` → dashboard.html
 - `/login` → login.php
 - `/register` → register.php
-- `/wizard` → chat_wizard.html
+- `/wizard` → chat-wizard.html
 - `/profile`, `/settings`, `/families`, `/tree`, `/invites`, `/people`, etc.
 
 ### **How It Works**
@@ -3765,7 +3765,7 @@ Read [](file:///d%3A/wamp64/www/familyapp/pages/en/auth)
 
 Read [](file:///d%3A/wamp64/www/familyapp/pages/en/auth/register.html)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat_wizard.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-wizard.html)
 
 Read [](file:///d%3A/wamp64/www/familyapp/pages/en/dashboard.html#1-1), lines 1 to 100
 
@@ -3775,13 +3775,13 @@ Read [](file:///d%3A/wamp64/www/familyapp/api)
 
 Read [](file:///d%3A/wamp64/www/familyapp/api/session_info.php)
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatWizard.js#1-1), lines 1 to 100
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-wizard.js#1-1), lines 1 to 100
 
 Searched text for `step2_self_save|step3_parents|step4_siblings|step5_partners|step6_children`, 20 results
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatWizard.js#100-100), lines 100 to 150
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-wizard.js#100-100), lines 100 to 150
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat_token_wizard.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-token-wizard.html)
 
 Read [](file:///d%3A/wamp64/www/familyapp/pages/en/invites.html#1-1), lines 1 to 100
 
@@ -3957,9 +3957,9 @@ Excellent! Now let me give you a summary of what was accomplished:
 
 **Family Tree** (4): `/tree`, `/view_tree`, `/edit_tree`, `/test_tree`
 
-**Person Management** (8): `/edit_persons`, `/chat_edit_persons`, `/profile_persons`, `/expand`, `/chat_expand`, `/expand_children`, `/expand_partners`, `/expand_siblings`
+**Person Management** (8): `/edit_persons`, `/chat_edit_persons`, `/profile_persons`, `/expand`, `/chat-expand`, `/expand_children`, `/expand_partners`, `/expand_siblings`
 
-**Invitations** (2): `/chat_invites`, `/accept_invite`
+**Invitations** (2): `/chat-invites`, `/accept-invite`
 
 **Pending Decisions** (3): `/pd_view`, `/pd_tree`, `/pending_decisions`
 
@@ -4365,13 +4365,13 @@ Complete fix report saved to: AUTH_FORM_FIX_URGENT.md
 
 Made changes.
 
-mjamalnasir65:  ! ) Warning: require_once(D:\wamp64\www\familyapp\pages\MY\auth/../../classes/Database.php): Failed to open stream: No such file or directory in D:\wamp64\www\familyapp\pages\MY\auth\login.php on line 3
+mjamalnasir65:  ! ) Warning: require_once(D:\wamp64\www\familyapp\pages\my\auth/../../classes/Database.php): Failed to open stream: No such file or directory in D:\wamp64\www\familyapp\pages\my\auth\login.php on line 3
 Call Stack
 #	Time	Memory	Function	Location
 1	0.0033	552808	{main}( )	...\login.php:0
 
-( ! ) Fatal error: Uncaught Error: Failed opening required 'D:\wamp64\www\familyapp\pages\MY\auth/../../classes/Database.php' (include_path='.;C:\php\pear') in D:\wamp64\www\familyapp\pages\MY\auth\login.php on line 3
-( ! ) Error: Failed opening required 'D:\wamp64\www\familyapp\pages\MY\auth/../../classes/Database.php' (include_path='.;C:\php\pear') in D:\wamp64\www\familyapp\pages\MY\auth\login.php on line 3
+( ! ) Fatal error: Uncaught Error: Failed opening required 'D:\wamp64\www\familyapp\pages\my\auth/../../classes/Database.php' (include_path='.;C:\php\pear') in D:\wamp64\www\familyapp\pages\my\auth\login.php on line 3
+( ! ) Error: Failed opening required 'D:\wamp64\www\familyapp\pages\my\auth/../../classes/Database.php' (include_path='.;C:\php\pear') in D:\wamp64\www\familyapp\pages\my\auth\login.php on line 3
 Call Stack
 #	Time	Memory	Function	Location
 1	0.0033	552808	{main}( )	...\login.php:0
@@ -4686,19 +4686,9 @@ Using "Replace String in File"
 ```
 
 ```
-## Fix 9: chat_wizard.html - logout link 
+## Fix 9: chat-wizard.html - logout link 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat_wizard.html#28-28), lines 28 to 36
-
-Using "Replace String in File"
-
-
-```
-
-```
-## Fix 10: chat_token_wizard.html - logout link 
-
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat_token_wizard.html#32-32), lines 32 to 40
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-wizard.html#28-28), lines 28 to 36
 
 Using "Replace String in File"
 
@@ -4706,19 +4696,9 @@ Using "Replace String in File"
 ```
 
 ```
-## Fix 11: chat_expand.html - logout link 
+## Fix 10: chat-token-wizard.html - logout link 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat_expand.html#29-29), lines 29 to 37
-
-Using "Replace String in File"
-
-
-```
-
-```
-## Fix 12: chatExpand_siblings.html - logout link 
-
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chatExpand_siblings.html#37-37), lines 37 to 45
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-token-wizard.html#32-32), lines 32 to 40
 
 Using "Replace String in File"
 
@@ -4726,19 +4706,9 @@ Using "Replace String in File"
 ```
 
 ```
-## Fix 13: chatExpand_partners.html - logout link 
+## Fix 11: chat-expand.html - logout link 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chatExpand_partners.html#37-37), lines 37 to 45
-
-Using "Replace String in File"
-
-
-```
-
-```
-## Fix 14: chatExpand_children.html - logout link 
-
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chatExpand_children.html#37-37), lines 37 to 45
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-expand.html#29-29), lines 29 to 37
 
 Using "Replace String in File"
 
@@ -4746,9 +4716,39 @@ Using "Replace String in File"
 ```
 
 ```
-## Fix 15: chatEdit_persons.html - logout link 
+## Fix 12: chat-expand-siblings.html - logout link 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chatEdit_persons.html#33-33), lines 33 to 41
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-expand-siblings.html#37-37), lines 37 to 45
+
+Using "Replace String in File"
+
+
+```
+
+```
+## Fix 13: chat-expand-partners.html - logout link 
+
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-expand-partners.html#37-37), lines 37 to 45
+
+Using "Replace String in File"
+
+
+```
+
+```
+## Fix 14: chat-expand-children.html - logout link 
+
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-expand-children.html#37-37), lines 37 to 45
+
+Using "Replace String in File"
+
+
+```
+
+```
+## Fix 15: chat-edit-persons.html - logout link 
+
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-edit-persons.html#33-33), lines 33 to 41
 
 Using "Replace String in File"
 
@@ -4778,9 +4778,9 @@ Using "Replace String in File"
 ```
 
 ```
-## Fix 18: chat_wizard_token_family.html - relative dashboard links 
+## Fix 18: chat-wizard-token-family.html - relative dashboard links 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat_wizard_token_family.html#40-40), lines 40 to 60
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-wizard-token-family.html#40-40), lines 40 to 60
 
 Using "Replace String in File"
 
@@ -4832,13 +4832,13 @@ Perfect! All links are now correctly using absolute paths with EN prefix. Let me
 6. ✅ invites.html
 7. ✅ edit_tree.html
 8. ✅ dashboard.html
-9. ✅ chat_wizard.html
-10. ✅ chat_token_wizard.html
-11. ✅ chat_expand.html
-12. ✅ chatExpand_siblings.html
-13. ✅ chatExpand_partners.html
-14. ✅ chatExpand_children.html
-15. ✅ chatEdit_persons.html
+9. ✅ chat-wizard.html
+10. ✅ chat-token-wizard.html
+11. ✅ chat-expand.html
+12. ✅ chat-expand-siblings.html
+13. ✅ chat-expand-partners.html
+14. ✅ chat-expand-children.html
+15. ✅ chat-edit-persons.html
 16. ✅ admin_dashboard.html
 
 ---
@@ -4849,7 +4849,7 @@ Perfect! All links are now correctly using absolute paths with EN prefix. Let me
 
 **Files Fixed (2 files):**
 1. ✅ pd_tree.html
-2. ✅ chat_wizard_token_family.html (2 instances)
+2. ✅ chat-wizard-token-family.html (2 instances)
 
 ---
 
@@ -5004,19 +5004,9 @@ Using "Replace String in File"
 ```
 
 ```
-### Fix 10: chat_wizard.html (MY) 
+### Fix 10: chat-wizard.html (MY) 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_wizard.html#28-28), lines 28 to 36
-
-Using "Replace String in File"
-
-
-```
-
-```
-### Fix 11: chat_token_wizard.html (MY) 
-
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_token_wizard.html#32-32), lines 32 to 40
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-wizard.html#28-28), lines 28 to 36
 
 Using "Replace String in File"
 
@@ -5024,19 +5014,9 @@ Using "Replace String in File"
 ```
 
 ```
-### Fix 12: chat_invites.html (MY) 
+### Fix 11: chat-token-wizard.html (MY) 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_invites.html#61-61), lines 61 to 69
-
-Using "Replace String in File"
-
-
-```
-
-```
-### Fix 13: chat_expand.html (MY) 
-
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_expand.html#29-29), lines 29 to 37
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-token-wizard.html#32-32), lines 32 to 40
 
 Using "Replace String in File"
 
@@ -5044,19 +5024,9 @@ Using "Replace String in File"
 ```
 
 ```
-### Fix 14: chatExpand_siblings.html (MY) 
+### Fix 12: chat-invites.html (MY) 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chatExpand_siblings.html#37-37), lines 37 to 45
-
-Using "Replace String in File"
-
-
-```
-
-```
-### Fix 15: chatExpand_partners.html (MY) 
-
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chatExpand_partners.html#37-37), lines 37 to 45
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-invites.html#61-61), lines 61 to 69
 
 Using "Replace String in File"
 
@@ -5064,9 +5034,9 @@ Using "Replace String in File"
 ```
 
 ```
-### Fix 16: chatExpand_children.html (MY) 
+### Fix 13: chat-expand.html (MY) 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chatExpand_children.html#37-37), lines 37 to 45
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-expand.html#29-29), lines 29 to 37
 
 Using "Replace String in File"
 
@@ -5074,9 +5044,39 @@ Using "Replace String in File"
 ```
 
 ```
-### Fix 17: chatEdit_persons.html (MY) 
+### Fix 14: chat-expand-siblings.html (MY) 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chatEdit_persons.html#33-33), lines 33 to 41
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-expand-siblings.html#37-37), lines 37 to 45
+
+Using "Replace String in File"
+
+
+```
+
+```
+### Fix 15: chat-expand-partners.html (MY) 
+
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-expand-partners.html#37-37), lines 37 to 45
+
+Using "Replace String in File"
+
+
+```
+
+```
+### Fix 16: chat-expand-children.html (MY) 
+
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-expand-children.html#37-37), lines 37 to 45
+
+Using "Replace String in File"
+
+
+```
+
+```
+### Fix 17: chat-edit-persons.html (MY) 
+
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-edit-persons.html#33-33), lines 33 to 41
 
 Using "Replace String in File"
 
@@ -5106,9 +5106,9 @@ Using "Replace String in File"
 ```
 
 ```
-### Fix 20: chat_wizard_token_family.html (MY) - relative dashboard links 
+### Fix 20: chat-wizard-token-family.html (MY) - relative dashboard links 
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_wizard_token_family.html#40-40), lines 40 to 60
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-wizard-token-family.html#40-40), lines 40 to 60
 
 Using "Replace String in File"
 
@@ -5148,14 +5148,14 @@ Excellent! All fixes are complete. Let me create a final summary:
 7. ✅ invites.html
 8. ✅ edit_tree.html
 9. ✅ dashboard.html
-10. ✅ chat_wizard.html
-11. ✅ chat_token_wizard.html
-12. ✅ chat_invites.html
-13. ✅ chat_expand.html
-14. ✅ chatExpand_siblings.html
-15. ✅ chatExpand_partners.html
-16. ✅ chatExpand_children.html
-17. ✅ chatEdit_persons.html
+10. ✅ chat-wizard.html
+11. ✅ chat-token-wizard.html
+12. ✅ chat-invites.html
+13. ✅ chat-expand.html
+14. ✅ chat-expand-siblings.html
+15. ✅ chat-expand-partners.html
+16. ✅ chat-expand-children.html
+17. ✅ chat-edit-persons.html
 18. ✅ admin_dashboard.html
 
 ---
@@ -5166,7 +5166,7 @@ Excellent! All fixes are complete. Let me create a final summary:
 
 **Files Fixed (2 files):**
 1. ✅ pd_tree.html
-2. ✅ chat_wizard_token_family.html (2 instances)
+2. ✅ chat-wizard-token-family.html (2 instances)
 
 ---
 
@@ -5230,43 +5230,43 @@ grep -r 'href="./dashboard' pages/my/
 Made changes.
 
 mjamalnasir65: read chat_history.txt thoroughly to understand the paths issues 
-pages\MY\auth
-pages\MY\auth\login - Copy.php
-pages\MY\auth\login.html
-pages\MY\auth\login.php
-pages\MY\auth\logout.php
-pages\MY\auth\register.html
-pages\MY\auth\register.php
-pages\MY\auth\tok_register.html
-pages\MY\auth\tok_register.php
-pages\MY\404.html
-pages\MY\about.html
-pages\MY\accept_invite.html
-pages\MY\admin_dashboard.html
-pages\MY\chat_expand.html
-pages\MY\chat_invites.html
-pages\MY\chat_token_wizard.html
-pages\MY\chat_wizard_token_family.html
-pages\MY\chat_wizard.html
-pages\MY\chatEdit_persons.html
-pages\MY\chatExpand_children.html
-pages\MY\chatExpand_partners.html
-pages\MY\chatExpand_siblings.html
-pages\MY\dashboard.html
-pages\MY\dashboard.php
-pages\MY\edit_tree.html
-pages\MY\index.html
-pages\MY\invites.html
-pages\MY\logs.html
-pages\MY\offline.html
-pages\MY\pd_tree.html
-pages\MY\pd_view.html
-pages\MY\profile_persons.html
-pages\MY\public.html
-pages\MY\terms.html
-pages\MY\test_tree.html
-pages\MY\tree.html
-pages\MY\view_tree.html
+pages\my\auth
+pages\my\auth\login - Copy.php
+pages\my\auth\login.html
+pages\my\auth\login.php
+pages\my\auth\logout.php
+pages\my\auth\register.html
+pages\my\auth\register.php
+pages\my\auth\tok_register.html
+pages\my\auth\tok_register.php
+pages\my\404.html
+pages\my\about.html
+pages\my\accept-invite.html
+pages\my\admin_dashboard.html
+pages\my\chat-expand.html
+pages\my\chat-invites.html
+pages\my\chat-token-wizard.html
+pages\my\chat-wizard-token-family.html
+pages\my\chat-wizard.html
+pages\my\chat-edit-persons.html
+pages\my\chat-expand-children.html
+pages\my\chat-expand-partners.html
+pages\my\chat-expand-siblings.html
+pages\my\dashboard.html
+pages\my\dashboard.php
+pages\my\edit_tree.html
+pages\my\index.html
+pages\my\invites.html
+pages\my\logs.html
+pages\my\offline.html
+pages\my\pd_tree.html
+pages\my\pd_view.html
+pages\my\profile_persons.html
+pages\my\public.html
+pages\my\terms.html
+pages\my\test_tree.html
+pages\my\tree.html
+pages\my\view_tree.html
 
 
 
@@ -5317,18 +5317,18 @@ Optional small improvements you may want next:
 
 If you still hit 404 after a hard refresh, tell me the exact URL DevTools shows for the logout request, and I’ll trace that path end to end.
 
-mjamalnasir65: http://familyapp/pages/en/chatExpand_children.html?pid=4&co=11
+mjamalnasir65: http://familyapp/pages/en/chat-expand-children.html?pid=4&co=11
 
 failed to fetch person #11 full name: Parents: Zakaria + #11
 
 GitHub Copilot: Summarized conversation history
 
-mjamalnasir65: http://familyapp/pages/en/chatExpand_children.html?pid=13&co=15
-check why EN/chatExpand_children.html and pages\EN\assets\js\chatExpand_children.js failed to fetch Parents: DAUS + partner person full_name for person #15 after saving the pages/en/chatExpand_partners.html?pid=13. Once found out fix also pages\MY\chatExpand_children.html and pages\MY\assets\js\chatExpand_children.js
+mjamalnasir65: http://familyapp/pages/en/chat-expand-children.html?pid=13&co=15
+check why EN/chat-expand-children.html and pages\en\assets\js\chat-expand-children.js failed to fetch Parents: DAUS + partner person full_name for person #15 after saving the pages/en/chat-expand-partners.html?pid=13. Once found out fix also pages\my\chat-expand-children.html and pages\my\assets\js\chat-expand-children.js
 
 GitHub Copilot: Summarized conversation historyI'll search the workspace to locate the referenced JS files and compare paths/casing to identify why the EN page isn't loading the correct script and failing to resolve the partner name. Outcome: inventory of file locations and mismatches to fix.
 
-Searched for files matching `**/chatExpand_children.js`, 8 matches
+Searched for files matching `**/chat-expand-children.js`, 8 matches
 
 Read [](file:///d%3A/wamp64/www/familyapp/api/person_get.php)
 
@@ -5340,23 +5340,23 @@ Read [](file:///d%3A/wamp64/www/familyapp/api/_init.php)
 
 Read [](file:///d%3A/wamp64/www/familyapp/classes/Database.php)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chatExpand_partners.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-expand-partners.html)
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatExpand_children.js)
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-expand-children.js)
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/my/chatExpand_children.js)
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/my/chat-expand-children.js)
 
 Collecting partner step JS and searching for prefill logic to ensure name saving and diagnose missing partner name before adding fallback to EN script. Outcome: identify gap and prepare patch.
 
-Searched for files matching `**/chatExpand_Partners.js`, no matches
+Searched for files matching `**/chat-expand-partners.js`, no matches
 
 Searched text for `prefill_children` (`**/*.js`), 8 results
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatExpand_partners.js)
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-expand-partners.js)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/assets/js/chatExpand_partners.js)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/assets/js/chat-expand-partners.js)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chatExpand_children.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-expand-children.html)
 
 Read [](file:///d%3A/wamp64/www/familyapp/config/config.php)
 
@@ -5392,7 +5392,7 @@ Updated EN children script to add person name fallback (person_get then family_t
 
 Made changes.
 
-mjamalnasir65: the image from pages/en/chat_invites.html mobile view. let tweak the css to make the table more organized in mobile first more. The action field for button revoke X make it more visible. 
+mjamalnasir65: the image from pages/en/chat-invites.html mobile view. let tweak the css to make the table more organized in mobile first more. The action field for button revoke X make it more visible. 
 
 GitHub Copilot: I'll update the invites page HTML/CSS for a mobile-first responsive table and style the revoke action button prominently, and adjust the JS to add data-label attributes so rows render cleanly on small screens. Outcome: cleaner stacked-card view on phones with clear revoke button.
 
@@ -5402,11 +5402,11 @@ Using "Apply Patch"
 ```
 
 ```
-Mobile-first improvements applied to chat_invites.html: added responsive card layout that hides the table header under 640px, each cell now shows a bold label via `data-label`, and action buttons (Resend/Revoke) are restyled as prominent pill buttons with a distinct revoke danger color. Added `.icon-btn` styling plus mobile tweaks and accessibility span placeholders. Let me know if you’d like the same enhancement mirrored to MY or further spacing/contrast adjustments.
+Mobile-first improvements applied to chat-invites.html: added responsive card layout that hides the table header under 640px, each cell now shows a bold label via `data-label`, and action buttons (Resend/Revoke) are restyled as prominent pill buttons with a distinct revoke danger color. Added `.icon-btn` styling plus mobile tweaks and accessibility span placeholders. Let me know if you’d like the same enhancement mirrored to MY or further spacing/contrast adjustments.
 
 Made changes.
 
-mjamalnasir65: refer to image pages/en/chat_invites.html for  <th class="right">Actions</th> <td data-label="Actions" class="right">
+mjamalnasir65: refer to image pages/en/chat-invites.html for  <th class="right">Actions</th> <td data-label="Actions" class="right">
             ${it.status==='pending' ? `<button data-act="resend" data-id="${it.id}" class="icon-btn" title="Resend" aria-label="Resend"><span class="icon">🔄</span><span class="label sr-only">Resend</span></button>
             <button data-act="revoke" data-id="${it.id}" class="icon-btn" title="Revoke" aria-label="Revoke"><span class="icon">✖</span><span class="label sr-only">Revoke</span></button>` : ''}
           </td>`;
@@ -5436,7 +5436,7 @@ What changed
   - Action buttons aligned right and spaced
 
 Files updated
-- chat_invites.html
+- chat-invites.html
   - CSS: added .icon-btn.icon-only, .btn-resend, .btn-danger, larger touch targets on mobile
   - JS row template: replaced inner HTML of Actions cell with icon-only buttons and removed text/sr-only spans
 
@@ -5463,11 +5463,11 @@ Read [](file:///d%3A/wamp64/www/familyapp/api/invite_url_helper.php)
 
 Read [](file:///d%3A/wamp64/www/familyapp/composer.json)
 
-Searched for files matching `**/pages/my/chat_invites.html`, 2 matches
+Searched for files matching `**/pages/my/chat-invites.html`, 2 matches
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_invites.html#1-1), lines 1 to 220
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-invites.html#1-1), lines 1 to 220
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat_invites.html#220-220), lines 220 to 484
+Read [](file:///d%3A/wamp64/www/familyapp/pages/my/chat-invites.html#220-220), lines 220 to 484
 
 Summarized conversation historyI'll inspect the backend invites_resend endpoint and related create endpoint to implement sending via PHPMailer and then update the EN/MY invites pages to display email send success/error feedback.
 
@@ -5477,7 +5477,7 @@ Read [](file:///d%3A/wamp64/www/familyapp/api/invites_create.php)
 
 Read [](file:///d%3A/wamp64/www/familyapp/classes/Mailer.php)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat_invites.html#220-220), lines 220 to 483
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-invites.html#220-220), lines 220 to 483
 
 Using "Apply Patch"
 
@@ -5515,19 +5515,19 @@ I’m going to wire email sending into the “Resend” flow and surface email s
     - Send invite email via `Mailer::sendInvite(...)` with context: family name, role, scope
     - Return `email: { ok: boolean, error?: string }` alongside `invite_url`
 - Frontend: show email send results in UI for create and resend
-  - chat_invites.html
+  - chat-invites.html
     - Resend: after copying the link, show “Email sent successfully” or “Email failed …” if returned
     - Create: on success show email result (“Email sent” or “Email failed …”); still copies link
-  - chat_invites.html
+  - chat-invites.html
     - Same behavior as EN, using localized strings via `T(...)`
 
 ## Files changed
 
 - invites_resend.php
   - Purpose: Add PHPMailer-based email sending on resend and return `email` result
-- chat_invites.html
+- chat-invites.html
   - Purpose: Display email send status messages after create/resend
-- chat_invites.html
+- chat-invites.html
   - Purpose: Display email send status messages after create/resend (localized)
 
 ## How to verify
@@ -6072,10 +6072,10 @@ Send me the next error snippet if it doesn’t authenticate yet, and I’ll tune
 
 Made changes.
 
-mjamalnasir65: we had an issue. Our email invitation link https://nasab.hdsite.com.my/pages/en/accept_invite.html?token=-25cbVS8EVqDM0ghtlpYoQ 
+mjamalnasir65: we had an issue. Our email invitation link https://nasab.hdsite.com.my/pages/en/accept-invite.html?token=-25cbVS8EVqDM0ghtlpYoQ 
 the accept invitation button inside the email onclick from the email did not link to login.html where system suppose to fetch and populate the email and token if token still valid and prompt user to fill in the password. We alredy set in login.php for user with invite token to login 
 
-GitHub Copilot: Searched text for `login.html|invite_token|Accept invitation|accept_invite` (`**/d:\wamp64\www\familyapp\**`), 2 results
+GitHub Copilot: Searched text for `login.html|invite_token|Accept invitation|accept-invite` (`**/d:\wamp64\www\familyapp\**`), 2 results
 
 Searched text for `invite_token` (`**/d:\wamp64\www\familyapp\**`), no results
 
@@ -6085,7 +6085,7 @@ Searched for files matching `**/login.html`, 6 matches
 
 Read [](file:///d%3A/wamp64/www/familyapp/pages/en/auth/login.html)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/accept_invite.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/accept-invite.html)
 
 Using "Apply Patch"
 
@@ -6107,13 +6107,13 @@ What I changed
 
 1) Email content: added a “Sign in with invite code” fallback
 - File: Mailer.php
-- The email still contains the “Accept invitation” button to /pages/en/accept_invite.html?token=...
+- The email still contains the “Accept invitation” button to /pages/en/accept-invite.html?token=...
 - Added a second link below it that points to the login page with the token carried as invite_token:
   - /pages/en/auth/login.html?invite_token=...
 - This helps users who aren’t signed in; your login.php already supports onboarding with invite_token and will create/attach the user when they submit a password.
 
 2) Accept page: show “Sign in to accept” with token prefilled
-- File: accept_invite.html
+- File: accept-invite.html
 - If invites_accept.php returns require_login, the page now:
   - Shows a “Sign in to accept” button that links to /pages/en/auth/login.html?invite_token=THE_TOKEN
   - Also shows “Create account” and “Go to tree” links
@@ -6128,17 +6128,17 @@ What I changed
 
 How this solves your case
 - If a recipient is not logged in and clicks the email’s Accept button:
-  - accept_invite.html will detect they’re not logged in and send them to login with the token prefilled, no need to fish for it manually.
+  - accept-invite.html will detect they’re not logged in and send them to login with the token prefilled, no need to fish for it manually.
 - If they click the new “Sign in with invite code” link in the email:
   - They go straight to login with the token in place and can set a password (first-time) or sign in then accept automatically.
 
 What you can test
 - Open the same invite email and try the new “Sign in with invite code” link.
-- Or click the Accept button; on accept_invite.html you should now see “Sign in to accept,” which takes you to login with the token attached.
+- Or click the Accept button; on accept-invite.html you should now see “Sign in to accept,” which takes you to login with the token attached.
 - After login (or first-time password set), the invite should be accepted and you’ll be redirected to the dashboard/tree (per your login.php flow).
 
 Notes
-- I also fixed a minor JS typo on accept_invite.html when adding the CSS class to the card.
+- I also fixed a minor JS typo on accept-invite.html when adding the CSS class to the card.
 - SMTP is working now (per your Gmail screenshot). Once you’re done testing, remember to:
   - Turn down SMTP_DEBUG to 0 (in config.local.php and/or config_prod.php depending on where you enabled it)
   - Re-enable strict security headers in config_prod.php:
@@ -6171,7 +6171,7 @@ Status
 - Email flow remains the same:
   - SMTPS 465 by default (per config), with a single fallback to STARTTLS 587 if the first attempt returns an authentication error.
   - Email includes both:
-    - Accept button (accept_invite.html?token=…)
+    - Accept button (accept-invite.html?token=…)
     - “Sign in with invite code” fallback (auth/login.html?invite_token=…)
 
 Next steps
@@ -6184,8 +6184,8 @@ Next steps
 Made changes.
 
 mjamalnasir65: image is from mobile device. Let do some Css tweaking to fix the tree view. 
-pages\MY\tree.html 
-pages\EN\tree.html
+pages\my\tree.html 
+pages\en\tree.html
 
 GitHub Copilot: Searched for files matching `**/pages/**/tree.html`, 4 matches
 
@@ -6223,15 +6223,15 @@ Mobile tree CSS enhancements added to both EN and MY pages (responsive media que
 
 Made changes.
 
-mjamalnasir65: we hah a broken path from both pages/en/tree.html and pages/my/tree.html to pages\EN\chat_expand.html and pages\MY\chat_expand.html to pages\EN\chatExpand_siblings.html and pages\MY\chatExpand_siblings.html
+mjamalnasir65: we hah a broken path from both pages/en/tree.html and pages/my/tree.html to pages\en\chat-expand.html and pages\my\chat-expand.html to pages\en\chat-expand-siblings.html and pages\my\chat-expand-siblings.html
 
 GET
-https://nasab.hdsite.com.my/pages/en/chatExpand_siblings.html?pid=2
+https://nasab.hdsite.com.my/pages/en/chat-expand-siblings.html?pid=2
 [HTTP/2 404  16ms]
 
 	
 GET
-	https://nasab.hdsite.com.my/pages/en/chatExpand_siblings.html?pid=2
+	https://nasab.hdsite.com.my/pages/en/chat-expand-siblings.html?pid=2
 Status
 404
 VersionHTTP/2
@@ -6245,27 +6245,19 @@ DNS ResolutionSystem
 
 GitHub Copilot: Read [](file:///d%3A/wamp64/www/familyapp/pages/EN)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat_expand.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-expand.html)
 
-Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chatExpand_siblings.html)
+Read [](file:///d%3A/wamp64/www/familyapp/pages/en/chat-expand-siblings.html)
 
 Read [](file:///d%3A/wamp64/www/familyapp/pages/MY)
 
-Searched text for `chatExpand_siblings` (`**/d:\wamp64\www\familyapp\**`), no results
+Searched text for `chat-expand-siblings` (`**/d:\wamp64\www\familyapp\**`), no results
 
-Searched text for `chatExpand_siblings` (`**/d:\wamp64\www\familyapp\**`), no results
+Searched text for `chat-expand-siblings` (`**/d:\wamp64\www\familyapp\**`), no results
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatExpand.js)
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-expand.js)
 
-Read [](file:///d%3A/wamp64/www/familyapp/assets/js/my/chatExpand.js)
-
-Using "Apply Patch"
-
-
-```
-
-```
-
+Read [](file:///d%3A/wamp64/www/familyapp/assets/js/my/chat-expand.js)
 
 Using "Apply Patch"
 
@@ -6275,9 +6267,17 @@ Using "Apply Patch"
 ```
 
 
-Checked [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chatExpand.js), [](file:///d%3A/wamp64/www/familyapp/assets/js/my/chatExpand.js), no problems found
+Using "Apply Patch"
 
-Fixed: Redirect paths now use the correct case (chatExpand_siblings.html) in both chatExpand.js and chatExpand.js, resolving the 404 from `/pages/*/chatExpand_siblings.html`. No syntax errors after patch. Test by completing the parents step; it should load the siblings chat without 404. Let me know if you’d like a quick curl test script or need similar checks for partners/children flows.
+
+```
+
+```
+
+
+Checked [](file:///d%3A/wamp64/www/familyapp/assets/js/en/chat-expand.js), [](file:///d%3A/wamp64/www/familyapp/assets/js/my/chat-expand.js), no problems found
+
+Fixed: Redirect paths now use the correct case (chat-expand-siblings.html) in both chat-expand.js and chat-expand.js, resolving the 404 from `/pages/*/chat-expand-siblings.html`. No syntax errors after patch. Test by completing the parents step; it should load the siblings chat without 404. Let me know if you’d like a quick curl test script or need similar checks for partners/children flows.
 
 =====================================================================================
   NEW CHAT SESSION COMBINING DEV AND PROD GIT Controlled
@@ -6298,7 +6298,7 @@ What’s solid
 Gaps and risks
 - API consistency: Only some endpoints have fatal handlers and guaranteed JSON. Others can still 500 with empty bodies (causes frontend JSON.parse errors).
 - Router vs direct access: You disabled .htaccess and rely on index.php + router, but many pages are reached directly. Keep router logic simple and avoid redirect loops; ensure POSTs never rely on router redirects.
-- Case sensitivity: Fixed chatExpand_siblings vs chatExpand_Siblings in JS. Verify all HTML links and redirects use exact casing (Linux prod is strict).
+- Case sensitivity: Fixed chat-expand-siblings vs chat-expand-siblings in JS. Verify all HTML links and redirects use exact casing (Linux prod is strict).
 - Duplicate/backup files: “login - Copy.php” exists; ensure not reachable or remove to avoid drift.
 - SMTP: Auth now configured (465/ssl with 587/tls fallback). If “Could not authenticate” reappears on prod, explicitly set AUTH type (LOGIN) and confirm mailbox policy on host.
 - Security: Production config currently relaxes CSP/HSTS and SMTP_DEBUG=2 in places. Remember to re-enable strict headers and set SMTP_DEBUG=0 before/after prod deploy.
@@ -6309,10 +6309,10 @@ High‑priority next steps
   - Start session, set Content-Type, register shutdown handler for fatals, wrap try/catch.
 - Final repo-wide checks:
   - Grep for any remaining /auth/*.php form actions (should be /pages/{LANG}/auth/*.php).
-  - Grep for /familyapp/public remnants and chatExpand_siblings lowercase.
+  - Grep for /familyapp/public remnants and chat-expand-siblings lowercase.
   - Grep for “../../classes” in api/ and pages/*/auth/*.php (should be …/../..../ consistently).
 - Invitations:
-  - Ensure email template includes both Accept (accept_invite.html?token=…) and “Sign in with invite code” (auth/login.html?invite_token=…).
+  - Ensure email template includes both Accept (accept-invite.html?token=…) and “Sign in with invite code” (auth/login.html?invite_token=…).
   - Verify invites_accept_* endpoints handle unauthenticated users by signaling require_login (your accept page now links to login with token).
 - Deployment prep:
   - Install vendor/ on prod; set SMTP_DEBUG=0; re-enable CSP/HSTS in config_prod.php.
@@ -6322,8 +6322,8 @@ High‑priority next steps
 Quick verification checklist
 - Assets: https://nasab.hdsite.com.my/assets/css/main.css → 200
 - Session: https://nasab.hdsite.com.my/api/session_info.php → {"ok":...}
-- Friendly URLs: /dashboard → 302 to /pages/EN/MY/dashboard.html
-- Invite click (logged out): accept_invite → shows “Sign in to accept” and carries invite_token to login; login accepts and redirects to dashboard.
+- Friendly URLs: /dashboard → 302 to /pages/en/my/dashboard.html
+- Invite click (logged out): accept-invite → shows “Sign in to accept” and carries invite_token to login; login accepts and redirects to dashboard.
 - EN/MY expand flows: parents → siblings → partners → children without 404; partner name fallback shows full_name not #id.
 
 If you want, I can add a small api/_bootstrap.php and show the one-line include pattern to standardize all endpoints.
@@ -6338,7 +6338,7 @@ My understanding
 - dashboard.php redirect fixed; language 404 pages added (EN/MY).
 - ActionLogger now writes to project /logs (no phantom /public/logs).
 - config.local.php introduced; BASE_URL set per environment; localhost config used here.
-- Invite links now carry lang and point to localized accept_invite.html (EN and MY present).
+- Invite links now carry lang and point to localized accept-invite.html (EN and MY present).
 - Uploads and APIs use forward slashes; no Windows-style separators.
 - _init/bootstrap consistency flagged; ensure _init.php present on prod or endpoints updated.
 
@@ -6387,7 +6387,7 @@ Memory of resolved path issues (condensed):
 3. Ensured _init.php (or equivalent) resides inside /api and matches require paths.
 4. ActionLogger path adjusted to /logs (no phantom /public/logs).
 5. BASE_URL now environment-specific via config (dev localhost vs prod domain).
-6. Case sensitivity audited (EN/MY, chatExpand_Siblings consistent).
+6. Case sensitivity audited (EN/MY, chat-expand-siblings consistent).
 7. Manifest and favicon now referenced at root.
 8. Log & uploads directories writable and referenced with forward slashes.
 
@@ -6419,16 +6419,16 @@ Just specify A, B, or C (or combo).
 
 mjamalnasir65: Read again the chat history especially toward the end for you to grasp the current situation.
 NOW let try fix this issue:
-image 1 and 2 from dev server localhost: http://familyappprod/pages/EN/chatExpand_Siblings.html?pid=2. If you look at image 2 the console image you may find out the network behaviour.
+image 1 and 2 from dev server localhost: http://familyappprod/pages/en/chat-expand-siblings.html?pid=2. If you look at image 2 the console image you may find out the network behaviour.
 
-image 3 and 4 from the prod server: https://nasab.hdsite.com.my/pages/EN/chatExpand_siblings.html?pid=2. And if you look at the console image (image 4)  missing session info thus having this error
+image 3 and 4 from the prod server: https://nasab.hdsite.com.my/pages/en/chat-expand-siblings.html?pid=2. And if you look at the console image (image 4)  missing session info thus having this error
 GET
-https://nasab.hdsite.com.my/pages/EN/chatExpand_siblings.html?pid=2
+https://nasab.hdsite.com.my/pages/en/chat-expand-siblings.html?pid=2
 [HTTP/2 404  18ms]
 
 	
 GET
-	https://nasab.hdsite.com.my/pages/EN/chatExpand_siblings.html?pid=2
+	https://nasab.hdsite.com.my/pages/en/chat-expand-siblings.html?pid=2
 Status
 404
 VersionHTTP/2
@@ -6444,7 +6444,7 @@ DNS ResolutionSystem
 GitHub Copilot: Below is the focused diagnosis and fix plan for the 404 + missing session info on the siblings expand page (EN) across dev vs prod.
 
 Root cause (primary)
-- Case mismatch in filename and/or links: dev (Windows) is case‑insensitive so both chatExpand_Siblings.html and chatExpand_siblings.html load; prod (Linux) is case‑sensitive, so any mismatch 404s.
+- Case mismatch in filename and/or links: dev (Windows) is case‑insensitive so both chat-expand-siblings.html and chat-expand-siblings.html load; prod (Linux) is case‑sensitive, so any mismatch 404s.
 - Because the HTML 404s (or the wrong file loads), the page’s JS that calls session_info.php never runs → no session fetch → wizard/chat logic fails.
 - Secondary: Some JS modules may still reference the wrong HTML filename variant when redirecting or building links.
 
@@ -6453,26 +6453,26 @@ Run these on prod (SSH or cPanel terminal):
 
 ````bash
 # List actual file names
-ls -1 pages/EN | grep -i chatExpand
+ls -1 pages/EN | grep -i chat-expand
 # Inspect siblings file exact casing
-stat pages/EN/chatExpand_Siblings.html 2>/dev/null
-stat pages/EN/chatExpand_siblings.html 2>/dev/null
+stat pages/en/chat-expand-siblings.html 2>/dev/null
+stat pages/en/chat-expand-siblings.html 2>/dev/null
 
 # Check any residual lowercase references in EN JS
-grep -R "chatExpand_siblings" assets/js/EN  pages/EN | cut -c1-180
+grep -R "chat-expand-siblings" assets/js/EN  pages/EN | cut -c1-180
 
 # Check uppercase references
-grep -R "chatExpand_Siblings" assets/js/EN  pages/EN | cut -c1-180
+grep -R "chat-expand-siblings" assets/js/EN  pages/EN | cut -c1-180
 ````
 
-Expected: Only one physical file exists (likely chatExpand_Siblings.html). Your failing URL on prod used lowercase “_siblings” → 404.
+Expected: Only one physical file exists (likely chat-expand-siblings.html). Your failing URL on prod used lowercase “_siblings” → 404.
 
 Fix strategy
-1. Standardize file naming: choose one (recommend camel with uppercase S: chatExpand_Siblings.html to match existing JS imports).
-2. Add a lightweight alias file for backward compatibility (optional for safety): chatExpand_siblings.html that simply meta‑refresh or JS redirect to the canonical file.
+1. Standardize file naming: choose one (recommend camel with uppercase S: chat-expand-siblings.html to match existing JS imports).
+2. Add a lightweight alias file for backward compatibility (optional for safety): chat-expand-siblings.html that simply meta‑refresh or JS redirect to the canonical file.
 3. Normalize all links & redirects in:
-   - pages/EN/*.html
-   - chatExpand_Siblings.js (and any central navigation code)
+   - pages/en/*.html
+   - chat-expand-siblings.js (and any central navigation code)
    - Friendly URL map (router.php) if it generates these paths.
 4. Verify session_info endpoint returns JSON (curl). If not, fix API include paths (should be `__DIR__ . Database.php'` etc.).
 5. Harden fetch logic (already partly done) so a failed session fetch does not break page.
@@ -6487,9 +6487,9 @@ A) Provide an alias (optional, prevents future typos)
 <head>
 <meta charset="utf-8">
 <title>Redirecting…</title>
-<meta http-equiv="refresh" content="0; url=chatExpand_Siblings.html">
+<meta http-equiv="refresh" content="0; url=chat-expand-siblings.html">
 <script>
-  location.replace("chatExpand_Siblings.html" + location.search);
+  location.replace("chat-expand-siblings.html" + location.search);
 </script>
 </head>
 <body>
@@ -6502,7 +6502,7 @@ B) Ensure canonical file has correct session_info fetch (add defensive check if 
 
 ````html
 <!-- ...existing code... -->
-<script src="/assets/js/EN/chatExpand_Siblings.js?v=202510"></script>
+<script src="/assets/js/en/chat-expand-siblings.js?v=202510"></script>
 <script>
 (function(){
   // Defensive: if global init not run, try session fetch directly.
@@ -6522,10 +6522,10 @@ C) Update any JS redirect helpers (example)
 ````javascript
 // ...existing code...
 function goToSiblings(personId) {
-  const url = "/pages/EN/chatExpand_Siblings.html?pid=" + encodeURIComponent(personId);
+  const url = "/pages/en/chat-expand-siblings.html?pid=" + encodeURIComponent(personId);
   window.location.href = url;
 }
-// Replace any previous 'chatExpand_siblings.html' uses.
+// Replace any previous 'chat-expand-siblings.html' uses.
 // ...existing code...
 ````
 
@@ -6533,7 +6533,7 @@ D) Router friendly URL (if you want /expand_siblings shortcut):
 
 ````php
 // ...existing code...
-'expand_siblings' => 'chatExpand_Siblings.html',
+'expand_siblings' => 'chat-expand-siblings.html',
 // ...existing code...
 ````
 
@@ -6542,13 +6542,13 @@ E) Add a quick consistency test script (dev only)
 ````php
 <?php
 $targets = [
-  'pages/EN/chatExpand_Siblings.html',
-  'pages/EN/chatExpand_siblings.html'
+  'pages/en/chat-expand-siblings.html',
+  'pages/en/chat-expand-siblings.html'
 ];
 foreach ($targets as $f) {
   echo $f . (is_file($f) ? " OK\n" : " MISSING\n");
 }
-$grep = shell_exec("grep -R \"chatExpand_siblings\" pages/EN assets/js/EN 2>NUL");
+$grep = shell_exec("grep -R \"chat-expand-siblings\" pages/EN assets/js/EN 2>NUL");
 echo "\nLowercase references:\n" . ($grep ?: "None\n");
 ````
 
@@ -6569,10 +6569,10 @@ Common residual pitfalls
 - Service Worker (if previously registered) still serving old asset path—clear SW in devtools Application tab.
 
 Verification checklist (after patch)
-1. Visit: https://nasab.hdsite.com.my/pages/EN/chatExpand_Siblings.html?pid=2 → 200.
-2. Visit lowercase alias: https://nasab.hdsite.com.my/pages/EN/chatExpand_siblings.html?pid=2 → 302 or redirect to canonical, then 200.
+1. Visit: https://nasab.hdsite.com.my/pages/en/chat-expand-siblings.html?pid=2 → 200.
+2. Visit lowercase alias: https://nasab.hdsite.com.my/pages/en/chat-expand-siblings.html?pid=2 → 302 or redirect to canonical, then 200.
 3. Network tab shows:
-   - chatExpand_Siblings.js 200
+   - chat-expand-siblings.js 200
    - session_info.php 200 (JSON)
    - expand_step2_prefill_siblings.php 200
 4. Console: No uncaught JSON.parse errors.
@@ -6582,10 +6582,10 @@ Quick remediation script (optional – prod via SSH)
 ````bash
 cd /home/hdsiteco/public_html/nasab.hdsite.com.my/pages/EN
 # If canonical missing, rename:
-[ -f chatExpand_siblings.html ] && mv chatExpand_siblings.html chatExpand_Siblings.html
+[ -f chat-expand-siblings.html ] && mv chat-expand-siblings.html chat-expand-siblings.html
 # Create alias:
-cat > chatExpand_siblings.html <<'EOF'
-<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=chatExpand_Siblings.html"><script>location.replace("chatExpand_Siblings.html"+location.search);</script>Redirecting...
+cat > chat-expand-siblings.html <<'EOF'
+<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=chat-expand-siblings.html"><script>location.replace("chat-expand-siblings.html"+location.search);</script>Redirecting...
 EOF
 ````
 
@@ -6597,7 +6597,7 @@ Summary
 
 Want me to supply a bulk grep/patch script for EN + MY variants? Reply “need patch script” and I’ll generate it.
 
-Let me know if you also want to enforce automatic normalization (middleware that redirects any chatExpand_siblings.html → chatExpand_Siblings.html globally).
+Let me know if you also want to enforce automatic normalization (middleware that redirects any chat-expand-siblings.html → chat-expand-siblings.html globally).
 
 mjamalnasir65: Image 1 and 3 are the prod server version. Image 2 and 4  are the dev server. 
 
@@ -6605,7 +6605,7 @@ Execute the most practical to solve the issues in production and applicable to d
 Below is the focused diagnosis and fix plan for the 404 + missing session info on the siblings expand page (EN) across dev vs prod.
 
 Root cause (primary)
-- Case mismatch in filename and/or links: dev (Windows) is case‑insensitive so both chatExpand_Siblings.html and chatExpand_siblings.html load; prod (Linux) is case‑sensitive, so any mismatch 404s.
+- Case mismatch in filename and/or links: dev (Windows) is case‑insensitive so both chat-expand-siblings.html and chat-expand-siblings.html load; prod (Linux) is case‑sensitive, so any mismatch 404s.
 - Because the HTML 404s (or the wrong file loads), the page’s JS that calls session_info.php never runs → no session fetch → wizard/chat logic fails.
 - Secondary: Some JS modules may still reference the wrong HTML filename variant when redirecting or building links.
 
@@ -6614,26 +6614,26 @@ Run these on prod (SSH or cPanel terminal):
 
 ````bash
 # List actual file names
-ls -1 pages/EN | grep -i chatExpand
+ls -1 pages/EN | grep -i chat-expand
 # Inspect siblings file exact casing
-stat pages/EN/chatExpand_Siblings.html 2>/dev/null
-stat pages/EN/chatExpand_siblings.html 2>/dev/null
+stat pages/en/chat-expand-siblings.html 2>/dev/null
+stat pages/en/chat-expand-siblings.html 2>/dev/null
 
 # Check any residual lowercase references in EN JS
-grep -R "chatExpand_siblings" assets/js/EN  pages/EN | cut -c1-180
+grep -R "chat-expand-siblings" assets/js/EN  pages/EN | cut -c1-180
 
 # Check uppercase references
-grep -R "chatExpand_Siblings" assets/js/EN  pages/EN | cut -c1-180
+grep -R "chat-expand-siblings" assets/js/EN  pages/EN | cut -c1-180
 ````
 
-Expected: Only one physical file exists (likely chatExpand_Siblings.html). Your failing URL on prod used lowercase “_siblings” → 404.
+Expected: Only one physical file exists (likely chat-expand-siblings.html). Your failing URL on prod used lowercase “_siblings” → 404.
 
 Fix strategy
-1. Standardize file naming: choose one (recommend camel with uppercase S: chatExpand_Siblings.html to match existing JS imports).
-2. Add a lightweight alias file for backward compatibility (optional for safety): chatExpand_siblings.html that simply meta‑refresh or JS redirect to the canonical file.
+1. Standardize file naming: choose one (recommend camel with uppercase S: chat-expand-siblings.html to match existing JS imports).
+2. Add a lightweight alias file for backward compatibility (optional for safety): chat-expand-siblings.html that simply meta‑refresh or JS redirect to the canonical file.
 3. Normalize all links & redirects in:
-   - pages/EN/*.html
-   - chatExpand_Siblings.js (and any central navigation code)
+   - pages/en/*.html
+   - chat-expand-siblings.js (and any central navigation code)
    - Friendly URL map (router.php) if it generates these paths.
 4. Verify session_info endpoint returns JSON (curl). If not, fix API include paths (should be `__DIR__ . Database.php'` etc.).
 5. Harden fetch logic (already partly done) so a failed session fetch does not break page.
@@ -6648,9 +6648,9 @@ A) Provide an alias (optional, prevents future typos)
 <head>
 <meta charset="utf-8">
 <title>Redirecting…</title>
-<meta http-equiv="refresh" content="0; url=chatExpand_Siblings.html">
+<meta http-equiv="refresh" content="0; url=chat-expand-siblings.html">
 <script>
-  location.replace("chatExpand_Siblings.html" + location.search);
+  location.replace("chat-expand-siblings.html" + location.search);
 </script>
 </head>
 <body>
@@ -6663,7 +6663,7 @@ B) Ensure canonical file has correct session_info fetch (add defensive check if 
 
 ````html
 <!-- ...existing code... -->
-<script src="/assets/js/EN/chatExpand_Siblings.js?v=202510"></script>
+<script src="/assets/js/en/chat-expand-siblings.js?v=202510"></script>
 <script>
 (function(){
   // Defensive: if global init not run, try session fetch directly.
@@ -6683,10 +6683,10 @@ C) Update any JS redirect helpers (example)
 ````javascript
 // ...existing code...
 function goToSiblings(personId) {
-  const url = "/pages/EN/chatExpand_Siblings.html?pid=" + encodeURIComponent(personId);
+  const url = "/pages/en/chat-expand-siblings.html?pid=" + encodeURIComponent(personId);
   window.location.href = url;
 }
-// Replace any previous 'chatExpand_siblings.html' uses.
+// Replace any previous 'chat-expand-siblings.html' uses.
 // ...existing code...
 ````
 
@@ -6694,7 +6694,7 @@ D) Router friendly URL (if you want /expand_siblings shortcut):
 
 ````php
 // ...existing code...
-'expand_siblings' => 'chatExpand_Siblings.html',
+'expand_siblings' => 'chat-expand-siblings.html',
 // ...existing code...
 ````
 
@@ -6703,13 +6703,13 @@ E) Add a quick consistency test script (dev only)
 ````php
 <?php
 $targets = [
-  'pages/EN/chatExpand_Siblings.html',
-  'pages/EN/chatExpand_siblings.html'
+  'pages/en/chat-expand-siblings.html',
+  'pages/en/chat-expand-siblings.html'
 ];
 foreach ($targets as $f) {
   echo $f . (is_file($f) ? " OK\n" : " MISSING\n");
 }
-$grep = shell_exec("grep -R \"chatExpand_siblings\" pages/EN assets/js/EN 2>NUL");
+$grep = shell_exec("grep -R \"chat-expand-siblings\" pages/EN assets/js/EN 2>NUL");
 echo "\nLowercase references:\n" . ($grep ?: "None\n");
 ````
 
@@ -6730,10 +6730,10 @@ Common residual pitfalls
 - Service Worker (if previously registered) still serving old asset path—clear SW in devtools Application tab.
 
 Verification checklist (after patch)
-1. Visit: https://nasab.hdsite.com.my/pages/EN/chatExpand_Siblings.html?pid=2 → 200.
-2. Visit lowercase alias: https://nasab.hdsite.com.my/pages/EN/chatExpand_siblings.html?pid=2 → 302 or redirect to canonical, then 200.
+1. Visit: https://nasab.hdsite.com.my/pages/en/chat-expand-siblings.html?pid=2 → 200.
+2. Visit lowercase alias: https://nasab.hdsite.com.my/pages/en/chat-expand-siblings.html?pid=2 → 302 or redirect to canonical, then 200.
 3. Network tab shows:
-   - chatExpand_Siblings.js 200
+   - chat-expand-siblings.js 200
    - session_info.php 200 (JSON)
    - expand_step2_prefill_siblings.php 200
 4. Console: No uncaught JSON.parse errors.
@@ -6743,10 +6743,10 @@ Quick remediation script (optional – prod via SSH)
 ````bash
 cd /home/hdsiteco/public_html/nasab.hdsite.com.my/pages/EN
 # If canonical missing, rename:
-[ -f chatExpand_siblings.html ] && mv chatExpand_siblings.html chatExpand_Siblings.html
+[ -f chat-expand-siblings.html ] && mv chat-expand-siblings.html chat-expand-siblings.html
 # Create alias:
-cat > chatExpand_siblings.html <<'EOF'
-<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=chatExpand_Siblings.html"><script>location.replace("chatExpand_Siblings.html"+location.search);</script>Redirecting...
+cat > chat-expand-siblings.html <<'EOF'
+<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=chat-expand-siblings.html"><script>location.replace("chat-expand-siblings.html"+location.search);</script>Redirecting...
 EOF
 ````
 
@@ -6758,35 +6758,27 @@ Summary
 
 Want me to supply a bulk grep/patch script for EN + MY variants? Reply “need patch script” and I’ll generate it.
 
-Let me know if you also want to enforce automatic normalization (middleware that redirects any chatExpand_siblings.html → chatExpand_Siblings.html globally).
+Let me know if you also want to enforce automatic normalization (middleware that redirects any chat-expand-siblings.html → chat-expand-siblings.html globally).
 
 GitHub Copilot: I'll scan the repository for any lowercase references to the siblings page and identify the exact files to edit, then add a safe redirect alias file and normalize links to the canonical filename so it works on both dev (case-insensitive) and prod (case-sensitive).
 
-Searched text for `chatExpand_siblings|chatExpand_Siblings`, 81 results
+Searched text for `chat-expand-siblings|chat-expand-siblings`, 81 results
 
 I'll gather references to the outdated embedded assets path and inspect the siblings HTML files to prepare precise patches.
 
 Created 7 todos
 
-Searched text for `pages/EN/assets/js|pages/MY/assets/js`, 2 results
+Searched text for `pages/en/assets/js|pages/my/assets/js`, 2 results
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/EN)
 
-Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/EN/assets/js)
+Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/en/assets/js)
 
-Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/EN/assets/js/chatExpand.js#130-130), lines 130 to 162
+Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/en/assets/js/chat-expand.js#130-130), lines 130 to 162
 
-Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/MY/assets/js/chatExpand.js#150-150), lines 150 to 162
+Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/my/assets/js/chat-expand.js#150-150), lines 150 to 162
 
-Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/EN/chatExpand_Siblings.html)
-
-Using "Apply Patch"
-
-
-```
-
-```
-
+Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/en/chat-expand-siblings.html)
 
 Using "Apply Patch"
 
@@ -6812,53 +6804,61 @@ Using "Apply Patch"
 ```
 
 
-Created [](file:///d%3A/wamp64/www/familyapp_prod/pages/EN/chatExpand_siblings.html)
+Using "Apply Patch"
+
+
+```
+
+```
+
+
+Created [](file:///d%3A/wamp64/www/familyapp_prod/pages/en/chat-expand-siblings.html)
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/EN)
 
 Completed (1/7) *Scan for embedded assets path*
 
-Searched text for `chatExpand_siblings\.html`, 49 results
+Searched text for `chat-expand-siblings\.html`, 49 results
 
 I’ll fix the siblings-page 404 by standardizing the redirect path in JS to the canonical filename and add a lightweight session fallback on the page so prod behaves like dev.
 
 Actions I just took
 - Corrected the redirect after parents-save to use the canonical path with uppercase S (works on Linux prod).
-  - chatExpand.js
-    - Redirect now goes to chatExpand_Siblings.html
-  - chatExpand.js
-    - Redirect now goes to chatExpand_Siblings.html
+  - chat-expand.js
+    - Redirect now goes to chat-expand-siblings.html
+  - chat-expand.js
+    - Redirect now goes to chat-expand-siblings.html
 - Added a defensive session fetch on the siblings chat page so it still shows the signed-in email even if the main init races.
-  - chatExpand_Siblings.html
-  - chatExpand_Siblings.html
+  - chat-expand-siblings.html
+  - chat-expand-siblings.html
 
 Files changed
-- chatExpand.js
-  - Switched chatExpand_siblings.html → chatExpand_Siblings.html
-- chatExpand.js
-  - Switched chatExpand_siblings.html → chatExpand_Siblings.html
-- chatExpand_Siblings.html
+- chat-expand.js
+  - Switched chat-expand-siblings.html → chat-expand-siblings.html
+- chat-expand.js
+  - Switched chat-expand-siblings.html → chat-expand-siblings.html
+- chat-expand-siblings.html
   - Added small fallback script to fetch session_info.php if NasabSession isn’t set
-- chatExpand_Siblings.html
+- chat-expand-siblings.html
   - Same fallback as EN
 
 Why no alias file
-- On Windows dev (case-insensitive FS), you can’t store both chatExpand_Siblings.html and chatExpand_siblings.html in the same folder. To keep one repo for dev and prod, I avoided creating lowercase alias files. The correct fix is to ensure all links use the canonical name; now they do.
+- On Windows dev (case-insensitive FS), you can’t store both chat-expand-siblings.html and chat-expand-siblings.html in the same folder. To keep one repo for dev and prod, I avoided creating lowercase alias files. The correct fix is to ensure all links use the canonical name; now they do.
 
 Quick verification
 - Dev and Prod (browser, Network tab)
   1) Start the expand flow and save parents.
   2) You should be redirected to:
-     - EN: /pages/EN/chatExpand_Siblings.html?pid=2
-     - MY: /pages/MY/chatExpand_Siblings.html?pid=2
+     - EN: /pages/en/chat-expand-siblings.html?pid=2
+     - MY: /pages/my/chat-expand-siblings.html?pid=2
   3) Check Network:
-     - chatExpand_Siblings.js → 200
+     - chat-expand-siblings.js → 200
      - session_info.php → 200 JSON
      - expand_step2_prefill_siblings.php → 200 JSON
   4) No 404s; header shows “Signed in as: …”. If the init is slow, the fallback fetch fills it.
 
 Optional hardening (tell me if you want them)
-- Router convenience path: add /expand_siblings → chatExpand_Siblings.html (already present for the helper route; note static “/pages/EN/…” requests bypass the router).
+- Router convenience path: add /expand_siblings → chat-expand-siblings.html (already present for the helper route; note static “/pages/en/…” requests bypass the router).
 - If you want a lowercase-to-uppercase redirect for manual URL typos, we could:
   - Add a minimal PHP redirect file under a different name (not colliding by case), or
   - Add a tiny JS redirect in a shared layout that normalizes known paths (lightweight, but I’d only add if needed).
@@ -6888,13 +6888,13 @@ Searched for regex `service-worker\.js|service_worker\.js|sw\.js`, 3 results
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/assets/js/main.js)
 
-Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/EN/assets/js/main.js)
+Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/en/assets/js/main.js)
 
-Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/MY/assets/js/main.js)
+Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/my/assets/js/main.js)
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/index.html)
 
-Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/EN/index.html)
+Read [](file:///d%3A/wamp64/www/familyapp_prod/pages/en/index.html)
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/manifest.webmanifest)
 
@@ -7022,12 +7022,12 @@ If you want, I can add a tiny banner in dev mode to display whether SW is active
 
 Made changes.
 
-mjamalnasir65: The resource from “https://nasab.hdsite.com.my/assets/js/EN/chatExpand_Partners.js?v=20251026” was blocked due to MIME type (“text/html”) mismatch (X-Content-Type-Options: nosniff). chatExpand_partners.html
-Loading failed for the <script> with source “https://nasab.hdsite.com.my/assets/js/EN/chatExpand_Partners.js?v=20251026”. chatExpand_partners.html:52:65
+mjamalnasir65: The resource from “https://nasab.hdsite.com.my/assets/js/en/chat-expand-partners.js?v=20251026” was blocked due to MIME type (“text/html”) mismatch (X-Content-Type-Options: nosniff). chat-expand-partners.html
+Loading failed for the <script> with source “https://nasab.hdsite.com.my/assets/js/en/chat-expand-partners.js?v=20251026”. chat-expand-partners.html:52:65
 
 
 
-GitHub Copilot: Searched for regex `chatExpand_Partners|chatExpand_partners`, 34 results
+GitHub Copilot: Searched for regex `chat-expand-partners|chat-expand-partners`, 34 results
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/assets/js/EN)
 
@@ -7040,22 +7040,22 @@ Using "Apply Patch"
 Thanks for the exact error. Root cause confirmed and fixed.
 
 Issue
-- The page chatExpand_partners.html referenced a non-existent script path with uppercase P:
-  - `/assets/js/EN/chatExpand_Partners.js?v=20251026`
+- The page chat-expand-partners.html referenced a non-existent script path with uppercase P:
+  - `/assets/js/en/chat-expand-partners.js?v=20251026`
 - On Linux prod, that 404s and returns HTML; with `X-Content-Type-Options: nosniff` the browser blocks it as a MIME mismatch.
 
 What I changed
 - Updated the script tag to the correct, existing file:
-  - `/assets/js/EN/chatExpand_partners.js?v=20251026`
-- File edited: chatExpand_partners.html
+  - `/assets/js/en/chat-expand-partners.js?v=20251026`
+- File edited: chat-expand-partners.html
 
 Why this resolves it
 - The correct path now returns the real JavaScript with the right `Content-Type: application/javascript`, so no nosniff block and the partners step JS will load properly.
 
 Quick verify
-- Reload: https://nasab.hdsite.com.my/pages/EN/chatExpand_partners.html?pid=2
+- Reload: https://nasab.hdsite.com.my/pages/en/chat-expand-partners.html?pid=2
 - Network tab should show:
-  - 200 for chatExpand_partners.js
+  - 200 for chat-expand-partners.js
   - No MIME mismatch warnings
   - Subsequent API calls (e.g., `expand_step3_prefill_partners.php`) should run
 
@@ -7070,9 +7070,9 @@ Perfect — the uploaded COMPLETE_PATHS_LIST.txt is extremely detailed and gives
 Now we can design a path-stability plan so that it never breaks on any device, screen, or browser again — even with multilingual folders and friendly URLs.
 🧭 1️⃣ Current Risks Observed
 Risk	Description	Impact
-Case sensitivity mismatch	/pages/MY/ vs /pages/my/	Works on Windows, breaks on Linux (mobile Firefox, etc.)
+Case sensitivity mismatch	/pages/my/ vs /pages/my/	Works on Windows, breaks on Linux (mobile Firefox, etc.)
 Duplicate EN/MY structure	Two full copies of frontend code	Double maintenance effort, high chance of link mismatch
-Relative paths in JS/HTML	e.g. href="chatExpand_siblings.html"	Can resolve differently on mobile vs desktop
+Relative paths in JS/HTML	e.g. href="chat-expand-siblings.html"	Can resolve differently on mobile vs desktop
 Cached 404 via LiteSpeed	LSCache storing outdated routes	Mobile shows wrong cache variant
 Router.php rewriting all requests	If not guarded by !-f, !-d	May intercept real HTML files
 🧩 2️⃣ Unbreakable Path Policy
@@ -7100,9 +7100,9 @@ Get-ChildItem -Recurse | Sort-Object FullName -Descending | ForEach-Object {
 
 Always link using absolute paths:
 
-<a href="/pages/my/chatexpand_siblings.html?pid=2"></a>
+<a href="/pages/my/chat-expand-siblings.html?pid=2"></a>
 
-Never use href="chatexpand_siblings.html" or "../" — these resolve differently depending on device or PWA install location.
+Never use href="chat-expand-siblings.html" or "../" — these resolve differently depending on device or PWA install location.
 ✅ Language Routing via Router (not folder duplication)
 
 Instead of duplicating /pages/en/ and /pages/my/ manually, centralize via a router variable:
@@ -7161,12 +7161,12 @@ familyapp/
 │   ├── en/
 │   │   ├── index.html
 │   │   ├── dashboard.html
-│   │   ├── chat_expand.html
+│   │   ├── chat-expand.html
 │   │   └── ...
 │   ├── my/
 │   │   ├── index.html
 │   │   ├── dashboard.html
-│   │   ├── chat_expand.html
+│   │   ├── chat-expand.html
 │   │   └── ...
 │
 ├── api/                    → backend endpoints
@@ -7209,7 +7209,7 @@ It’s built from your current structure (COMPLETE_PATHS_LIST.txt) and all prior
 
 Goal: Unified, stable folder & routing setup that works on all devices, browsers, and screen modes.
 
-Purpose: Prevent Linux 404 errors caused by MY vs my, chatExpand_Siblings.html vs chatexpand_siblings.html.
+Purpose: Prevent Linux 404 errors caused by MY vs my, chat-expand-siblings.html vs chat-expand-siblings.html.
 Commands (PowerShell – Run in project root)
 
 # Convert all files to lowercase
@@ -7238,10 +7238,10 @@ Get-ChildItem -Recurse | Where-Object { $_.Name -cmatch '[A-Z]' }
 Purpose: Ensure all HTML/JS references match new lowercase paths.
 VS Code Global Replace:
 Find	Replace
-/pages/MY/	/pages/my/
-chatExpand_Siblings	chatexpand_siblings
-chatExpand_Partners	chatexpand_partners
-chatExpand_Children	chatexpand_children
+/pages/my/	/pages/my/
+chat-expand-siblings	chat-expand-siblings
+chat-expand-partners	chat-expand-partners
+chat-expand-children	chat-expand-children
 Regex-based Search (VS Code or Notepad++):
 
 href="(\.\./)*pages/[A-Z].*"
@@ -7251,7 +7251,7 @@ src="(\.\./)*assets/[A-Z].*"
 
 ✅ Use root-relative URLs in all HTML/JS:
 
-<a href="/pages/my/chatexpand_siblings.html?pid=2"></a>
+<a href="/pages/my/chat-expand-siblings.html?pid=2"></a>
 
 🔁 4️⃣ Apply Stable .htaccess
 
@@ -7348,7 +7348,7 @@ All	PWA installed mode	Opens correct language
 Run this PHP script once on server root to confirm all paths resolve:
 
 <?php
-$pages = ['index.html','dashboard.html','chatexpand_siblings.html'];
+$pages = ['index.html','dashboard.html','chat-expand-siblings.html'];
 foreach ($pages as $p) {
   $url = "https://nasab.hdsite.com.my/pages/my/$p";
   echo "$url => " . get_headers($url)[0] . PHP_EOL;
@@ -7439,14 +7439,14 @@ RewriteRule ^ router.php [L,QSA]
 
 **Phase 2: Alias & Link Normalization**
 1. Update all HTML/JS internal links to root‑relative lowercase paths:
-   - chatexpand_siblings.html
+   - chat-expand-siblings.html
    - dashboard.html
 2. Normalize API calls: keep `/api/...` all lowercase (verify no uppercase query parameter names hardcoded).
-3. Optional: Create temporary alias files only where users may have old uppercase bookmarks (e.g., chatExpand_Siblings.html):
+3. Optional: Create temporary alias files only where users may have old uppercase bookmarks (e.g., chat-expand-siblings.html):
 ```html
-<!-- pages/en/chatExpand_Siblings.html (temporary) -->
-<!doctype html><meta http-equiv="refresh" content="0; url=/pages/en/chatexpand_siblings.html">
-<script>location.replace('/pages/en/chatexpand_siblings.html'+location.search);</script>
+<!-- pages/en/chat-expand-siblings.html (temporary) -->
+<!doctype html><meta http-equiv="refresh" content="0; url=/pages/en/chat-expand-siblings.html">
+<script>location.replace('/pages/en/chat-expand-siblings.html'+location.search);</script>
 ```
 (You already fixed siblings partner case; if no external traffic yet, you can skip alias creation.)
 
@@ -7489,7 +7489,7 @@ Validation script (PHP CLI or web-accessible `/tools/validate_paths.php`):
 <?php
 $paths = [
   '/', '/pages/en/index.html', '/pages/my/index.html',
-  '/pages/en/dashboard.html', '/pages/en/chatexpand_siblings.html',
+  '/pages/en/dashboard.html', '/pages/en/chat-expand-siblings.html',
   '/api/session_info.php'
 ];
 foreach ($paths as $p) {
@@ -7510,10 +7510,10 @@ Run both with desktop browser and mobile (Chrome dev tools device mode), plus of
 **Testing Matrix (Expanded)**
 | Scenario | Path | Expectation |
 |----------|------|-------------|
-| Mobile Chrome | chatexpand_partners.html | 200, SW active (mobile) |
-| Desktop Firefox | chatexpand_partners.html | 200, SW unregistered |
-| Old bookmark uppercase | chatExpand_partners.html | 301 → lowercase (Phase 1–2 only) |
-| Friendly route | `/expand_partners` | Router → chatexpand_partners.html |
+| Mobile Chrome | chat-expand-partners.html | 200, SW active (mobile) |
+| Desktop Firefox | chat-expand-partners.html | 200, SW unregistered |
+| Old bookmark uppercase | chat-expand-partners.html | 301 → lowercase (Phase 1–2 only) |
+| Friendly route | `/expand_partners` | Router → chat-expand-partners.html |
 | API call | `/api/person_get.php?id=5` | 200 JSON, no SW interception |
 | Offline mobile | dashboard.html | Offline fallback page or cached version |
 
@@ -7678,7 +7678,7 @@ Let me know: run-grep / offline-test / skip-alias and I’ll proceed.
 
 Made changes.
 
-mjamalnasir65: pages/en/chatExpand_partners.html?pid=3 c onnected from pages/en/chatExpand_siblings.html?pid=3
+mjamalnasir65: pages/en/chat-expand-partners.html?pid=3 c onnected from pages/en/chat-expand-siblings.html?pid=3
 
 we have a logic error here. 
 
@@ -7696,27 +7696,27 @@ The correct union in union table: (1, 1, 2, 3, )  is Nasir (2, 1, 'Nasir',)
 
 GitHub Copilot: Summarized conversation historyI’ll search the code paths that populate partners on the partners page to pinpoint where JandaF is being included incorrectly.Optimizing tool selection...
 
-Searched for regex `chatExpand_partners|partners_save|Existing partners|token_family_unions|unions|partners list|Add a partner`, 20 results
+Searched for regex `chat-expand-partners|partners_save|Existing partners|token_family_unions|unions|partners list|Add a partner`, 20 results
 
-Searched for regex `partners|unions|existing partners|step5|chatExpand_partners|pd_unions|token_family_unions|person2_id|person1_id` (`**/api/**`), 20 results
+Searched for regex `partners|unions|existing partners|step5|chat-expand-partners|pd_unions|token_family_unions|person2_id|person1_id` (`**/api/**`), 20 results
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/api/token_family_unions.php)
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/api/step5_partners_save.php)
 
-Searched for regex `chatExpand_partners.js|partners list|Existing partners|Add a partner|step5|partners` (`**/assets/js/**|pages/**`), no results
+Searched for regex `chat-expand-partners.js|partners list|Existing partners|Add a partner|step5|partners` (`**/assets/js/**|pages/**`), no results
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/assets/js)
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/assets/js/EN)
 
-Read [](file:///d%3A/wamp64/www/familyapp_prod/assets/js/EN/chatExpand_partners.js)
+Read [](file:///d%3A/wamp64/www/familyapp_prod/assets/js/en/chat-expand-partners.js)
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/api/expand_step3_prefill_partners.php)
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/api/step6_children_save.php)
 
-Read [](file:///d%3A/wamp64/www/familyapp_prod/assets/js/EN/chatExpand_children.js)
+Read [](file:///d%3A/wamp64/www/familyapp_prod/assets/js/en/chat-expand-children.js)
 
 Read [](file:///d%3A/wamp64/www/familyapp_prod/api/expand_step4_save_children.php)
 
@@ -7829,7 +7829,7 @@ Acknowledged. Plan: run the repair, then verify Jonah’s unions show only Nasir
   - step5_partners_save.php scopes “last partner” per person in session to avoid cross-person leakage.
 
 Next steps
-- Refresh `/pages/en/chatExpand_partners.html?pid=3` in the browser; “Existing partners” should list only Nasir.
+- Refresh `/pages/en/chat-expand-partners.html?pid=3` in the browser; “Existing partners” should list only Nasir.
 - Want me to also run a quick UI check and, if needed, clear any cached sessionStorage for the children step prefill?
 
 Made changes.

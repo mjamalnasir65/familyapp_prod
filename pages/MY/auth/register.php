@@ -62,14 +62,14 @@ try {
             $upFam = $pdo->prepare('UPDATE users SET families_id = ? WHERE id = ?');
             $upFam->execute([$famId, $userId]);
             $_SESSION['families_id'] = $famId;
-            header('Location: /pages/my/chat_token_wizard.html?tok=' . urlencode($familyTok));
+            header('Location: /pages/my/chat-token-wizard.html?tok=' . urlencode($familyTok));
             exit;
         }
         // If token invalid/expired, continue to normal flow
     }
 
     // Default: route to chat wizard start
-    header('Location: /pages/my/chat_wizard.html?step=1');
+    header('Location: /pages/my/chat-wizard.html?step=1');
     exit;
 } catch (Throwable $e) {
     header('Location: /auth/register.html?error=server');

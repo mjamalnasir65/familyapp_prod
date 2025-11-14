@@ -36,6 +36,15 @@ if (isset($_SERVER['REQUEST_URI']) && preg_match('/[A-Z]/', $_SERVER['REQUEST_UR
 // Load configuration and core classes
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/classes/Database.php';
+// Light router logging using existing ActionLogger (best-effort)
+if (is_file(__DIR__ . '/classes/ActionLogger.php')) {
+    require_once __DIR__ . '/classes/ActionLogger.php';
+    if (!function_exists('logAction')) {
+        function logAction(string $event, array $data = []): void {
+            try { ActionLogger::log($event, $data); } catch (\Throwable $e) { /* no-op */ }
+        }
+    }
+}
 
 class SmartRouter {
     private $lang;
@@ -159,9 +168,9 @@ class SmartRouter {
             return $this->redirectToLangAuth();
         }
         
-        // Handle language-specific pages
-        if (preg_match('#^/pages/(EN|MY)/(.+)#', $this->requestUri, $matches)) {
-            $requestedLang = $matches[1];
+        // Handle language-specific pages (accept case-insensitive and normalize)
+        if (preg_match('#^/pages/(EN|MY)/(.+)#i', $this->requestUri, $matches)) {
+            $requestedLang = strtoupper($matches[1]);
             $page = $matches[2];
             
             // Update session lang if different
@@ -171,6 +180,7 @@ class SmartRouter {
                 setcookie('lang', $requestedLang, time() + (365 * 24 * 60 * 60), '/');
             }
             
+            logAction('router.page.match', ['lang'=>$this->lang, 'page'=>$page]);
             return $this->handleLangPage($page);
         }
         
@@ -190,6 +200,7 @@ class SmartRouter {
         }
         
         // Default: redirect to appropriate landing
+        logAction('router.default', ['uri'=>$this->requestUri]);
         return $this->handleDefault();
     }
     
@@ -220,11 +231,11 @@ class SmartRouter {
             // ============================================
             // WIZARD PAGES (Onboarding)
             // ============================================
-            'wizard' => 'chat_wizard.html',
-            'chat_wizard' => 'chat_wizard.html',
-            'token_wizard' => 'chat_token_wizard.html',
-            'chat_token_wizard' => 'chat_token_wizard.html',
-            'family_token_wizard' => 'chat_wizard_token_family.html',
+            'wizard' => 'chat-wizard.html',
+            'chat_wizard' => 'chat-wizard.html',
+            'token_wizard' => 'chat-token-wizard.html',
+            'chat-token-wizard' => 'chat-token-wizard.html',
+            'family_token_wizard' => 'chat-wizard-token-family.html',
             
             // ============================================
             // FAMILY TREE PAGES
@@ -237,21 +248,21 @@ class SmartRouter {
             // ============================================
             // PERSON MANAGEMENT
             // ============================================
-            'edit_persons' => 'chatEdit_persons.html',
-            'chat_edit_persons' => 'chatEdit_persons.html',
+            'edit_persons' => 'chat-edit-persons.html',
+            'chat_edit_persons' => 'chat-edit-persons.html',
             'profile_persons' => 'profile_persons.html',
-            'expand' => 'chat_expand.html',
-            'chat_expand' => 'chat_expand.html',
-            'expand_children' => 'chatExpand_children.html',
-            'expand_partners' => 'chatExpand_partners.html',
-            'expand_siblings' => 'chatExpand_siblings.html',
+            'expand' => 'chat-expand.html',
+            'chat-expand' => 'chat-expand.html',
+            'expand_children' => 'chat-expand-children.html',
+            'expand_partners' => 'chat-expand-partners.html',
+            'expand_siblings' => 'chat-expand-siblings.html',
             
             // ============================================
             // INVITATIONS
             // ============================================
             'invites' => 'invites.html',
-            'chat_invites' => 'chat_invites.html',
-            'accept_invite' => 'accept_invite.html',
+            'chat-invites' => 'chat-invites.html',
+            'accept-invite' => 'accept-invite.html',
             
             // ============================================
             // PENDING DECISIONS (Duplicates)
@@ -386,6 +397,7 @@ class SmartRouter {
         $filePath = __DIR__ . '/index.html';
         
         if (!file_exists($filePath)) {
+            logAction('router.404', ['path'=>$filePath, 'context'=>'landing']);
             http_response_code(404);
             echo "<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>404 - Landing Page Not Found</h1></body></html>";
             return true;
@@ -438,6 +450,7 @@ class SmartRouter {
         
         // Check if file exists
         if (!file_exists($filePath)) {
+            logAction('router.404', ['path'=>$filePath, 'context'=>'auth']);
             http_response_code(404);
             $this->servePage(__DIR__ . "/pages/{$this->lang}/404.html");
             return true;
@@ -498,9 +511,9 @@ class SmartRouter {
         // If wizard not complete and not requesting wizard page, redirect to wizard
         if (!$wizardStatus['completed']) {
             $allowedPages = [
-                'chat_wizard.html',
-                'chat_token_wizard.html',
-                'chat_wizard_token_family.html'
+                'chat-wizard.html',
+                'chat-token-wizard.html',
+                'chat-wizard-token-family.html'
             ];
             
             if (!in_array($requestedPage, $allowedPages)) {
@@ -535,7 +548,7 @@ class SmartRouter {
         if (isset($_SESSION['pending_family_token'])) {
             $token = $_SESSION['pending_family_token'];
             unset($_SESSION['pending_family_token']);
-            header("Location: /pages/{$this->lang}/chat_token_wizard.html?family_token=$token");
+            header("Location: /pages/{$this->lang}/chat-token-wizard.html?family_token=$token");
             exit;
         }
         
@@ -561,11 +574,11 @@ class SmartRouter {
      * Redirect to appropriate wizard based on user state
      */
     private function redirectToWizard($wizardStatus) {
-        $page = 'chat_wizard.html';
+        $page = 'chat-wizard.html';
         $query = '';
         
         if ($wizardStatus['has_family_token']) {
-            $page = 'chat_token_wizard.html';
+            $page = 'chat-token-wizard.html';
             if (!empty($wizardStatus['family_token'])) {
                 $query = '?family_token=' . urlencode($wizardStatus['family_token']);
             }
@@ -585,6 +598,7 @@ class SmartRouter {
         $filePath = __DIR__ . $relativePath;
         
         if (!file_exists($filePath)) {
+            logAction('router.404', ['path'=>$filePath, 'context'=>'servePagePath']);
             http_response_code(404);
             $this->servePage(__DIR__ . "/pages/{$this->lang}/404.html");
             return true;
@@ -599,6 +613,7 @@ class SmartRouter {
      */
     private function servePage($filePath) {
         if (!file_exists($filePath)) {
+            logAction('router.404', ['path'=>$filePath, 'context'=>'servePage']);
             http_response_code(404);
             echo "<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>404 - Page Not Found</h1></body></html>";
             return;

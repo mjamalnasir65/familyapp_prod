@@ -89,7 +89,7 @@ Visit / → Landing page
 → Choose language
 → Register
 → Router checks families_id
-→ NULL → Redirect to chat_wizard.html
+→ NULL → Redirect to chat-wizard.html
 ```
 
 #### Scenario 2: Registration with Invite Token
@@ -105,14 +105,14 @@ Click invite link?invite_token=xxx
 Register with ?family_token=xxx
 → Token stored in session
 → Complete registration
-→ Router redirects to chat_token_wizard.html?family_token=xxx
+→ Router redirects to chat-token-wizard.html?family_token=xxx
 ```
 
 #### Scenario 4: Returning Incomplete User
 ```
 Login
 → Router checks families_id
-→ NULL → Redirect to chat_wizard.html
+→ NULL → Redirect to chat-wizard.html
 ```
 
 #### Scenario 5: Returning Complete User

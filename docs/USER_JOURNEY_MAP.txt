@@ -52,19 +52,19 @@ The application supports **3 primary user entry paths**:
 **Success Flow**:
 1. User account created in `users` table
 2. Session created (`$_SESSION['user_id']`, `$_SESSION['user_email']`, `$_SESSION['user_name']`)
-3. **Redirect to**: `/pages/en/chat_wizard.html` (onboarding wizard)
+3. **Redirect to**: `/pages/en/chat-wizard.html` (onboarding wizard)
 
 **With Family Token**:
 - If family token provided during registration
-- Redirect to: `/pages/en/chat_token_wizard.html?family_token=XXX`
+- Redirect to: `/pages/en/chat-token-wizard.html?family_token=XXX`
 - (Alternative flow - see Journey 2)
 
 ---
 
-### **Step 2: Chat Wizard - Family Setup** (`/wizard` or `/pages/en/chat_wizard.html`)
+### **Step 2: Chat Wizard - Family Setup** (`/wizard` or `/pages/en/chat-wizard.html`)
 
-**Page**: `pages/en/chat_wizard.html`
-**Script**: `assets/js/en/chatWizard.js`
+**Page**: `pages/en/chat-wizard.html`
+**Script**: `assets/js/en/chat-wizard.js`
 
 **UI**: WhatsApp-style conversational interface
 - Bot messages (left, white bubbles)
@@ -241,8 +241,8 @@ OR `POST /api/wizard_complete_no_partners.php` (if no partners/children)
 
 #### **Action Buttons**:
 - **View Tree** → `/tree.html` - Visual family tree
-- **Add Person** → `/chatEdit_persons.html` - Add new family member
-- **Expand Family** → `/chat_expand.html` - Expand existing person (add relatives)
+- **Add Person** → `/chat-edit-persons.html` - Add new family member
+- **Expand Family** → `/chat-expand.html` - Expand existing person (add relatives)
 - **Invitations** → `/invites.html` - Manage sent/received invites
 - **Activity Log** → Shows recent changes
 
@@ -281,14 +281,14 @@ OR: `/auth/register.html?family_token=YYYY`
 1. User account created
 2. Session created
 3. Token stored in session: `$_SESSION['pending_invite_token']` or `$_SESSION['pending_family_token']`
-4. **Redirect to**: `/pages/en/chat_token_wizard.html?family_token=YYYY`
+4. **Redirect to**: `/pages/en/chat-token-wizard.html?family_token=YYYY`
 
 ---
 
-### **Step 2: Token Wizard** (`/token_wizard` or `/pages/en/chat_token_wizard.html`)
+### **Step 2: Token Wizard** (`/token_wizard` or `/pages/en/chat-token-wizard.html`)
 
-**Page**: `pages/en/chat_token_wizard.html`
-**Script**: `assets/js/chatTokenWizard.js` (if exists) or similar flow
+**Page**: `pages/en/chat-token-wizard.html`
+**Script**: `assets/js/chat-token-wizard.js` (if exists) or similar flow
 
 **Purpose**: Simplified wizard for joining existing family
 
@@ -340,7 +340,7 @@ OR: `/auth/register.html?family_token=YYYY`
 **Success Flow**:
 1. Session created (`$_SESSION['user_id']`)
 2. Check `users.families_id`:
-   - **If NULL** (wizard incomplete) → Redirect to `/pages/en/chat_wizard.html`
+   - **If NULL** (wizard incomplete) → Redirect to `/pages/en/chat-wizard.html`
    - **If SET** (has family) → Redirect to `/pages/en/dashboard.html`
 
 **Redirect After Login**:
@@ -374,9 +374,9 @@ OR: `/auth/register.html?family_token=YYYY`
 
 ---
 
-### **Flow B: Add New Person** (`/chatEdit_persons.html`)
+### **Flow B: Add New Person** (`/chat-edit-persons.html`)
 
-**Page**: `pages/en/chatEdit_persons.html`
+**Page**: `pages/en/chat-edit-persons.html`
 
 **Chat Interface** - Bot guides:
 1. "Who are you adding?" → Free text
@@ -394,9 +394,9 @@ OR: `/auth/register.html?family_token=YYYY`
 
 ---
 
-### **Flow C: Expand Existing Person** (`/chat_expand.html`)
+### **Flow C: Expand Existing Person** (`/chat-expand.html`)
 
-**Page**: `pages/en/chat_expand.html`
+**Page**: `pages/en/chat-expand.html`
 
 **Purpose**: Add relatives to an existing person (e.g., add parents to someone)
 
@@ -501,8 +501,8 @@ OR: `/auth/register.html?family_token=YYYY`
   - Response: `{ ok: true }`
 
 **Direct Accept** (from email link):
-- URL: `/accept_invite.html?token=XXXX`
-- Page: `pages/en/accept_invite.html`
+- URL: `/accept-invite.html?token=XXXX`
+- Page: `pages/en/accept-invite.html`
 - Auto-calls: `POST /api/invites_accept_direct.php`
 - Redirects to login if not authenticated
 
@@ -653,10 +653,10 @@ OR: `/auth/register.html?family_token=YYYY`
 ### **Chat Interface Pattern**
 
 **Used in**:
-- `chat_wizard.html`
-- `chat_token_wizard.html`
-- `chatEdit_persons.html`
-- `chat_expand.html`
+- `chat-wizard.html`
+- `chat-token-wizard.html`
+- `chat-edit-persons.html`
+- `chat-expand.html`
 
 **Structure**:
 - Header (user info, logout)

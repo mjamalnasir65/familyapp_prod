@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Papan Pemuka · PWA Pokok Keluarga</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <style>
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .stat {
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    .stat h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .stat .val {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    /* Improve contrast for invite banner */
+    #invitesBanner .stat {
+      background: #fff8e1;
+      border: 1px solid #facc15;
+    }
+
+    #invitesBanner,
+    #invitesBanner * {
+      color: #0f172a;
+    }
+
+    #invitesBanner h3 {
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    #invitesBanner .tagline {
+      color: #1f2937;
+      opacity: 1;
+    }
+
+    #invitesBanner strong {
+      color: #0c4a6e;
+    }
+
+    #invitesBanner .btn {
+      background: #0ea5e9;
+      color: #fff;
+      border: none;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+    }
+
+    #invitesBanner .btn:hover {
+      filter: brightness(0.95);
+    }
+
+    /* Improve contrast for PD panel */
+    #pdPanel .stat { background:#eef2ff; border:1px solid #c7d2fe; }
+    #pdPanel, #pdPanel * { color:#0f172a; }
+    #pdPanel h3 { color:#1e40af; font-weight:700; }
+    #pdPanel .tagline { color:#1f2937; opacity:1; }
+    #pdPanel strong { color:#0c4a6e; }
+    #pdPanel .btn { background:#1d4ed8; color:#fff; border:none; box-shadow:0 1px 2px rgba(0,0,0,.08); }
+    #pdPanel .btn:hover { filter:brightness(0.95); }
+  </style>
+</head>
+
+<body>
+  <main class="hero">
+    <div class="glass card-enter" style="max-width:960px;">
+      <!-- Icons sprite injection -->
+      <object type="image/svg+xml" data="./assets/img/icons/sprite.svg" style="display:none"></object>
+      <header class="wizard-head">
+        <div style="display:flex; align-items:center; gap:12px; justify-content:space-between;">
+          <div class="tagline"><span id="signedInAs">Log masuk sebagai:</span> <strong id="sessionEmail">...</strong></div>
+          <a class="link" href="/pages/my/auth/logout.php">❌</a>
+        </div>
+  <h1 id="readyTitle">Semua selesai 🎉</h1>
+  <p class="tagline" id="summaryTag">Ringkasan pantas keluarga anda setakat ini.</p>
+      </header>
+
+      <section id="invitesBanner" style="display:none; margin-bottom:12px;">
+        <div class="stat" style="background:#fff8e1; border:1px solid #fde68a;">
+          <h3 style="margin:0 0 6px; color:#92400e;" id="pendingInvites">Anda mempunyai jemputan tertunda</h3>
+          <div id="invitesList" style="display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+      </section>
+      
+      <section>
+        <div class="stats" id="stats">
+          <div class="stat">
+            <h3 id="lblTotalMembers">Jumlah Ahli</h3>
+            <div class="val" id="total_members">-</div>
+          </div>
+          <div class="stat">
+            <h3 id="lblLiving">Hidup</h3>
+            <div class="val" id="living_members">-</div>
+          </div>
+          <div class="stat">
+            <h3 id="lblDeceased">Meninggal</h3>
+            <div class="val" id="deceased_members">-</div>
+          </div>
+          <div class="stat">
+            <h3 id="lblRelationships">Jumlah Hubungan</h3>
+            <div class="val" id="total_relationships">-</div>
+          </div>
+          <div class="stat">
+            <h3 id="lblUnions">Penyatuan</h3>
+            <div class="val" id="total_unions">-</div>
+          </div>
+          <div class="stat">
+            <h3 id="lblCurrentUnions">Penyatuan Semasa</h3>
+            <div class="val" id="current_unions">-</div>
+          </div>
+          <div class="stat">
+            <h3 id="lblNotifications">Notifikasi</h3>
+            <div class="val" id="current_unions">-</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="/pages/my/tree.html">🌳 <span class="label" id="actExpand">Kembangkan pokok</span></a>
+          <a class="btn btn-primary" href="/pages/my/edit_tree.html">✏️ <span class="label" id="actEdit">Edit Butiran</span></a>
+          <a class="btn btn-primary" href="/pages/my/view_tree.html">👁️ <span class="label" id="actView">Lihat Pokok</span></a>
+          <a class="btn btn-primary" href="/pages/my/chat-invites.html">👥 <span class="label" id="actInvite">Jemput</span></a>
+          <a class="btn btn-primary" href="/pages/my/profile_persons.html">📁 <span class="label" id="actProfile">Profil</span></a>
+          <a class="btn btn-primary" href="/pages/my/chat-wizard-token-family.html">🔑 <span class="label" id="actToken">Token Keluarga</span></a>
+          
+        </div>
+      </section>
+
+
+    </div>
+  </main>
+  <script src="/assets/js/i18n.js"></script>
+  <script>
+  fetch('/api/session_info.php').then(r => r.json()).then(u => {
+      // Gate access: redirect non-admins to regular dashboard
+      if (!u || !u.ok || !u.user || !u.user.is_admin) {
+  window.location.href = '/pages/my/dashboard.html';
+        return;
+      }
+      const el = document.getElementById('sessionEmail');
+      if (el) el.textContent = (u && u.ok && u.user && u.user.email) || '—';
+    }).catch(() => {
+  window.location.href = '/pages/my/auth/login.html';
+    });
+
+    async function loadReceivedInvites() {
+      try {
+  const r = await fetch('/api/invites_received.php', {
+          credentials: 'include'
+        });
+        const j = await r.json();
+        const banner = document.getElementById('invitesBanner');
+        const list = document.getElementById('invitesList');
+        if (!j || !j.ok || !(j.items || []).length) {
+          banner.style.display = 'none';
+          return;
+        }
+        banner.style.display = 'block';
+        list.innerHTML = '';
+        for (const it of j.items) {
+          const row = document.createElement('div');
+          row.style.display = 'flex';
+          row.style.alignItems = 'center';
+          row.style.justifyContent = 'space-between';
+          row.style.gap = '10px';
+          row.innerHTML = `
+            <div>
+              <strong>${(it.family_name||'A family')}</strong>
+              <span class="tagline">· peranan: ${it.role||'viewer'} · skop: ${it.scope_type||'family'}</span>
+              ${it.message ? `<div class="tagline" style="margin-top:4px;">${it.message}</div>` : ''}
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn" data-act="accept" data-id="${it.id}"><span class="icon">✔</span><span class="label">${T('accept','Terima')}</span></button>
+            </div>`;
+          list.appendChild(row);
+        }
+        list.addEventListener('click', async (e) => {
+          const btn = e.target.closest('button');
+          if (!btn) return;
+          if (btn.dataset.act === 'accept') {
+            const id = parseInt(btn.dataset.id, 10);
+            btn.disabled = true;
+            btn.textContent = T('accepting','Menerima…');
+            try {
+              const res = await fetch('/api/invites_accept_direct.php', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  id
+                })
+              });
+              const jj = await res.json();
+              if (!jj || !jj.ok) {
+                btn.disabled = false;
+                btn.textContent = T('accept','Terima');
+                alert(jj.error || T('accept_failed','Gagal menerima'));
+                return;
+              }
+              await loadReceivedInvites();
+            } catch (_) {
+              btn.disabled = false;
+              btn.textContent = T('accept','Terima');
+              alert(T('server_error','Ralat pelayan'));
+            }
+          }
+        }, {
+          once: true
+        });
+      } catch (_) {
+        /* ignore */ }
+    }
+
+  fetch('/api/family_summary.php').then(r => r.json()).then(j => {
+      if (!j || !j.ok) return;
+      const m = j.summary || {};
+      const set = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = (val ?? 0);
+      };
+      set('total_members', m.total_members);
+      set('living_members', m.living_members);
+      set('deceased_members', m.deceased_members);
+      set('total_relationships', m.total_relationships);
+      set('total_unions', m.total_unions);
+      set('current_unions', m.current_unions);
+    }).catch(() => {});
+    async function loadPDs() {
+      try {
+  const r = await fetch('/api/pd_list.php', {
+          credentials: 'include'
+        });
+        const j = await r.json();
+        const panel = document.getElementById('pdPanel');
+        const list = document.getElementById('pdList');
+        if (!j || !j.ok || !(j.items || []).length) {
+          panel.style.display = 'none';
+          return;
+        }
+        panel.style.display = 'block';
+        list.innerHTML = '';
+        for (const it of j.items) {
+          const row = document.createElement('div');
+          row.style.display = 'flex';
+          row.style.alignItems = 'center';
+          row.style.justifyContent = 'space-between';
+          row.style.gap = '10px';
+          const flags = [];
+          if (it.flags?.email) flags.push('same email');
+          if (it.flags?.parents) flags.push('shared parents');
+          if (!flags.length && it.flags) {
+            if (it.flags.name) flags.push('similar name');
+            if (it.flags.father) flags.push('similar father');
+            if (it.flags.mother) flags.push('similar mother');
+          }
+          const badge = flags.length ? ` · <span class="tagline">${flags.join(', ')}</span>` : '';
+          let actions = '';
+          if (it.status !== 'reviewed') {
+            actions = `<span class="tagline">${T('awaiting_acceptance','Menunggu penerimaan jemputan')}</span>`;
+          } else if (it.u1 && it.u2) {
+            actions = `<button class="btn" data-act="merge" data-id="${it.id}"><span class="icon">🔄</span><span class="label">${T('finalized_merge','Dimuktamadkan gabungan')}</span></button>`;
+          } else if (it.your_consented) {
+            actions = `<button class="btn" disabled title="${T('consented','Anda telah memberi kebenaran')}"><span class="icon">✔</span><span class="label">${T('consented','Anda telah memberi kebenaran')}</span></button>`;
+          } else {
+            actions = `<button class="btn" data-act="consent" data-id="${it.id}"><span class="icon">✔</span><span class="label">${T('consent_to_merge','Beri kebenaran untuk gabung')}</span></button>`;
+          }
+          row.innerHTML = `
+            <div>
+              <strong>${it.a?.name||('ID '+it.a?.id)}</strong>
+              ↔
+              <strong>${it.b?.name||('ID '+it.b?.id)}</strong>
+              ${badge}
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">${actions}</div>`;
+          list.appendChild(row);
+        }
+
+        list.addEventListener('click', async (e) => {
+          const btn = e.target.closest('button');
+          if (!btn) return;
+          const id = parseInt(btn.dataset.id, 10);
+          if (btn.dataset.act === 'consent') {
+            btn.disabled = true;
+            btn.textContent = T('loading','Memuatkan…');
+            try {
+              const res = await fetch('/api/pd_click.php', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  id
+                })
+              });
+              const jj = await res.json();
+              if (!jj || !jj.ok) {
+                btn.disabled = false;
+                btn.textContent = T('consent_to_merge','Beri kebenaran untuk gabung');
+                alert(jj?.error || T('error','Ralat'));
+                return;
+              }
+              await loadPDs();
+            } catch (_) {
+              btn.disabled = false;
+              btn.textContent = T('consent_to_merge','Beri kebenaran untuk gabung');
+              alert(T('server_error','Ralat pelayan'));
+            }
+          }
+          if (btn.dataset.act === 'merge') {
+            btn.disabled = true;
+            btn.textContent = T('merging','Menggabungkan…');
+            try {
+              const res = await fetch('/api/pd_merge.php', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  id
+                })
+              });
+              const jj = await res.json();
+              if (!jj || !jj.ok) {
+                btn.disabled = false;
+                btn.textContent = T('finalized_merge','Dimuktamadkan gabungan');
+                if (jj && jj.error === 'consent_required') alert(T('awaiting_acceptance','Menunggu penerimaan jemputan'));
+                else alert(jj?.error || T('error','Ralat'));
+                return;
+              }
+              await loadPDs();
+            } catch (_) {
+              btn.disabled = false;
+              btn.textContent = T('finalized_merge','Dimuktamadkan gabungan');
+              alert(T('server_error','Ralat pelayan'));
+            }
+          }
+        }, {
+          once: true
+        });
+      } catch (_) {
+        /* ignore */ }
+    }
+
+    window.addEventListener('load', () => {
+      document.querySelector('.card-enter')?.classList.add('in');
+      // Static label localization (Malay already, fallback kept)
+      loadReceivedInvites();
+      loadPDs();
+    });
+  </script>
+</body>
+<script src="./assets/js/main.js"></script>
+</html>

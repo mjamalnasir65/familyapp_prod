@@ -14,7 +14,7 @@ Date: 2025-11-13
     - expand_step3: partners
     - expand_step4: children
   - Other screens: dashboard, tree views, invites, profile, PD (possible duplicates) tools, auth (login/register/logout), accept invite.
-  - JavaScript modules in /assets/js with language-specific code: chatExpand_*.js, chatWizard*.js, main.js, i18n.
+  - JavaScript modules in /assets/js with language-specific code: chat-expand_*.js, chat-wizard*.js, main.js, i18n.
 - PWA Layer
   - sw.js registered only on mobile, caches core assets and provides offline fallbacks; bypasses /api.
 - Backend Layer
@@ -60,7 +60,7 @@ Notes:
 - Invites
   - POST /api/invites_create.php { email, lang } → invite_url to accept
   - POST /api/invites_resend.php { id, lang } → refreshed invite_url
-  - GET  /pages/<LANG>/accept_invite.html?token=...
+  - GET  /pages/<LANG>/accept-invite.html?token=...
 - Tokens (guided family token onboarding)
   - POST /api/family_token_issue.php, /api/family_token_validate.php
   - POST /api/token_family_save_child.php { tok, child_name, ... } → creates child under a union encoded by token
@@ -76,7 +76,7 @@ Common response patterns
 - Server errors: 500 + { ok:false, error: 'server_error' }
 
 5) Frontend Logic (JS Chat Flows)
-- Chat controllers (EN/MY): chatExpand_siblings.js, chatExpand_partners.js, chatExpand_children.js, chatWizard*.js.
+- Chat controllers (EN/MY): chat-expand-siblings.js, chat-expand-partners.js, chat-expand-children.js, chat-wizard*.js.
 - General pattern:
   1) Prefill: GET prefill endpoint to display existing data (partners, children, etc.)
   2) Prompt user via chips/buttons; accumulate collected inputs in arrays.
@@ -90,7 +90,7 @@ Common response patterns
 6) Router, Paths, and Case Policy
 - router.php normalizes uppercase in request URI to lowercase (301) to avoid Linux 404s.
 - All asset/API paths standardized to root-relative (/assets, /api, /pages/<LANG>), not relative paths.
-- Known case-sensitive pages include `chatExpand_Siblings.html` (uppercase S); alias pages can meta-redirect.
+- Known case-sensitive pages include `chat-expand-siblings.html` (uppercase S); alias pages can meta-redirect.
 
 7) PWA and Caching
 - Service worker sw.js caches core assets; network-first navigations with offline fallback to /pages/<LANG>/offline.html.
@@ -210,7 +210,7 @@ I) Incremental Migration Strategy
 - JSON shape drift across endpoints → version contracts; prefer server fixes before client release
 
 14) Files to Review When Migrating
-- /assets/js/EN/*.js and /assets/js/MY/*.js → drive exact user flows
+- /assets/js/en/*.js and /assets/js/my/*.js → drive exact user flows
 - /api/* endpoints above → define DTOs
 - /router.php → URL mapping/logical redirects
 - /docs/PWA_NEXT_FIXES.txt → deployment checklists and stability notes

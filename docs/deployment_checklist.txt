@@ -138,7 +138,7 @@ rm test_router.php
 3. [ ] Registration without token → wizard
 4. [ ] Registration with invite token → dashboard with token
 5. [ ] Registration with family token → family wizard
-6. [ ] Login with incomplete wizard → chat_wizard.html
+6. [ ] Login with incomplete wizard → chat-wizard.html
 7. [ ] Login with complete wizard → dashboard.html
 8. [ ] Admin login → admin_dashboard.html
 9. [ ] Protected page access requires auth

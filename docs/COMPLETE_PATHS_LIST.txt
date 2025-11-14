@@ -69,19 +69,19 @@
 
 ### Wizard Pages (Onboarding)
 ```
-/wizard                              → /pages/en/chat_wizard.html (friendly)
-/chat_wizard                         → /pages/en/chat_wizard.html (friendly)
-/token_wizard                        → /pages/en/chat_token_wizard.html (friendly)
-/chat_token_wizard                   → /pages/en/chat_token_wizard.html (friendly)
-/family_token_wizard                 → /pages/en/chat_wizard_token_family.html (friendly)
+/wizard                              → /pages/en/chat-wizard.html (friendly)
+/chat_wizard                         → /pages/en/chat-wizard.html (friendly)
+/token_wizard                        → /pages/en/chat-token-wizard.html (friendly)
+/chat-token-wizard                   → /pages/en/chat-token-wizard.html (friendly)
+/family_token_wizard                 → /pages/en/chat-wizard-token-family.html (friendly)
 
-/pages/en/chat_wizard.html           → Full 6-step wizard (conversational)
-/pages/en/chat_token_wizard.html     → Token-based wizard
-/pages/en/chat_wizard_token_family.html → Family token wizard
+/pages/en/chat-wizard.html           → Full 6-step wizard (conversational)
+/pages/en/chat-token-wizard.html     → Token-based wizard
+/pages/en/chat-wizard-token-family.html → Family token wizard
 
-/pages/my/chat_wizard.html           → Wizard (MY)
-/pages/my/chat_token_wizard.html     → Token wizard (MY)
-/pages/my/chat_wizard_token_family.html → Family token wizard (MY)
+/pages/my/chat-wizard.html           → Wizard (MY)
+/pages/my/chat-token-wizard.html     → Token wizard (MY)
+/pages/my/chat-wizard-token-family.html → Family token wizard (MY)
 ```
 
 ### Family Tree Views
@@ -100,26 +100,26 @@
 
 ### Person Management
 ```
-/pages/en/chatEdit_persons.html      → Add/edit person (chat interface)
+/pages/en/chat-edit-persons.html      → Add/edit person (chat interface)
 /pages/en/profile_persons.html       → Person profile view
-/pages/en/chat_expand.html           → Expand person (add relatives)
-/pages/en/chatExpand_children.html   → Expand: add children
-/pages/en/chatExpand_partners.html   → Expand: add partners
-/pages/en/chatExpand_siblings.html   → Expand: add siblings
+/pages/en/chat-expand.html           → Expand person (add relatives)
+/pages/en/chat-expand-children.html   → Expand: add children
+/pages/en/chat-expand-partners.html   → Expand: add partners
+/pages/en/chat-expand-siblings.html   → Expand: add siblings
 
-/pages/my/chatEdit_persons.html      → Edit persons (MY)
-/pages/my/chat_expand.html           → Expand person (MY)
+/pages/my/chat-edit-persons.html      → Edit persons (MY)
+/pages/my/chat-expand.html           → Expand person (MY)
 ```
 
 ### Invitations
 ```
 /invites                             → /pages/en/invites.html (friendly)
 /pages/en/invites.html               → Invitations management (send/receive)
-/pages/en/chat_invites.html          → Invitations chat interface
-/pages/en/accept_invite.html         → Accept invitation page
+/pages/en/chat-invites.html          → Invitations chat interface
+/pages/en/accept-invite.html         → Accept invitation page
 
 /pages/my/invites.html               → Invitations (MY)
-/pages/my/accept_invite.html         → Accept invite (MY)
+/pages/my/accept-invite.html         → Accept invite (MY)
 ```
 
 ### Pending Decisions (Duplicates)
@@ -278,14 +278,14 @@ POST /api/nested_family_create.php   → Create nested/sub-family
 
 ### JavaScript - English (EN)
 ```
-/assets/js/en/chatWizard.js          → Chat wizard logic (EN)
-/assets/js/en/chatTokenWizard.js     → Token wizard logic (EN)
+/assets/js/en/chat-wizard.js          → Chat wizard logic (EN)
+/assets/js/en/chat-token-wizard.js     → Token wizard logic (EN)
 ```
 
 ### JavaScript - Malaysian (MY)
 ```
-/assets/js/my/chatWizard.js          → Chat wizard logic (MY)
-/assets/js/my/chatTokenWizard.js     → Token wizard logic (MY)
+/assets/js/my/chat-wizard.js          → Chat wizard logic (MY)
+/assets/js/my/chat-token-wizard.js     → Token wizard logic (MY)
 ```
 
 ### Images & Icons
@@ -326,11 +326,11 @@ POST /api/nested_family_create.php   → Create nested/sub-family
 ### Application
 ```
 /dashboard        → /pages/{LANG}/dashboard.html
-/wizard           → /pages/{LANG}/chat_wizard.html
-/chat_wizard      → /pages/{LANG}/chat_wizard.html
-/token_wizard     → /pages/{LANG}/chat_token_wizard.html
-/chat_token_wizard → /pages/{LANG}/chat_token_wizard.html
-/family_token_wizard → /pages/{LANG}/chat_wizard_token_family.html
+/wizard           → /pages/{LANG}/chat-wizard.html
+/chat_wizard      → /pages/{LANG}/chat-wizard.html
+/token_wizard     → /pages/{LANG}/chat-token-wizard.html
+/chat-token-wizard → /pages/{LANG}/chat-token-wizard.html
+/family_token_wizard → /pages/{LANG}/chat-wizard-token-family.html
 /tree             → /pages/{LANG}/tree.html
 /invites          → /pages/{LANG}/invites.html
 /profile          → /pages/{LANG}/profile.html
@@ -438,13 +438,13 @@ POST /api/nested_family_create.php
 /pages/en/auth/tok_register.html?invite_token={token}
   - Token-based registration
 
-/pages/en/chat_wizard.html?step={step_number}
+/pages/en/chat-wizard.html?step={step_number}
   - Resume wizard at specific step (1-6)
 
-/pages/en/chat_token_wizard.html?family_token={token}
+/pages/en/chat-token-wizard.html?family_token={token}
   - Token wizard with prefilled token
 
-/pages/en/accept_invite.html?token={invite_token}
+/pages/en/accept-invite.html?token={invite_token}
   - Direct invitation accept link
 
 /pages/en/dashboard.html?tab={tab_name}
@@ -507,9 +507,9 @@ POST /api/wizard_complete_step6.php  → Finish
 GET /api/family_summary.php          → Get stats
 /tree                                → View tree
 GET /api/family_tree.php             → Get tree data
-/pages/en/chatEdit_persons.html      → Add person
+/pages/en/chat-edit-persons.html      → Add person
 POST /api/person_update.php          → Save person
-/chat_expand.html                    → Expand person
+/chat-expand.html                    → Expand person
 /invites                             → Manage invites
 POST /api/invites_create.php         → Send invite
 ```
@@ -547,23 +547,23 @@ GET /api/test_family_tree.php        → Test tree data endpoint
 Protected Page (not logged in)       → /pages/{LANG}/auth/login.php
 Login Success (no redirect stored)   → /pages/{LANG}/dashboard.html
 Login Success (redirect stored)      → {stored_url}
-Registration Success                 → /pages/{LANG}/chat_wizard.html
+Registration Success                 → /pages/{LANG}/chat-wizard.html
 Wizard Complete                      → /pages/{LANG}/dashboard.html
 Logout                               → /pages/{LANG}/index.html or /
 ```
 
 ### Wizard State Redirects
 ```
-Login (no family)                    → /pages/{LANG}/chat_wizard.html
+Login (no family)                    → /pages/{LANG}/chat-wizard.html
 Login (has family)                   → /pages/{LANG}/dashboard.html
-Dashboard (wizard incomplete)        → /pages/{LANG}/chat_wizard.html
+Dashboard (wizard incomplete)        → /pages/{LANG}/chat-wizard.html
 ```
 
 ### Token Redirects
 ```
-Register with family_token           → /pages/{LANG}/chat_token_wizard.html?family_token=XXX
+Register with family_token           → /pages/{LANG}/chat-token-wizard.html?family_token=XXX
 Dashboard (pending_invite_token)     → /pages/{LANG}/dashboard.html?invite_token=XXX
-Dashboard (pending_family_token)     → /pages/{LANG}/chat_token_wizard.html?family_token=XXX
+Dashboard (pending_family_token)     → /pages/{LANG}/chat-token-wizard.html?family_token=XXX
 ```
 
 ### Admin Redirects
@@ -595,8 +595,8 @@ Login (is_admin=true)                → /pages/{LANG}/admin_dashboard.html
 
 ### Token Required
 - `/tok_register` (needs invite_token or family_token)
-- `/accept_invite.html` (needs token parameter)
-- `/chat_token_wizard.html` (needs family_token)
+- `/accept-invite.html` (needs token parameter)
+- `/chat-token-wizard.html` (needs family_token)
 
 ---
 
@@ -637,7 +637,7 @@ familyapp/
 │   ├── Accept/reject invite
 │   └── Resend/revoke invite
 │
-├── /chat_expand.html (protected)
+├── /chat-expand.html (protected)
 │   ├── Select person
 │   ├── Choose expansion type
 │   └── Add relatives

@@ -28,7 +28,7 @@ $friendlyUrls = [
     'wizard',
     'chat_wizard',
     'token_wizard',
-    'chat_token_wizard',
+    'chat-token-wizard',
     'family_token_wizard',
     
     // Family Tree
@@ -42,15 +42,15 @@ $friendlyUrls = [
     'chat_edit_persons',
     'profile_persons',
     'expand',
-    'chat_expand',
+    'chat-expand',
     'expand_children',
     'expand_partners',
     'expand_siblings',
     
     // Invitations
     'invites',
-    'chat_invites',
-    'accept_invite',
+    'chat-invites',
+    'accept-invite',
     
     // Pending Decisions
     'pd_view',

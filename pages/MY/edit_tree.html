@@ -394,7 +394,7 @@
 
     function onNodeClick(person) {
       if (!person || !person.id) return;
-  window.location.href = `/pages/my/chatEdit_persons.html?pid=${encodeURIComponent(person.id)}`;
+  window.location.href = `/pages/my/chat-edit-persons.html?pid=${encodeURIComponent(person.id)}`;
     }
 
     // Invite button: navigate to invites.html and prefill modal via query params
@@ -414,7 +414,7 @@
         // optional defaults
         qs.set('role', 'viewer');
         qs.set('days', '7');
-  window.location.href = `/pages/my/chat_invites.html?${qs.toString()}`;
+  window.location.href = `/pages/my/chat-invites.html?${qs.toString()}`;
       });
       return btn;
     }

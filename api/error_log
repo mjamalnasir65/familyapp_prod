@@ -92,7 +92,7 @@ Stack trace:
 
 [11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/en/accept_invite.html?token=9AlGEOY6CAQ8wqhrCp9osw
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/en/accept-invite.html?token=9AlGEOY6CAQ8wqhrCp9osw
 
 [11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
 
@@ -110,7 +110,7 @@ Stack trace:
 
 [11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p style="margin-top:10px">Message from inviter:</p><blockquote style="margin:6px 0 14px;padding-left:10px;border-left:3px solid #ddd">Test email</blockquote><p><a href="https://nasab.hdsite.com.my/pages/en/accept_invite.html?token=9AlGEOY6CAQ8wqhrCp9osw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p></div>
+[11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p style="margin-top:10px">Message from inviter:</p><blockquote style="margin:6px 0 14px;padding-left:10px;border-left:3px solid #ddd">Test email</blockquote><p><a href="https://nasab.hdsite.com.my/pages/en/accept-invite.html?token=9AlGEOY6CAQ8wqhrCp9osw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p></div>
 
 [11-Nov-2025 21:25:04 UTC] CLIENT -> SERVER: 
 
@@ -201,7 +201,7 @@ Stack trace:
 
 [11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/en/accept_invite.html?token=-25cbVS8EVqDM0ghtlpYoQ
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/en/accept-invite.html?token=-25cbVS8EVqDM0ghtlpYoQ
 
 [11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
 
@@ -219,7 +219,7 @@ Stack trace:
 
 [11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p style="margin-top:10px">Message from inviter:</p><blockquote style="margin:6px 0 14px;padding-left:10px;border-left:3px solid #ddd">Test email</blockquote><p><a href="https://nasab.hdsite.com.my/pages/en/accept_invite.html?token=-25cbVS8EVqDM0ghtlpYoQ" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p></div>
+[11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p style="margin-top:10px">Message from inviter:</p><blockquote style="margin:6px 0 14px;padding-left:10px;border-left:3px solid #ddd">Test email</blockquote><p><a href="https://nasab.hdsite.com.my/pages/en/accept-invite.html?token=-25cbVS8EVqDM0ghtlpYoQ" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p></div>
 
 [11-Nov-2025 21:29:03 UTC] CLIENT -> SERVER: 
 
@@ -310,7 +310,7 @@ Stack trace:
 
 [11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/en/accept_invite.html?token=I9sCJ5qE7hF1eHsUh5fptw
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/en/accept-invite.html?token=I9sCJ5qE7hF1eHsUh5fptw
 
 [11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
 
@@ -324,7 +324,7 @@ Stack trace:
 
 [11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>viewer</strong> · Scope: <strong>person</strong></p><p><a href="https://nasab.hdsite.com.my/pages/en/accept_invite.html?token=I9sCJ5qE7hF1eHsUh5fptw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/en/auth/login.html?invite_token=I9sCJ5qE7hF1eHsUh5fptw" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
+[11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>viewer</strong> · Scope: <strong>person</strong></p><p><a href="https://nasab.hdsite.com.my/pages/en/accept-invite.html?token=I9sCJ5qE7hF1eHsUh5fptw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/en/auth/login.html?invite_token=I9sCJ5qE7hF1eHsUh5fptw" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
 
 [11-Nov-2025 21:58:38 UTC] CLIENT -> SERVER: 
 
@@ -415,7 +415,7 @@ Stack trace:
 
 [11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/en/accept_invite.html?token=c-iG22RwEeZW0bF-SvgNdw
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/en/accept-invite.html?token=c-iG22RwEeZW0bF-SvgNdw
 
 [11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
 
@@ -429,7 +429,7 @@ Stack trace:
 
 [11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p><a href="https://nasab.hdsite.com.my/pages/en/accept_invite.html?token=c-iG22RwEeZW0bF-SvgNdw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/en/auth/login.html?invite_token=c-iG22RwEeZW0bF-SvgNdw" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
+[11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p><a href="https://nasab.hdsite.com.my/pages/en/accept-invite.html?token=c-iG22RwEeZW0bF-SvgNdw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/en/auth/login.html?invite_token=c-iG22RwEeZW0bF-SvgNdw" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
 
 [11-Nov-2025 22:00:51 UTC] CLIENT -> SERVER: 
 
@@ -520,7 +520,7 @@ Stack trace:
 
 [11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/my/accept_invite.html?token=JzomGVasRQIUGBEzxSiZjw
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/my/accept-invite.html?token=JzomGVasRQIUGBEzxSiZjw
 
 [11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
 
@@ -534,7 +534,7 @@ Stack trace:
 
 [11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p><a href="https://nasab.hdsite.com.my/pages/my/accept_invite.html?token=JzomGVasRQIUGBEzxSiZjw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/my/auth/login.html?invite_token=JzomGVasRQIUGBEzxSiZjw" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
+[11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p><a href="https://nasab.hdsite.com.my/pages/my/accept-invite.html?token=JzomGVasRQIUGBEzxSiZjw" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/my/auth/login.html?invite_token=JzomGVasRQIUGBEzxSiZjw" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
 
 [11-Nov-2025 22:10:49 UTC] CLIENT -> SERVER: 
 
@@ -625,7 +625,7 @@ Stack trace:
 
 [11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/my/accept_invite.html?token=XiWfDlxFqEuaPw-bJmWDpQ
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: Accept: https://nasab.hdsite.com.my/pages/my/accept-invite.html?token=XiWfDlxFqEuaPw-bJmWDpQ
 
 [11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
 
@@ -639,7 +639,7 @@ Stack trace:
 
 [11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
 
-[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p><a href="https://nasab.hdsite.com.my/pages/my/accept_invite.html?token=XiWfDlxFqEuaPw-bJmWDpQ" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/my/auth/login.html?invite_token=XiWfDlxFqEuaPw-bJmWDpQ" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
+[11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: <div style="font-family:Segoe UI,Arial,sans-serif;color:#0f172a"><p>You've been invited to join <strong>family jamal</strong> on Family App.</p><p>Role: <strong>editor</strong> · Scope: <strong>family</strong></p><p><a href="https://nasab.hdsite.com.my/pages/my/accept-invite.html?token=XiWfDlxFqEuaPw-bJmWDpQ" style="display:inline-block;background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none">Accept invitation</a></p><p style="margin-top:8px"><a href="https://nasab.hdsite.com.my/pages/my/auth/login.html?invite_token=XiWfDlxFqEuaPw-bJmWDpQ" style="color:#0284c7;text-decoration:underline">Having trouble? Sign in with invite code</a></p></div>
 
 [11-Nov-2025 22:16:23 UTC] CLIENT -> SERVER: 
 

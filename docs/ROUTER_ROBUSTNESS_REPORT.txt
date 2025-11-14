@@ -50,11 +50,11 @@ Added `handleFriendlyUrl()` method to SmartRouter that:
 - `/people` → `/pages/{LANG}/people.html`
 
 ### Wizard Pages (Login Required)
-- `/wizard` → `/pages/{LANG}/chat_wizard.html`
-- `/chat_wizard` → `/pages/{LANG}/chat_wizard.html`
-- `/token_wizard` → `/pages/{LANG}/chat_token_wizard.html`
-- `/chat_token_wizard` → `/pages/{LANG}/chat_token_wizard.html`
-- `/family_token_wizard` → `/pages/{LANG}/chat_wizard_token_family.html`
+- `/wizard` → `/pages/{LANG}/chat-wizard.html`
+- `/chat_wizard` → `/pages/{LANG}/chat-wizard.html`
+- `/token_wizard` → `/pages/{LANG}/chat-token-wizard.html`
+- `/chat-token-wizard` → `/pages/{LANG}/chat-token-wizard.html`
+- `/family_token_wizard` → `/pages/{LANG}/chat-wizard-token-family.html`
 
 ---
 

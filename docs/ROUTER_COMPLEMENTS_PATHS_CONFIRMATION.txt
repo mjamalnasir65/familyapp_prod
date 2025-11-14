@@ -63,18 +63,18 @@ The router complements the paths list by:
 - `/test_tree` → test_tree.html
 
 **Person Management** (8 new):
-- `/edit_persons` → chatEdit_persons.html
-- `/chat_edit_persons` → chatEdit_persons.html
+- `/edit_persons` → chat-edit-persons.html
+- `/chat_edit_persons` → chat-edit-persons.html
 - `/profile_persons` → profile_persons.html
-- `/expand` → chat_expand.html
-- `/chat_expand` → chat_expand.html
-- `/expand_children` → chatExpand_children.html
-- `/expand_partners` → chatExpand_partners.html
-- `/expand_siblings` → chatExpand_siblings.html
+- `/expand` → chat-expand.html
+- `/chat-expand` → chat-expand.html
+- `/expand_children` → chat-expand-children.html
+- `/expand_partners` → chat-expand-partners.html
+- `/expand_siblings` → chat-expand-siblings.html
 
 **Invitations** (2 new):
-- `/chat_invites` → chat_invites.html
-- `/accept_invite` → accept_invite.html
+- `/chat-invites` → chat-invites.html
+- `/accept-invite` → accept-invite.html
 
 **Pending Decisions** (3 new):
 - `/pd_view` → pd_view.html
@@ -168,14 +168,14 @@ The router now uses **clear category headers**:
 | Feature | Old URL | New URL | Improvement |
 |---------|---------|---------|-------------|
 | Tree View | `/pages/en/tree.html` | `/tree` | 73% shorter |
-| Expand Person | `/pages/en/chat_expand.html?p=123` | `/expand?p=123` | 65% shorter |
+| Expand Person | `/pages/en/chat-expand.html?p=123` | `/expand?p=123` | 65% shorter |
 | Pending Decisions | `/pages/en/pd_view.html` | `/pending_decisions` | More semantic |
 | Admin Dashboard | `/pages/en/admin_dashboard.html` | `/admin` | 84% shorter |
 
 ### Sharing Benefits
 Users can now share **clean, memorable URLs**:
 - ✅ `yoursite.com/tree?family=smith` instead of `yoursite.com/pages/en/tree.html?family=smith`
-- ✅ `yoursite.com/expand?p=123` instead of `yoursite.com/pages/en/chat_expand.html?p=123`
+- ✅ `yoursite.com/expand?p=123` instead of `yoursite.com/pages/en/chat-expand.html?p=123`
 - ✅ `yoursite.com/invites` instead of `yoursite.com/pages/en/invites.html`
 
 ---

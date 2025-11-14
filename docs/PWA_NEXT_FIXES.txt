@@ -3,7 +3,7 @@ Date: 2025-11-13
 
 Summary
 - Production regressions traced to three primary causes:
-  1) Pathing mismatches on Linux (case sensitivity + relative URLs). Examples: requests for /pages/en/assets/... and /pages/en/api/... returned 404 because pages used relative href/fetch, not root-relative. Also, mixed-case filenames (chatExpand_Siblings) caused 404 on prod.
+  1) Pathing mismatches on Linux (case sensitivity + relative URLs). Examples: requests for /pages/en/assets/... and /pages/en/api/... returned 404 because pages used relative href/fetch, not root-relative. Also, mixed-case filenames (chat-expand-siblings) caused 404 on prod.
   2) Service Worker cache interference (stale assets, cached navigations). Early SW cached too broadly; later constrained to mobile, but some clients still had old SW installed.
   3) Inference/state leakage between wizard steps. Example: a global last_partner_id leaked across persons, creating an unintended Jonah↔JandaF union.
 
@@ -53,7 +53,7 @@ Next Fixes (Actionable)
    - Spot checks:
      - curl -I https://nasab.hdsite.com.my/assets/css/main.css
      - curl -I https://nasab.hdsite.com.my/api/session_info.php (expect 401 JSON, not 404 HTML)
-     - curl -I https://nasab.hdsite.com.my/pages/en/chatExpand_partners.html
+     - curl -I https://nasab.hdsite.com.my/pages/en/chat-expand-partners.html
 
 6) Rollback/repair playbook
    - If a wrong union appears: php tools/fix_union_repair.php family_id=<id> primary_id=<pid> wrong_partner_id=<wid> correct_partner_id=<cid>

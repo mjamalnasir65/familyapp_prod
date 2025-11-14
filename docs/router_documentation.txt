@@ -67,12 +67,12 @@ Click Register → /pages/<LANG>/auth/register.php
     ↓
 Complete registration
     ↓
-Router detects no families_id → Redirect to chat_wizard.html
+Router detects no families_id → Redirect to chat-wizard.html
 ```
 
 ### 2. Registration with Invite Token
 ```
-Click invite link → /pages/<LANG>/accept_invite.html?invite_token=xxx
+Click invite link → /pages/<LANG>/accept-invite.html?invite_token=xxx
     ↓
 Click Register → Token stored in $_SESSION['pending_invite_token']
     ↓
@@ -91,7 +91,7 @@ Token stored in $_SESSION['pending_family_token']
     ↓
 Complete registration
     ↓
-Router detects family token → Redirect to chat_token_wizard.html?family_token=xxx
+Router detects family token → Redirect to chat-token-wizard.html?family_token=xxx
 ```
 
 ### 4. Returning User (Wizard Incomplete)
@@ -100,7 +100,7 @@ Login → Router checks families_id field
     ↓
 families_id is NULL → Wizard incomplete
     ↓
-Redirect to chat_wizard.html
+Redirect to chat-wizard.html
     ↓
 Complete wizard → families_id populated
     ↓
@@ -225,7 +225,7 @@ http://localhost/familyapp/test_router.php
 INSERT INTO users (email, password_hash, families_id, pwa_admin)
 VALUES ('test1@test.com', '$2y$10$...', NULL, 0);
 ```
-Expected: Redirect to chat_wizard.html
+Expected: Redirect to chat-wizard.html
 
 #### Test 2: Complete User
 ```sql

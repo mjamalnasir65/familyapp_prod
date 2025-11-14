@@ -38,7 +38,7 @@ try {
   $upd = $pdo->prepare('UPDATE families SET family_token_hash=?, family_token_expires_at=?, family_token_issued_by=?, family_token_union_id=?, expected_children=?, children_added=0 WHERE id=?');
   $upd->execute([$hash, $exp, $uid, $unionId, $expectedChildren, $familyId]);
 
-  $url = BASE_URL . '/chat_token_wizard.html?tok=' . urlencode($code);
+  $url = BASE_URL . '/chat-token-wizard.html?tok=' . urlencode($code);
   echo json_encode(['ok'=>true,'code'=>$code,'url'=>$url,'family_id'=>$familyId,'union_id'=>$unionId,'expires_at'=>$exp,'ttl_hours'=>$ttlHours]);
 } catch (Throwable $e) {
   http_response_code(500);
