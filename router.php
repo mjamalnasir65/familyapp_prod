@@ -1,11 +1,26 @@
 <?php
-// Early lowercase normalization: redirect any request URI containing uppercase letters
-// Helps prevent Linux case mismatch 404s and enforces canonical lowercase path usage
+// Early lowercase normalization for app pages only (skip assets/uploads/static files)
 if (isset($_SERVER['REQUEST_URI']) && preg_match('/[A-Z]/', $_SERVER['REQUEST_URI'])) {
-    $lower = strtolower($_SERVER['REQUEST_URI']);
-    if ($lower !== $_SERVER['REQUEST_URI']) {
-        header('Location: ' . $lower, true, 301);
-        exit;
+    $uriPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $skipLowercase = false;
+    if ($uriPath !== null) {
+        // Do NOT lowercase for static assets or uploads to preserve case-sensitive file paths
+        if (
+            strpos($uriPath, '/assets/') === 0 ||
+            strpos($uriPath, '/uploads/') === 0 ||
+            $uriPath === '/sw.js' ||
+            $uriPath === '/manifest.webmanifest' ||
+            preg_match('#\.(css|js|jpg|jpeg|png|gif|svg|webp|ico|woff|woff2|ttf|eot|mp3|mp4|webm)$#i', $uriPath)
+        ) {
+            $skipLowercase = true;
+        }
+    }
+    if (!$skipLowercase) {
+        $lower = strtolower($_SERVER['REQUEST_URI']);
+        if ($lower !== $_SERVER['REQUEST_URI']) {
+            header('Location: ' . $lower, true, 301);
+            exit;
+        }
     }
 }
 /**

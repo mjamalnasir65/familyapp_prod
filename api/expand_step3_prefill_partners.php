@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../classes/Database.php';
 require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../classes/ActionLogger.php';
 
 header('Content-Type: application/json');
 
@@ -21,6 +22,7 @@ if (!$personId) { echo json_encode(['ok'=>false,'error'=>'missing_person']); exi
 
 try {
     $pdo = Database::getInstance()->getConnection();
+    ActionLogger::log('expand_step3_prefill_partners:start', ['person_id'=>$personId]);
 
     // Load person and family
     $ps = $pdo->prepare('SELECT id, family_id, full_name, gender FROM persons WHERE id = ? LIMIT 1');
@@ -66,15 +68,18 @@ try {
         ];
     }
 
-    echo json_encode([
+    $out = [
         'ok'=>true,
         'family_id'=>$familyId,
         'person_id'=>$personId,
         'person_name'=>$personName,
         'person_gender'=>$personGender,
         'partners'=>$partners
-    ]);
+    ];
+    ActionLogger::log('expand_step3_prefill_partners:success', ['person_id'=>$personId,'partners'=>count($partners)]);
+    echo json_encode($out);
 } catch (Throwable $e) {
+    ActionLogger::log('expand_step3_prefill_partners:error', ['person_id'=>$personId,'error'=>'server_error']);
     http_response_code(500);
     echo json_encode(['ok'=>false,'error'=>'server_error']);
 }

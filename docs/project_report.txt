@@ -1,0 +1,245 @@
+Project Report: Family App (PHP PWA) → Flutter Migration
+Date: 2025-11-13
+
+1) Executive Summary
+- Purpose: Genealogy web app to build, view, and share family trees with a conversational (chat) workflow and wizard steps.
+- Current Stack: PHP 8.x + MySQL (InnoDB), vanilla HTML/JS/CSS, PWA service worker (mobile-only), Apache routing through router.php, session-based auth.
+- Migration Goal: A native Flutter app (Android/iOS/web optional) that preserves all existing features, consumes the current PHP APIs (or a facade), and improves offline support and UX.
+
+2) High-Level Architecture (Current)
+- UI Layer
+  - Pages under /pages/EN and /pages/MY (English/Malay), chat-like screens for wizard steps:
+    - expand_step1: parents
+    - expand_step2: siblings
+    - expand_step3: partners
+    - expand_step4: children
+  - Other screens: dashboard, tree views, invites, profile, PD (possible duplicates) tools, auth (login/register/logout), accept invite.
+  - JavaScript modules in /assets/js with language-specific code: chatExpand_*.js, chatWizard*.js, main.js, i18n.
+- PWA Layer
+  - sw.js registered only on mobile, caches core assets and provides offline fallbacks; bypasses /api.
+- Backend Layer
+  - API endpoints under /api using PHP + PDO (Database singleton). JSON responses with { ok: bool, ... } and HTTP codes (401, 405, 500).
+  - Session-based auth (PHPSESSID cookie). `session_info.php` reports current user.
+  - Logging: `ActionLogger` writes to DB table `action_logs` and to logs/actions-YYYY-MM-DD.jsonl.
+- Data Layer (MySQL)
+  - Persons, families, relationships (parent → child), unions (person ↔ person), invites, files, possible_duplicates, settings. See prodDB/hdsiteco_familyapp.sql.
+  - Triggers ensure consistency (e.g., prevent circular relationships; ensure a union exists when both parents present).
+
+3) Data Model (Essentials)
+- users(id, email, password_hash, ...)
+- families(id, name, creator_id, step_1..step_6 flags, wizard_completed_at, family_token_*)
+- family_members(id, family_id, user_id, role, capabilities)
+- persons(id, family_id, full_name, gender[male|female|other|prefer_not_to_say], is_alive, birth_date, death_date, label_color, contact fields...)
+- unions(id, family_id, person1_id, person2_id, union_type [marriage|divorced|separated|widowed|...], is_current)
+- relationships(id, family_id, parent_id, child_id, relationship_type [biological|...])
+- files, file_attachments, settings, activity/action logs
+- views: person_details, family_statistics
+
+Notes:
+- Parentage: relationships table holds edges parent→child (one row per parent), allowing 2+ parents.
+- Partners: unions pairs two persons. Current inference favors a current/most recent union.
+
+4) Key API Endpoints (Observed)
+- Session/Auth
+  - GET /api/session_info.php → { ok, user: { id, email, ... } } or 401
+  - Auth lives under /auth/ (login.php, register.php, logout.php); returns HTML; session cookie set. Flutter must persist cookies.
+- Wizard/Expand
+  - GET  /api/expand_step1_prefill_parents.php
+  - POST /api/expand_step1_save_parents.php
+  - GET  /api/expand_step2_prefill_siblings.php
+  - POST /api/expand_step2_save_siblings.php
+  - GET  /api/expand_step3_prefill_partners.php?person_id=PID
+  - POST /api/expand_step3_save_partners.php { person_id, partners:[{name,gender,status,rel_type}] }
+  - GET  /api/children_by_parents.php?person_id=PID&partner_id=CO
+  - POST /api/expand_step4_save_children.php { parent1_id, parent2_id, children:[...] }
+  - POST /api/step6_children_save.php { parent_a_id?, parent_b_id?, children:[...] } (original and token flows)
+- Persons/Tree
+  - GET  /api/person_get.php?person_id=PID → person
+  - POST /api/person_update.php { person fields }
+  - GET  /api/family_tree.php → all nodes (used by tests and fallbacks)
+- Invites
+  - POST /api/invites_create.php { email, lang } → invite_url to accept
+  - POST /api/invites_resend.php { id, lang } → refreshed invite_url
+  - GET  /pages/<LANG>/accept_invite.html?token=...
+- Tokens (guided family token onboarding)
+  - POST /api/family_token_issue.php, /api/family_token_validate.php
+  - POST /api/token_family_save_child.php { tok, child_name, ... } → creates child under a union encoded by token
+- Media
+  - POST /api/upload_person_photo.php multipart/form-data
+- Utilities
+  - GET /api/test_family_tree.php (diagnostic), /api/pd_* (possible duplicates tools)
+
+Common response patterns
+- Success: { ok: true, ... }
+- Auth failure: 401 + { ok:false, error: 'unauthorized' }
+- Method failure: 405 + { ok:false, error: 'method_not_allowed' }
+- Server errors: 500 + { ok:false, error: 'server_error' }
+
+5) Frontend Logic (JS Chat Flows)
+- Chat controllers (EN/MY): chatExpand_siblings.js, chatExpand_partners.js, chatExpand_children.js, chatWizard*.js.
+- General pattern:
+  1) Prefill: GET prefill endpoint to display existing data (partners, children, etc.)
+  2) Prompt user via chips/buttons; accumulate collected inputs in arrays.
+  3) POST save endpoint; on success, navigate to next step (e.g., from partners → children).
+  4) Navigation encodes person id `pid` and co-parent id `co` as query params.
+- Partners step specifics (EN/JS snippet):
+  - Infers co-parent from save response unions or prior session prefill; stores `prefill_children` in sessionStorage for next step.
+- Children step specifics:
+  - Uses pid & co to fetch prefill children and push additions; saves via expand_step4_save_children.
+
+6) Router, Paths, and Case Policy
+- router.php normalizes uppercase in request URI to lowercase (301) to avoid Linux 404s.
+- All asset/API paths standardized to root-relative (/assets, /api, /pages/<LANG>), not relative paths.
+- Known case-sensitive pages include `chatExpand_Siblings.html` (uppercase S); alias pages can meta-redirect.
+
+7) PWA and Caching
+- Service worker sw.js caches core assets; network-first navigations with offline fallback to /pages/<LANG>/offline.html.
+- SW bypasses /api.
+- Registration is mobile-only; desktop actively unregisters to avoid stale caches.
+- Migration implication: Flutter app can take over offline caching; keep SW only for web build.
+
+8) Logging & Telemetry
+- `ActionLogger::log($action, $details)` dual-writes:
+  - DB table `action_logs` (user_id, session_id, action, details JSON, IP, UA, created_at)
+  - File logs in /logs/actions-YYYY-MM-DD.jsonl
+- Instrumented actions (added):
+  - expand_step3_prefill_partners:start|success|error
+  - step5_partners_save:start|success|error
+  - step6_children_save:start|success|error
+- Useful for tracing step transitions and failures in prod.
+
+9) Known Recent Fixes (Stability)
+- Path normalization: removed legacy /familyapp/public/* paths; enforced root-relative.
+- Lowercase redirect in router.php to eliminate Linux case issues.
+- Hardened co-parent inference: session partner is now scoped to person and validated by existing union.
+- Repair tool added: tools/fix_union_repair.php to remove bad unions and rewire parent edges.
+- Invite URL helper: ensures language-specific accept links.
+
+10) Flutter Migration Guide (How to map features)
+A) App Architecture
+- Suggested:
+  - Routing: go_router
+  - State management: Riverpod or Provider
+  - HTTP: dio with cookie jar (session cookies) or http + cookie_jar; enable credentials for PHP session
+  - Serialization: json_serializable/freezed (optional)
+  - i18n: flutter_localizations + intl; two locales: EN and MY
+  - Local storage: hive/sqflite for offline drafts and cache
+  - Form/input: flutter_form_builder (optional)
+  - File upload: image_picker/file_picker + dio multipart
+
+B) Auth + Session
+- PHP is session-cookie based. In Flutter:
+  - Persist cookies (PHPSESSID) in a CookieJar
+  - Always include cookies in requests (dio: withCredentials, or manage headers manually)
+  - Verify login by hitting /api/session_info.php and checking { ok:true }
+
+C) API Integration
+- Create a typed API client wrapping:
+  - Persons: person_get, person_update
+  - Tree: family_tree
+  - Expand/Wizard:
+    - GET prefill endpoints (steps 1–4)
+    - POST save endpoints, pass JSON bodies mirroring JS
+  - Invites: invites_create, invites_resend (pass lang: 'EN'|'MY')
+  - Token Flow: token_family_validate/issue/save_child
+  - Uploads: upload_person_photo (multipart)
+
+Example: dio usage
+- Base URL: https://nasab.hdsite.com.my
+- All calls path-rooted (/api/...)
+- Error handling: map 401 → show login screen; 405/500 → in-app error with action log
+
+D) Screens/Flows Mapping
+- Home/Dashboard → two tabs: Tree, Invites (plus admin/PD if enabled)
+- Chat-like Wizards → Flutter pages with:
+  - Prefill section (existing items)
+  - Choice chips & inputs, as in current JS (partners/children/siblings/parents)
+  - Save & navigation to next step
+- Person Profile → read/update person fields; upload photo
+- Tree View → initially use server `family_tree` response to render simple list/cards; later add interactive graph
+
+E) Localization
+- Strings in EN and MY; map existing text from pages/EN and pages/MY
+- Accept invite pages are separate per locale; Flutter deep link can capture token and locale
+
+F) Offline & Caching
+- For native Flutter offline:
+  - Cache session user, persons list, and recent prefill data in Hive/Sqflite
+  - Queue writes with retry; conflict strategy: last-write-wins (server authoritative)
+- If building Flutter Web, keep existing SW approach (or adapt workbox) and ensure /api is never cached
+
+G) File Uploads
+- image_picker → select
+- dio multipart POST to /api/upload_person_photo.php
+- Server expects 'file' and meta fields; follow current endpoint contract
+
+H) Security & Edge Cases
+- Enforce HTTPS; accept cookies only over secure contexts
+- Handle 401 uniformly; clear jar on logout
+- Validate person/union inferences client-side if needed (but server validation remains source of truth)
+
+I) Incremental Migration Strategy
+1. Flutter Auth + Dashboard shell
+2. Implement chat Partners (step 3) screen consuming current API
+3. Implement Children (step 4) screen
+4. Implement Parents/Siblings (steps 1–2)
+5. Person profile + uploads
+6. Invites + accept flows (deep links)
+7. PD tools (optional)
+8. Tree visualization (optional)
+- Keep PHP backend; migrate UI gradually. Later, consider a GraphQL or REST v2 to simplify Flutter client.
+
+11) Environments & Config
+- Configure BASE_URL in the Flutter app; keep it in env/secret store
+- For development: point to local WAMP or staging; ensure CORS/HTTPS
+- Cookies: set cookie policy to include PHPSESSID; dio CookieJar backed by local storage
+
+12) Testing & Diagnostics
+- Unit tests for API client (mock JSONs based on current responses)
+- E2E tests for partner→children flow
+- Post-migration smoke tests:
+  - session_info 401 vs 200
+  - invites create/resend URL language
+  - partners/children save round-trip
+- Logging: mirror server ActionLogger by emitting lightweight app-side logs to console and optional endpoint (not required).
+
+13) Risks & Mitigations
+- Case sensitivity in links/file names → enforce lowercase in Flutter asset paths and routes
+- Session handling on mobile → always reuse CookieJar, check domain
+- SW conflicts (web target) → either reuse current sw.js or disable SW for Flutter web until verified
+- JSON shape drift across endpoints → version contracts; prefer server fixes before client release
+
+14) Files to Review When Migrating
+- /assets/js/EN/*.js and /assets/js/MY/*.js → drive exact user flows
+- /api/* endpoints above → define DTOs
+- /router.php → URL mapping/logical redirects
+- /docs/PWA_NEXT_FIXES.txt → deployment checklists and stability notes
+- /classes/ActionLogger.php → event taxonomy to keep parity with Flutter telemetry if desired
+
+15) Suggested Flutter Packages
+- dio, dio_cookie_manager, cookie_jar
+- go_router
+- riverpod (or provider)
+- intl
+- hive (or sqflite) + path_provider
+- image_picker / file_picker
+- json_annotation + build_runner (optional)
+
+16) Migration Deliverables
+- OpenAPI-style API notes (lightweight): enumerate endpoints you will call and expected payloads
+- Flutter module structure: lib/api, lib/models, lib/features/wizard, lib/features/invites, lib/features/person, lib/router.dart
+- .env handling (flutter_dotenv) for base URL
+- QA plan with the smoke tests listed above
+
+Appendix A: HTTP Status & Response Conventions
+- 401 Unauthorized → show login
+- 405 Method not allowed → client bug; fix verb
+- 500 Server error → show toast/snackbar + prompt retry
+- JSON: { ok: boolean, error?: string, ...data }
+
+Appendix B: Database Integrity Notes
+- Triggers ensure union on parent pair and prevent circular relationships
+- Relationships are idempotent via ON DUPLICATE KEY in several endpoints
+- Union order normalized (min(id), max(id)) in writes
+
+This document should equip a Copilot agent (and a human engineer) to stand up a Flutter client with confidence, by mapping existing flows, endpoints, and data, while avoiding known pitfalls (paths, SW caching, session leakage).

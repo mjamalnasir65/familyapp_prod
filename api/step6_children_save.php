@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../classes/Database.php';
 require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../classes/ActionLogger.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); echo json_encode(['ok'=>false,'error'=>'method']); exit; }
@@ -21,6 +22,12 @@ $children = $body['children'] ?? [];
 $parentA = isset($body['parent_a_id']) ? (int)$body['parent_a_id'] : 0;
 $parentB = isset($body['parent_b_id']) ? (int)$body['parent_b_id'] : 0;
 
+ActionLogger::log('step6_children_save:start', [
+  'children_count' => is_array($children) ? count($children) : 0,
+  'parent_a_id' => $parentA,
+  'parent_b_id' => $parentB
+]);
+
 // Resolve primary/focus person (must be one parent)
 $primaryId = null;
 if (!empty($_SESSION['expand']['person_id']) && (int)$_SESSION['expand']['family_id'] === $familyId) {
@@ -36,18 +43,35 @@ if (!$primaryId) { echo json_encode(['ok'=>false,'error'=>'self_missing']); exit
 if (!$parentA) $parentA = $primaryId;
 if ($parentA !== $primaryId) { echo json_encode(['ok'=>false,'error'=>'parentA_must_be_primary']); exit; }
 if (!$parentB) {
-  if (!empty($_SESSION['last_partner_id'])) {
-    $chk = $pdo->prepare("SELECT 1 FROM persons WHERE id=? AND family_id=?");
-    $chk->execute([ (int)$_SESSION['last_partner_id'], $familyId ]);
-    if ($chk->fetch()) $parentB = (int)$_SESSION['last_partner_id'];
+  // Prefer a partner remembered specifically for this primary person
+  $scopedPartner = 0;
+  if (!empty($_SESSION['last_partner_by_person']) && is_array($_SESSION['last_partner_by_person'])) {
+    $scopedPartner = (int)($_SESSION['last_partner_by_person'][$primaryId] ?? 0);
   }
+  if ($scopedPartner) {
+    // Validate that a union exists between primary and scoped partner within the same family
+    $vu = $pdo->prepare("SELECT 1 FROM unions WHERE family_id=? AND ((person1_id=? AND person2_id=?) OR (person1_id=? AND person2_id=?)) LIMIT 1");
+    $vu->execute([$familyId, $primaryId, $scopedPartner, $scopedPartner, $primaryId]);
+    if ($vu->fetch()) { $parentB = $scopedPartner; }
+  }
+
+  // Back-compat: older sessions stored a global last_partner_id.
+  if (!$parentB && !empty($_SESSION["last_partner_id"])) {
+    $candidate = (int)$_SESSION['last_partner_id'];
+    // Only accept if that candidate is actually in a union with the primary
+    $vu = $pdo->prepare("SELECT 1 FROM unions WHERE family_id=? AND ((person1_id=? AND person2_id=?) OR (person1_id=? AND person2_id=?)) LIMIT 1");
+    $vu->execute([$familyId, $primaryId, $candidate, $candidate, $primaryId]);
+    if ($vu->fetch()) { $parentB = $candidate; }
+  }
+
+  // Final fallback: choose the current/most recent union partner of the primary
   if (!$parentB) {
-    $u = $pdo->prepare("
-      SELECT CASE WHEN person1_id=? THEN person2_id ELSE person1_id END AS pid
-      FROM unions
-      WHERE family_id=? AND (person1_id=? OR person2_id=?) AND (is_current=1 OR is_current IS NULL)
-      ORDER BY id DESC LIMIT 1
-    ");
+    $u = $pdo->prepare(
+      "SELECT CASE WHEN person1_id=? THEN person2_id ELSE person1_id END AS pid
+       FROM unions
+       WHERE family_id=? AND (person1_id=? OR person2_id=?) AND (is_current=1 OR is_current IS NULL)
+       ORDER BY id DESC LIMIT 1"
+    );
     $u->execute([$primaryId, $familyId, $primaryId, $primaryId]);
     $parentB = (int)($u->fetchColumn() ?: 0);
   }
@@ -117,6 +141,13 @@ try {
   }
 
   $pdo->commit();
+  ActionLogger::log('step6_children_save:success', [
+    'created' => count($created),
+    'updated' => count($updated),
+    'linked'  => count($linked),
+    'parent_a_id' => $parentA,
+    'parent_b_id' => $parentB
+  ]);
   echo json_encode([
     'ok'=>true,
     'parents'=>[
@@ -127,6 +158,7 @@ try {
   ]);
 } catch (Throwable $e) {
   $pdo->rollBack();
+  ActionLogger::log('step6_children_save:error', ['error'=>$e->getMessage()]);
   echo json_encode(['ok'=>false,'error'=>$e->getMessage()]);
 }
 ?>

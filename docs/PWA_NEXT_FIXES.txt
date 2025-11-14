@@ -1,0 +1,72 @@
+PWA Transition Condensed History and Next Fixes
+Date: 2025-11-13
+
+Summary
+- Production regressions traced to three primary causes:
+  1) Pathing mismatches on Linux (case sensitivity + relative URLs). Examples: requests for /pages/en/assets/... and /pages/en/api/... returned 404 because pages used relative href/fetch, not root-relative. Also, mixed-case filenames (chatExpand_Siblings) caused 404 on prod.
+  2) Service Worker cache interference (stale assets, cached navigations). Early SW cached too broadly; later constrained to mobile, but some clients still had old SW installed.
+  3) Inference/state leakage between wizard steps. Example: a global last_partner_id leaked across persons, creating an unintended Jonah↔JandaF union.
+
+What We Changed (stabilizers)
+- Routing: Added lowercase normalization in router.php (301 redirect). Enforced root-relative links. Validation script (tools/validate_paths.php) now follows redirects and accepts 200/301/302.
+- Paths: Replaced legacy /familyapp/public/* with /assets/*, /api/*, /pages/<LANG>/* across EN/MY. Fixed MIME/filename casing and added optional alias pages where needed.
+- SW: Root service worker with mobile-only registration; excluded /api from caching and added offline fallbacks.
+- Partners/Children: Scoped session partner memory per-person and validated unions before inferring co‑parent.
+- Repair: tools/fix_union_repair.php added to remove wrong unions and rewire parent edges.
+
+Outstanding Risks (root causes to watch)
+- Any remaining relative paths inside /pages/<LANG>/*.html that reference assets or APIs without leading slash.
+- Clients with an older SW still installed (desktop cache or old scope) leading to stale responses.
+- New files introduced with mixed case (Linux 404 risk) or links to uppercase variants.
+
+Detection and Telemetry
+- Action logs now capture key events:
+  - expand_step3_prefill_partners:start|success|error
+  - step5_partners_save:start|success|error
+  - step6_children_save:start|success|error
+- Consider adding SW beacon logs (install/activate/fetch-error) if needed.
+
+Next Fixes (Actionable)
+1) Sweep for relative asset/API URLs
+   - Search patterns:
+     - href="assets/  → must be href="/assets/
+     - src="assets/   → must be src="/assets/
+     - fetch('api/    → must be fetch('/api/
+   - CI guard (optional): a script that fails build if patterns are found.
+
+2) Enforce lowercase routing universally
+   - Keep router lowercase redirect in place.
+   - Pre-commit hook to deny filenames containing uppercase in pages/assets/api.
+
+3) SW hygiene
+   - Bump SW version string on deploy; ensure skipWaiting/clients.claim during controlled rollout.
+   - Continue bypassing /api; keep navigation fallback to /pages/<LANG>/offline.html.
+   - Add a one-shot unregister path for desktops (already implemented via registration logic).
+
+4) Server checks
+   - Confirm document root on prod is the project root (so /assets and /api resolve from root).
+   - Ensure .htaccess or vhost rewrites don’t rewrite /assets, /api unexpectedly.
+
+5) Tests you can run quickly
+   - Paths (Windows PowerShell):
+     - php tools/validate_paths.php host=https://nasab.hdsite.com.my
+   - Spot checks:
+     - curl -I https://nasab.hdsite.com.my/assets/css/main.css
+     - curl -I https://nasab.hdsite.com.my/api/session_info.php (expect 401 JSON, not 404 HTML)
+     - curl -I https://nasab.hdsite.com.my/pages/en/chatExpand_partners.html
+
+6) Rollback/repair playbook
+   - If a wrong union appears: php tools/fix_union_repair.php family_id=<id> primary_id=<pid> wrong_partner_id=<wid> correct_partner_id=<cid>
+   - If stale pages are seen on desktop: hard refresh + ensure desktop SW unregister path executed.
+
+Owner Checklist Before Deploy
+- [ ] Repo-wide search shows no href/src/fetch starting with 'assets/' or 'api/'.
+- [ ] validate_paths reports only 200/301/302.
+- [ ] SW version bumped; mobile-only registration code present.
+- [ ] Router lowercase redirect confirmed on prod.
+- [ ] Key flows log to action_logs (DB + logs/actions-YYYY-MM-DD.jsonl).
+
+Notes for Contributors
+- Always use root-relative URLs for assets and APIs.
+- Keep filenames lowercase; browsers + Linux servers are case-sensitive.
+- When adding wizard steps, avoid global session markers that can leak across persons; scope by person id and validate relationships.

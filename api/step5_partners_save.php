@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../classes/Database.php';
 require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../classes/ActionLogger.php';
 
 header('Content-Type: application/json');
 
@@ -43,6 +44,7 @@ try {
     $selfGender = strtolower((string)$self['gender']);
 
     $pdo->beginTransaction();
+    ActionLogger::log('step5_partners_save:start', ['self_email'=>$_SESSION['user_email'] ?? null,'partners_count'=>count($data['partners'])]);
 
     $allowedGender = ['male','female','other','prefer_not_to_say'];
     $allowedRelTypes = ['marriage','divorced','separated','widowed'];
@@ -93,9 +95,15 @@ try {
         $union->execute([$familyId, $p1, $p2, $relType, $isCurrent]);
         $unions[] = ['p1'=>$p1, 'p2'=>$p2, 'type'=>$relType, 'current'=>$isCurrent];
 
-        // after successfully upserting a partner + union, remember the last partner for Step 6 defaulting
+        // after successfully upserting a partner + union, remember last partner scoped by the focus person
         if (!headers_sent()) {
-            $_SESSION['last_partner_id'] = $pid; // last processed partner id
+            // Back-compat global key (kept for older flows)
+            $_SESSION['last_partner_id'] = $pid;
+            // New: scope by the current person to avoid leaking partners across people
+            if (empty($_SESSION['last_partner_by_person']) || !is_array($_SESSION['last_partner_by_person'])) {
+                $_SESSION['last_partner_by_person'] = [];
+            }
+            $_SESSION['last_partner_by_person'][(int)$selfId] = (int)$pid;
         }
     }
 
@@ -106,10 +114,12 @@ try {
     }
 
     $pdo->commit();
+    ActionLogger::log('step5_partners_save:success', ['self_id'=>$selfId,'created'=>count($created),'updated'=>count($updated),'unions'=>count($unions)]);
     echo json_encode(['ok'=>true,'created'=>$created,'updated'=>$updated,'unions'=>$unions]);
 } catch (Throwable $e) {
     if (isset($pdo) && $pdo instanceof PDO && $pdo->inTransaction()) { $pdo->rollBack(); }
     http_response_code(500);
+    ActionLogger::log('step5_partners_save:error', ['error'=>'server_error']);
     echo json_encode(['ok'=>false,'error'=>'server_error']);
 }
 ?>

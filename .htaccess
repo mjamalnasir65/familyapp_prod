@@ -1,0 +1,103 @@
+# ==========================================================
+# 🔒 Unified Security & Routing Config for Nasab Family Tree PWA
+# ==========================================================
+
+# Prefer HTML landing first so public root does not start a session prematurely
+DirectoryIndex index.html index.php
+
+RewriteEngine On
+
+# ----------------------------------------------------------
+# 🚫 Exclusions: never rewrite core static assets or service worker / manifest
+# ----------------------------------------------------------
+RewriteCond %{REQUEST_URI} ^/(assets|uploads)(/|$) [NC]
+RewriteRule ^ - [L]
+RewriteCond %{REQUEST_URI} ^/sw\.js$ [NC]
+RewriteRule ^ - [L]
+RewriteCond %{REQUEST_URI} ^/manifest\.webmanifest$ [NC]
+RewriteRule ^ - [L]
+
+# ----------------------------------------------------------
+# 🌐 Force all /pages/* through router for auth, language, wizard logic
+# Even if the physical file exists we still want router.php to gate access
+# ----------------------------------------------------------
+RewriteCond %{REQUEST_URI} ^/pages/ [NC]
+RewriteRule ^ router.php [L,QSA]
+
+# ----------------------------------------------------------
+# 🔁 Fallback: send other non-file/non-dir requests to router (legacy / friendly URLs)
+# ----------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ router.php [L,QSA]
+
+# ----------------------------------------------------------
+# 🚀 LITESPEED CACHE SETTINGS
+# ----------------------------------------------------------
+<IfModule LiteSpeed>
+    CacheDisable public /pages/
+    CacheDisable public /api/
+    CacheDisable public /auth/
+    CacheDisable public /assets/js/
+    CacheDisable public /assets/json/
+    CacheEnable public /
+    CacheSmartPurge On
+</IfModule>
+
+# ----------------------------------------------------------
+# 🌐 MIME TYPES & CHARACTER SET
+# ----------------------------------------------------------
+AddDefaultCharset utf-8
+AddType text/html .html
+AddType text/javascript .js
+AddType text/css .css
+AddType application/json .json
+AddType image/svg+xml .svg
+
+# ----------------------------------------------------------
+# 🔒 Security Headers
+# ----------------------------------------------------------
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    # Basic CSP (adjust if additional external origins required)
+    Header set Content-Security-Policy "default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' https:; manifest-src 'self';"
+</IfModule>
+
+# ----------------------------------------------------------
+# 🧭 CORS for PWA (if needed for API or assets)
+# ----------------------------------------------------------
+<IfModule mod_headers.c>
+    # Limit wildcard CORS to non-HTML static assets only
+    <FilesMatch "\.(js|json|css|png|jpg|svg|webp|ico|manifest|webmanifest)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+# ----------------------------------------------------------
+# 🕓 Cache-Control for static files (client browser cache)
+# ----------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 7 days"
+    ExpiresByType text/javascript "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/svg+xml "access plus 30 days"
+    ExpiresByType text/html "access plus 15 minutes"
+    ExpiresByType application/manifest+json "access plus 1 hour"
+    ExpiresByType application/json "access plus 1 hour"
+</IfModule>
+
+# ----------------------------------------------------------
+# 🛠 Error handling funnel through router for custom 404/redirect logic
+# ----------------------------------------------------------
+ErrorDocument 404 /router.php
+
+# ----------------------------------------------------------
+# ✅ END OF CONFIG
+# ----------------------------------------------------------
